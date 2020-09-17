@@ -1,9 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<c:url value="/resources/js/jquery-1.12.4.js" var="jquery"/>
-	<c:url value="/resources/js/bootstrap.js" var="bootstrap"/>
-	<c:url value="/resources/css/bootstrap.min.css" var="bootstrapCSS"></c:url>
-	<c:url value="/" var="root"></c:url>
-	<link rel="stylesheet" type="text/css" href="${bootstrapCSS }">
-	<script type="text/javascript" src="${jquery }"></script>
-	<script type="text/javascript" src="${bootstrap }"></script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="" style="font-size: 25px;">YOLLOW</a>

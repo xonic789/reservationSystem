@@ -5,7 +5,7 @@
 <html>
 
 <head>
-<%@ include file="template/header.jspf" %>
+<%@ include file="template/head.jspf" %>
 <style type="text/css">
 		
 		.nav-item{
@@ -34,7 +34,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@ include file="template/header.jspf" %>
 <%@ include file="template/menu.jspf" %>
 
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -57,9 +57,9 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-
+</div>
 <div class="container">
-	<div class="row" id="content">
+	<div class="row">
   		<div class="col-lg-6" style="text-align: center;">
   		<button type="button" class="btn btn-warning">액티비티 추천</button>
   		</div>
@@ -69,6 +69,7 @@
 	</div>
 
 </div>
+
 <%@ include file="template/footer.jspf" %>
 
 </body>
