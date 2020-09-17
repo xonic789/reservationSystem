@@ -38,6 +38,7 @@
 <%@ include file="template/menu.jspf" %>
 
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+	</div>
   <div class="carousel-inner ">
     <div class="carousel-item active">
       <video src="resources/video/beach.mp4" class="d-block w-100" autoplay muted></video>
