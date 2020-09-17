@@ -1,9 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 	<c:url value="/resources/js/jquery-1.12.4.js" var="jquery"/>
 	<c:url value="/resources/js/bootstrap.js" var="bootstrap"/>
 	<c:url value="/resources/css/bootstrap.min.css" var="bootstrapCSS"></c:url>
 	<c:url value="/" var="root"></c:url>
 	<link rel="stylesheet" type="text/css" href="${bootstrapCSS }">
+	<style rel="stylesheet" type="text/css">
+		@font-face{
+			font-family: 'MapoPeacefull';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		#navbarColor01{
+			font-family: 'MapoPeacefull';
+			font-style: bold;
+			
+		}
+		#content,#footer{
+			font-family: 'MapoPeacefull';
+			
+		}
+	</style>
 	<script type="text/javascript" src="${jquery }"></script>
 	<script type="text/javascript" src="${bootstrap }"></script>
