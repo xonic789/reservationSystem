@@ -1,0 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div class="jumbotron jumbotron-fluid text-center">
+	  <div class="container">
+	    <h1 class="display-4">YOLLOWA</h1>
+	    <p class="lead">프로젝트 조원 : 김진,이승우,오영문,이성범</p>
+	  </div>
+	</div>
