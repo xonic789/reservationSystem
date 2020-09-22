@@ -15,19 +15,13 @@
 			font-size:16px;
 			
 		}
-		 .carousel-item,
-		.carousel-inner,
-		.carousel-inner img {
-		  height: 100%;
+				
+		.list-group li{
+			 height: 30px;
 		}
-		.carousel-item {
-		  text-align: center;
-		}
-		.carousel {
-		  height: 600px;
-		}
-		.carousel-inner img {
-		  width: 100%;
+		
+		.pagination {
+	  		 justify-content: center;
 		}
 </style>
 <meta charset="UTF-8">
@@ -36,6 +30,23 @@
 <body>
 <%@ include file="../template/header.jspf" %>
 <%@ include file="../template/menu.jspf" %>
+<div class="row">
+	<div class="col-sm-1">
+		<!-- 사이드 바 메뉴-->
+		  <!-- 패널 타이틀1 -->
+		<div class="panel panel-info">
+		    <div class="panel-heading">
+		      <h3 class="panel-title">고객센터</h3>
+		    </div>
+		    <!-- 사이드바 메뉴목록1 -->
+		    <ul class="list-group">
+		      <li class="list-group-item-text"><a href="#">공지사항</a></li>
+		      <li class="list-group-item-text"><a href="#">FAQ</a></li>
+		      <li class="list-group-item-text"><a href="#">Q&A</a></li>
+		    </ul>
+		</div>
+	</div>
+	<div class="col-sm-11">
 <h2>Q&A</h2>
   <p>이 곳은 고객님의 궁금하신 사항을 질문하는 공간입니다.</p>
 <table class="table">
@@ -69,8 +80,8 @@
   <li class="page-item"><a class="page-link" href="#">5</a></li>
   <li class="page-item"><a class="page-link" href="#">다음</a></li>
 </ul>
+</div>
 
 <%@ include file="../template/footer.jspf" %>
-
 </body>
 </html>

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CsPageController {
 	//고객센터 페이지 표시를 위한 임시 컨트롤러
 	
-	@RequestMapping(value = "/faq", method = RequestMethod.GET)//우선 고객센터 기본 페이지는 faq로, 차후 검색 기능 post 추가
+	//우선 고객센터 기본 페이지는 faq로<-차후에 생각, 차후 검색 기능은 post로 추가한다
+	@RequestMapping(value = "/faq", method = RequestMethod.GET)
 	public String faqList() {
 		
 		return "cs-center/faqlist";
