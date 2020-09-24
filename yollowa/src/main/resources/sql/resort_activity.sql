@@ -33,6 +33,7 @@ CREATE TABLE `activity` (
   `activity_goodCount` int NOT NULL DEFAULT '0',
   `activity_reviewGradeRate` double NOT NULL DEFAULT '0',
   `activity_reviewCount` int NOT NULL DEFAULT '0',
+  `activity_img` varchar(1000) NOT NULL,
   `activity_temp` int DEFAULT '0',
   PRIMARY KEY (`activity_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-16 23:23:03
+-- Dump completed on 2020-09-24 17:13:29
