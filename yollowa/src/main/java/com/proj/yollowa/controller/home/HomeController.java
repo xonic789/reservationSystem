@@ -1,4 +1,4 @@
-package com.yollowa.controller.home;
+package com.proj.yollowa.controller.home;
 
 import java.text.DateFormat;
 import java.util.Date;

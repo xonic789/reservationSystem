@@ -1,4 +1,4 @@
-package com.yollowa.model.user;
+package com.proj.yollowa.model.user;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.UserVo;
 
 public interface UserDao {
 	

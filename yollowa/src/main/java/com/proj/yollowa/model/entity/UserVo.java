@@ -1,4 +1,4 @@
-package com.yollowa.model.entity;
+package com.proj.yollowa.model.entity;
 
 public class UserVo {
 	int user_number;

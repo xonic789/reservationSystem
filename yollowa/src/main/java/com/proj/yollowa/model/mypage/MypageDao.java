@@ -1,8 +1,8 @@
-package com.yollowa.model.mypage;
+package com.proj.yollowa.model.mypage;
 
 import java.sql.SQLException;
 
-import com.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.UserVo;
 
 public interface MypageDao {
 	public UserVo user(int user_number) throws SQLException;

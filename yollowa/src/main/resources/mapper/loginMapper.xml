@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.yollowa.model.user.UserDao">
-		<select id="login" resultType="com.yollowa.model.entity.UserVo">
+  <mapper namespace="com.proj.yollowa.model.user.UserDao">
+		<select id="login" resultType="com.proj.yollowa.model.entity.UserVo">
 			select * from user where user_id=#{user_id} and user_password=#{user_password}
 		</select>
   </mapper>

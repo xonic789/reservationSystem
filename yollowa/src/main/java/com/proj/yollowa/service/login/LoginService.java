@@ -1,4 +1,4 @@
-package com.yollowa.service.login;
+package com.proj.yollowa.service.login;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import com.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.UserVo;
 
 public interface LoginService {
 
