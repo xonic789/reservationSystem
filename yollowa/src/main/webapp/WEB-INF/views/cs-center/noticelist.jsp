@@ -53,8 +53,7 @@
 		display: block;
 	}
 	/* category end */
-	
-	
+		
 	/* content start */
 	.table{
 		margin-top: 30px;
@@ -79,8 +78,6 @@
 	.pagingBox{
 		display: flex;
 		position: relative;
-		/* justify-content: center;  */
-
 	}
 	.pagination {
 		margin: 10px 205px auto 350px;
@@ -92,6 +89,7 @@
 	    padding-top: 1px;
 	    padding-bottom: 1px;
 	}
+	/* content end */
 		
 </style>
 <script type="text/javascript">
@@ -102,8 +100,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">고객센터</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small> 욜로와에서 알려드립니다.</small></h1>
+		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
+		<h1>공지사항 <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -167,7 +165,7 @@
 					  <li class="page-item"><a class="page-link" href="#">다음</a></li>
 					</ul>
 				</div>
-				<div class="btn">
+				<div class="btnGroup">
 				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='http://www.daum.net'" />
 				</div>
 			</div>
