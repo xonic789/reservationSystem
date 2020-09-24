@@ -12,15 +12,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 20px;">숙&nbsp;&nbsp;박</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" style="font-size: 18px;" href="#" >인기 액티비티</a>
-          <a class="dropdown-item" style="font-size: 18px;" href="#">숙박 모아보기</a>
+          <a class="dropdown-item" style="font-size: 18px;" href="${pageContext.request.contextPath}/lodgement/list">숙박 모아보기</a>
+          <a class="dropdown-item" style="font-size: 18px;" href="${pageContext.request.contextPath}/" >인기 숙박</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 20px;">액티비티</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" style="font-size: 18px;" href="#">인기 액티비티</a>
-          <a class="dropdown-item" style="font-size: 18px;" href="#">액티비티 모아보기</a>
+          <a class="dropdown-item" style="font-size: 18px;" href="${pageContext.request.contextPath}/activity/list">액티비티 모아보기</a>
+          <a class="dropdown-item" style="font-size: 18px;" href="${pageContext.request.contextPath}/">인기 액티비티</a>
         </div>
       </li> 
        
