@@ -34,6 +34,7 @@ CREATE TABLE `roomInfo` (
   `roomInfo_minPeople` int NOT NULL,
   `roomInfo_maxPeople` int NOT NULL,
   `roomInfo_extraPrice` int NOT NULL,
+  `roomInfo_img` varchar(1000) NOT NULL,
   PRIMARY KEY (`roomInfo_roomNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-16 23:23:00
+-- Dump completed on 2020-09-24 17:13:27
