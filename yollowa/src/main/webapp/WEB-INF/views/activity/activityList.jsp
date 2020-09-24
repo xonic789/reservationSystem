@@ -144,10 +144,12 @@
 		
 	}
 </style>
-	<%-- <c:url value="resources/css/bootstrap-slider.min.css" var="sliderCSS"/>
+	<%-- 
+	<c:url value="resources/css/bootstrap-slider.min.css" var="sliderCSS"/>
 	<c:url value="resources/js/bootstrap-slider.min.js" var="sliderJS"/>
 	<link rel="stylesheet" type="text/css" href="${sliderCSS }">
-	<script type="text/javascript" src="${sliderJS }"/> --%>
+	<script type="text/javascript" src="${sliderJS }"/> 
+	--%>
 <script type="text/javascript">
 	
 	//카테고리
