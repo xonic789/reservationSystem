@@ -112,12 +112,6 @@
 					<div class="smallList">
 						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
 					</div>
-					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
-					</div>
-					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
-					</div>
 				</div>
 				<div class="bigList">
 					<p>글 등록하기</p>
@@ -132,9 +126,6 @@
 					<p>글 등록하기</p>
 					<div class="smallList">
 						<p><a href="">숙박 게시글 리뷰</a></p>
-					</div>
-					<div class="smallList">
-						<p><a href="">엑티비티 게시글 리뷰</a></p>
 					</div>
 				</div>
 			</div>
