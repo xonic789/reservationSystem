@@ -81,7 +81,7 @@
   <li class="page-item"><a class="page-link" href="#">다음</a></li>
 </ul>
 </div>
-
+</div>
 <%@ include file="../template/footer.jspf" %>
 </body>
 </html>

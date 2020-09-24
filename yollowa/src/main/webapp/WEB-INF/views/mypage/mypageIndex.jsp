@@ -8,29 +8,8 @@
 <title>YOLLOWA</title>
 <%@ include file="../template/head.jspf" %>
 <style type="text/css">
-	.list-group{
-		background-color: white;
-	}
-	.list{
-		float:left;
-		width:274px;
+	ul{
 		list-style: none;
-		padding: 0;
-		margin: 0;
-		}
-	.card-body{
-		font-size: 20px;
-		padding: 10px;
-	}
-	.card{
-		border-radius: 5px;
-	}
-	.card>img{
-		overflow: hidden;
-	}
-	.table{
-		width:70%;
-		margin: 15px;
 	}
 	
 </style>
@@ -39,15 +18,15 @@
 <%@ include file="../template/header.jspf" %>
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
-
 <div class="page-header">
 	<p>메인 페이지 > 마이 페이지</p>
 	<h1>마이페이지  <small>  My Page</small></h1>
 </div>
 <div class="row">
+<div class="col-md-3">
 <ul class="list">
 <li>
-	<div class="card mb-3">
+	<div class="card">
 	  <img style="height: 200px; width: 100%; display: block;" src="../resources/img/mypageImage.png" alt="">
 	  <div class="card-body">
 	    <p class="card-text" style="text-align: center;"><!-- ${user.name} -->XXX님</p>
@@ -79,6 +58,40 @@
 </li>
 </ul>
 </div>
+<div class="col-md-9">
+	<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 <%@ include file="../template/footer.jspf" %>
 </body>
