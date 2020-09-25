@@ -127,33 +127,11 @@ h2 {
 		$('#currentDate').attr('min', msg);
 	});
 	
-	/* 카테고리 */
-	/* $(function() {
-		
-		$('#category>.bigList').on('click',function(){
-			
-			if(document.querySelector(".bigList").className == 'bigList arrowUp'){
-				$(this).find('.smallList').stop().slideDown(800);
-				$(this).removeClass('arrowUp').addClass('arrowDown');
-			}else{
-				$(this).find('.smallList').stop().slideUp(800);
-				$(this).removeClass('arrowDown').addClass('arrowUp');
-			}
-			
-		}); */
-		/* $('#category>.bigList').on('click',function(){
-			if($(this).find('.smallList'))
-			$(this).find('.smallList').stop().slideUp(800);
-		});
-	});
- */
-		
-	
 	
 </script>
 
 <meta charset="UTF-8">
-<title>숙박</title>
+<title>액티비티</title>
 </head>
 <body>
 	<%@ include file="../template/header.jspf"%>
@@ -161,25 +139,24 @@ h2 {
 	<div class="container">
 		<div class="page-header">
 			<p>
-				<a href="../">메인 페이지</a> > 숙박 페이지
+				<a href="../">메인 페이지</a> > 액티비티 페이지
 			</p>
 			<h1>
-				숙박 <small>Lodgement</small>
+				액티비티 <small>Activity</small>
 			</h1>
 		</div>
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList arrowUp">
-					<p>숙박 종류</p>
+					<p>종류</p>
 					<div class="smallList">
-						<p><label><input type="checkbox" name="color" value="blue">호텔</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">펜션</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">게스트 하우스</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">모텔</label></p>
+						<p><label><input type="checkbox" name="color" value="blue">수상스키</label></p>
+						<p><label><input type="checkbox" name="color" value="blue">번지점프</label></p>
+						<p><label><input type="checkbox" name="color" value="blue">스키</label></p>
 					</div>
 				</div>
 				<div class="bigList arrowUp">
-					<p>위치</p>
+					<p>여행지</p>
 					<div class="smallList">
 						<p><label><input type="checkbox" name="color" value="blue">서울</label></p>
 						<p><label><input type="checkbox" name="color" value="blue">경기도</label></p>
@@ -197,53 +174,31 @@ h2 {
 							<form id="custom-search-form"
 								class="form-search form-horizontal pull-right">
 								<div id="search" class="input-append span12">
-									가격대
-									<input type="text" id="minPay" name="minPay" class="search-query" placeholder="최소금액"/> -
-									<input type="text" id="maxPay" name="maxPay" class="search-query" placeholder="최대금액"/>
-									&nbsp;&nbsp;&nbsp;								
 									<input type="text" id="search" name="search" class="search-query" placeholder="검색어를 입력하세요"/>
 									<button type="submit" class="btn btn-primary">검색</button>
+									<br/>가격대
+									<input type="text" id="minPay" name="minPay" class="search-query" placeholder="최소금액"/> -
+									<input type="text" id="maxPay" name="maxPay" class="search-query" placeholder="최대금액"/>
+									&nbsp;&nbsp;&nbsp;					
+									
+									<div class="btn-group">
+									  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    Action
+									  </button>
+									  <div class="dropdown-menu">
+									    <a class="dropdown-item" href="#">Action</a>
+									    <a class="dropdown-item" href="#">Another action</a>
+									    <a class="dropdown-item" href="#">Something else here</a>
+									    <div class="dropdown-divider"></div>
+									    <a class="dropdown-item" href="#">Separated link</a>
+									  </div>
+									</div>			
+									
 								</div>
 							</form>
 						</div>
 					</div>
 					<div id="actiList">
-						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
-						</div>
-						
-						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
-						</div>
-						
-						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
-						</div>
-						
-						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
-						</div>
-						
 						<div>
 							<img alt="" src="../resources/img/activity/jump.jpg">
 							<ul>

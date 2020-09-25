@@ -105,6 +105,7 @@
 		<p> <a href="../">메인 페이지</a> > 호스트 페이지 </p>
 		<h1>호스트 페이지 <small> Host page</small></h1>
 	</div>
+	
 	<div class="row">
 		<div id="category" class="col-md-3">
 				<div class="bigList">
