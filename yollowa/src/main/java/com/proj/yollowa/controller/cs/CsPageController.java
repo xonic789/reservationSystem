@@ -10,19 +10,19 @@ public class CsPageController {
 	//고객센터 페이지 표시를 위한 임시 컨트롤러
 	
 	//우선 고객센터 기본 페이지는 faq로<-차후에 생각, 차후 검색 기능은 post로 추가한다
-	@RequestMapping(value = "/faq", method = RequestMethod.GET)
+	@RequestMapping(value = "/faq/", method = RequestMethod.GET)
 	public String faqList() {
 		
 		return "cs-center/faqlist";
 	}
 	
-	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	@RequestMapping(value = "/notice/", method = RequestMethod.GET)
 	public String noticeList() {
 		
 		return "cs-center/noticelist";
 	}
 	
-	@RequestMapping(value = "/qna", method = RequestMethod.GET)
+	@RequestMapping(value = "/qna/", method = RequestMethod.GET)
 	public String index() {
 		
 		return "cs-center/qnalist";
