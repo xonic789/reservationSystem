@@ -1,4 +1,4 @@
-package com.bit.yollowa.lodgement.controller;
+package com.proj.yollowa.controller.lodgement;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.bit.yollowa.cs.controller;
+package com.proj.yollowa.controller.cs;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
