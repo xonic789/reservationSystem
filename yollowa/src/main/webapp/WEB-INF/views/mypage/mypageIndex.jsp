@@ -29,7 +29,7 @@
 	<div class="card">
 	  <img style="height: 200px; width: 100%; display: block;" src="../resources/img/mypageImage.png" alt="">
 	  <div class="card-body">
-	    <p class="card-text" style="text-align: center;"><!-- ${user.name} -->XXX님</p>
+	    <p class="card-text" style="text-align: center;">${user.user_name}님</p>
 	  </div>
 	  <div class="card-body">
 	    <a href="#" class="card-link">내 정보</a>
@@ -41,7 +41,7 @@
 	    <a href="#" class="card-link">찜 목록</a>
 	    </div>
 	    <div class="card-body">
-	    <a href="#" class="card-link">이용 내역</a>
+	    <a href="#" class="card-link">예약 내역</a>
 	    </div>
 	  </div>
 	  </li>

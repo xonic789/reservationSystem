@@ -41,14 +41,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 		HttpSession session = request.getSession();
 		if(session==null) {
 			//로그인 화면으로 이동
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/login/");
 			return false;
 		}
 		
 		//세션이 있으면 해당 행위가 로그인을 해야하는지 판단
 		UserVo authUser = (UserVo)session.getAttribute(LOGIN);
 		if(authUser==null) {
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/login/");
 			return false;
 		}
 		
@@ -59,7 +59,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 		ManagerVo authManager = (ManagerVo)session.getAttribute(MLOGIN);
 			if(MLOGIN.equals(role)) {
 				if(authManager==null) {
-					response.sendRedirect(request.getContextPath()+"/mlogin");
+					response.sendRedirect(request.getContextPath()+"/mlogin/");
 					return false;
 				}
 			}

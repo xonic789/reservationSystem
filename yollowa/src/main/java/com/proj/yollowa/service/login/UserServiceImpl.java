@@ -50,11 +50,6 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	@Override
-	public UserVo userDetailService(Model model,int user_number) throws SQLException {
-		UserDao userDao =sqlSession.getMapper(UserDao.class);
-		UserVo userVo = userDao.selectOne(user_number);
-		return userVo;
-	}
+	
 	
 }

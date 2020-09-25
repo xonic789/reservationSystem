@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class LoginController {
 	//유저 로그인 페이지 get
 	@RequestMapping(value ="login/",method = RequestMethod.GET )
 	public String login() {
+		
 		return "login/login";
 	}
 	
@@ -41,12 +43,16 @@ public class LoginController {
 		return "login/managerlogin";
 	}
 	
-	@Auth(role = Role.MANAGER)
+	
+	
+	
 	@RequestMapping(value = "login/result", method = RequestMethod.POST)
-	public void loginResult() throws SQLException {
-		
+	public void loginResult() {
 	}
 	
+	@RequestMapping(value = "mlogin/result",method =RequestMethod.POST )
+	public void managerLoginResult() {
+	}
 	
 	
 }

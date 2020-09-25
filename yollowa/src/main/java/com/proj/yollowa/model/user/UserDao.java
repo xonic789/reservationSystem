@@ -13,5 +13,4 @@ public interface UserDao {
 	
 	public List<UserVo> selectAll() throws SQLException;
 	public UserVo login(LoginVo loginVo) throws SQLException;
-	public UserVo selectOne(int user_number) throws SQLException;
 }

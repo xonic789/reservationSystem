@@ -15,5 +15,5 @@ import com.proj.yollowa.model.entity.login.ManagerLoginVo;
 public interface UserService {
 	UserVo loginUserService(LoginVo loginVo) throws SQLException;
 	ManagerVo loginManagerService(ManagerLoginVo managerLoginVo) throws SQLException;
-	UserVo userDetailService(Model model,int user_number) throws SQLException;
+	
 }

@@ -15,7 +15,7 @@
 	<form action="${pageContext.request.contextPath }/login/result" method="post">
 	  <div class="form-group">
 	    <label for="user_id">ID : </label>
-	    <input type="text" class="form-control" name="user_id" id="exampleInputEmail1" placeholder="아이디를 입력해주세요">
+	    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="아이디를 입력해주세요">
 	  </div>
 	  <div class="form-group">
 	    <label for="user_password">Password</label>

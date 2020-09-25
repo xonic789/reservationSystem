@@ -39,13 +39,23 @@
 			<mapping path="/mlogin/result"/>
 			<beans:bean class="com.proj.yollowa.interceptor.MloginInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/login/"/>
+			<beans:bean class="com.proj.yollowa.interceptor.LoginCheck"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mlogin/"/>
+			<beans:bean class="com.proj.yollowa.interceptor.LoginCheck"></beans:bean>
+		</interceptor>
 	</interceptors>
+	 
+	 
 	 
 	 <interceptors>
 	 	<interceptor>
 	 		<mapping path="/**"/>
-	 		<exclude-mapping path="/mlogin"/>
-	 		<exclude-mapping path="/login"/>
+	 		<exclude-mapping path="/mlogin/result"/>
+	 		<exclude-mapping path="/login/result"/>
 	 		<beans:bean class="com.proj.yollowa.interceptor.AuthInterceptor"></beans:bean>
 	 	</interceptor>
 	 </interceptors>
