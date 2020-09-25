@@ -147,6 +147,9 @@
 		margin-left:28px;
 	}
 	
+	#submit{
+		text-align: center;
+	}
 	/* 방 추가등록 end  */
 </style>
 <script type="text/javascript">
@@ -451,8 +454,9 @@ function removeInput(){
 				    
 				  </div>
 
-
-				  <button type="submit" class="btn btn-primary">글 등록하기</button>
+				  <div id="submit">
+				  	<button type="submit" class="btn btn-primary">글 등록하기</button>
+				  </div>
 				</form>
 			</div>
 		</div>
