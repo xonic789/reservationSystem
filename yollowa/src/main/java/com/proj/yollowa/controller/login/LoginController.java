@@ -1,4 +1,4 @@
-package com.yollowa.controller.login;
+package com.proj.yollowa.controller.login;
 
 
 import java.sql.SQLException;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yollowa.model.entity.UserVo;
-import com.yollowa.service.login.LoginService;
+import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.service.login.LoginService;
 
 @Controller
 @RequestMapping("/login")
