@@ -101,7 +101,7 @@
 <div class="container">
 	<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
+		<h1>공지사항 <small>욜로와에서 알려드립니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -166,7 +166,7 @@
 					</ul>
 				</div>
 				<div class="btnGroup">
-				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='http://www.daum.net'" />
+				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath }/cs-center/notice/write'" />
 				</div>
 			</div>
 		</div>
