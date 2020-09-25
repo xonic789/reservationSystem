@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.interceptor.Auth;
+import com.proj.yollowa.interceptor.Auth.Role;
+import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
@@ -39,9 +41,10 @@ public class LoginController {
 		return "login/managerlogin";
 	}
 	
-	
+	@Auth(role = Role.MANAGER)
 	@RequestMapping(value = "login/result", method = RequestMethod.POST)
 	public void loginResult() throws SQLException {
+		
 	}
 	
 	
