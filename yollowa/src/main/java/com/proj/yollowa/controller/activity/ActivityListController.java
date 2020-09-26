@@ -13,7 +13,14 @@ public class ActivityListController {
 	}
 	
 //	@RequestMapping("detail/{name}")
-//	public String ActivityDetail() {
-//		return "activity/activityDetail";
-//	}
+	@RequestMapping("detail")
+	public String ActivityDetail() {
+		return "activity/activityDetail";
+	}
+	
+	@RequestMapping("test")
+	public String ActivityList1() {
+		return "activity/test";
+	}
+	
 }

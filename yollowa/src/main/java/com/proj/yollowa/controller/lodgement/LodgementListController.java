@@ -12,4 +12,9 @@ public class LodgementListController {
 		return "lodgement/lodgementList";
 	}
 
+//	@RequestMapping("detail/{name}")
+	@RequestMapping("detail")
+	public String lodgementDetail() {
+		return "lodgement/lodgementDetail";
+	}
 }

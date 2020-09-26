@@ -13,6 +13,17 @@
 	border-bottom: 1px solid darkslategrey;
 }
 
+/* upDown Fix start*/
+#upDown{
+	border: 1px solid black;
+	position: fixed;
+	top:400px;
+	right: 200px;
+	padding: 3px 6px;
+}
+
+/* upDown Fix end*/
+
 /* category start */
 .page-header {
 	border-bottom: 1px solid lightgray;
@@ -39,7 +50,7 @@
 	font-size: 16px;
 }
 
-.smallList>p:hover {
+.smallList p label:hover {
 	background-color: #EEEEED;
 	cursor: pointer;
 }
@@ -63,12 +74,18 @@ h2 {
 	margin-bottom: 8px;
 }
 
-.smallList>p>a {
+.smallList>p>label>input {
 	font-size: 15px;
 	text-decoration: none;
-	display: block;
 }
 /* category end */
+
+/* 금액설정 폼 start */
+
+#payAmount{
+	padding: 0px 10px;
+}
+/* 금액설정 폼 end */
 
 /* selected link */
 
@@ -77,42 +94,41 @@ h2 {
 	margin-left: 20px;
 }
 
-#filter-1, #filter-2 {
-	display: inline-block;
-}
-
 #actiList>div {
 	margin: 30px 10px;
-	width: 20%;
-	background-color: gray;
+	width: 30%;
+	background-color: white;
 	display: inline-block;
+	box-shadow: 1px 1px 1px gray;
 }
 
 #actiList>div img {
 	width: 100%;
 }
 
-#actiList div ul {
+#actiList div a ul {
 	padding-left: 10px;
 	list-style: none;
-	color: white;
+	color: black;
 	margin: 5px 0px 10px;
 }
-
-#search{
-	margin: 0px auto;
+#actiList div a{
+	text-decoration: none;
 }
 
+#dropdownMenuButton1,#dropdownMenuButton2{
+	margin-right:10px;
+	float:left;
+}
 
-.smallList{
-/* 	display: none;
- */}
+#searchQuery{
+	margin-left: 50px;
+	float: none;
+}
 
 #minPay,#maxPay{
 	width: 100px;
 	text-align: center;
-}
-#search{
 }
 
 </style>
@@ -126,6 +142,30 @@ h2 {
 		$('#currentDate').attr('value', msg);
 		$('#currentDate').attr('min', msg);
 	});
+	
+	/* 리스트 마우스 오버 */
+	$(function() {
+		$('#actiList>div').mouseover(function(){
+			$(this).css('cursor','pointer').css('transform','translate(0,-5px)').css('box-shadow','3px 3px 3px gray');
+		});
+		
+		$('#actiList>div').mouseleave(function(){
+			$(this).css('cursor','none').css('transform','translate(0,0)').css('box-shadow','1px 1px 1px gray');
+		});
+	});
+	
+	/* updown button */
+	$(function() {
+		$('#upIcon').mouseover(function(){
+			$(this).css('cursor','pointer');
+		});
+		
+		$('#downIcon').mouseover(function(){
+			$(this).css('cursor','pointer');
+		});
+		
+	});
+	
 	
 	/* 카테고리 */
 	/* $(function() {
@@ -159,7 +199,7 @@ h2 {
 	<%@ include file="../template/header.jspf"%>
 	<%@ include file="../template/menu.jspf"%>
 	<div class="container">
-		<div class="page-header">
+		<div id="headerUp" class="page-header">
 			<p>
 				<a href="../">메인 페이지</a> > 숙박 페이지
 			</p>
@@ -167,6 +207,24 @@ h2 {
 				숙박 <small>Lodgement</small>
 			</h1>
 		</div>
+		<div id="upDown">
+			<a id="upIcon" href="#headerUp">
+				<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chevron-double-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+				  <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+				</svg>
+			</a><br/>
+			<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+			</svg><br/>
+			<a id="downIcon" href="#footer">
+				<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chevron-double-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+				  <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+				</svg>
+			</a>
+		</div>
+		
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList arrowUp">
@@ -188,70 +246,106 @@ h2 {
 					</div>
 				</div>
 			</div>
-	
+			
 			<div class="col-md-9">
 				<div id="search-right">
 					<h2>111건의 검색결과</h2>
-					<div>
-						<div id="filter-2">
-							<form id="custom-search-form"
-								class="form-search form-horizontal pull-right">
-								<div id="search" class="input-append span12">
-									가격대
-									<input type="text" id="minPay" name="minPay" class="search-query" placeholder="최소금액"/> -
-									<input type="text" id="maxPay" name="maxPay" class="search-query" placeholder="최대금액"/>
-									&nbsp;&nbsp;&nbsp;								
-									<input type="text" id="search" name="search" class="search-query" placeholder="검색어를 입력하세요"/>
-									<button type="submit" class="btn btn-primary">검색</button>
+					<div id="filter-2">
+						<div id="search" class="input-append span12">
+						
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">예약가능 날짜</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<form id="currentDate1">
+										<input id="currentDate" type="date"/>
+										<button type="submit" class="btn btn-primary">확인</button>
+									</form>
 								</div>
-							</form>
+						
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton2" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">가격대</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<form id="payAmount" action="">
+										<input type="text" id="minPay" name="minPay" class="search-query" placeholder="최소금액"/> -
+										<input type="text" id="maxPay" name="maxPay" class="search-query" placeholder="최대금액"/>
+										<button type="submit" class="btn btn-primary">확인</button>
+									</form>
+								</div>
+							</div>
+							<div>
+								
+							</div>
+							<div>
+								<form id="custom-search-form" class="form-search form-horizontal pull-right">
+									<input type="text" id="searchQuery" name="searchQuery" class="search-query" placeholder="검색어를 입력하세요"/>
+									<button class="btn btn-primary">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+										  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+										</svg>
+									</button>
+								</form>
+							</div>	
 						</div>
 					</div>
 					<div id="actiList">
 						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
+							<a href="#">
+								<img alt="" src="../resources/img/activity/jump.jpg">
+								<ul>
+									<li>방콕 스카이 발코니 뷔페</li>
+									<li>★ 4.0 (리뷰 1234건)</li>
+									<li>￦ 2,000</li>
+								</ul>
+							</a>
 						</div>
 						
 						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
+							<a href="#">
+								<img alt="" src="../resources/img/activity/jump.jpg">
+								<ul>
+									<li>방콕 스카이 발코니 뷔페</li>
+									<li>★ 4.0 (리뷰 1234건)</li>
+									<li>￦ 2,000</li>
+								</ul>
+							</a>
 						</div>
 						
 						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
+							<a href="#">
+								<img alt="" src="../resources/img/activity/jump.jpg">
+								<ul>
+									<li>방콕 스카이 발코니 뷔페</li>
+									<li>★ 4.0 (리뷰 1234건)</li>
+									<li>￦ 2,000</li>
+								</ul>
+							</a>
 						</div>
 						
 						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
+							<a href="#">
+								<img alt="" src="../resources/img/activity/jump.jpg">
+								<ul>
+									<li>방콕 스카이 발코니 뷔페</li>
+									<li>★ 4.0 (리뷰 1234건)</li>
+									<li>￦ 2,000</li>
+								</ul>
+							</a>
 						</div>
 						
 						<div>
-							<img alt="" src="../resources/img/activity/jump.jpg">
-							<ul>
-								<li>방콕 스카이 발코니 뷔페</li>
-								<li>★ 4.0 (리뷰 1234건)</li>
-								<li>￦ 2,000</li>
-							</ul>
+							<a href="#">
+								<img alt="" src="../resources/img/activity/jump.jpg">
+								<ul>
+									<li>방콕 스카이 발코니 뷔페</li>
+									<li>★ 4.0 (리뷰 1234건)</li>
+									<li>￦ 2,000</li>
+								</ul>
+							</a>
 						</div>
+						
 						
 					</div>
 
