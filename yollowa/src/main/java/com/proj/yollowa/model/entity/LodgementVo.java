@@ -3,7 +3,7 @@ package com.proj.yollowa.model.entity;
 public class LodgementVo {
 	private int lodgement_number;
 	private int lodgement_userNumber;
-	private String lodgement_title;
+	private String lodgement_companyName;
 	private String lodgement_location;
 	private String lodgement_LatLng;
 	private String lodgement_category;
@@ -17,14 +17,14 @@ public class LodgementVo {
 	public LodgementVo() {
 	}
 
-	public LodgementVo(int lodgement_number, int lodgement_userNumber, String lodgement_title,
+	public LodgementVo(int lodgement_number, int lodgement_userNumber, String lodgement_companyName,
 			String lodgement_location, String lodgement_LatLng, String lodgement_category, String lodgement_hashTag,
 			int lodgement_goodCount, double lodgement_reviewGradeRate, int lodgement_reviewCount, String lodgement_img,
 			int lodgement_temp) {
 		super();
 		this.lodgement_number = lodgement_number;
 		this.lodgement_userNumber = lodgement_userNumber;
-		this.lodgement_title = lodgement_title;
+		this.lodgement_companyName = lodgement_companyName;
 		this.lodgement_location = lodgement_location;
 		this.lodgement_LatLng = lodgement_LatLng;
 		this.lodgement_category = lodgement_category;
@@ -52,7 +52,7 @@ public class LodgementVo {
 		temp = Double.doubleToLongBits(lodgement_reviewGradeRate);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + lodgement_temp;
-		result = prime * result + ((lodgement_title == null) ? 0 : lodgement_title.hashCode());
+		result = prime * result + ((lodgement_companyName == null) ? 0 : lodgement_companyName.hashCode());
 		result = prime * result + lodgement_userNumber;
 		return result;
 	}
@@ -102,10 +102,10 @@ public class LodgementVo {
 			return false;
 		if (lodgement_temp != other.lodgement_temp)
 			return false;
-		if (lodgement_title == null) {
-			if (other.lodgement_title != null)
+		if (lodgement_companyName == null) {
+			if (other.lodgement_companyName != null)
 				return false;
-		} else if (!lodgement_title.equals(other.lodgement_title))
+		} else if (!lodgement_companyName.equals(other.lodgement_companyName))
 			return false;
 		if (lodgement_userNumber != other.lodgement_userNumber)
 			return false;
@@ -115,7 +115,7 @@ public class LodgementVo {
 	@Override
 	public String toString() {
 		return "LodgementVo [lodgement_number=" + lodgement_number + ", lodgement_userNumber=" + lodgement_userNumber
-				+ ", lodgement_title=" + lodgement_title + ", lodgement_location=" + lodgement_location
+				+ ", lodgement_title=" + lodgement_companyName + ", lodgement_location=" + lodgement_location
 				+ ", lodgement_LatLng=" + lodgement_LatLng + ", lodgement_category=" + lodgement_category
 				+ ", lodgement_hashTag=" + lodgement_hashTag + ", lodgement_goodCount=" + lodgement_goodCount
 				+ ", lodgement_reviewGradeRate=" + lodgement_reviewGradeRate + ", lodgement_reviewCount="
@@ -139,12 +139,12 @@ public class LodgementVo {
 		this.lodgement_userNumber = lodgement_userNumber;
 	}
 
-	public String getLodgement_title() {
-		return lodgement_title;
+	public String getLodgement_companyName() {
+		return lodgement_companyName;
 	}
 
-	public void setLodgement_title(String lodgement_title) {
-		this.lodgement_title = lodgement_title;
+	public void setLodgement_companyName(String lodgement_title) {
+		this.lodgement_companyName = lodgement_title;
 	}
 
 	public String getLodgement_location() {

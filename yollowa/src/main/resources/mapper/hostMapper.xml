@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.proj.yollowa.model.host.HostDao">
+	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
+		select * from user where user_number=#{user_number}
+	</select>
+	
+	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.LodgementVo">
+		insert into lodgement (lodgement_userNumber, lodgement_companyName, lodgement_location, lodgement_LatLng, lodgement_category, lodgement_hashTag, lodgement_img) values 
+							  (#{lodgement_userNumber}, #{lodgement.lodgement_companyName}, #{lodgement.lodgement_location}, #{lodgement.lodgement_LatLng}, #{lodgement.lodgement_category}, #{lodgement.lodgement_hashTag} ,#{lodgement.lodgement_img})
+	</insert>
+	
+	<select id="selectLodgementNum" resultType="int">
+		select lodgement_number from lodgement where lodgement_userNumber=#{lodgement_userNumber} and lodgement_companyName=#{lodgement.lodgement_companyName} and lodgement_location=#{lodgement.lodgement_location}
+	</select>
+	
+</mapper>

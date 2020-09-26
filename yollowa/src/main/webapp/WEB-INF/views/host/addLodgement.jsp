@@ -75,12 +75,19 @@
 	}
 	.label_title{
 		font-size:16px;
+		padding-left: 5px;
+		border-left: 2px solid #B167CF;
+		margin-top: 10px;
 	}
 	.infoTitle{
 		margin-top: 40px;
 		margin-bottom: 30px;
 		padding-bottom: 10px;
 		border-bottom: 1px solid lightgray;
+	}
+	.location{
+		width :680px;
+		float:left;
 	}
 	.type_label{
 		margin-right:15px;
@@ -124,7 +131,6 @@
 
 </style>
 <script type="text/javascript">
-
 /* 이미지 등록 시 미리보기 기능 */
 function setThumbnail(event) { 
 	var reader = new FileReader();
@@ -138,43 +144,43 @@ function setThumbnail(event) {
 
 /* 해쉬태그 등록 add input method (name, class ="notice") */
 function addInputHashtag(){
-	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="hashtag" />\
+	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="lodgement_hashTag" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
-	);
+	);s
 }
 
 
 /* 공지사항 등록 add input method (name, class ="notice") */
 function addInputNotice(){
-	$('.addInputNotice').append('<input type="text" class="form-control notice" name="notice" />\
+	$('.addInputNotice').append('<input type="text" class="form-control notice" name="information_notice" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
 
 /* 기본정보 등록 add input method (name, class ="basic_info") */
 function addInputBasicInfo(){
-	$('.addInputBasicInfo').append('<input type="text" class="form-control basic_info" name="basic_info" />\
+	$('.addInputBasicInfo').append('<input type="text" class="form-control basic_info" name="information_basicInfo" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
 
 /* 인원 추가정보 등록 add input method (name, class ="basic_info") */
 function addInputAddPeople(){
-	$('.addInputAddPeople').append('<input type="text" class="form-control add_people" name="add_people" />\
+	$('.addInputAddPeople').append('<input type="text" class="form-control add_people" name="information_addPeopleInfo" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
 
 /* 편의시설 및 서비스 등록 add input method (name, class ="basic_info") */
 function addInputService(){
-	$('.addInputService').append('<input type="text" class="form-control service" name="service" />\
+	$('.addInputService').append('<input type="text" class="form-control service" name="information_service" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
 
 /* 취소 및 환불규정 등록 add input method (name, class ="basic_info") */
 function addInputRefundInfo(){
-	$('.addInputRefundInfo').append('<input type="text" class="form-control refund_info" name="refund_info" />\
+	$('.addInputRefundInfo').append('<input type="text" class="form-control refund_info" name="information_refundInfo" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -182,7 +188,7 @@ function addInputRefundInfo(){
 
 /* 글 타이틀 사진 추가 */
 function addTitleImg(){
-	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" />\
+	$('.titleImgFile').append('<input type="file" class="titleImg" name="lodgement_img" />\
 							<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -253,101 +259,103 @@ function removeTitleImg(){
 				  <h4 class="infoTitle">기본정보 등록</h4>
 				  
 				  <div class="form-group">
-				  	<label class="label_title" for="Lcategory">타입</label><br/>
+				  	<label class="label_title" for="lodgement_category">타입</label><br/>
 				  	<div>
 					  	<label class="radio-inline type_label">
-						<input type="radio" name="Lcategory" id="hotel" value="hotel"> 호텔
+						<input type="radio" name="lodgement_category" id="hotel" value="hotel"> 호텔
 						</label>
 						<label class="radio-inline type_label">
-						<input type="radio" name="Lcategory" id="motel" value="motel"> 모텔
+						<input type="radio" name="lodgement_category" id="motel" value="motel"> 모텔
 						</label>
 						<label class="radio-inline type_label">
-						<input type="radio" name="Lcategory" id="Pension" value="Pension"> 펜션
+						<input type="radio" name="lodgement_category" id="Pension" value="Pension"> 펜션
 						</label>
 					</div>
 				  </div>
 
 					<div class="form-group">
-						<label for="title" class="label_title">업체명</label>
+						<label for="lodgement_comapanyName" class="label_title">업체명</label>
 						<p>계정에 사업자로 등록되어 있는 업체명이 표시되며 선택사항이 존재하지 않으면 글 등록에 제한됩니다</p>
 						<div>
-							<select class="form-control">
-								<option>신라호텔</option>
-								<option>단양 랄랄라 패러글라이딩</option>
+							<select name="lodgement_companyName" class="form-control">
+							<c:forEach items="${companys}" var="companyName">
+								<option value="${companyName }">${companyName }</option>
+							</c:forEach>
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="title" class="label_title">글 제목</label>
-						<div>
-							<input type="text" class="form-control" name="title" id="title" placeholder="글 제목을 입력하세요">
+						<label for="lodgement_location" class="label_title">위치 등록</label><br/>
+						<div>		
+							<input type="text" class="location form-control" name="lodgement_location" id="sample5_address" placeholder="주소">
+							<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+							<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 						</div>
 					</div>
 					
 					<div class="form-group">
-				    <label class="label_title" for="hashtag">해쉬태그</label>
-					<a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
-				    <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
-				    <div class="addInputHashtag">
-				    	<input type="text" class="form-control hashtag" name="hashtag" placeholder="#욜로와단독"/>
-					</div>
-				  </div>
-
+				      <label class="label_title" for="lodgement_hashTag">해쉬태그</label>
+					  <a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
+				      <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
+				      <div class="addInputHashtag">
+				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/>
+  					  </div>
+				  	</div>
 
 					<div class="form-group">
-				      <label class="label_title" for="titleImg">타이틀 사진 등록</label>
+				      <label class="label_title" for="lodgement_img">타이틀 사진 등록</label>
 					  <a onclick="addTitleImg()" class="btnAdd btn btn-primary">사진 추가 등록</a>
 					  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
 				      <div class="titleImgFile">
-						<input type="file" class="titleImg" name="titleImg" /><br/>
+						<input type="file" class="titleImg" name="lodgement_img" /><br/>
 					  </div>
 				    </div>
 
 					<div class="form-group">
-				    <label class="label_title" for="comment">사장님 한마디 등록</label>
+				    <label class="label_title" for="information_comment">사장님 한마디 등록</label>
 				    <div>
-					<textarea class="form-control" rows="3" name="comment" id="comment" placeholder="손님을 끌어들일 달콤한 멘트를 작성하세요"></textarea>
+					<textarea class="form-control" rows="3" name="information_comment" id="comment" placeholder="손님을 끌어들일 달콤한 멘트를 작성하세요"></textarea>
 					</div>
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="notice">공지사항 등록</label>
+				    <label class="label_title" for="infomation_notice">공지사항 등록</label>
 					<a onclick="addInputNotice()" class="btnAdd btn btn-primary" role="btn">태그 추가</a>
 				    <div class="addInputNotice">
-				    	<input type="text" class="form-control notice" name="notice" placeholder="공지사항 정보"/>
+				    	<input type="text" class="form-control notice" name="information_notice" placeholder="공지사항 정보"/>
 					</div>
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="basic_info">기본정보 등록</label>
+				    <label class="label_title" for="infomation_basicInfo">기본정보 등록</label>
 					<a onclick="addInputBasicInfo()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputBasicInfo">
-				    	<input type="text" class="form-control basic_info" name="basic_info" placeholder="체크인아웃 정보 및 주차가능 여부 등"/>
+				    	<input type="text" class="form-control basic_info" name="information_basicInfo" placeholder="체크인아웃 정보 및 주차가능 여부 등"/>
 					</div>
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="add_people">인원 추가정보 등록</label>
+				    <label class="label_title" for="infomation_addPeopleInfo">인원 추가정보 등록</label>
 					<a onclick="addInputAddPeople()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputAddPeople">
-				    	<input type="text" class="form-control add_people" name="add_people" placeholder="인원추가 정보"/>
+				    	<input type="text" class="form-control add_people" name="information_addPeopleInfo" placeholder="인원추가 정보"/>
 					</div>
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="service">편의시설 및 서비스 등록</label>
+				    <label class="label_title" for="infomation_service">편의시설 및 서비스 등록</label>
 					<a onclick="addInputService()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputService">
-				    	<input type="text" class="form-control service" name="service" placeholder="편의시설 및 서비스"/>
+				    	<input type="text" class="form-control service" name="information_service" placeholder="편의시설 및 서비스"/>
 					</div>
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="refund_info">취소 및 환불규정 등록</label>
+				    <label class="label_title" for="infomation_refundInfo">취소 및 환불규정 등록</label>
 					<a onclick="addInputRefundInfo()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputRefundInfo">
-				    	<input type="text" class="form-control refund_info" name="refund_info" placeholder="취소 및 환불규정"/>
+				    	<input type="text" class="form-control refund_info" name="infomation_refundInfo" placeholder="취소 및 환불규정"/>
 					</div>
 				  </div>
 				  
@@ -359,4 +367,54 @@ function removeTitleImg(){
 	</div>
 	<%@ include file="../template/footer.jspf"%>
 </body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d2ea55cf19b317302dd07f8c2c3117&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
+
 </html>
