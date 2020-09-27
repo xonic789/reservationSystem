@@ -102,6 +102,7 @@ public class HostLodgementController {
 		}
 		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
 		
+<<<<<<< HEAD
 		// 위에서 업로드와 동시에 파싱된 lodgement_img update 
 		hostService.updateLodgementImg(lodgementNumber, lodgement_img);
 		

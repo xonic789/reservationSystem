@@ -1,21 +1,21 @@
 package com.proj.yollowa.model.entity;
 
 public class UserVo {
-	int user_number;
-	String user_nickName;
-	String user_name;
-	String user_birthday;
-	String user_gender;
-	String user_phoneNumber;
-	String user_address;
-	String user_id;
-	String user_password;
-	String user_email;
-	String user_likes;
-	String user_wishList;
-	int user_companyNumber;
-	String user_companyName;
-	int user_level;
+	private int user_number;
+	private String user_nickName;
+	private String user_name;
+	private String user_birthday;
+	private String user_gender;
+	private String user_phoneNumber;
+	private String user_address;
+	private String user_id;
+	private String user_password;
+	private String user_email;
+	private String user_likes;
+	private String user_wishList;
+	private int user_companyNumber;
+	private String user_companyName;
+	private int user_level;
 	public UserVo() {
 	}
 	public String getUser_birthday() {

@@ -6,4 +6,5 @@
 	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{user_number}
 	</select>
+	
 </mapper>
