@@ -38,7 +38,6 @@ public class HostServiceImpl implements HostService {
 		String lodgement_img = bean.getLodgement_img().replaceAll(",", "&");
 		bean.setLodgement_img(lodgement_img);
 		
-		System.out.println("insert될 때 bean :: "+bean);
 		
 		hostDao.insertLodgement(user_number, bean);
 	}
@@ -46,7 +45,6 @@ public class HostServiceImpl implements HostService {
 	@Override
 	public int selectLodgementNumber(int user_number, AddLodgementPageDto bean) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		System.out.println("select 될 때 bean :: "+bean);
 		int lodgementNumber = hostDao.selectLodgementNum(user_number, bean);
 		return lodgementNumber;
 	}
@@ -56,26 +54,36 @@ public class HostServiceImpl implements HostService {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		
 		// 공지사항
-		String information_notice = bean.getInformation_notice().replaceAll(",", "&");
-		bean.setInformation_notice(information_notice);
+		if(bean.getInformation_notice().contains(",")) {
+			String information_notice = bean.getInformation_notice().replaceAll(",", "&");
+			bean.setInformation_notice(information_notice);
+		}
 		
 		// 기본정보
-		String information_basicInfo = bean.getInformation_basicInfo().replaceAll(",", "&");
-		bean.setInformation_basicInfo(information_basicInfo);
+		if(bean.getInformation_basicInfo().contains(",")) {
+			String information_basicInfo = bean.getInformation_basicInfo().replaceAll(",", "&");
+			bean.setInformation_basicInfo(information_basicInfo);
+		}
 		
 		//인원 추가정보
-		String information_addPeopleInfo = bean.getInformation_addPeopleInfo().replaceAll(",", "&");
-		bean.setInformation_addPeopleInfo(information_addPeopleInfo);
+		if(bean.getInformation_addPeopleInfo().contains(",")) {
+			String information_addPeopleInfo = bean.getInformation_addPeopleInfo().replaceAll(",", "&");
+			bean.setInformation_addPeopleInfo(information_addPeopleInfo);
+		}
 		
 		// 편의시설 및 서비스
-		String information_service = bean.getInformation_service().replaceAll(",", "&");
-		bean.setInformation_service(information_service);
+		if(bean.getInformation_service().contains(",")) {
+			String information_service = bean.getInformation_service().replaceAll(",", "&");
+			bean.setInformation_service(information_service);
+		}
 		
 		// 취소 및 환불규정
-		String information_refundInfo = bean.getInformation_refundInfo().replaceAll(",", "&");
-		bean.setInformation_refundInfo(information_refundInfo);
+		if(bean.getInformation_refundInfo().contains(",")) {
+			String information_refundInfo = bean.getInformation_refundInfo().replaceAll(",", "&");
+			bean.setInformation_refundInfo(information_refundInfo);
+		}
 		
-		
+		hostDao.insertLodgeInfo(lodgementNumber, bean);
 	}
 
 

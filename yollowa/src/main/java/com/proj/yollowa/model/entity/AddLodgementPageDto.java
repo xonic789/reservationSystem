@@ -1,5 +1,7 @@
 package com.proj.yollowa.model.entity;
 
+import java.io.File;
+
 public class AddLodgementPageDto {
 	private String lodgement_category;
 	private String lodgement_companyName;
@@ -13,6 +15,7 @@ public class AddLodgementPageDto {
 	private String information_addPeopleInfo;
 	private String information_service;
 	private String information_refundInfo;
+	private File titleImgs;
 	
 	public AddLodgementPageDto() {
 	}
@@ -232,6 +235,14 @@ public class AddLodgementPageDto {
 
 	public void setInformation_refundInfo(String information_refundInfo) {
 		this.information_refundInfo = information_refundInfo;
+	}
+
+	public File getTitleImgs() {
+		return titleImgs;
+	}
+
+	public void setTitleImgs(File titleImgs) {
+		this.titleImgs = titleImgs;
 	}
 	
 	

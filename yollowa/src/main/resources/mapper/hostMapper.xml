@@ -17,4 +17,8 @@
 		select lodgement_number from lodgement where lodgement_userNumber=#{lodgement_userNumber} and lodgement_companyName=#{lodgement.lodgement_companyName} and lodgement_location=#{lodgement.lodgement_location}
 	</select>
 	
+	<insert id="insertLodgeInfo">
+		insert into information (information_number, information_type, information_notice, information_basicInfo, information_comment, information_addPeopleInfo, information_service, information_refundInfo) values
+								(#{information_number}, 1, #{information.information_notice}, #{information.information_basicInfo}, #{information.information_comment}, #{information.information_addPeopleInfo}, #{information.information_service}, #{information.information_refundInfo})
+	</insert>
 </mapper>

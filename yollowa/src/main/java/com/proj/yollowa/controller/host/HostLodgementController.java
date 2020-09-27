@@ -1,14 +1,21 @@
 package com.proj.yollowa.controller.host;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
@@ -57,17 +64,36 @@ public class HostLodgementController {
 	
 	@Auth
 	@RequestMapping(value="/ladd", method=RequestMethod.POST)
-	public void addLadgement(@AuthUser UserVo userVo, AddLodgementPageDto bean) throws SQLException {
-		System.out.println(bean);
+	public String addLadgement(@AuthUser UserVo userVo, AddLodgementPageDto bean, MultipartFile[] lodgement_img, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
+		System.out.println("입력받은 숙박 글 : "+bean);
+		System.out.println(lodgement_img);
+		System.out.println(req.getContextPath());
+		
+		// 타이틀 이미지들 처리 업로드
+		List<String> titleImgNames = new ArrayList<String>();
+		for(MultipartFile titleImg : lodgement_img) {
+			String origin = System.currentTimeMillis()+"_"+titleImg.getOriginalFilename();
+			if(titleImg.getOriginalFilename().isEmpty()) {
+				continue;
+			}
+			File dest = new File("//yollowa//upload//"+origin);
+			titleImg.transferTo(dest);
+			System.out.println("titleImg :: "+titleImg);
+			titleImgNames.add(origin);
+			System.out.println("titleImgNames :: "+titleImgNames);
+		}
+		
 		// Lodgement Insert
 		hostService.insertLodgement(userVo.getUser_number(), bean);
 		
 		// 위에서 insert 된 lodgement_number 값을 select (information 테이블에 같이 넣어줘야 하기 떄문) 
 		int lodgementNumber = hostService.selectLodgementNumber(userVo.getUser_number(), bean);
-		System.out.println("insert된 글의 번호 select :: "+lodgementNumber);
+		System.out.println("숙박 insert된 글의 번호 select :: "+lodgementNumber);
 		
 		// information insert
-		hostService.insertLodgeInfo(lodgementNumber, bean)
+		hostService.insertLodgeInfo(lodgementNumber, bean);
+		
+		return "host/addRoom";
 	}
 	
 	

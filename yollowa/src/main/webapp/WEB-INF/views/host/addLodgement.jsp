@@ -290,7 +290,7 @@ function removeTitleImg(){
 						<div>		
 							<input type="text" class="location form-control" name="lodgement_location" id="sample5_address" placeholder="주소">
 							<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-							<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+							<div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div>
 						</div>
 					</div>
 					
@@ -320,7 +320,7 @@ function removeTitleImg(){
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="infomation_notice">공지사항 등록</label>
+				    <label class="label_title" for="information_notice">공지사항 등록</label>
 					<a onclick="addInputNotice()" class="btnAdd btn btn-primary" role="btn">태그 추가</a>
 				    <div class="addInputNotice">
 				    	<input type="text" class="form-control notice" name="information_notice" placeholder="공지사항 정보"/>
@@ -328,7 +328,7 @@ function removeTitleImg(){
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="infomation_basicInfo">기본정보 등록</label>
+				    <label class="label_title" for="information_basicInfo">기본정보 등록</label>
 					<a onclick="addInputBasicInfo()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputBasicInfo">
 				    	<input type="text" class="form-control basic_info" name="information_basicInfo" placeholder="체크인아웃 정보 및 주차가능 여부 등"/>
@@ -336,7 +336,7 @@ function removeTitleImg(){
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="infomation_addPeopleInfo">인원 추가정보 등록</label>
+				    <label class="label_title" for="information_addPeopleInfo">인원 추가정보 등록</label>
 					<a onclick="addInputAddPeople()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputAddPeople">
 				    	<input type="text" class="form-control add_people" name="information_addPeopleInfo" placeholder="인원추가 정보"/>
@@ -344,7 +344,7 @@ function removeTitleImg(){
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="infomation_service">편의시설 및 서비스 등록</label>
+				    <label class="label_title" for="information_service">편의시설 및 서비스 등록</label>
 					<a onclick="addInputService()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputService">
 				    	<input type="text" class="form-control service" name="information_service" placeholder="편의시설 및 서비스"/>
@@ -352,10 +352,10 @@ function removeTitleImg(){
 				  </div>
 
 				  <div class="form-group">
-				    <label class="label_title" for="infomation_refundInfo">취소 및 환불규정 등록</label>
+				    <label class="label_title" for="information_refundInfo">취소 및 환불규정 등록</label>
 					<a onclick="addInputRefundInfo()" class="btnAdd btn btn-primary">태그 추가</a>
 				    <div class="addInputRefundInfo">
-				    	<input type="text" class="form-control refund_info" name="infomation_refundInfo" placeholder="취소 및 환불규정"/>
+				    	<input type="text" class="form-control refund_info" name="information_refundInfo" placeholder="취소 및 환불규정"/>
 					</div>
 				  </div>
 				  

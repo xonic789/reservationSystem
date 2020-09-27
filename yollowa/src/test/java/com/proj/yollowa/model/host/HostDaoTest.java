@@ -3,6 +3,8 @@ package com.proj.yollowa.model.host;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -51,4 +53,5 @@ public class HostDaoTest {
 		int lodgementNumber = hostDao.selectLodgementNum(1, dto);
 		System.out.println(lodgementNumber);
 	}
+
 }
