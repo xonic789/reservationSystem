@@ -35,8 +35,8 @@ public class HostServiceImpl implements HostService {
 		bean.setLodgement_hashTag(lodgement_hashTag);
 		
 		// 타이틀 이미지
-		String lodgement_img = bean.getLodgement_img().replaceAll(",", "&");
-		bean.setLodgement_img(lodgement_img);
+//		String lodgement_img = bean.getLodgement_img().replaceAll(",", "&");
+//		bean.setLodgement_img(lodgement_img);
 		
 		
 		hostDao.insertLodgement(user_number, bean);
@@ -84,6 +84,12 @@ public class HostServiceImpl implements HostService {
 		}
 		
 		hostDao.insertLodgeInfo(lodgementNumber, bean);
+	}
+
+	@Override
+	public void updateLodgementImg(int lodgementNumber, String lodgement_img) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.updateLodgementImg(lodgementNumber, lodgement_img);
 	}
 
 

@@ -188,7 +188,7 @@ function addInputRefundInfo(){
 
 /* 글 타이틀 사진 추가 */
 function addTitleImg(){
-	$('.titleImgFile').append('<input type="file" class="titleImg" name="lodgement_img" />\
+	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" />\
 							<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -255,7 +255,7 @@ function removeTitleImg(){
 			<div class="col-md-9">
 				<h2>숙박 게시글 등록</h2>
 				<p id="sub">아래 입력박스들을 모두 기입해야 글 등록이 가능합니다<p>
-				<form id="form" action="ladd" method="post">
+				<form id="form" action="ladd" method="post" enctype="multipart/form-data">
 				  <h4 class="infoTitle">기본정보 등록</h4>
 				  
 				  <div class="form-group">
@@ -304,11 +304,11 @@ function removeTitleImg(){
 				  	</div>
 
 					<div class="form-group">
-				      <label class="label_title" for="lodgement_img">타이틀 사진 등록</label>
+				      <label class="label_title" for="titleImg">타이틀 사진 등록</label>
 					  <a onclick="addTitleImg()" class="btnAdd btn btn-primary">사진 추가 등록</a>
 					  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
 				      <div class="titleImgFile">
-						<input type="file" class="titleImg" name="lodgement_img" /><br/>
+						<input type="file" class="titleImg" name="titleImg" /><br/>
 					  </div>
 				    </div>
 

@@ -19,4 +19,6 @@ public interface HostService {
 
 	// lodgement information insert
 	void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean);
+
+	void updateLodgementImg(int lodgementNumber, String lodgement_img);
 }
