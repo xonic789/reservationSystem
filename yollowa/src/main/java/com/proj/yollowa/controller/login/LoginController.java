@@ -1,18 +1,14 @@
 package com.proj.yollowa.controller.login;
 
 
-import java.sql.SQLException;
+import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.Auth.Role;
@@ -20,8 +16,6 @@ import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
-import com.proj.yollowa.model.entity.login.LoginVo;
-import com.proj.yollowa.model.entity.login.ManagerLoginVo;
 import com.proj.yollowa.service.login.UserService;
 
 @Controller
@@ -53,6 +47,29 @@ public class LoginController {
 	@RequestMapping(value = "mlogin/result",method =RequestMethod.POST )
 	public void managerLoginResult() {
 	}
+	//로그아웃!!!
+//	@RequestMapping(value = "logout/",method = RequestMethod.GET)
+//	public @ResponseBody String logout(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws IOException {
+//		if(session!=null) {
+//			session.invalidate();
+//			response.sendRedirect(request.getContextPath()+"/");
+//			return null;
+//		}else {
+//			return "<script>window.addEventListener('DOMContentLoaded',function(){window.history.back();})</script>";
+//		}
+//		
+//	}
+	@Auth
+	@RequestMapping(value = "logout/",method = RequestMethod.GET)
+	public String logout(HttpSession session,@AuthUser UserVo userVo) throws IOException {
+		if(userVo!=null) {
+			session.invalidate();
+			return "redirect:../";
+		}
+		
+		return null;
+	}
+	
 	
 	
 }

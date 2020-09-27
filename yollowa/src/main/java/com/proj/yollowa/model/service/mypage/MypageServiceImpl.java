@@ -19,11 +19,10 @@ public class MypageServiceImpl implements MypageService{
 	
 	@Override
 	public UserVo userDetailService(Model model,int user_number) throws SQLException {
-		MypageDao myPageDao =sqlSession.getMapper(MypageDao.class);
+		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
 		UserVo userVo = myPageDao.userDetail(user_number);
 		
 		model.addAttribute("userVo",userVo);
-		
 		return userVo;
 	}
 }

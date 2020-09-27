@@ -1,10 +1,10 @@
 package com.proj.yollowa.model.entity;
 
 public class ManagerVo {
-	String manager_number;
-	String manager_id;
-	String manager_password;
-	String manager_level;
+	private String manager_number;
+	private String manager_id;
+	private String manager_password;
+	private String manager_level;
 	
 	public ManagerVo() {
 	}
