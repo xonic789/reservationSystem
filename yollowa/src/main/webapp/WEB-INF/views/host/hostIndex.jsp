@@ -152,6 +152,7 @@
 						<p>경기도 안산시 단원구 선부광장남로17</p>
 						<p>평점 ★★★★☆</p> 
 						<p>후기 569개</p>
+						<p class="insert"><a href="addRoom">방 추가하기</a>
 						<p class="modify"><a href="#">글 수정하기</a></p>
 						<p class="delete"><a href="#">글 삭제하기</a></p>
 					</div>
