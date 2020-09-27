@@ -67,7 +67,7 @@ public class HostLodgementController {
 		System.out.println("insert된 글의 번호 select :: "+lodgementNumber);
 		
 		// information insert
-		hostService.insertLodgeInfo(lodgementNumber, bean)
+		hostService.insertLodgeInfo(lodgementNumber, bean);
 	}
 	
 	
