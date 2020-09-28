@@ -9,17 +9,35 @@
 	<%@ include file="../template/head.jspf" %>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	 <style type="text/css">
-	 	.button{
-	 		width:191px;
-	 		height: 40px;
-	 	}
-	 </style>
 </head>
 <body>
 	<%@ include file="../template/header.jspf" %>
 	<%@ include file="../template/menu.jspf" %>
 	<div class="container">
+	<!-- naver login -->	
+	<div id="naverIdLogin"></div>
+			<script type="text/javascript">
+			var naverLogin = new naver.LoginWithNaverId(
+				{
+					clientId: "65ddf9c4a57ddf27e0cf2ac5eaac8af5",
+					callbackUrl: "http://localhost:8080/yollowa/login/naver/callback",
+					isPopup: false, /* 팝업을 통한 연동처리 여부 */
+					loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+				}
+			);
+			
+			/* 설정정보를 초기화하고 연동을 준비 */
+			naverLogin.init();
+		</script>
+	
+	<!-- /naver login -->
+	<!-- kakao login -->
+	<a id="kakao-login-btn">dd</a>
+	<script type="text/javascript">
+	Kakao.init('fab08af29cefb086ca342c892c7f9a20');
+	
+	</script>
+	<!-- /kakao login -->
 	<form action="${pageContext.request.contextPath }/login/result" method="post">
 	  <div class="form-group">
 	    <label for="user_id">ID : </label>
@@ -34,11 +52,7 @@
 			
 	</div>
 	
-	<div class="text-center">
-		<a href="${naver_url }"><img class="button" src="../resources/img/naverButton.png"/></a>
-		<a href="https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8080/yollowa/login/google/callback&response_type=code&client_id=183141477636-5vabtlolvogrdtv3r2rg8graq5c96fk2.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/userinfo.email&access_type=offline"><img class="button" src="../resources/img/googleButton.png"/></a>
-		<a href="https://kauth.kakao.com/oauth/authorize?client_id=65ddf9c4a57ddf27e0cf2ac5eaac8af5&redirect_uri=http://localhost:8080/yollowa/login/kakao/callback&response_type=code"><img class="button" src="../resources/img/kakaoButton.png"/></a>
-	</div>
+	
 	<%@ include file="../template/footer.jspf" %>
 </body>
 </html>

@@ -60,4 +60,34 @@
 	 	</interceptor>
 	 </interceptors>
 	 
+	 
+	 <!-- oauth2 naver -->
+	 <beans:bean id="naverClientID" class="java.lang.String">
+	 	<beans:constructor-arg value="FAFgcQcPU4tJiser6QxC"/>
+	 </beans:bean>
+	 <beans:bean id="naverClientSecret" class="java.lang.String">
+	 	<beans:constructor-arg value="v9uycC_MDV"/>
+	 </beans:bean>
+	 <beans:bean id="naverRedirectUrl" class="java.lang.String">
+	 	<beans:constructor-arg value="http://localhost:8080/yollowa/login/naver/callback"></beans:constructor-arg>
+	 </beans:bean>
+	 
+	 <beans:bean id="naverSns" class="com.proj.yollowa.auth.SnsValue">
+	 	<beans:constructor-arg value="naver"/>
+	 	<beans:constructor-arg ref="naverClientID"/>
+	 	<beans:constructor-arg ref="naverClientSecret"/>
+	 	<beans:constructor-arg ref="naverRedirectUrl"/>
+	 </beans:bean>
+	 
+	  <beans:bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+	<beans:constructor-arg value="183141477636-5vabtlolvogrdtv3r2rg8graq5c96fk2.apps.googleusercontent.com" />
+	<beans:constructor-arg value="DU-4qjG8kSueeusYa7z7zsx2" />
+	</beans:bean>
+	    
+	<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+	        <beans:property name="scope" value="https://www.googleapis.com/auth/userinfo.email" />
+	        <!-- <beans:property name="scope" value="https://www.googleapis.com/auth/plus.login" /> -->
+	        <beans:property name="redirectUri" value="http://localhost:8080/yollowa/login/google/callback" />
+	</beans:bean>	
+	
 </beans:beans>
