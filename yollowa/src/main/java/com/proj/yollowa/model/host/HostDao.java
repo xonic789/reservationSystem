@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.yollowa.model.entity.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.LodgementVo;
 import com.proj.yollowa.model.entity.UserVo;
 
 public interface HostDao {
@@ -13,7 +14,7 @@ public interface HostDao {
 	public UserVo userDetail(int user_number) throws SQLException;
 	
 	// 호스트 숙박글 리스트 
-	public ArrayList<AddLodgementPageDto> selectHostLodgementList(int user_number);
+	public ArrayList<LodgementVo> selectHostLodgementList(int user_number);
 	//host/ end
 	
 	// host/ladd start

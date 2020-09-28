@@ -28,17 +28,12 @@ public class HostLodgementController {
 	@Inject
 	HostService hostService;
 	
-	@RequestMapping("/ladd/roadAddress")
-	public String test() {
-		return "host/roadAddress";
-	}
-	
 	@Auth
 	@RequestMapping("/")
 	public String HostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
 		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
-		
 		hostService.selectHostLodgementList(model, bean.getUser_number());
+		
 		model.addAttribute("userVo", bean);
 		return "host/hostIndex";
 	}

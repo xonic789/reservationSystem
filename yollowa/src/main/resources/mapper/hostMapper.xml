@@ -10,7 +10,7 @@
 	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{user_number}
 	</select>
-	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.AddLodgementPageDto">
+	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.LodgementVo">
 		select * from lodgement where lodgement_userNumber = #{user_number}
 	</select>
 	

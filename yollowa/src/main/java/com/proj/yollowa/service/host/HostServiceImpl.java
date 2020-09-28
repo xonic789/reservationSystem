@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.yollowa.model.entity.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.LodgementVo;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.host.HostDao;
 
@@ -36,9 +37,10 @@ public class HostServiceImpl implements HostService {
 	@Override
 	public void selectHostLodgementList(Model model, int user_number) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		ArrayList<AddLodgementPageDto> lodgementList = hostDao.selectHostLodgementList(user_number);
+		ArrayList<LodgementVo> lodgementList = hostDao.selectHostLodgementList(user_number);
 		model.addAttribute("lodgementList", lodgementList);
-//		System.out.println(lodgementList.size());
+
+		//		System.out.println(lodgementList.size());
 //		for(int i=0; i<lodgementList.size(); i++) {
 //			if(lodgementList.get(i).getLodgement_hashTag().contains("&")) {
 //				String[] ArrhashTag = lodgementList.get(i).getLodgement_hashTag().split("&");
@@ -75,13 +77,13 @@ public class HostServiceImpl implements HostService {
 		List<String> titleImgNames = new ArrayList<String>();
 				
 		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
-		String lodgement_img = "";
+		String img = "";
 		
 		for(MultipartFile titleImg : bean.getTitleImg()) {
 			String origin = lodgementNumber+"_"+titleImg.getOriginalFilename();
 			
 			// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
-			lodgement_img+=origin+"&";
+			img+=origin+"&";
 			
 			if(titleImg.getOriginalFilename().isEmpty()) {
 				continue;
@@ -98,8 +100,9 @@ public class HostServiceImpl implements HostService {
 			titleImg.transferTo(dest);
 			titleImgNames.add(origin);
 		}
+		// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송
+		String lodgement_img = img.substring(0,img.length()-1);
 		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
-		
 		return lodgement_img;
 	}
 

@@ -76,6 +76,7 @@
 		padding : 3px 0px 3px 10px;
 		margin-top: 20px;
 		margin-bottom:15px;
+		margin-right: 20px;
 		display:inline-block;
 		border-left: 2px solid #B167CF;
 	}
@@ -89,12 +90,18 @@
 		margin-bottom:15px;
 	}
 	.inputCon{
+		display:inline-block;
 		margin-left: 20px;
 	}
 	.form-control{
 		display:inline-block;
-		width:615px;
+		width:610px;
 	}
+	.btns{
+		text-align: right;
+	}
+	
+	
 	/* .list{
 		height: 250px;
 		border-bottom: 1px solid lightgray;
@@ -133,6 +140,13 @@
 	
 </style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		if($('.temp').val()==0){
+			$('.temp').val("관리자 승인이 대기중인 글입니다");
+		}else if($('.temp').val()==1){
+			$('.temp').val("관리자 승인이 완료된 글입니다. 정상적으로 등록이 완료되었습니다.")
+		}
+	});
 </script>
 </head>
 <body>
@@ -173,16 +187,33 @@
 			<h2>나의 글 정보</h2>
 			<p id="sub">사업자께서 등록하신 욜로와 글 등록 정보입니다.</p>
 			<h4>숙박 게시글 정보</h4>
+			
 			<c:forEach items="${lodgementList }" var="lodgeList">
-			<h5>${lodgeList.lodgement_companyName }</h5><br/>
-			<div class="list">
-				<form class="form">
-					<div class="title">업체명</div><input type="text" class="inputCon form-control" value="${lodgeList.lodgement_companyName }" disabled="disabled"></input>
-					<div class="title">위치</div><input type="text" class="inputCon form-control" value="${lodgeList.lodgement_location }" disabled="disabled"></input>
-					<div class="title">해쉬태그</div><input type="text" class="inputCon form-control" value="${lodgeList.lodgement_hashTag }" disabled="disabled"></input>
-					<div class="title">타이틀 이미지</div><input type="file" class="inputCon" value="${lodgeList.lodgement_img }"/>
+			<div class="lodgementBox">
+				<h5>${lodgeList.lodgement_companyName }</h5><a href="#" class="btn btn-outline-primary">방 등록 현황</a><br/>
+				<div class="list">
+					<div class="title">업체명</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_companyName }" disabled="disabled"/>
+					<div class="title">타이틀 이미지</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_img }" disabled="disabled" />
+					<div class="title">위치</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_location }" disabled="disabled"/>
+					<div class="title">해쉬태그</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_hashTag }" disabled="disabled"/>
+					<div class="title">후기 수</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewCount }" disabled="disabled" />
+					<div class="title">좋아요 수</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_goodCount }" disabled="disabled" />
+					<div class="title">평점</div>
+					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewGradeRate }" disabled="disabled" />
+					<div class="title">글 등록 현황</div>
+					<input type="text" class="inputCon temp form-control" value="${lodgeList.lodgement_temp }" disabled="disabled" />
 					
-				</form>
+					<div class="btns">
+						<button id="modify${lodgeList.lodgement_number }" class="btn btn-outline-warning">수정</button>
+						<a href="#" class="btn btn-outline-danger">삭제</a>
+					</div>
+				</div>
 			</div>
 			</c:forEach>
 			
