@@ -27,4 +27,11 @@ public class CsPageController {
 		
 		return "cs-center/qnalist";
 	}
+	
+	@RequestMapping(value = "/notice/write", method = RequestMethod.GET)
+	public String noticeWrite() {
+		
+		return "cs-center/noticewrite";
+	}
+	
 }
