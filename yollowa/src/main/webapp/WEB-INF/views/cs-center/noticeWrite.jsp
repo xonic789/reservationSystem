@@ -114,7 +114,7 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<form method="post" action="">
+			<form method="post" action="write">
 				<div class="box1">
 					<label for="title" id="titleLabel">제목</label>
 					<input type="text" name="title" class="form-control" id="titleInput" placeholder="제목을 입력해 주세요">

@@ -142,13 +142,13 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="i" begin="1" end="10">
+			  <c:forEach items="${list }" var="notice">
 			    <tr>
-			      <td>${i }</td>
-			      <td>${i }번째 테스트 게시글입니다</td>
-			      <td>관리자</td>
-			      <td>2020-09-20</td>
-			      <td>200</td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.noticeno }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.title }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.writer }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.writeddate }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.cnt }</a></td>
 			    </tr>
 			    </c:forEach>
 			  </tbody>
@@ -166,7 +166,7 @@
 					</ul>
 				</div>
 				<div class="btnGroup">
-				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='${pageContext.request.contextPath }/cs-center/notice/write'" />
+				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
 				</div>
 			</div>
 		</div>

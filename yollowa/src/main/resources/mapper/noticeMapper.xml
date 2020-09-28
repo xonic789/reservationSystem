@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.yollowa.model.cs.NoticeDao">
+	<select id="getNoticeList" resultType="com.proj.yollowa.model.entity.NoticeVo">
+		SELECT * FROM NOTICE ORDER BY NOTICENO DESC
+	</select>
+	<select id="getNotice" resultType="com.proj.yollowa.model.entity.NoticeVo">
+		SELECT * FROM NOTICE WHERE NOTICENO=#{noticeno}
+	</select>
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE WHERE NOTICENO=#{noticeno}
+	</delete>
+	<insert id="insertNotice">
+		INSERT INTO NOTICE (TITLE, WRITER, CONTENT) VALUES (#{title}, #{writer}, #{content})
+	</insert>
+</mapper>
