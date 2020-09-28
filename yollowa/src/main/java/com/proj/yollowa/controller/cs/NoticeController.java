@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.model.entity.NoticeVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
@@ -65,6 +66,26 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		return "redirect:./";
+	}
+	
+	@RequestMapping("/modify/{noticeno}")
+	public String modify(Model model, @PathVariable int noticeno) {
+		try {
+			noticeService.getNoticeService(model, noticeno);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "cs-center/noticeModify";
+	}
+	
+	@RequestMapping(value = "/modify/{noticeno}", method = RequestMethod.POST)
+	public ModelAndView noticeUpdate(@PathVariable int noticeno, @ModelAttribute NoticeVo bean) {
+		try {
+			noticeService.updateNoticeService(bean);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("redirect:../detail/"+noticeno);
 	}
 	
 	

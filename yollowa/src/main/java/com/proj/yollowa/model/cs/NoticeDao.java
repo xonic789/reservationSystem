@@ -12,4 +12,5 @@ public interface NoticeDao{
 	NoticeVo getNotice(int noticeno) throws SQLException;
 	void deleteNotice(int noticeno) throws SQLException;
 	void insertNotice(NoticeVo bean) throws SQLException;
+	void updateNotice(NoticeVo bean) throws SQLException;
 }

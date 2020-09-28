@@ -13,4 +13,5 @@ public interface NoticeService {
 	void getNoticeService(Model model, int noticeno) throws SQLException;
 	void deleteNoticeService(int noticeno) throws SQLException;
 	void insertNoticeService(NoticeVo bean) throws SQLException;
+	void updateNoticeService(NoticeVo bean) throws SQLException;
 }

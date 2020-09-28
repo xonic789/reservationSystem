@@ -117,7 +117,7 @@
 			<form method="post" action="write">
 				<div class="box1">
 					<label for="title" id="titleLabel">제목</label>
-					<input type="text" name="title" class="form-control" id="titleInput" placeholder="제목을 입력해 주세요">
+					<input type="text" name="title" class="form-control" id="titleInput" placeholder="제목을 입력해 주세요" />
 				</div>
 				<div class="box2">
 					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>

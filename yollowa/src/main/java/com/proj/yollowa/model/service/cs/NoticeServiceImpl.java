@@ -43,5 +43,12 @@ public class NoticeServiceImpl implements NoticeService{
 		bean.setWriter("tester");
 		noticeDao.insertNotice(bean);
 	}
+
+	@Override
+	public void updateNoticeService(NoticeVo bean) throws SQLException {
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		System.out.println(noticeDao);
+		noticeDao.updateNotice(bean);
+	}
 	
 }
