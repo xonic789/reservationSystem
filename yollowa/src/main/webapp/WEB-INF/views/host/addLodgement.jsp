@@ -116,7 +116,15 @@
 	.btnRemove, .titleImgRemove{
 		line-height: 8px;
 	}
-	.hashtag, .notice, .basic_info, .add_people, .service, .refund_info{
+	.titleImg{
+		margin-bottom:5px;
+	}
+	.hashtag{
+		width:690px;
+		display:inline-block;
+		margin-bottom:10px;
+	}
+	.notice, .basic_info, .add_people, .service, .refund_info{
 		width:705px;
 		display:inline-block;
 		margin-bottom:10px;
@@ -144,9 +152,9 @@ function setThumbnail(event) {
 
 /* 해쉬태그 등록 add input method (name, class ="notice") */
 function addInputHashtag(){
-	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="lodgement_hashTag" />\
+	$('.addInputHashtag').append('# <input type="text" class="form-control hashtag" name="lodgement_hashTag" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
-	);s
+	);
 }
 
 
@@ -277,7 +285,8 @@ function removeTitleImg(){
 						<label for="lodgement_comapanyName" class="label_title">업체명</label>
 						<p>계정에 사업자로 등록되어 있는 업체명이 표시되며 선택사항이 존재하지 않으면 글 등록에 제한됩니다</p>
 						<div>
-							<select name="lodgement_companyName" class="form-control">
+							<select name="lodgement_companyName" class="form-control custom-select">
+							<option selected>업체명을 선택해 주세요</option>
 							<c:forEach items="${companys}" var="companyName">
 								<option value="${companyName }">${companyName }</option>
 							</c:forEach>
@@ -286,7 +295,7 @@ function removeTitleImg(){
 					</div>
 
 					<div class="form-group">
-						<label for="lodgement_location" class="label_title">위치 등록</label><br/>
+						<label for="lodgement_location" class="label_title">위치 등록(도로명 주소)</label><br/>
 						<div>		
 							<input type="text" class="location form-control" name="lodgement_location" id="sample5_address" placeholder="주소">
 							<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
@@ -297,9 +306,9 @@ function removeTitleImg(){
 					<div class="form-group">
 				      <label class="label_title" for="lodgement_hashTag">해쉬태그</label>
 					  <a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
-				      <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
+				      <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙이지 않고 작성해주세요</p>
 				      <div class="addInputHashtag">
-				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/>
+				      	# <input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="욜로와단독"/><br/>
   					  </div>
 				  	</div>
 

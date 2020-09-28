@@ -22,6 +22,7 @@ public class AddLodgementPageDto {
 	private MultipartFile[] titleImg;
 	
 	public AddLodgementPageDto() {
+		
 	}
 
 	@Override

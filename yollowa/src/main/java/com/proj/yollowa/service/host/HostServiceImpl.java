@@ -1,12 +1,19 @@
 package com.proj.yollowa.service.host;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.yollowa.model.entity.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.UserVo;
@@ -27,6 +34,20 @@ public class HostServiceImpl implements HostService {
 	}
 
 	@Override
+	public void selectHostLodgementList(Model model, int user_number) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		ArrayList<AddLodgementPageDto> lodgementList = hostDao.selectHostLodgementList(user_number);
+		model.addAttribute("lodgementList", lodgementList);
+//		System.out.println(lodgementList.size());
+//		for(int i=0; i<lodgementList.size(); i++) {
+//			if(lodgementList.get(i).getLodgement_hashTag().contains("&")) {
+//				String[] ArrhashTag = lodgementList.get(i).getLodgement_hashTag().split("&");
+//			}
+//		}
+		
+	}
+
+	@Override
 	public void insertLodgement(int user_number, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		
@@ -43,14 +64,53 @@ public class HostServiceImpl implements HostService {
 	}
 
 	@Override
-	public int selectLodgementNumber(int user_number, AddLodgementPageDto bean) {
+	public int selectLodgementNumber(int user_number, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		int lodgementNumber = hostDao.selectLodgementNum(user_number, bean);
 		return lodgementNumber;
 	}
+	
+	@Override
+	public String uploadLodgementImg(AddLodgementPageDto bean, int lodgementNumber, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
+		List<String> titleImgNames = new ArrayList<String>();
+				
+		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
+		String lodgement_img = "";
+		
+		for(MultipartFile titleImg : bean.getTitleImg()) {
+			String origin = lodgementNumber+"_"+titleImg.getOriginalFilename();
+			
+			// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
+			lodgement_img+=origin+"&";
+			
+			if(titleImg.getOriginalFilename().isEmpty()) {
+				continue;
+			}
+			
+			String path = "/upload/lodgement/titleImg/";
+			ServletContext context = req.getSession().getServletContext();
+			String realPath = context.getRealPath(path);
+			
+			File dest = new File(realPath+origin);
+			System.out.println("이미지 저장위치"+dest.getAbsolutePath());
+//			저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
+			
+			titleImg.transferTo(dest);
+			titleImgNames.add(origin);
+		}
+		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
+		
+		return lodgement_img;
+	}
 
 	@Override
-	public void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) {
+	public void updateLodgementImg(int lodgementNumber, String lodgement_img) throws SQLException {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.updateLodgementImg(lodgementNumber, lodgement_img);
+	}
+
+	@Override
+	public void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		
 		// 공지사항
@@ -86,11 +146,8 @@ public class HostServiceImpl implements HostService {
 		hostDao.insertLodgeInfo(lodgementNumber, bean);
 	}
 
-	@Override
-	public void updateLodgementImg(int lodgementNumber, String lodgement_img) {
-		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		hostDao.updateLodgementImg(lodgementNumber, lodgement_img);
-	}
+
+	
 
 
 

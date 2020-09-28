@@ -37,6 +37,9 @@ public class HostLodgementController {
 	@RequestMapping("/")
 	public String HostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
 		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
+		
+		hostService.selectHostLodgementList(model, bean.getUser_number());
+		model.addAttribute("userVo", bean);
 		return "host/hostIndex";
 	}
 	
@@ -72,39 +75,12 @@ public class HostLodgementController {
 		// 위에서 insert 된 lodgement_number 값을 select (information 테이블에 같이 넣어줘야 하고 titleImg도 파싱해서 넣어줘야 함) 
 		int lodgementNumber = hostService.selectLodgementNumber(userVo.getUser_number(), bean);
 		System.out.println("숙박 insert된 글의 번호 select :: "+lodgementNumber);
-
+		
 		// 타이틀 이미지들 처리 업로드
-		List<String> titleImgNames = new ArrayList<String>();
-		
-		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
-		String lodgement_img = "";
-		
-		for(MultipartFile titleImg : bean.getTitleImg()) {
-			String origin = lodgementNumber+"_"+titleImg.getOriginalFilename();
-			
-			// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
-			lodgement_img+=origin+"&";
-			
-			if(titleImg.getOriginalFilename().isEmpty()) {
-				continue;
-			}
-			
-			String path = "/upload/lodgement/titleImg/";
-			ServletContext context = req.getSession().getServletContext();
-			String realPath = context.getRealPath(path);
-			
-			File dest = new File(realPath+origin);
-			System.out.println("저장위치"+dest.getAbsolutePath());
-//			저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
-			
-			titleImg.transferTo(dest);
-			titleImgNames.add(origin);
-		}
-		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
+		String lodgement_img = hostService.uploadLodgementImg(bean, lodgementNumber, req);
 		
 		// 위에서 업로드와 동시에 파싱된 lodgement_img update 
 		hostService.updateLodgementImg(lodgementNumber, lodgement_img);
-		
 		
 		// information insert  숙박 글번호와 함께 사장님 한마디, 공지사항, 기본정보, 인원 추가정보, 편의시설 및 서비스, 취소 및 환불규정
 		hostService.insertLodgeInfo(lodgementNumber, bean);
