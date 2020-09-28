@@ -18,6 +18,9 @@
 			font-style: bold;
 			
 		}
+		.userinfo{
+			margin-right: 15px;
+		}
 		#content,#footer{
 			font-family: 'MapoPeacefull';
 			

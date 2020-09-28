@@ -1,51 +1,75 @@
 package com.proj.yollowa.controller.login;
 
 
-import java.sql.SQLException;
+import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.proj.yollowa.interceptor.Auth;
+import com.proj.yollowa.interceptor.Auth.Role;
+import com.proj.yollowa.interceptor.AuthManager;
+import com.proj.yollowa.interceptor.AuthUser;
+import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
-import com.proj.yollowa.service.login.LoginService;
+import com.proj.yollowa.service.login.UserService;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	
 	@Inject
-	LoginService loginService;
+	UserService userService;
 	
-	@RequestMapping(value ="/",method = RequestMethod.GET )
+	//유저 로그인 페이지 get
+	@RequestMapping(value ="login/",method = RequestMethod.GET )
 	public String login() {
 		
-		//return "loginpage";
+		return "login/login";
+	}
+	
+	//매니저 로그인 페이지 get
+	@RequestMapping(value = "mlogin/",method = RequestMethod.GET)
+	public String managerLogin() {
+		return "login/managerlogin";
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "login/result", method = RequestMethod.POST)
+	public void loginResult() {
+	}
+	
+	@RequestMapping(value = "mlogin/result",method =RequestMethod.POST )
+	public void managerLoginResult() {
+	}
+	//로그아웃!!!
+//	@RequestMapping(value = "logout/",method = RequestMethod.GET)
+//	public @ResponseBody String logout(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws IOException {
+//		if(session!=null) {
+//			session.invalidate();
+//			response.sendRedirect(request.getContextPath()+"/");
+//			return null;
+//		}else {
+//			return "<script>window.addEventListener('DOMContentLoaded',function(){window.history.back();})</script>";
+//		}
+//		
+//	}
+	@Auth
+	@RequestMapping(value = "logout/",method = RequestMethod.GET)
+	public String logout(HttpSession session,@AuthUser UserVo userVo) throws IOException {
+		if(userVo!=null) {
+			session.invalidate();
+			return "redirect:../";
+		}
+		
 		return null;
 	}
 	
-	@RequestMapping(value = "/",method = RequestMethod.POST)
-	public String login(Model model,@RequestParam("user_id") String user_id,@RequestParam("user_password") String user_password,HttpServletRequest request) {
-		try {
-			UserVo userVo =loginService.loginUser(model, user_id, user_password);
-			
-			if(userVo!=null) {
-				model.addAttribute("user",userVo);
-				return "redirect:../";
-			}else {
-				model.addAttribute("user",null);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "redirect:./";
-	}
+	
+	
 }

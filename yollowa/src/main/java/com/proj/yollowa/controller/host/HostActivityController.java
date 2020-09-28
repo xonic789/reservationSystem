@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/host")
 public class HostActivityController {
 
-	@RequestMapping("/")
-	public String HostIndex() {
-		return "host/hostIndex";
-	}
+	
 	
 }
