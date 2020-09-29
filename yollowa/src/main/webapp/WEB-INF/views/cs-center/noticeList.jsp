@@ -101,7 +101,7 @@
 <div class="container">
 	<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
+		<h1>공지사항 <small>욜로와에서 알려드립니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -142,31 +142,33 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="i" begin="1" end="10">
+			  <c:forEach items="${list }" var="notice">
 			    <tr>
-			      <td>${i }</td>
-			      <td>${i }번째 테스트 게시글입니다</td>
-			      <td>관리자</td>
-			      <td>2020-09-20</td>
-			      <td>200</td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.noticeno }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.title }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.writer }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.writeddate }</a></td>
+			      <td><a href="./detail/${notice.noticeno }">${notice.cnt }</a></td>
 			    </tr>
 			    </c:forEach>
 			  </tbody>
 			</table>
 			<div class="pagingBox">
 				<div class="paging">
-					<ul class="pagination pagination">
-					  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">4</a></li>
-					  <li class="page-item"><a class="page-link" href="#">5</a></li>
-					  <li class="page-item"><a class="page-link" href="#">다음</a></li>
+					<ul class="pagination">
+						<c:if test="${paging.prev }">
+						 <li class="page-item"><a class="page-link" href="#">이전</a></li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
+							<li class="page-item"><a class="page-link" href="?page=${status.index }">${status.index }</a></li>
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0 }">
+							<li class="page-item"><a class="page-link" href="#">다음</a></li>
+						</c:if>
 					</ul>
 				</div>
 				<div class="btnGroup">
-				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='http://www.daum.net'" />
+				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
 				</div>
 			</div>
 		</div>
