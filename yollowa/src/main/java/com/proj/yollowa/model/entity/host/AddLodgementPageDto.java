@@ -1,4 +1,10 @@
-package com.proj.yollowa.model.entity;
+package com.proj.yollowa.model.entity.host;
+
+
+import java.io.File;
+import java.util.Arrays;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class AddLodgementPageDto {
 	private String lodgement_category;
@@ -13,27 +19,22 @@ public class AddLodgementPageDto {
 	private String information_addPeopleInfo;
 	private String information_service;
 	private String information_refundInfo;
+	private MultipartFile[] titleImg;
 	
 	public AddLodgementPageDto() {
+		
 	}
 
-	public AddLodgementPageDto(String lodgement_category, String lodgement_companyName, String lodgement_location,
-			String lodgement_LatLng, String lodgement_hashTag, String lodgement_img, String information_comment,
-			String information_notice, String information_basicInfo, String information_addPeopleInfo,
-			String information_service, String information_refundInfo) {
-		super();
-		this.lodgement_category = lodgement_category;
-		this.lodgement_companyName = lodgement_companyName;
-		this.lodgement_location = lodgement_location;
-		this.lodgement_LatLng = lodgement_LatLng;
-		this.lodgement_hashTag = lodgement_hashTag;
-		this.lodgement_img = lodgement_img;
-		this.information_comment = information_comment;
-		this.information_notice = information_notice;
-		this.information_basicInfo = information_basicInfo;
-		this.information_addPeopleInfo = information_addPeopleInfo;
-		this.information_service = information_service;
-		this.information_refundInfo = information_refundInfo;
+	@Override
+	public String toString() {
+		return "AddLodgementPageDto [lodgement_category=" + lodgement_category + ", lodgement_companyName="
+				+ lodgement_companyName + ", lodgement_location=" + lodgement_location + ", lodgement_LatLng="
+				+ lodgement_LatLng + ", lodgement_hashTag=" + lodgement_hashTag + ", lodgement_img=" + lodgement_img
+				+ ", information_comment=" + information_comment + ", information_notice=" + information_notice
+				+ ", information_basicInfo=" + information_basicInfo + ", information_addPeopleInfo="
+				+ information_addPeopleInfo + ", information_service=" + information_service
+				+ ", information_refundInfo=" + information_refundInfo + ", titleImg=" + Arrays.toString(titleImg)
+				+ "]";
 	}
 
 	@Override
@@ -52,6 +53,7 @@ public class AddLodgementPageDto {
 		result = prime * result + ((lodgement_hashTag == null) ? 0 : lodgement_hashTag.hashCode());
 		result = prime * result + ((lodgement_img == null) ? 0 : lodgement_img.hashCode());
 		result = prime * result + ((lodgement_location == null) ? 0 : lodgement_location.hashCode());
+		result = prime * result + Arrays.hashCode(titleImg);
 		return result;
 	}
 
@@ -124,18 +126,29 @@ public class AddLodgementPageDto {
 				return false;
 		} else if (!lodgement_location.equals(other.lodgement_location))
 			return false;
+		if (!Arrays.equals(titleImg, other.titleImg))
+			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "AddLodgementPageDto [lodgement_category=" + lodgement_category + ", lodgement_comapanyName="
-				+ lodgement_companyName + ", lodgement_location=" + lodgement_location + ", lodgement_LatLng="
-				+ lodgement_LatLng + ", lodgement_hashTag=" + lodgement_hashTag + ", lodgement_img=" + lodgement_img
-				+ ", information_comment=" + information_comment + ", information_notice=" + information_notice
-				+ ", information_basicInfo=" + information_basicInfo + ", information_addPeopleInfo="
-				+ information_addPeopleInfo + ", information_service=" + information_service
-				+ ", information_refundInfo=" + information_refundInfo + "]";
+	public AddLodgementPageDto(String lodgement_category, String lodgement_companyName, String lodgement_location,
+			String lodgement_LatLng, String lodgement_hashTag, String lodgement_img, String information_comment,
+			String information_notice, String information_basicInfo, String information_addPeopleInfo,
+			String information_service, String information_refundInfo, MultipartFile[] titleImg) {
+		super();
+		this.lodgement_category = lodgement_category;
+		this.lodgement_companyName = lodgement_companyName;
+		this.lodgement_location = lodgement_location;
+		this.lodgement_LatLng = lodgement_LatLng;
+		this.lodgement_hashTag = lodgement_hashTag;
+		this.lodgement_img = lodgement_img;
+		this.information_comment = information_comment;
+		this.information_notice = information_notice;
+		this.information_basicInfo = information_basicInfo;
+		this.information_addPeopleInfo = information_addPeopleInfo;
+		this.information_service = information_service;
+		this.information_refundInfo = information_refundInfo;
+		this.titleImg = titleImg;
 	}
 
 	public String getLodgement_category() {
@@ -233,7 +246,14 @@ public class AddLodgementPageDto {
 	public void setInformation_refundInfo(String information_refundInfo) {
 		this.information_refundInfo = information_refundInfo;
 	}
-	
-	
+
+	public MultipartFile[] getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(MultipartFile[] titleImg) {
+		this.titleImg = titleImg;
+	}
+
 	
 }
