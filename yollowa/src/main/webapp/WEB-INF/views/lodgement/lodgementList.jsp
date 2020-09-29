@@ -291,60 +291,18 @@ h2 {
 						</div>
 					</div>
 					<div id="actiList">
+					<c:forEach items="${list }" var="bean">
 						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
+							<a href="detail/${bean.lodgement_number }">
+								<img alt="" src="../${bean.lodgement_img }">
 								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
+									<li>${bean.lodgement_companyName }</li>
+									<li>★ ${bean.lodgement_reviewGradeRate } (리뷰 ${bean.lodgement_reviewCount }건)</li>
 								</ul>
 							</a>
 						</div>
+					</c:forEach>
 						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
 						
 						
 					</div>

@@ -249,7 +249,7 @@ h2 {
 			
 			<div class="col-md-9">
 				<div id="search-right">
-					<h2>111건의 검색결과</h2>
+					<h2>${count}건의 검색결과</h2>
 					<div id="filter-2">
 						<div id="search" class="input-append span12">
 						
@@ -291,60 +291,17 @@ h2 {
 						</div>
 					</div>
 					<div id="actiList">
+					<c:forEach items="${list}" var="bean"> 
 						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
+							<a href="detail/${bean.activity_number }">
+								<img alt="" src="../${bean.activity_img }">
 								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
+									<li>${bean.activity_title}</li>
+									<li>★ ${bean.activity_reviewGradeRate} (리뷰 ${bean.activity_reviewCount}건)</li>
 								</ul>
 							</a>
 						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
-						
-						<div>
-							<a href="#">
-								<img alt="" src="../resources/img/activity/jump.jpg">
-								<ul>
-									<li>방콕 스카이 발코니 뷔페</li>
-									<li>★ 4.0 (리뷰 1234건)</li>
-									<li>￦ 2,000</li>
-								</ul>
-							</a>
-						</div>
+					</c:forEach>
 						
 						
 					</div>

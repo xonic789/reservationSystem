@@ -76,12 +76,13 @@ h1{
 		</div>
 		<div class="row">
 			<div id="category" class="col-md-12">
-				<h1>방콕 스카이 발코니 뷔페 (바이욕 스카이 호텔 81층)</h1>
+				<c:forEach items="${list }" var="bean">
+				<h1>${bean.lodgement_companyName}</h1>
 				<div>
-				
 				
 				</div>
 				
+				</c:forEach>
 			</div>
 		</div>
 		<%@ include file="../template/footer.jspf"%>

@@ -3,6 +3,7 @@
 	<c:url value="/resources/js/jquery-1.12.4.js" var="jquery"/>
 	<c:url value="/resources/js/bootstrap.js" var="bootstrap"/>
 	<c:url value="/resources/css/bootstrap.min.css" var="bootstrapCSS"/>
+	
 	<c:url value="/" var="root"></c:url>
 	<link rel="stylesheet" type="text/css" href="${bootstrapCSS }">
 	

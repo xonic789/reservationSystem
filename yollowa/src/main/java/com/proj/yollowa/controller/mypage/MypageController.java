@@ -25,7 +25,7 @@ public class MypageController {
 	@Auth
 	@RequestMapping(value = "/",method = RequestMethod.GET)
 	public String index(@AuthUser UserVo userVo,Model model) throws SQLException {
-		System.out.println(userVo);
+		System.out.println("UserVo ::"+userVo);
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
 		
 		if(user==null) {

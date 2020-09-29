@@ -1,53 +1,46 @@
-<input type="text" id="sample5_address" placeholder="주소">
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a25c7b7725e0d15c5a618bc931661e3&libraries=services"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 아임포트 결제 api -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
+<!-- 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
+<%@ include file="../template/head.jspf"%>
 <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
 
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
+	IMP.init('imp40929352'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능
 
+	IMP.request_pay({
+	    pg : 'html5_inicis', //이니시스 웹표준
+	    pay_method : 'card', // 결제수단 : 카드 
+	    merchant_uid : 'merchant_' + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
+	    name : '주문명:결제테스트', // 주문명 - 16자 이내로 권장
+	    amount : 14000,	//결제할 금액
+	    buyer_email : 'iamport@siot.do',	//주문자 email
+	    buyer_name : '구매자이름',	// 주문자 이름
+	    buyer_tel : '010-1234-5678',	//주문자 번호
+	    buyer_addr : '서울특별시 강남구 삼성동',	//주문자 주소
+	    buyer_postcode : '123-456'	//주문자 우편번호
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
 
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
-    }
+	    alert(msg);
+	});
 </script>
+</head>
+<body>
+
+
+</body>
+</html>

@@ -6,11 +6,6 @@
 <head>
 
 <%@ include file="../template/head.jspf"%>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <style type="text/css">
 
@@ -37,17 +32,18 @@ h3:first-letter {
 	border-left: 2px solid purple;
 }
 
-#package-div-option{
-	background-color: #E9F7FF;
-}
 
-#package-div-option-select button{
+#package-div-option-select{
 	background-color:white;
-	border:1px solid lightgray;
-	outline-color: purple;
+	margin:10px auto;
+	border:1px solid purple;
 	font-size: 15px;
-	padding: 5px 20px;
-	margin-left: 20px;
+	padding: 10px 20px;
+}
+#package-div-option-select div{
+}
+#package-div-option-select div p{
+	margin:2px auto;
 }
 
 .quantity-style{
@@ -81,42 +77,38 @@ h3:first-letter {
 	});
 	
 	/* 수량 */
-	var sell_price;
-	var amount;
 	
-	function init () {
-		sell_price = document.form.sell_price.value;
-		amount = document.form.amount.value;
-		document.form.sum.value = sell_price;
-		change();
+	// + 버튼
+	function add(a){
+		
+		var clickValue = parseInt($(a).prev().val(),10);
+		var resultValue =clickValue+1;
+		
+		$(a).prev().val(resultValue);
+		var pri1 = parseInt($(a).prev().prev().val());
+		var totalAdd = parseInt($('#resultAmount').val())+pri1;
+		
+		//합계
+		$('#resultAmount').val(totalAdd); 
 	}
 	
-	function add () {
-		hm = document.form.amount;
-		sum = document.form.sum;
-		hm.value ++ ;
+	// - 버튼
+	function del(d){
+		var clickValue = parseInt($(d).prev().prev().val(),10);
+		var resultValue =clickValue-1;
+		
+		if(resultValue>-1){
+			$(d).prev().prev().val(resultValue);
+			
+			var pri2 = parseInt($(d).prev().prev().prev().val());
+			var totalDel = parseInt($('#resultAmount').val())-pri2;
+			
+			//합계
+			$('#resultAmount').val(totalDel); 
+			
+		}
+	};
 	
-		sum.value = parseInt(hm.value) * sell_price;
-	}
-	
-	function del () {
-		hm = document.form.amount;
-		sum = document.form.sum;
-			if (hm.value > 1) {
-				hm.value -- ;
-				sum.value = parseInt(hm.value) * sell_price;
-			}
-	}
-	
-	function change () {
-		hm = document.form.amount;
-		sum = document.form.sum;
-	
-			if (hm.value < 0) {
-				hm.value = 0;
-			}
-		sum.value = parseInt(hm.value)*sell_price;
-	}  
 	
 	
 </script>
@@ -124,7 +116,7 @@ h3:first-letter {
 <meta charset="UTF-8">
 <title>액티비티</title>
 </head>
-<body onload="init();">
+<body>
 	<%@ include file="../template/header.jspf"%>
 	<%@ include file="../template/menu.jspf"%>
 	<div class="container">
@@ -166,9 +158,11 @@ h3:first-letter {
 		</div>
 		<div class="row">
 			<div id="category" class="col-md-12">
-				<h1>방콕 스카이 발코니 뷔페 (바이욕 스카이 호텔 81층)</h1>
+			<c:forEach items="${detailList }" var="bean">
+				<h1>${bean.activity_title }</h1>
+			</c:forEach>
 				<div id="infoList">
-					<div id="package-div">
+					<div class="jumbotron">
 						<h3>패키지 옵션</h3>
 						<div id="package-div-option">
 							<h5>날짜 및 패키지 옵션 선택</h5>
@@ -183,25 +177,51 @@ h3:first-letter {
 								</div>
 							</div>
 							
+							<div>
+								<h5>옵션 선택</h5>
+								<form action="">
+								<c:forEach items="${option }" var="bean">
+								<div id="package-div-option-select" class="col-md-11">
+									<!-- <button>check</button> -->
+									<div>
+										<p>[${bean.AOInfo_name}]</p>
+									</div>
+									<div>
+										<p>${bean.AOInfo_optionNumber}. ${bean.activityOption_name }</p>
+										<p>￦${bean.AOInfo_price}</p>
+										<input type="hidden" value="${bean.AOInfo_price}"/>
+										<input type="text" name="amount${bean.AOInfo_optionNumber}" style="height:25px;" value="0" size="8" />
+										<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="+" onclick="add(this);"/>
+										<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="-" onclick="del(this);"/>
+									</form>
+									</div>
+								</div>
+								</c:forEach>
+									<label for="resultAmount">합계 :</label>
+									<input id="resultAmount" type="text" value="0" size="8" disabled/>
+									<button id="wish" >장바구니</button>
+									<button>바로구매</button>
+								</form>
+							</div>
+									
+							<%-- 
 							<div id="package-div-option-select">
 								<h5>옵션 선택</h5>
 								<div>
-									<button>전망대 입장권</button>
-									<button>야간 입장권</button>
+									<c:forEach items="${optionList }" var="option">
+									<button class="option${option.activityOption_optionNumber}">${option.activityOption_name }</button>
+									<input type="hidden" name="abc${option.activityOption_optionNumber}"/>
+									</c:forEach>
 								</div>
 							</div>
 							
 							<div>
 								<h5>수량</h5>
 								<div>
-									<form name="form" method="get">
-										<input type=hidden name="sell_price" value="5500">
-										<input type="text" name="amount" value="1" size="3" onchange="change();">
-										<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
-										금액 : <input type="text" name="sum" size="11" readonly>원
-									</form>
 								</div>
-							</div>
+							</div> --%>
+							
+							
 						</div>
 					</div>
 
