@@ -18,7 +18,7 @@ public class AuthManagerHandlerMethodArgumentResolver implements HandlerMethodAr
 	public boolean supportsParameter(MethodParameter parameter) {
 		//@ AuthUser , @AuthManager가 붙어 있는지 확인
 				AuthManager authManager = parameter.getParameterAnnotation(AuthManager.class);
-				
+				System.out.println(authManager);
 				// 안붙어 있는 경우
 				if(authManager==null) {
 					return false;

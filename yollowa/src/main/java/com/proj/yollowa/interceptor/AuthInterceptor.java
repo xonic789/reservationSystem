@@ -31,7 +31,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		Auth managerRole = handlerMethod.getMethod().getDeclaringClass().getAnnotation(Auth.class);
 		
-		
 		// method에 @Auth가 없는 경우, 권한이 필요 없는 경우
 		if(auth ==null) {
 			return true;
@@ -52,7 +51,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 			return false;
 		}
 		
-		// manager일 경우
+		// manager일 경우 @Controller 위에 @Auth(role=Role.MANAGER)가 붙어있을 경우
 		if(managerRole!=null) {
 			
 		String role = managerRole.role().toString();
