@@ -16,27 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `activityOption`
+-- Table structure for table `activityoption`
 --
 
-DROP TABLE IF EXISTS `activityOption`;
+DROP TABLE IF EXISTS `activityoption`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `activityOption` (
-  `activityOption_optionNumber` int NOT NULL,
+CREATE TABLE `activityoption` (
+  `activityOption_optionNumber` int NOT NULL AUTO_INCREMENT,
   `activityOption_articleNumber` int NOT NULL,
   `activityOption_name` varchar(45) NOT NULL,
-  `activityOption_max` int DEFAULT '9999'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`activityOption_optionNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `activityOption`
+-- Dumping data for table `activityoption`
 --
 
-LOCK TABLES `activityOption` WRITE;
-/*!40000 ALTER TABLE `activityOption` DISABLE KEYS */;
-/*!40000 ALTER TABLE `activityOption` ENABLE KEYS */;
+LOCK TABLES `activityoption` WRITE;
+/*!40000 ALTER TABLE `activityoption` DISABLE KEYS */;
+INSERT INTO `activityoption` VALUES (1,1,'다이빙1'),(2,1,'다이빙2'),(3,1,'다이빙3'),(4,2,'수상레져1'),(5,2,'수상레져2');
+/*!40000 ALTER TABLE `activityoption` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 17:13:29
+-- Dump completed on 2020-09-29 15:42:58

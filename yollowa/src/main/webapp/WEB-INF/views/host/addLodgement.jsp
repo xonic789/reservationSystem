@@ -33,9 +33,12 @@
 		cursor: pointer;
 	}
 	h2{
-		margin-top: 50px;
-		margin-left: 20px;
+		font-size: 35px;
 		display: inline-block;
+	}
+	h4{
+		padding-bottom:5px;
+		border-bottom: 2px solid lightgray;
 	}
 	.bigList>p{
 		font-size: 18px;
@@ -59,31 +62,28 @@
 	
 	
 	/* 기본정보 등록 start */
-	#sub{
-		margin-left:25px;
-	}
-	#form{
-		margin-top: 10px;
-		margin-left: 30px;
+	#hostWrite{
+		margin-top: 30px;
+		margin-left: 20px;
 	}
 	.form-group, .form-inline{
-		margin-left:15px;
 		margin-bottom:30px;
 	}
 	.form-group > div{
 		margin-left:15px;
 	}
 	.label_title{
-		font-size:16px;
-		padding-left: 5px;
+		font-size:18px;
+		padding-left: 10px;
 		border-left: 2px solid #B167CF;
 		margin-top: 10px;
+		margin-bottom:10px;
 	}
 	.infoTitle{
 		margin-top: 40px;
-		margin-bottom: 30px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid lightgray;
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		border-bottom: 2px solid lightgray;
 	}
 	.location{
 		width :680px;
@@ -152,7 +152,6 @@ function addInputHashtag(){
 	);
 }
 
-
 /* 공지사항 등록 add input method (name, class ="notice") */
 function addInputNotice(){
 	$('.addInputNotice').append('<input type="text" class="form-control notice" name="information_notice" />\
@@ -191,7 +190,7 @@ function addInputRefundInfo(){
 
 /* 글 타이틀 사진 추가 */
 function addTitleImg(){
-	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" />\
+	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/>\
 							<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -206,7 +205,7 @@ function removeInput(){
 };
 
 /* 타이틀 디테일 사진 동적 추가된 input delete method */
-function removeTitleImg(){
+function removetitleImg(){
 	$('.titleImgRemove').on('click', function(){
 		$(this).prev().remove();
 		$(this).next().remove();
@@ -248,16 +247,12 @@ function removeTitleImg(){
 						<p><a href="${pageContext.request.contextPath }/host/aadd">엑티비티 게시글 등록</a></p>
 					</div>
 				</div>
-				<div class="bigList">
-					<p>글 등록하기</p>
-					<div class="smallList">
-						<p><a href="">숙박 게시글 리뷰</a></p>
-					</div>
-				</div>
 			</div>
 			<div class="col-md-9">
+			<div id="hostWrite">
 				<h2>숙박 게시글 등록</h2>
 				<p id="sub">아래 입력박스들을 모두 기입해야 글 등록이 가능합니다<p>
+				
 				<form id="form" action="ladd" method="post" enctype="multipart/form-data">
 				  <h4 class="infoTitle">기본정보 등록</h4>
 				  
@@ -312,8 +307,9 @@ function removeTitleImg(){
 					  <a onclick="addTitleImg()" class="btnAdd btn btn-primary">사진 추가 등록</a>
 					  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
 				      <div class="titleImgFile">
-						<input type="file" class="titleImg" name="titleImg" /><br/>
+						<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/><br/>
 					  </div>
+					  <div id="image_container"></div>
 				    </div>
 
 					<div class="form-group">
@@ -367,6 +363,7 @@ function removeTitleImg(){
 				  <button type="submit" class="submit btn btn-primary btn-lg btn-block">글 등록하기</button>				  
 				</form>
 			</div>
+		</div>
 		</div>
 	</div>
 	<%@ include file="../template/footer.jspf"%>

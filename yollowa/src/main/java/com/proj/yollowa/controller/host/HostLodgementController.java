@@ -1,25 +1,22 @@
 package com.proj.yollowa.controller.host;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
-import com.proj.yollowa.model.entity.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.service.host.HostService;
 
 @Controller
@@ -30,10 +27,10 @@ public class HostLodgementController {
 	
 	@Auth
 	@RequestMapping("/")
-	public String HostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
+	public String HostIndex(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
 		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
 		hostService.selectHostLodgementList(model, bean.getUser_number());
-		
+		hostService.selectRealPath(model ,req);
 		model.addAttribute("userVo", bean);
 		return "host/hostIndex";
 	}
@@ -83,10 +80,15 @@ public class HostLodgementController {
 		return "host/addRoom";
 	}
 	
-	
-	@RequestMapping(value="/addRoom", method=RequestMethod.GET)
-	public String addRoomPage() {
-		
-		return "host/addRoom";
+	@Auth
+	@RequestMapping(value="/addRoom/{lodgement_number}", method=RequestMethod.GET)
+	public String addRoomPage(@PathVariable("lodgement_number") int lodgement_number, @AuthUser UserVo userVo, Model model) throws SQLException {
+		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
+		if(bean.getUser_companyNumber()==lodgement_number) {
+			
+			
+			return "host/addRoom";
+		}
+		return "home";
 	}
 }

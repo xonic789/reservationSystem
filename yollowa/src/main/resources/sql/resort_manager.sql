@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
 -- Host: 127.0.0.1    Database: resort
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `manager` (
   `manager_password` varchar(15) NOT NULL,
   PRIMARY KEY (`manager_number`),
   UNIQUE KEY `manager_id_UNIQUE` (`manager_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,6 @@ CREATE TABLE `manager` (
 
 LOCK TABLES `manager` WRITE;
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
-INSERT INTO `manager` VALUES (1,5,'manager1','1234'),(2,6,'manager2','1234'),(3,7,'manager3','1234'),(4,8,'manager4','1234'),(5,9,'manager5','1234'),(6,10,'manager6','1234'),(7,11,'manager7','1234'),(8,12,'manager8','1234'),(9,13,'manager9','1234'),(10,14,'manager10','1234');
 /*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-26  1:57:21
+-- Dump completed on 2020-09-29 15:42:56

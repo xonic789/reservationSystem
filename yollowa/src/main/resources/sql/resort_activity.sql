@@ -23,20 +23,20 @@ DROP TABLE IF EXISTS `activity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `activity` (
-  `activity_number` int NOT NULL,
-  `activity_userNumber` int NOT NULL,
-  `activity_title` varchar(45) NOT NULL,
-  `activity_location` varchar(45) NOT NULL,
+  `activity_number` int NOT NULL AUTO_INCREMENT,
+  `activity_userNumber` int DEFAULT NULL,
+  `activity_title` varchar(45) DEFAULT NULL,
+  `activity_location` varchar(45) DEFAULT NULL,
   `activity_LatLng` varchar(100) DEFAULT NULL,
-  `activity_category` varchar(45) NOT NULL,
+  `activity_category` varchar(45) DEFAULT NULL,
   `activity_hashTag` varchar(45) DEFAULT NULL,
-  `activity_goodCount` int NOT NULL DEFAULT '0',
-  `activity_reviewGradeRate` double NOT NULL DEFAULT '0',
-  `activity_reviewCount` int NOT NULL DEFAULT '0',
-  `activity_img` varchar(1000) NOT NULL,
+  `activity_goodCount` int DEFAULT '0',
+  `activity_reviewGradeRate` double DEFAULT '0',
+  `activity_reviewCount` int DEFAULT '0',
+  `activity_img` varchar(1000) DEFAULT NULL,
   `activity_temp` int DEFAULT '0',
   PRIMARY KEY (`activity_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
+INSERT INTO `activity` VALUES (1,1,'제목1','위치1','1234','카테고리1','해시',1,1,1,'resources/img/bigmeet1.jpg',1),(2,2,'제목2','위치2','1234','카테고리1','해시',2,2,2,'resources/img/bigmeet2.jpg',1),(8,3,'제목3','위치3','1234','카테고리1','해시',3,3,3,'resources/img/bigmeet3.jpg',1),(9,4,'제목4','위치4','1234','카테고리1','해시',4,4,4,'resources/img/bigmeet4.jpg',0),(10,5,'제목5','위치5','1234','카테고리1','해시',5,5,5,'resources/img/dog.jpg',1),(11,5,'제목5','위치5','1234','카테고리1','해시',5,1,6,'resources/img/girl.jpg',0),(12,5,'제목5','위치5','1234','카테고리1','해시',5,2,7,'resources/img/hiker.jpg',0),(13,5,'제목5','위치5','1234','카테고리1','해시',5,3,8,'resources/img/hotel1.jpg',1),(14,1,'제목1','위치1','1234','카테고리1','해시',1,4,9,'resources/img/bigmeet1.jpg',1),(15,2,'제목2','위치2','1234','카테고리1','해시',2,5,10,'resources/img/bigmeet2.jpg',1),(16,3,'제목3','위치3','1234','카테고리1','해시',3,1,12,'resources/img/bigmeet3.jpg',1),(17,4,'제목4','위치4','1234','카테고리1','해시',4,2,3,'resources/img/bigmeet4.jpg',0),(18,5,'제목5','위치5','1234','카테고리1','해시',5,3,4,'resources/img/dog.jpg',1),(19,5,'제목5','위치5','1234','카테고리1','해시',5,4,6,'resources/img/girl.jpg',0),(20,5,'제목5','위치5','1234','카테고리1','해시',5,5,7,'resources/img/hiker.jpg',0),(21,5,'제목5','위치5','1234','카테고리1','해시',5,1,8,'resources/img/hotel1.jpg',1);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 17:13:29
+-- Dump completed on 2020-09-29 15:42:57

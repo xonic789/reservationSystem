@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.proj.yollowa.model.entity.AddLodgementPageDto;
-import com.proj.yollowa.model.entity.LodgementVo;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.host.HostDao;
 
 @Service
@@ -35,10 +35,34 @@ public class HostServiceImpl implements HostService {
 	}
 
 	@Override
+	public void selectRealPath(Model model, HttpServletRequest req) {
+		String path = "/upload/lodgement/titleImg/";
+		ServletContext context = req.getSession().getServletContext();
+		String realPath = context.getRealPath(path);
+		model.addAttribute("path", realPath);
+	}
+
+	@Override
 	public void selectHostLodgementList(Model model, int user_number) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		ArrayList<LodgementVo> lodgementList = hostDao.selectHostLodgementList(user_number);
 		model.addAttribute("lodgementList", lodgementList);
+		
+		
+//		model.addAttribute("titleImgSize", lodgementList.size());
+		
+		System.out.println("호스트 숙박 글 사이즈 : "+lodgementList.size());
+		for(int i=0; i<lodgementList.size(); i++) {
+			String[] imgs = lodgementList.get(i).getLodgement_img().split("&");
+			model.addAttribute("titleImgSize"+i, imgs.length);
+			System.out.println(i+"번째 이미지 길이"+imgs.length);
+			
+			for(int j=0; j<imgs.length; j++) {
+				model.addAttribute("imgName"+i+j, imgs[j]);
+				System.out.println(i+"번째 이미지"+imgs[j]);
+			}
+			
+		}
 
 		//		System.out.println(lodgementList.size());
 //		for(int i=0; i<lodgementList.size(); i++) {
@@ -100,7 +124,7 @@ public class HostServiceImpl implements HostService {
 			titleImg.transferTo(dest);
 			titleImgNames.add(origin);
 		}
-		// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송
+		// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송 
 		String lodgement_img = img.substring(0,img.length()-1);
 		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
 		return lodgement_img;
@@ -148,6 +172,7 @@ public class HostServiceImpl implements HostService {
 		
 		hostDao.insertLodgeInfo(lodgementNumber, bean);
 	}
+
 
 
 	

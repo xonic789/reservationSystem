@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.proj.yollowa.model.entity.AddLodgementPageDto;
-import com.proj.yollowa.model.entity.LodgementVo;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 
 public interface HostDao {
 	// host/ start

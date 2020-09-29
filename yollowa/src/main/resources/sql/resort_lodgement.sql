@@ -24,16 +24,16 @@ DROP TABLE IF EXISTS `lodgement`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lodgement` (
   `lodgement_number` int NOT NULL AUTO_INCREMENT,
-  `lodgement_userNumber` int NOT NULL,
-  `lodgement_title` varchar(45) NOT NULL,
-  `lodgement_location` varchar(45) NOT NULL,
+  `lodgement_userNumber` int DEFAULT NULL,
+  `lodgement_companyName` varchar(45) DEFAULT NULL,
+  `lodgement_location` varchar(45) DEFAULT NULL,
   `lodgement_LatLng` varchar(100) DEFAULT NULL,
-  `lodgement_category` varchar(45) NOT NULL,
+  `lodgement_category` varchar(45) DEFAULT NULL,
   `lodgement_hashTag` varchar(45) DEFAULT NULL,
-  `lodgement_goodCount` int NOT NULL DEFAULT '0',
-  `lodgement_reviewGradeRate` double NOT NULL DEFAULT '0',
-  `lodgement_reviewCount` int NOT NULL DEFAULT '0',
-  `lodgement_img` varchar(1000) NOT NULL,
+  `lodgement_goodCount` int DEFAULT '0',
+  `lodgement_reviewGradeRate` double DEFAULT '0',
+  `lodgement_reviewCount` int DEFAULT '0',
+  `lodgement_img` varchar(1000) DEFAULT NULL,
   `lodgement_temp` int DEFAULT '0',
   PRIMARY KEY (`lodgement_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 17:13:28
+-- Dump completed on 2020-09-29 15:42:55

@@ -10,7 +10,7 @@
 	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{user_number}
 	</select>
-	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.LodgementVo">
+	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
 		select * from lodgement where lodgement_userNumber = #{user_number}
 	</select>
 	
@@ -18,7 +18,7 @@
 	
 	<!--host/ladd start -->
 	
-	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.LodgementVo">
+	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.host.LodgementVo">
 		insert into lodgement (lodgement_userNumber, lodgement_companyName, lodgement_location, lodgement_LatLng, lodgement_category, lodgement_hashTag) values 
 							  (#{lodgement_userNumber}, #{lodgement.lodgement_companyName}, #{lodgement.lodgement_location}, #{lodgement.lodgement_LatLng}, #{lodgement.lodgement_category}, #{lodgement.lodgement_hashTag})
 	</insert>

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-import com.proj.yollowa.model.entity.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 
 public interface HostService {
 	
@@ -16,6 +16,8 @@ public interface HostService {
 	
 	// host/ -> 사업자 글 리스트
 	void selectHostLodgementList(Model model,int user_number);
+	// path 경로 리턴
+	void selectRealPath(Model model, HttpServletRequest req);
 
 	
 	
@@ -33,6 +35,7 @@ public interface HostService {
 
 	// host/ladd -> lodgement information insert
 	void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException;
+
 
 
 

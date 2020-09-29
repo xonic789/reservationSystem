@@ -1,4 +1,4 @@
-package com.proj.yollowa.model.entity;
+package com.proj.yollowa.model.entity.host;
 
 public class LodgementVo {
 	private int lodgement_number;

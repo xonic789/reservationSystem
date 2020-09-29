@@ -1,4 +1,4 @@
-package com.proj.yollowa.model.entity;
+package com.proj.yollowa.model.entity.host;
 
 
 import java.io.File;

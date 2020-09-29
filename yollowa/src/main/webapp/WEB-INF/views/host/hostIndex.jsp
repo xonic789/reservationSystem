@@ -52,13 +52,13 @@
 		text-decoration: none;
 		display: block;
 	}
+	h2{
+		font-size: 35px;
+	}
 	/* category end */
 	
 	
 	/* content start */
-	h2{
-		font-size: 35px;
-	}
 	.list{
 		margin-left:20px;
 		padding-top:20px;
@@ -73,6 +73,7 @@
 		border-bottom: 2px solid lightgray;
 	}
 	h5{
+		color: #7F23A4;
 		padding : 3px 0px 3px 10px;
 		margin-top: 20px;
 		margin-bottom:15px;
@@ -99,6 +100,15 @@
 	}
 	.btns{
 		text-align: right;
+	}
+	.btn-outline-primary{
+		margin-right:10px;
+	}
+	.btn-outline-danger{
+		margin-left:5px;
+	}
+	.imgInput{
+		
 	}
 	
 	
@@ -146,7 +156,40 @@
 		}else if($('.temp').val()==1){
 			$('.temp').val("관리자 승인이 완료된 글입니다. 정상적으로 등록이 완료되었습니다.")
 		}
+		
+		var jumbo = '<div class="jumbotron">';
+		jumbo+='<h1 class="display-6">등록된 숙박 게시글이 존재하지 않습니다.</h1>';
+		jumbo+='<hr class="my-4">';
+		jumbo+='<p class="lead">욜로와에 자신의 숙박업소에 대한 글 작성하기!</p>';
+		jumbo+='<a class="btn btn-primary" href="#" role="button">숙박 게시글 등록</a>';
+		jumbo+='</div>';
+		
+		if($('.inputCon').val()==null){
+			$('#hostInfo').append(jumbo);
+		}
+		
 	});
+	
+	
+	function modiClick(a){
+		var number = $(a).next().val();
+		if($(a).text()=='수정'){
+			$('.lodgemodifyEl'+number).attr('disabled', false);
+			$(a).text('수정 완료');
+			$('.imgInput'+number).attr('type','file');
+			$('.imgInput'+number).attr('accept','.jpg, .jpeg, .png, .webp');
+			$('.imgInput'+number).css('width','610px');
+			$('.imgInput'+number).removeClass('form-control');
+			
+			if($('.imgInput'+number).prev().text()=='디테일 이미지 1'){
+				$('.imgInput'+number).prev().text('이미지 등록');
+			}
+			
+		}else if($(a).text()=='수정 완료'){
+			$(a).attr('href','ladd');
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -175,31 +218,40 @@
 						<p><a href="${pageContext.request.contextPath }/host/aadd">엑티비티 게시글 등록</a></p>
 					</div>
 				</div>
-				<div class="bigList">
-					<p>글 등록하기</p>
-					<div class="smallList">
-						<p><a href="">숙박 게시글 리뷰</a></p>
-					</div>
-				</div>
 			</div>
 		<div class="col-md-9">
 		<div id="hostInfo">
 			<h2>나의 글 정보</h2>
 			<p id="sub">사업자께서 등록하신 욜로와 글 등록 정보입니다.</p>
 			<h4>숙박 게시글 정보</h4>
+			<c:forEach items="${lodgementList }" begin="0" varStatus="num" var="lodgeList">
 			
-			<c:forEach items="${lodgementList }" var="lodgeList">
+			<!-- String path = "/upload/lodgement/titleImg/";
+			ServletContext context = req.getSession().getServletContext();
+			String realPath = context.getRealPath(path); -->
+			<input type="hidden" id="imgPath" value="${path }"></input>
+
 			<div class="lodgementBox">
-				<h5>${lodgeList.lodgement_companyName }</h5><a href="#" class="btn btn-outline-primary">방 등록 현황</a><br/>
+				<h5>${lodgeList.lodgement_companyName }</h5><a href="#" class="btn btn-outline-primary">디테일 페이지로 이동</a><a href="addRoom/${lodgeList.lodgement_number }" class="btn btn-outline-success">방 등록 현황</a><br/>
 				<div class="list">
 					<div class="title">업체명</div>
 					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_companyName }" disabled="disabled"/>
-					<div class="title">타이틀 이미지</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_img }" disabled="disabled" />
+										
+					<div class="title">대표 이미지</div>
+
+					<c:set var="sizeNumber" value="titleImgSize${num.index }" ></c:set>
+					<c:forEach begin="0" end="${requestScope[sizeNumber]-1 }" varStatus="number">
+						<c:set var="titleName" value="imgName${num.index }${number.index }"></c:set>
+						<c:if test="${0 ne number.index }">
+							<div class="title">디테일 이미지 ${number.index }</div>
+						</c:if>
+						<input type="text" id="titleImg" class="imgInput${lodgeList.lodgement_number } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_img" value="${requestScope[titleName] }" disabled="disabled" />
+					</c:forEach>
+					
 					<div class="title">위치</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_location }" disabled="disabled"/>
+					<input type="text" class="inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
 					<div class="title">해쉬태그</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_hashTag }" disabled="disabled"/>
+					<input type="text" class="inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_hashTag" value="${lodgeList.lodgement_hashTag }" disabled="disabled"/>
 					<div class="title">후기 수</div>
 					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewCount }" disabled="disabled" />
 					<div class="title">좋아요 수</div>
@@ -210,7 +262,8 @@
 					<input type="text" class="inputCon temp form-control" value="${lodgeList.lodgement_temp }" disabled="disabled" />
 					
 					<div class="btns">
-						<button id="modify${lodgeList.lodgement_number }" class="btn btn-outline-warning">수정</button>
+						<a class="btn btn-outline-warning lodgeModify${lodgeList.lodgement_number }" onclick="modiClick(this);">수정</a>
+						<input type="hidden" value="${lodgeList.lodgement_number }"></input>
 						<a href="#" class="btn btn-outline-danger">삭제</a>
 					</div>
 				</div>
