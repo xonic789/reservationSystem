@@ -52,16 +52,19 @@ public class HostServiceImpl implements HostService {
 //		model.addAttribute("titleImgSize", lodgementList.size());
 		
 		System.out.println("호스트 숙박 글 사이즈 : "+lodgementList.size());
-		for(int i=0; i<lodgementList.size(); i++) {
-			String[] imgs = lodgementList.get(i).getLodgement_img().split("&");
-			model.addAttribute("titleImgSize"+i, imgs.length);
-			System.out.println(i+"번째 이미지 길이"+imgs.length);
-			
-			for(int j=0; j<imgs.length; j++) {
-				model.addAttribute("imgName"+i+j, imgs[j]);
-				System.out.println(i+"번째 이미지"+imgs[j]);
+		if(lodgementList.size()!=0) {
+			for(int i=0; i<lodgementList.size(); i++) {
+				
+				String[] imgs = lodgementList.get(i).getLodgement_img().split("&");
+				model.addAttribute("titleImgSize"+i, imgs.length);
+				System.out.println(i+"번째 이미지 길이"+imgs.length);
+				
+				for(int j=0; j<imgs.length; j++) {
+					model.addAttribute("imgName"+i+j, imgs[j]);
+					System.out.println(i+"번째 이미지"+imgs[j]);
+				}
+				
 			}
-			
 		}
 
 		//		System.out.println(lodgementList.size());
