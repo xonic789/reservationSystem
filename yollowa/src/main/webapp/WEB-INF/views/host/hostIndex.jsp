@@ -201,6 +201,7 @@
 		<h1>호스트 페이지 <small> Host page</small></h1>
 		<p>${userVo.user_name }님 호스트 페이지 입니다.</p>
 	</div>
+	
 	<div class="row">
 		<div id="category" class="col-md-3">
 				<div class="bigList">
