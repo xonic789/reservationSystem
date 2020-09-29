@@ -16,6 +16,51 @@ public class UserVo {
 	private int user_companyNumber;
 	private String user_companyName;
 	private int user_level;
+	private String user_googleId;
+	private String user_naverId;
+	private String user_kakaoId;
+	public String getUser_googleId() {
+		return user_googleId;
+	}
+	public UserVo(int user_number, String user_nickName, String user_name, String user_birthday, String user_gender,
+			String user_phoneNumber, String user_address, String user_id, String user_password, String user_email,
+			String user_likes, String user_wishList, int user_companyNumber, String user_companyName, int user_level,
+			String user_googleId, String user_naverId, String user_kakaoId) {
+		super();
+		this.user_number = user_number;
+		this.user_nickName = user_nickName;
+		this.user_name = user_name;
+		this.user_birthday = user_birthday;
+		this.user_gender = user_gender;
+		this.user_phoneNumber = user_phoneNumber;
+		this.user_address = user_address;
+		this.user_id = user_id;
+		this.user_password = user_password;
+		this.user_email = user_email;
+		this.user_likes = user_likes;
+		this.user_wishList = user_wishList;
+		this.user_companyNumber = user_companyNumber;
+		this.user_companyName = user_companyName;
+		this.user_level = user_level;
+		this.user_googleId = user_googleId;
+		this.user_naverId = user_naverId;
+		this.user_kakaoId = user_kakaoId;
+	}
+	public void setUser_googleId(String user_googleId) {
+		this.user_googleId = user_googleId;
+	}
+	public String getUser_naverId() {
+		return user_naverId;
+	}
+	public void setUser_naverId(String user_naverId) {
+		this.user_naverId = user_naverId;
+	}
+	public String getUser_kakaoId() {
+		return user_kakaoId;
+	}
+	public void setUser_kakaoId(String user_kakaoId) {
+		this.user_kakaoId = user_kakaoId;
+	}
 	public UserVo() {
 	}
 	public String getUser_birthday() {
@@ -112,27 +157,8 @@ public class UserVo {
 				+ user_phoneNumber + ", user_address=" + user_address + ", user_id=" + user_id + ", user_password="
 				+ user_password + ", user_email=" + user_email + ", user_likes=" + user_likes + ", user_wishList="
 				+ user_wishList + ", user_companyNumber=" + user_companyNumber + ", user_companyName="
-				+ user_companyName + ", user_level=" + user_level + "]";
-	}
-	public UserVo(int user_number, String user_nickName, String user_name, String user_birthday, String user_gender,
-			String user_phoneNumber, String user_address, String user_id, String user_password, String user_email,
-			String user_likes, String user_wishList, int user_companyNumber, String user_companyName, int user_level) {
-		super();
-		this.user_number = user_number;
-		this.user_nickName = user_nickName;
-		this.user_name = user_name;
-		this.user_birthday = user_birthday;
-		this.user_gender = user_gender;
-		this.user_phoneNumber = user_phoneNumber;
-		this.user_address = user_address;
-		this.user_id = user_id;
-		this.user_password = user_password;
-		this.user_email = user_email;
-		this.user_likes = user_likes;
-		this.user_wishList = user_wishList;
-		this.user_companyNumber = user_companyNumber;
-		this.user_companyName = user_companyName;
-		this.user_level = user_level;
+				+ user_companyName + ", user_level=" + user_level + ", user_googleId=" + user_googleId
+				+ ", user_naverId=" + user_naverId + ", user_kakaoId=" + user_kakaoId + "]";
 	}
 	public void setUser_level(int user_level) {
 		this.user_level = user_level;

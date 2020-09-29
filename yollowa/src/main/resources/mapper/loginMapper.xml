@@ -7,4 +7,7 @@
 		<select id="login" resultType="com.proj.yollowa.model.entity.UserVo">
 			select * from user where user_id=#{user_id} and user_password=#{user_password}
 		</select>
+		<select id="selectAll" resultType="com.proj.yollowa.model.entity.UserVo">
+			select * from user
+		</select>
   </mapper>
