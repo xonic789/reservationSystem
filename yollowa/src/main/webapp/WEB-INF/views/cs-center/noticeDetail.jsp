@@ -114,18 +114,20 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<form method="post" action="">
-				<div class="box1">
-					<label for="title" id="titleLabel">제목</label>
-					<input type="text" name="title" class="form-control" id="titleInput" placeholder="제목을 입력해 주세요">
-				</div>
-				<div class="box2">
-					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>
-				</div>
-				<div class="box3">
-					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">
-				</div> 
-			</form>
+			<div class="box1">
+				<div id="title">${bean.title }</div>
+			</div>
+			<div class="box2">
+				<span id="writer">작성자 | ${bean.writer }</span>
+				<span id="date">작성일 | ${bean.writeddate }</span>
+				<span id="cnt">조회수  ${bean.cnt }</span>
+			</div>
+			<div class="box3">${bean.content }</div>
+			<div class="box4">
+				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.noticeno }'" value="수정하기">
+				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.noticeno }'" value="삭제하기">
+				<input type="button" id="list" class="btn btn-primary" onclick ="location.href='./'" value="목록">
+			</div> 
 		</div>
 	</div>
 </div>
