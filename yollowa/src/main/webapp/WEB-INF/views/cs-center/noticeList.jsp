@@ -156,11 +156,15 @@
 			<div class="pagingBox">
 				<div class="paging">
 					<ul class="pagination">
-					  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-					  <c:forEach begin="${begin }" end="${begin+4 }" varStatus="status">
-					  <li class="page-item"><a class="page-link" href="${status.index }">${status.index }</a></li>
-					  </c:forEach>
-					  <li class="page-item"><a class="page-link" href="#">다음</a></li>
+						<c:if test="${paging.prev }">
+						 <li class="page-item"><a class="page-link" href="#">이전</a></li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
+							<li class="page-item"><a class="page-link" href="?page=${status.index }">${status.index }</a></li>
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0 }">
+							<li class="page-item"><a class="page-link" href="#">다음</a></li>
+						</c:if>
 					</ul>
 				</div>
 				<div class="btnGroup">

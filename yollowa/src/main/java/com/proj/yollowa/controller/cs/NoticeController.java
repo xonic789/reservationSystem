@@ -30,8 +30,12 @@ public class NoticeController {
 		System.out.println("페이징 작업 진행 시작...");
 		PagingScale pagingScale = new PagingScale();
 		pagingScale.setPage(page);
+		int totalCnt = 100;
+		pagingScale.setTotalCnt(totalCnt);
 		
+		System.out.println(pagingScale.toString());
 		model.addAttribute("list", noticeService.getNoticeListService(pagingScale));
+		model.addAttribute("paging", pagingScale);
 		
 		return "cs-center/noticeList";
 	}
