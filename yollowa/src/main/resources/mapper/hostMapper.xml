@@ -4,25 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.proj.yollowa.model.host.HostDao">
+	
+	<!-- host/ start -->
+	
 	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{user_number}
 	</select>
+	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
+		select * from lodgement where lodgement_userNumber = #{user_number}
+	</select>
 	
-	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.LodgementVo">
+	<!-- host/ end -->
+	
+	<!--host/ladd start -->
+	
+	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.host.LodgementVo">
 		insert into lodgement (lodgement_userNumber, lodgement_companyName, lodgement_location, lodgement_LatLng, lodgement_category, lodgement_hashTag) values 
 							  (#{lodgement_userNumber}, #{lodgement.lodgement_companyName}, #{lodgement.lodgement_location}, #{lodgement.lodgement_LatLng}, #{lodgement.lodgement_category}, #{lodgement.lodgement_hashTag})
 	</insert>
-	
 	<select id="selectLodgementNum" resultType="int">
 		select lodgement_number from lodgement where lodgement_userNumber=#{lodgement_userNumber} and lodgement_companyName=#{lodgement.lodgement_companyName} and lodgement_location=#{lodgement.lodgement_location}
 	</select>
-	
 	<insert id="insertLodgeInfo">
 		insert into information (information_number, information_type, information_notice, information_basicInfo, information_comment, information_addPeopleInfo, information_service, information_refundInfo) values
 								(#{information_number}, 1, #{information.information_notice}, #{information.information_basicInfo}, #{information.information_comment}, #{information.information_addPeopleInfo}, #{information.information_service}, #{information.information_refundInfo})
 	</insert>
-	
 	<insert id="updateLodgementImg">
 		update lodgement set lodgement_img = #{lodgement_img} where lodgement_number = #{lodgeNumber}
 	</insert>
+	
+	<!-- host/ladd end -->
+	
+	
+	
 </mapper>

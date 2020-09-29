@@ -33,9 +33,12 @@
 		cursor: pointer;
 	}
 	h2{
-		margin-top: 50px;
-		margin-left: 20px;
+		font-size: 35px;
 		display: inline-block;
+	}
+	h4{
+		padding-bottom:5px;
+		border-bottom: 2px solid lightgray;
 	}
 	.bigList>p{
 		font-size: 18px;
@@ -59,31 +62,28 @@
 	
 	
 	/* 기본정보 등록 start */
-	#sub{
-		margin-left:25px;
-	}
-	#form{
-		margin-top: 10px;
-		margin-left: 30px;
+	#hostWrite{
+		margin-top: 30px;
+		margin-left: 20px;
 	}
 	.form-group, .form-inline{
-		margin-left:15px;
 		margin-bottom:30px;
 	}
 	.form-group > div{
 		margin-left:15px;
 	}
 	.label_title{
-		font-size:16px;
-		padding-left: 5px;
+		font-size:18px;
+		padding-left: 10px;
 		border-left: 2px solid #B167CF;
 		margin-top: 10px;
+		margin-bottom:10px;
 	}
 	.infoTitle{
 		margin-top: 40px;
-		margin-bottom: 30px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid lightgray;
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		border-bottom: 2px solid lightgray;
 	}
 	.location{
 		width :680px;
@@ -116,6 +116,9 @@
 	.btnRemove, .titleImgRemove{
 		line-height: 8px;
 	}
+	.titleImg{
+		margin-bottom:5px;
+	}
 	.hashtag, .notice, .basic_info, .add_people, .service, .refund_info{
 		width:705px;
 		display:inline-block;
@@ -146,9 +149,8 @@ function setThumbnail(event) {
 function addInputHashtag(){
 	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="lodgement_hashTag" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
-	);s
+	);
 }
-
 
 /* 공지사항 등록 add input method (name, class ="notice") */
 function addInputNotice(){
@@ -188,7 +190,7 @@ function addInputRefundInfo(){
 
 /* 글 타이틀 사진 추가 */
 function addTitleImg(){
-	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" />\
+	$('.titleImgFile').append('<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/>\
 							<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -203,7 +205,7 @@ function removeInput(){
 };
 
 /* 타이틀 디테일 사진 동적 추가된 input delete method */
-function removeTitleImg(){
+function removetitleImg(){
 	$('.titleImgRemove').on('click', function(){
 		$(this).prev().remove();
 		$(this).next().remove();
@@ -245,16 +247,12 @@ function removeTitleImg(){
 						<p><a href="${pageContext.request.contextPath }/host/aadd">엑티비티 게시글 등록</a></p>
 					</div>
 				</div>
-				<div class="bigList">
-					<p>글 등록하기</p>
-					<div class="smallList">
-						<p><a href="">숙박 게시글 리뷰</a></p>
-					</div>
-				</div>
 			</div>
 			<div class="col-md-9">
+			<div id="hostWrite">
 				<h2>숙박 게시글 등록</h2>
 				<p id="sub">아래 입력박스들을 모두 기입해야 글 등록이 가능합니다<p>
+				
 				<form id="form" action="ladd" method="post" enctype="multipart/form-data">
 				  <h4 class="infoTitle">기본정보 등록</h4>
 				  
@@ -277,7 +275,8 @@ function removeTitleImg(){
 						<label for="lodgement_comapanyName" class="label_title">업체명</label>
 						<p>계정에 사업자로 등록되어 있는 업체명이 표시되며 선택사항이 존재하지 않으면 글 등록에 제한됩니다</p>
 						<div>
-							<select name="lodgement_companyName" class="form-control">
+							<select name="lodgement_companyName" class="form-control custom-select">
+							<option selected>업체명을 선택해 주세요</option>
 							<c:forEach items="${companys}" var="companyName">
 								<option value="${companyName }">${companyName }</option>
 							</c:forEach>
@@ -286,7 +285,7 @@ function removeTitleImg(){
 					</div>
 
 					<div class="form-group">
-						<label for="lodgement_location" class="label_title">위치 등록</label><br/>
+						<label for="lodgement_location" class="label_title">위치 등록(도로명 주소)</label><br/>
 						<div>		
 							<input type="text" class="location form-control" name="lodgement_location" id="sample5_address" placeholder="주소">
 							<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
@@ -299,7 +298,7 @@ function removeTitleImg(){
 					  <a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
 				      <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
 				      <div class="addInputHashtag">
-				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/>
+				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/><br/>
   					  </div>
 				  	</div>
 
@@ -308,8 +307,9 @@ function removeTitleImg(){
 					  <a onclick="addTitleImg()" class="btnAdd btn btn-primary">사진 추가 등록</a>
 					  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
 				      <div class="titleImgFile">
-						<input type="file" class="titleImg" name="titleImg" /><br/>
+						<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/><br/>
 					  </div>
+					  <div id="image_container"></div>
 				    </div>
 
 					<div class="form-group">
@@ -363,6 +363,7 @@ function removeTitleImg(){
 				  <button type="submit" class="submit btn btn-primary btn-lg btn-block">글 등록하기</button>				  
 				</form>
 			</div>
+		</div>
 		</div>
 	</div>
 	<%@ include file="../template/footer.jspf"%>

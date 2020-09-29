@@ -3,8 +3,15 @@
 	<c:url value="/resources/js/jquery-1.12.4.js" var="jquery"/>
 	<c:url value="/resources/js/bootstrap.js" var="bootstrap"/>
 	<c:url value="/resources/css/bootstrap.min.css" var="bootstrapCSS"/>
+	
 	<c:url value="/" var="root"></c:url>
 	<link rel="stylesheet" type="text/css" href="${bootstrapCSS }">
+	
+	<!-- bootstrap bundle -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	
+	<!-- 지도 api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a25c7b7725e0d15c5a618bc931661e3"></script>
 	
 	<style rel="stylesheet" type="text/css">
 		@font-face{
