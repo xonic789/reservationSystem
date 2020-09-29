@@ -1,6 +1,7 @@
 package com.proj.yollowa.model.service.cs;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.mysql.cj.protocol.x.Notice;
 import com.proj.yollowa.model.cs.NoticeDao;
 import com.proj.yollowa.model.entity.NoticeVo;
 
@@ -19,9 +19,11 @@ public class NoticeServiceImpl implements NoticeService{
 	SqlSession sqlSession;
 	
 	@Override
-	public void getNoticeListService(Model model) throws SQLException {
+	public List<NoticeVo> getNoticeListService(PagingScale pagingScale) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		model.addAttribute("list", noticeDao.getNoticeList());
+		
+		return noticeDao.getNoticeList(pagingScale);
+		//model.addAttribute("list", noticeDao.getNoticeList(pagingScale));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.proj.yollowa.controller.cs;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.model.entity.NoticeVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
+import com.proj.yollowa.model.service.cs.PagingScale;
 
 @Controller
 @RequestMapping("/cs-center/notice")
@@ -23,12 +26,13 @@ public class NoticeController {
 	NoticeService noticeService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String noticeList(Model model) {
-		try {
-			noticeService.getNoticeListService(model);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public String noticeList(Model model, @RequestParam(value="page", required=false, defaultValue="1") int page) throws SQLException {
+		System.out.println("페이징 작업 진행 시작...");
+		PagingScale pagingScale = new PagingScale();
+		pagingScale.setPage(page);
+		
+		model.addAttribute("list", noticeService.getNoticeListService(pagingScale));
+		
 		return "cs-center/noticeList";
 	}
 	

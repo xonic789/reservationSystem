@@ -9,7 +9,9 @@ import com.proj.yollowa.model.service.cs.PagingScale;
 
 public interface NoticeDao{
 
-	List<NoticeVo> getNoticeList() throws SQLException;
+//	List<NoticeVo> getNoticeList() throws SQLException;
+	List<NoticeVo> getNoticeList(PagingScale pagingScale) throws SQLException;
+	
 	NoticeVo getNotice(int noticeno) throws SQLException;
 	void deleteNotice(int noticeno) throws SQLException;
 	void insertNotice(NoticeVo bean) throws SQLException;
