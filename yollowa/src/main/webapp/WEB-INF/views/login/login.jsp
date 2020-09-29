@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<%@ include file="../template/head.jspf" %>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	 <style type="text/css">
+	 	.button{
+	 		width:191px;
+	 		height: 40px;
+	 	}
+	 </style>
 </head>
 <body>
 	<%@ include file="../template/header.jspf" %>
@@ -23,10 +31,13 @@
 	  </div>
 	  <button type="submit" class="btn btn-primary">로그인</button>
 	</form>
+			
 	</div>
 	
-	
-	
+	<div class="text-center">
+		<a href="${naver_url }"><img class="button" src="../resources/img/naverButton.png"/></a>
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=65ddf9c4a57ddf27e0cf2ac5eaac8af5&redirect_uri=http://localhost:8080/yollowa/login/kakao/callback&response_type=code"><img class="button" src="../resources/img/kakaoButton.png"/></a>
+	</div>
 	<%@ include file="../template/footer.jspf" %>
 </body>
 </html>

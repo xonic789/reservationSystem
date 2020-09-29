@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `AOInfo`
+-- Table structure for table `aoinfo`
 --
 
-DROP TABLE IF EXISTS `AOInfo`;
+DROP TABLE IF EXISTS `aoinfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `AOInfo` (
+CREATE TABLE `aoinfo` (
   `AOInfo_articleNumber` int NOT NULL,
-  `AOInfo_optionNumber` int NOT NULL,
+  `AOInfo_optionNumber` int NOT NULL AUTO_INCREMENT,
   `AOInfo_name` varchar(45) NOT NULL,
-  `AOInfo_price` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `AOInfo_price` int NOT NULL,
+  PRIMARY KEY (`AOInfo_optionNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `AOInfo`
+-- Dumping data for table `aoinfo`
 --
 
-LOCK TABLES `AOInfo` WRITE;
-/*!40000 ALTER TABLE `AOInfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `AOInfo` ENABLE KEYS */;
+LOCK TABLES `aoinfo` WRITE;
+/*!40000 ALTER TABLE `aoinfo` DISABLE KEYS */;
+INSERT INTO `aoinfo` VALUES (1,1,'1인이용권',15000),(1,2,'2인이용권',28000),(2,3,'5인',90000),(2,4,'10인',150000);
+/*!40000 ALTER TABLE `aoinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 17:13:30
+-- Dump completed on 2020-09-29 15:42:58

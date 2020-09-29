@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `information`;
 CREATE TABLE `information` (
   `information_number` int NOT NULL,
   `information_type` bit(1) NOT NULL,
-  `information_basicInfo` varchar(1000) DEFAULT NULL,
   `information_notice` varchar(1000) DEFAULT NULL,
+  `information_basicInfo` varchar(1000) DEFAULT NULL,
   `information_comment` varchar(1000) DEFAULT NULL,
   `information_addPeopleInfo` varchar(1000) DEFAULT NULL,
   `information_service` varchar(1000) DEFAULT NULL,
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-24 17:13:27
+-- Dump completed on 2020-09-29 15:42:54

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
 -- Host: 127.0.0.1    Database: resort
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,12 +32,15 @@ CREATE TABLE `user` (
   `user_address` varchar(100) NOT NULL,
   `user_id` varchar(15) NOT NULL,
   `user_password` varchar(15) NOT NULL,
-  `user_email` varchar(40) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `user_likes` varchar(1000) DEFAULT NULL,
   `user_wishList` varchar(1000) DEFAULT NULL,
   `user_companyNumber` varchar(12) DEFAULT NULL,
   `user_companyName` varchar(45) DEFAULT NULL,
   `user_level` int NOT NULL DEFAULT '0',
+  `user_googleId` varchar(45) DEFAULT NULL,
+  `user_naverId` varchar(45) DEFAULT NULL,
+  `user_kakaoId` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_number`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `user_email_UNIQUE` (`user_email`),
@@ -53,7 +56,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user9','lee','남','20000101','01022223330','경기도 광주시 창뜰','leeseungwoo9','1234','dltmddn9@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(2,'xonic','이승우','남','19950906','01022223331','경기도 광주시 창뜰','dltmddn','1234','dltmddn951@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(3,'user1','lee','여','20000102','01022223332','경기도 광주시 창뜰','leeseungwoo1','1234','dltmddn1@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(4,'user2','lee','남','20000103','01022223333','경기도 광주시 창뜰','leeseungwoo2','1234','dltmddn2@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(5,'user3','lee','여','20000104','01022223334','경기도 광주시 창뜰','leeseungwoo3','1234','dltmddn3@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(6,'user4','lee','남','20000105','01022223335','경기도 광주시 창뜰','leeseungwoo4','1234','dltmddn4@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(7,'user5','lee','남','20000106','01022223336','경기도 광주시 창뜰','leeseungwoo5','1234','dltmddn5@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(8,'user6','lee','남','20000107','01022223337','경기도 광주시 창뜰','leeseungwoo6','1234','dltmddn6@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(9,'user7','lee','남','20000108','01022223338','경기도 광주시 창뜰','leeseungwoo7','1234','dltmddn7@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0),(10,'user8','lee','여','20000109','01022223339','경기도 광주시 창뜰','leeseungwoo8','1234','dltmddn8@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0);
+INSERT INTO `user` VALUES (1,'user9','lee','남','20000101','01022223330','경기도 광주시 창뜰','leeseungwoo9','1234','dltmddn9@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(2,'xonic','이승우','남','19950906','01022223331','경기도 광주시 창뜰','dltmddn','1234','dltmddn951@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(3,'user1','lee','여','20000102','01022223332','경기도 광주시 창뜰','leeseungwoo1','1234','dltmddn1@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(4,'user2','lee','남','20000103','01022223333','경기도 광주시 창뜰','leeseungwoo2','1234','dltmddn2@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(5,'user3','lee','여','20000104','01022223334','경기도 광주시 창뜰','leeseungwoo3','1234','dltmddn3@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(6,'user4','lee','남','20000105','01022223335','경기도 광주시 창뜰','leeseungwoo4','1234','dltmddn4@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(7,'user5','lee','남','20000106','01022223336','경기도 광주시 창뜰','leeseungwoo5','1234','dltmddn5@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(8,'user6','lee','남','20000107','01022223337','경기도 광주시 창뜰','leeseungwoo6','1234','dltmddn6@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(9,'user7','lee','남','20000108','01022223338','경기도 광주시 창뜰','leeseungwoo7','1234','dltmddn7@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL),(10,'user8','lee','여','20000109','01022223339','경기도 광주시 창뜰','leeseungwoo8','1234','dltmddn8@gmail.com','다이빙,스카이다이빙,번지점프',NULL,NULL,NULL,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -66,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-25  0:52:20
+-- Dump completed on 2020-09-29 15:42:58
