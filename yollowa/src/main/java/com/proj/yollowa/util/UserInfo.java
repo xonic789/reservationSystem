@@ -12,12 +12,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class UserInfo {
-	public static JsonNode getUserInfo(JsonNode accessToken,String service) {
+	public static JsonNode getUserInfo(JsonNode accessToken) {
 		String RequestUrl=null;
 		
-		if(StringUtils.equals("kakao", service))
 		RequestUrl="https://kapi.kakao.com/v2/user/me";
-		else RequestUrl="https://accounts.google.com/o/oauth2/v2/auth";
         
         
         final HttpClient client = HttpClientBuilder.create().build();

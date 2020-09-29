@@ -36,7 +36,6 @@
 	
 	<div class="text-center">
 		<a href="${naver_url }"><img class="button" src="../resources/img/naverButton.png"/></a>
-		<a href="https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:8080/yollowa/login/google/callback&response_type=code&client_id=183141477636-5vabtlolvogrdtv3r2rg8graq5c96fk2.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/userinfo.email&access_type=offline"><img class="button" src="../resources/img/googleButton.png"/></a>
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=65ddf9c4a57ddf27e0cf2ac5eaac8af5&redirect_uri=http://localhost:8080/yollowa/login/kakao/callback&response_type=code"><img class="button" src="../resources/img/kakaoButton.png"/></a>
 	</div>
 	<%@ include file="../template/footer.jspf" %>

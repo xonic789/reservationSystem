@@ -80,45 +80,6 @@ public class AccessToken {
 
 		return returnNode;
 	}
-	public static JsonNode getAccessToken(String code,String url) {
-
-		final HttpClient client = HttpClientBuilder.create().build();
-		final URI myUri = URI.create(url);
-		System.out.println(url);
-		final HttpPost post = new HttpPost(myUri);
-		post.setURI(myUri);
-		JsonNode returnNode = null;
-
-		try {
-
-			final HttpResponse response =	client.execute(post);
-			final int responseCode = response.getStatusLine().getStatusCode();
-
-			System.out.println("\nSending 'POST' request to URL : " + url);
-			System.out.println("Response Code : " + responseCode);
-
-
-			// JSON 형태 반환값 처리
-			ObjectMapper mapper = new ObjectMapper();
-			System.out.println(response.getEntity().getContent());
-//            InputStream is = response.getEntity().getContent();
-//            int su=-1;
-//            while((su=is.read())!=-1) {
-//            	System.out.print((char)su);
-//            }
-			returnNode = mapper.readTree(response.getEntity().getContent());
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-		}
-		
-		return returnNode;
-	}
 
 
 }

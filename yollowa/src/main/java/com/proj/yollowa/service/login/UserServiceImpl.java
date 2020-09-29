@@ -1,15 +1,12 @@
 package com.proj.yollowa.service.login;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
@@ -48,7 +45,11 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 	}
-
+	
+	//탐색 하기 위한 모든 리스트
+	public List<UserVo> selectAllService(){
+		return null;
+	}
 
 	
 	

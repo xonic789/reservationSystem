@@ -36,10 +36,7 @@ public class LoginController {
 	
 	@Inject
 	private SnsValue naverSns;
-	@Inject
-	private GoogleConnectionFactory googleConnectionFactory;
-	@Inject
-	private OAuth2Parameters googleOAuth2Parameters;
+	
 	JsonNode accessToken;
 	
 	@RequestMapping(value = "login/{service}/callback",method = { RequestMethod.GET,RequestMethod.POST})
@@ -48,9 +45,9 @@ public class LoginController {
 		System.out.println(code);
 		if(StringUtils.equals("kakao", service)) {
 			
-			JsonNode jsonToken = AccessToken.getAccessToken(code,service);
+			JsonNode jsonToken = AccessToken.getAccessToken(code);
 			accessToken=jsonToken.get("access_token");
-			JsonNode userInfo = UserInfo.getUserInfo(accessToken,service);
+			JsonNode userInfo = UserInfo.getUserInfo(accessToken);
 			System.out.println(userInfo);
 			String id= userInfo.path("id").asText();
 			System.out.println(id);
@@ -72,12 +69,6 @@ public class LoginController {
 			UserVo snsUser = snsLogin.getUserProfile(code);
 			System.out.println("Profile>> "+snsUser);
 		}else {
-			OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-    		
-    		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-			JsonNode jsonToken = AccessToken.getAccessToken(code,url);
-			accessToken=jsonToken.get("access_token");
-			System.out.println(accessToken);
 		}
 		
 		
@@ -93,7 +84,7 @@ public class LoginController {
 	//유저 로그인 페이지 get
 	@RequestMapping(value ="login/",method = RequestMethod.GET )
 	public String login(Model model) {
-
+		
 		SNSLogin snsLogin = new SNSLogin(naverSns);
 		model.addAttribute("naver_url", snsLogin.getNaverAuthURL());
 		
