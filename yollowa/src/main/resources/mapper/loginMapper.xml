@@ -10,4 +10,17 @@
 		<select id="selectAll" resultType="com.proj.yollowa.model.entity.UserVo">
 			select * from user
 		</select>
+		<select id="getKakaoId" resultType="java.lang.String">
+			select user_kakaoId from user
+		</select>
+		<select id="getNaverId" resultType="java.lang.String">
+			select user_naverId from user
+		</select>
+		<select id="getKakaoUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
+			select * from user where user_kakaoId=#{user_kakaoId}
+		</select>
+		<select id="getNaverUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
+			select * from user where user_naverId=#{user_naverId}
+		</select>
+		
   </mapper>

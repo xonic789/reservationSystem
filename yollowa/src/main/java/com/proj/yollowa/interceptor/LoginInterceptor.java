@@ -24,12 +24,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter implements Sessi
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		///로그인
 		String user_id = request.getParameter("user_id");
 		String user_password = request.getParameter("user_password");
-		
+		//아이디와 패스워드 가지고 로그인 Vo 리턴 받아옴
 		LoginVo loginVo = new LoginVo(user_id,user_password);
-		UserVo userVo = loginService.loginUserService(loginVo);
 		
+		UserVo userVo = loginService.loginUserService(loginVo);
+		//로그인VO를 가지고 널이아니면 세션에 실어줌
 		HttpSession session = request.getSession();
 		if(userVo != null) {
 			//가져왔을때 널이 아니면 세션에 유저 정보 실어줌.

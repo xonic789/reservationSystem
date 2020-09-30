@@ -11,6 +11,22 @@ import com.proj.yollowa.model.entity.login.LoginVo;
 
 public interface UserDao {
 	
-	public List<UserVo> selectAll() throws SQLException;
-	public UserVo login(LoginVo loginVo) throws SQLException;
+	List<UserVo> selectAll() throws SQLException;
+	UserVo login(LoginVo loginVo) throws SQLException;
+//	<select id="kakaoId" resultType="java.lang.String">
+//	select user_kakaoId from user
+//</select>
+//<select id="naverId" resultType="java.lang.String">
+//	select user_naverId from user
+//</select>
+//<select id="getKakaoUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
+//	select * from user where user_kakaoId=#{user_kakaoId}
+//</select>
+//<select id="getNaverUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
+//	select * from user where user_naverId=#{user_naverId}
+//</select>
+	List<String> getKakaoId() throws SQLException;
+	List<String> getNaverId() throws SQLException;
+	UserVo getKakaoUserInfo(String kakaoId) throws SQLException;
+	UserVo getNaverUserInfo(String naverId) throws SQLException;
 }

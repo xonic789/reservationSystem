@@ -56,24 +56,7 @@ public class SNSLogin {
 		
 		ObjectMapper mapper= new ObjectMapper();
 		JsonNode rootNode = mapper.readTree(body);
-		if(this.sns.isGoogle()) {
-			String id= rootNode.get("id").asText();
-				if(this.sns.isGoogle()) 
-					userVo.setUser_googleId(id);
-				userVo.setUser_nickName(rootNode.get("displayName").asText());
-				JsonNode nameNode=rootNode.path("name");
-				userVo.setUser_name(nameNode.get("familyName").asText()+nameNode.get("givenName").asText());
-				
-				Iterator<JsonNode> iterEmails = rootNode.path("emails").getElements();
-				while(iterEmails.hasNext()) {
-					JsonNode emailNode=iterEmails.next();
-					String type = emailNode.get("type").asText();
-					if(StringUtils.equals(type, "account")){
-						userVo.setUser_email(emailNode.get("value").asText());
-						break;
-					}
-				}
-		}else if(this.sns.isNaver()) {
+		if(this.sns.isNaver()) {
 			JsonNode resNode = rootNode.get("response");
 			userVo.setUser_naverId(resNode.get("id").asText());
 			userVo.setUser_nickName(resNode.get("nickname").asText());
