@@ -294,9 +294,9 @@ function removetitleImg(){
 					</div>
 					
 					<div class="form-group">
-				      <label class="label_title" for="lodgement_hashTag">해쉬태그</label>
+				      <label class="label_title" for="lodgement_hashTag">해시태그</label>
 					  <a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
-				      <p>해쉬태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
+				      <p>해시태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
 				      <div class="addInputHashtag">
 				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/><br/>
   					  </div>

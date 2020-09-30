@@ -110,8 +110,32 @@
 	.imgInput{
 		
 	}
-	
-	
+	.titleImgFile{
+		display: inline-block;
+	}
+	.btnAdd{
+		width:120px;
+		hight: 500px;
+		cursor:pointer;
+		margin-bottom:0px;
+		text-decoration:none;		
+		display: inline-block;
+		line-height: 4px;
+		border: 0px;
+	}
+	.btnAdd:hover{
+		background-color:#E3A1ED;
+	}
+	.btnRemove, .titleImgRemove{
+		line-height: 8px;
+		margin-left:5px;
+	}
+	#location{
+		display: inline-block;
+	}
+	.inputHash{
+		width:545px;
+	}
 	/* .list{
 		height: 250px;
 		border-bottom: 1px solid lightgray;
@@ -170,25 +194,87 @@
 		
 	});
 	
-	
+	/* 수정 버튼 클릭 이벤트 */
 	function modiClick(a){
 		var number = $(a).next().val();
 		if($(a).text()=='수정'){
 			$('.lodgemodifyEl'+number).attr('disabled', false);
 			$(a).text('수정 완료');
-			$('.imgInput'+number).attr('type','file');
-			$('.imgInput'+number).attr('accept','.jpg, .jpeg, .png, .webp');
-			$('.imgInput'+number).css('width','610px');
-			$('.imgInput'+number).removeClass('form-control');
 			
-			if($('.imgInput'+number).prev().text()=='디테일 이미지 1'){
-				$('.imgInput'+number).prev().text('이미지 등록');
+			var divNum = number-1;
+			
+			// 클래스의 마지막이 0 인 것들은 속성변화
+			$('.imgInput'+number+0).prev().text('타이틀 사진 등록');
+			$('.imgInput'+number+0).attr('type','file');
+			$('.imgInput'+number+0).attr('accept','.jpg, .jpeg, .png, .webp');
+			$('.imgInput'+number+0).css('width','610px');
+			$('.imgInput'+number+0).removeClass('form-control');
+			$('.imgDiv'+divNum).append('<a onclick="addTitleImg('+divNum+')" class="btnAdd btn btn-primary">사진추가 버튼</a>');	
+			$('.inputCon').css('margin-left','15px');
+			
+			// 클래스의 마지막이 1 이상인 것들은 삭제
+			for(var i=1; i<100; i++){
+				$('.imgInput'+number+i).prev().remove();
+				$('.imgInput'+number+i).remove();
 			}
+
+			/* 해시태그 동적 변환 */
+			$('.hashDiv'+divNum).append('<a onclick="addInputHashtag('+divNum+')" class="btnAdd btn btn-primary">태그추가 버튼</a>');	
+			$('.').css('width','500px');
+			
+			
+			/* 위치 수정 
+			var location = '<input type="text" class="location'+number+' form-control" name="lodgement_location" id="sample5_address" placeholder="주소">';
+			location += '<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>';
+			location += '<div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div>';
+			
+			$('.location'+number).prev().text('위치 등록');
+			
+			$('.loc'+number).remove();
+			$('.location'+number).append(location);
+			$('#sample5_address').css('width','520px');
+			$('#sample5_address').css('margin-left','15px');
+			$('#sample5_address').css('margin-right','10px'); */
+			
 			
 		}else if($(a).text()=='수정 완료'){
 			$(a).attr('href','ladd');
 		}
 	}
+	
+	/* 글 타이틀 사진 추가 */
+	function addTitleImg(divNum){
+		$('.titleImgFile'+divNum).append('<div class="title">타이틀 사진 등록</div><input type="file" id="titleImg" class="inputCon" name="lodgement_img" value="${requestScope[titleName] }" />\
+								<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
+		);
+	}
+
+	/* 해쉬태그 등록 add input method (name, class ="notice") */
+	function addInputHashtag(divNum){
+		$('.hashBox'+divNum).append('<div class="title hashDiv${num.index }">해시태그 추가</div><input type="text" class="inputCon inputHash form-control" name="lodgement_hashTag" value="${requestScope[hashTagName] }" />\
+								<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
+		);
+	}
+	
+	/* 타이틀 디테일 사진 동적 추가된 input delete method */
+	function removetitleImg(){
+		$('.titleImgRemove').on('click', function(){
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).next().remove();
+			$(this).remove();
+		});
+	};
+	
+	/* 글 정보 태그 동적 추가된 input delete method */
+	function removeInput(){
+		$('.btnRemove').on('click', function(){
+			$(this).prev().remove();
+			$(this).prev().remove();
+			$(this).next().remove();
+			$(this).remove();
+		});
+	};
 	
 </script>
 </head>
@@ -238,21 +324,41 @@
 					<div class="title">업체명</div>
 					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_companyName }" disabled="disabled"/>
 										
-					<div class="title">대표 이미지</div>
+					<div class="titleImgFile${num.index }">
+						<div class="title imgDiv${num.index }">대표 이미지</div>
+						<c:set var="sizeNumber" value="titleImgSize${num.index }" ></c:set>
+						<c:forEach begin="0" end="${requestScope[sizeNumber]-1 }" varStatus="number">
+						
+							<c:set var="titleName" value="imgName${num.index }${number.index }"></c:set>
+							<c:if test="${0 ne number.index }">
+								<div class="title">디테일 이미지 ${number.index }</div>
+							</c:if>
+							<input type="text" id="titleImg" class="imgInput${lodgeList.lodgement_number }${number.index } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_img" value="${requestScope[titleName] }" disabled="disabled" />
+						</c:forEach>
+							
+					</div>
 
-					<c:set var="sizeNumber" value="titleImgSize${num.index }" ></c:set>
-					<c:forEach begin="0" end="${requestScope[sizeNumber]-1 }" varStatus="number">
-						<c:set var="titleName" value="imgName${num.index }${number.index }"></c:set>
-						<c:if test="${0 ne number.index }">
-							<div class="title">디테일 이미지 ${number.index }</div>
-						</c:if>
-						<input type="text" id="titleImg" class="imgInput${lodgeList.lodgement_number } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_img" value="${requestScope[titleName] }" disabled="disabled" />
-					</c:forEach>
-					
 					<div class="title">위치</div>
-					<input type="text" class="inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
-					<div class="title">해쉬태그</div>
-					<input type="text" class="inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_hashTag" value="${lodgeList.lodgement_hashTag }" disabled="disabled"/>
+					<input type="text" class="inputCon form-control" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
+					
+					<%-- <div class="title">위치</div>
+					<div class="location">
+						<input type="text" class="inputCon form-control loc${number.index } lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
+					</div>
+					 --%>
+					<div class="hashBox${num.index }">
+					<div class="title hashDiv${num.index }">해시태그1</div>
+					<c:set var="hashTagSize" value="hashTagSize${num.index }"></c:set>
+					<c:forEach begin="0" end="${requestScope[hashTagSize]-1 }" varStatus="number">
+						<c:set var="hashTagName" value="hashTag${num.index }${number.index }"></c:set>
+						<c:if test="${0 ne number.index }">
+							<div class="title">해시태그${number.index+1 }</div>
+						</c:if>
+						<input type="text" class="inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_hashTag" value="${requestScope[hashTagName] }" disabled="disabled"/>
+					</c:forEach>
+					</div>
+					<div class=""></div>
+					
 					<div class="title">후기 수</div>
 					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewCount }" disabled="disabled" />
 					<div class="title">좋아요 수</div>

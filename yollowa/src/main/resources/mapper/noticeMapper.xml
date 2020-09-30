@@ -16,6 +16,9 @@
 	<select id="getNotice" resultType="com.proj.yollowa.model.entity.NoticeVo">
 		SELECT * FROM NOTICE WHERE NOTICENO=#{noticeno}
 	</select>
+	<select id="countNotice" resultType="int">
+		SELECT COUNT(NOTICENO) FROM NOTICE
+	</select>
 	<delete id="deleteNotice">
 		DELETE FROM NOTICE WHERE NOTICENO=#{noticeno}
 	</delete>

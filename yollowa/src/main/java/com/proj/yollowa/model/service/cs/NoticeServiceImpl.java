@@ -31,7 +31,13 @@ public class NoticeServiceImpl implements NoticeService{
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 		model.addAttribute("bean", noticeDao.getNotice(noticeno));
 	}
-
+	
+	@Override
+	public int countNoticeService() throws SQLException {
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		return noticeDao.countNotice();
+	}
+	
 	@Override
 	public void deleteNoticeService(int noticeno) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
@@ -52,5 +58,6 @@ public class NoticeServiceImpl implements NoticeService{
 		System.out.println(noticeDao);
 		noticeDao.updateNotice(bean);
 	}
+
 	
 }

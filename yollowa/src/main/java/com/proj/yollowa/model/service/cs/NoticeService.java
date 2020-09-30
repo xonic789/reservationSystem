@@ -13,6 +13,7 @@ public interface NoticeService {
 //	void getNoticeListService(Model model) throws SQLException;
 	List<NoticeVo> getNoticeListService(PagingScale pagingScale) throws SQLException;
 	void getNoticeService(Model model, int noticeno) throws SQLException;
+	int countNoticeService() throws SQLException;
 	void deleteNoticeService(int noticeno) throws SQLException;
 	void insertNoticeService(NoticeVo bean) throws SQLException;
 	void updateNoticeService(NoticeVo bean) throws SQLException;
