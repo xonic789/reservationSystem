@@ -39,13 +39,12 @@ public class ActivityListController {
 		return "activity/activityDetail";
 	}
 	
-	@ResponseBody
 	@RequestMapping(value = "detail/Inicis",method = RequestMethod.POST)
 	public String ActivityInicis(Model model,HttpServletRequest req) throws SQLException {
-//		System.out.println(req.getParameter("resultAmount"));
-		String a=req.getParameter("resultPay");
-		System.out.println(a);
-		return a;
+		System.out.println(req.getParameter("resultAmount"));
+		
+		
+		return "activity/activityInicis";
 	}
 
 	
