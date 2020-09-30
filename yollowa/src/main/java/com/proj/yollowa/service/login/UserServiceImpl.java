@@ -4,9 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
@@ -45,10 +48,35 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 	}
+	public List<String> getAllKakaoIdService() throws SQLException{
+		UserDao userDao=sqlSession.getMapper(UserDao.class);
+		return userDao.getKakaoId();
+	}
+	public List<String> getAllNaverIdService() throws SQLException{
+		UserDao userDao=sqlSession.getMapper(UserDao.class);
+		return userDao.getNaverId();
+	}
+	public UserVo getKakaoUserLoginService(Model model,String kakaoId,HttpServletRequest request) throws SQLException{
+		UserDao userDao=sqlSession.getMapper(UserDao.class);
+		UserVo user=null;
+		System.out.println(kakaoId);
+		if(kakaoId!=null) {
+			HttpSession session=request.getSession();
+			user = userDao.getKakaoUserInfo(kakaoId);
+			session.setAttribute("user", user);
+		}else
+			return null;
+		return user;
 	
-	//탐색 하기 위한 모든 리스트
-	public List<UserVo> selectAllService(){
-		return null;
+	}
+	public UserVo getNaverUserLoginService(Model model,String naverId,HttpServletRequest request) throws SQLException{
+		UserDao userDao=sqlSession.getMapper(UserDao.class);
+		if(naverId!=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", userDao.getNaverUserInfo(naverId));
+		}else
+			return null;
+		return userDao.getNaverUserInfo(naverId);
 	}
 
 	

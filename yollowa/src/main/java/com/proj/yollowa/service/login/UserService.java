@@ -15,5 +15,9 @@ import com.proj.yollowa.model.entity.login.ManagerLoginVo;
 public interface UserService {
 	UserVo loginUserService(LoginVo loginVo) throws SQLException;
 	ManagerVo loginManagerService(ManagerLoginVo managerLoginVo) throws SQLException;
-	public List<UserVo> selectAllService() throws SQLException;
+	List<String> getAllNaverIdService() throws SQLException;
+	List<String> getAllKakaoIdService() throws SQLException;
+	public UserVo getKakaoUserLoginService(Model model,String kakaoId,HttpServletRequest request) throws SQLException;
+	public UserVo getNaverUserLoginService(Model model,String naverId,HttpServletRequest request) throws SQLException;
+	
 }

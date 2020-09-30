@@ -1,4 +1,4 @@
-package com.proj.yollowa.util;
+package com.proj.yollowa.util.socialLogin;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
