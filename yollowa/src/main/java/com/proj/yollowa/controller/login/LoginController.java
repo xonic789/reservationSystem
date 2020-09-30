@@ -55,7 +55,7 @@ public class LoginController {
 						break;
 					}else {
 						model.addAttribute("joinInfo",userVo);
-						return "redirect:../join/";
+						return "redirect:../../join/";
 					}
 				}
 			}
@@ -124,7 +124,9 @@ public class LoginController {
 
 		return null;
 	}
-
-
+	@RequestMapping(value = "join/",method = RequestMethod.GET)
+	public String join() {
+		return "login/join";
+	}
 
 }

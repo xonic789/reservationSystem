@@ -67,46 +67,47 @@
 	width: 191px;
 	height: 40px;
 }
+
 </style>
 </head>
 <body>
 	<%@ include file="../template/header.jspf"%>
 	<%@ include file="../template/menu.jspf"%>
-	<div class="limiter">
+	<div class="limiter" >
 		<div class="container-login100"
 			style="background-image: url(${pageContext.request.contextPath}/resources/img/bg-01.jpg);">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form"
 					action="${pageContext.request.contextPath }/login/result"
 					method="post">
-					<span class="login100-form-title p-b-49"> 로그인 </span>
+					<span class="login100-form-title p-b-49" style="font-family: 'MapoPeacefull';"> 로그인 </span>
 					<div class="wrap-input100 validate-input m-b-23"
-						data-validate="Username is reauired">
-						<span class="label-input100">아이디</span> <input class="input100"
+						data-validate="아이디를 입력해주세요">
+						<span style="font-family: 'MapoPeacefull';" class="label-input100">아이디</span> <input style="font-family: 'MapoPeacefull';" class="input100"
 							type="text" name="user_id" placeholder="아이디를 입력해주세요"> <span
 							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
-						data-validate="Password is required">
-						<span class="label-input100">비밀번호</span> <input class="input100"
-							type="password" name="user_password" placeholder="패스워드를 입력해주세요">
+						data-validate="패스워드를 입력해주세요">
+						<span style="font-family: 'MapoPeacefull';" class="label-input100">비밀번호</span> <input class="input100"
+							type="password" name="user_password" style="font-family: 'MapoPeacefull';" placeholder="패스워드를 입력해주세요">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
 					<div class="text-right p-t-8 p-b-31">
-						<a href="#"> 비밀번호를 잊어버리셨나요? </a>
+						<a style="font-family: 'MapoPeacefull';" href="#"> 비밀번호를 잊어버리셨나요? </a>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">로그인</button>
+							<button class="login100-form-btn" style="font-family: 'MapoPeacefull';" >로그인</button>
 						</div>
 					</div>
 
 					<div class="txt1 text-center p-t-54 p-b-20">
-						<span> 소셜 계정으로 로그인 하기 </span>
+						<span style="font-family: 'MapoPeacefull';" > 소셜 계정으로 로그인 하기 </span>
 					</div>
 
 					<div class="flex-c-m">
@@ -122,8 +123,8 @@
 					</div>
 
 					<div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17"> 아이디가 없으신가요? </span> <a href="#"
-							class="txt2"> 회원 가입 </a>
+						<span class="txt1 p-b-17" style="font-family: 'MapoPeacefull';"> 아이디가 없으신가요? </span> <a href="../join/"
+							class="txt2" style="font-family: 'MapoPeacefull';" > 회원 가입 </a>
 					</div>
 				</form>
 			</div>
