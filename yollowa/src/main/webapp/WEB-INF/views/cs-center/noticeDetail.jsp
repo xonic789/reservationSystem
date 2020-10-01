@@ -126,7 +126,7 @@
 			<div class="box4">
 				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.noticeno }'" value="수정하기">
 				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.noticeno }'" value="삭제하기">
-				<input type="button" id="list" class="btn btn-primary" onclick ="location.href='./'" value="목록">
+				<input type="button" id="list" class="btn btn-primary" onclick ="history.back();" value="목록">
 			</div> 
 		</div>
 	</div>

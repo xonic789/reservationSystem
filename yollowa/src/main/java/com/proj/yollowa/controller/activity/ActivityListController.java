@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.yollowa.model.service.activity.ActivityService;
 import com.proj.yollowa.model.service.activity.ActivityServiceImpl;
@@ -16,11 +19,6 @@ import com.proj.yollowa.model.service.activity.ActivityServiceImpl;
 @Controller
 @RequestMapping("/activity/")
 public class ActivityListController {
-	
-	@RequestMapping("test")
-	public String ActivityList1() {
-		return "activity/test";
-	}
 	
 	@Inject
 	ActivityService activityService;
@@ -41,7 +39,15 @@ public class ActivityListController {
 		return "activity/activityDetail";
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "detail/Inicis",method = RequestMethod.POST)
+	public String ActivityInicis(Model model,HttpServletRequest req) throws SQLException {
+//		System.out.println(req.getParameter("resultAmount"));
+		String a=req.getParameter("resultPay");
+		System.out.println(a);
+		return a;
+	}
+
 	
 	
 }

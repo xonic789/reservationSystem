@@ -89,7 +89,8 @@ h3:first-letter {
 		var totalAdd = parseInt($('#resultAmount').val())+pri1;
 		
 		//합계
-		$('#resultAmount').val(totalAdd); 
+		$('#resultAmount').val(totalAdd);
+		
 	}
 	
 	// - 버튼
@@ -108,6 +109,30 @@ h3:first-letter {
 			
 		}
 	};
+
+	
+	// 합계 전송
+	/* 
+	function buySubmit(){
+		$.ajax({
+			type:'post',
+			url:'Inicis',
+			data: {
+				resultPay:$('#resultAmount').val()
+			} ,
+			success: function(){
+				window.location.href='../detail/Inicis';
+			},
+			error: function(e){
+				alert("에러메시지 :"+e);
+			}
+		}); 
+	} 
+	*/
+
+	
+	
+
 	
 	
 	
@@ -179,49 +204,31 @@ h3:first-letter {
 							
 							<div>
 								<h5>옵션 선택</h5>
-								<form action="">
-								<c:forEach items="${option }" var="bean">
-								<div id="package-div-option-select" class="col-md-11">
-									<!-- <button>check</button> -->
-									<div>
-										<p>[${bean.AOInfo_name}]</p>
+								<button type="reset">재설정</button>
+								<form action="Inicis" method="post">
+									<c:forEach items="${option }" var="bean">
+									<div id="package-div-option-select" class="col-md-11">
+										<!-- <button>check</button> -->
+										<div>
+											<p>[${bean.AOInfo_name}]</p>
+										</div>
+										<div>
+											<p>${bean.AOInfo_optionNumber}. ${bean.activityOption_name }</p>
+											<p>￦${bean.AOInfo_price}</p>
+											<input type="hidden" value="${bean.AOInfo_price}"/>
+											<input type="text" name="amount${bean.AOInfo_optionNumber}" style="height:25px;" value="0" size="8" disabled/>
+											<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="+" onclick="add(this);"/>
+											<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="-" onclick="del(this);"/>
+										</div>
 									</div>
-									<div>
-										<p>${bean.AOInfo_optionNumber}. ${bean.activityOption_name }</p>
-										<p>￦${bean.AOInfo_price}</p>
-										<input type="hidden" value="${bean.AOInfo_price}"/>
-										<input type="text" name="amount${bean.AOInfo_optionNumber}" style="height:25px;" value="0" size="8" />
-										<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="+" onclick="add(this);"/>
-										<input class="btn btn-primary btn-sm" role="btn" style="border-radius: 5px;" type="button" value="-" onclick="del(this);"/>
-									</form>
-									</div>
-								</div>
-								</c:forEach>
+									</c:forEach>
 									<label for="resultAmount">합계 :</label>
-									<input id="resultAmount" type="text" value="0" size="8" disabled/>
+									<input id="resultAmount" name="resultAmount" value="0" type="text" size="8" readonly="readonly"/>
 									<button id="wish" >장바구니</button>
-									<button>바로구매</button>
+ 									<button id="buySubmit" type="submit">바로구매</button>
+								 	<!-- <input type="submit" value="바로구매" onclick="buySubmit();"/> -->
 								</form>
 							</div>
-									
-							<%-- 
-							<div id="package-div-option-select">
-								<h5>옵션 선택</h5>
-								<div>
-									<c:forEach items="${optionList }" var="option">
-									<button class="option${option.activityOption_optionNumber}">${option.activityOption_name }</button>
-									<input type="hidden" name="abc${option.activityOption_optionNumber}"/>
-									</c:forEach>
-								</div>
-							</div>
-							
-							<div>
-								<h5>수량</h5>
-								<div>
-								</div>
-							</div> --%>
-							
-							
 						</div>
 					</div>
 
