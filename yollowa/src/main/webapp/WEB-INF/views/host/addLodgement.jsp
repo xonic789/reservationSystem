@@ -233,9 +233,16 @@ function removetitleImg(){
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList">
+					<p>호스트 페이지</p>
+					<div class="smallList">
+						<p><a href="${pageContext.request.contextPath }/host/">호스트 페이지</a></p>
+					</div>
+				</div>
+				<div class="bigList">
 					<p>글 보기</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/lodgement">내가 작성한 숙박 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/activity">내가 작성한 액티비티 글</a></p>
 					</div>
 				</div>
 				<div class="bigList">
@@ -266,7 +273,7 @@ function removetitleImg(){
 						<input type="radio" name="lodgement_category" id="motel" value="motel"> 모텔
 						</label>
 						<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="Pension" value="Pension"> 펜션
+						<input type="radio" name="lodgement_category" id="Pension" value="pension"> 펜션
 						</label>
 					</div>
 				  </div>
