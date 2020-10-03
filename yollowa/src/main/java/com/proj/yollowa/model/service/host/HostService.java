@@ -1,4 +1,4 @@
-package com.proj.yollowa.service.host;
+package com.proj.yollowa.model.service.host;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.proj.yollowa.service.host;
+package com.proj.yollowa.model.service.host;
 
 import java.io.File;
 import java.io.IOException;

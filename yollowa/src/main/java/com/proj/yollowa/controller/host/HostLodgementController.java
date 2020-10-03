@@ -17,7 +17,7 @@ import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
-import com.proj.yollowa.service.host.HostService;
+import com.proj.yollowa.model.service.host.HostService;
 
 @Controller
 @RequestMapping("/host")
