@@ -35,6 +35,14 @@
 	</insert>
 	<!-- host/ladd end -->
 	
+	<!-- host/lodgeRoom start -->
+	<select id="selectLodgementName" resultType="String">
+		select lodgement_companyName from lodgement where lodgement_number = #{lodgement_number}
+	</select>
+	<select id="selectLodgementRooms" resultType="com.proj.yollowa.model.entity.host.RoomInfoVo">
+		select * from roomInfo where roomInfo_articleNumber = #{lodgement_number}
+	</select>
+	<!-- host/lodgeRoom end -->
 	
 	
 	<!-- host/addRoom start -->

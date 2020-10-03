@@ -30,8 +30,8 @@ public class HostLodgementController {
 	// 호스트 인덱스 페이지
 	@Auth
 	@RequestMapping("/")
-	public String HostIndex(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
-		
+	public String HostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
+		model.addAttribute("userName",userVo.getUser_name());
 		return "host/hostIndex";
 	}
 	
@@ -55,6 +55,9 @@ public class HostLodgementController {
 	public String laddPage(@AuthUser UserVo userVo, Model model) {
 		// session에서 companyName get
 		String user_companyName = userVo.getUser_companyName();
+		
+		// 페이지 상단 유저이름 출력
+		model.addAttribute("userName",userVo.getUser_name());
 		
 		// 문자열로 들어온 user_companyName을 특정기호로 잘라 배열로 저장
 		String[] companys = user_companyName.split("&");
@@ -111,6 +114,28 @@ public class HostLodgementController {
 		return "redirect:/host/";
 	}
 	
+	// 해당 숙박 글에 등록된 방 리스트페이지
+	@Auth
+	@RequestMapping(value="/lodgeRoom/{lodgement_number}", method=RequestMethod.GET)
+	public String lodgementRoomsPage(@PathVariable("lodgement_number") int lodgement_number, @AuthUser UserVo userVo, Model model) throws SQLException {
+		
+		// host/lodgeRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
+		ArrayList<LodgementVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
+		
+		if(matchUserNumber!=null) {
+			// 컴퍼니 네임 select
+			hostService.selectLodgementName(lodgement_number, model);
+			// 등록 된 방
+			hostService.selectLodgementRooms(lodgement_number, model);
+			
+			return "host/lodgementRooms";
+		}else {
+			return "home";
+		}
+		
+	}
+	
+	// 숙박 글의 룸 리스트 페이지에서 방 추가하기 버튼 클릭 시 이동
 	@Auth
 	@RequestMapping(value="/addRoom/{lodgement_number}", method=RequestMethod.GET)
 	public String addRoomPage(@PathVariable("lodgement_number") int lodgement_number, @AuthUser UserVo userVo, Model model) throws SQLException {

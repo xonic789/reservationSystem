@@ -9,6 +9,7 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
+import com.proj.yollowa.model.entity.host.RoomInfoVo;
 
 public interface HostDao {
 	// host/ start
@@ -34,9 +35,16 @@ public interface HostDao {
 	public void updateLodgementImg(@Param("lodgeNumber") int lodgementNumber,@Param("lodgement_img") String lodgement_img);
 	// host/ladd end
 
+	// host/lodgeRoom -> 숙박업소명 select
+	public String selectLodgementName(int lodgement_number);
+
+	// host/lodgeRoom -> 등록된 방 
+	public ArrayList<RoomInfoVo> selectLodgementRooms(int lodgement_number);
 
 	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
 	public ArrayList<LodgementVo> hostNumberMatch(int user_number);
+
+
 
 
 	

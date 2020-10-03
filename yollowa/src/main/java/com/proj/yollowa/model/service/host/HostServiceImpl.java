@@ -19,6 +19,7 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
+import com.proj.yollowa.model.entity.host.RoomInfoVo;
 import com.proj.yollowa.model.host.HostDao;
 
 @Service
@@ -215,6 +216,22 @@ public class HostServiceImpl implements HostService {
 		hostDao.insertLodgeInfo(lodgementNumber, bean);
 	}
 
+	// host/lodgeRoom -> 숙박업소명 select
+	@Override
+	public void selectLodgementName(int lodgement_number, Model model) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		String lodgement_companyName = hostDao.selectLodgementName(lodgement_number);
+		model.addAttribute("lodgement_companyName", lodgement_companyName);
+		
+	}
+	
+	// host/lodgeRoom -> 등록된 방 
+	@Override
+	public void selectLodgementRooms(int lodgement_number, Model model) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		ArrayList<RoomInfoVo> roomList =  hostDao.selectLodgementRooms(lodgement_number);
+		model.addAttribute("roomList", roomList);
+	}
 	
 	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
 	@Override
@@ -222,13 +239,12 @@ public class HostServiceImpl implements HostService {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		ArrayList<LodgementVo> matchUserNumber = hostDao.hostNumberMatch(user_number);
 			if(matchUserNumber.size()!=0) {
-			for(int i=0; i<matchUserNumber.size(); i++) {
-				System.out.println(matchUserNumber.get(i));
-			}
 			return matchUserNumber;
 		}
 		return null;
 	}
+
+
 
 
 
