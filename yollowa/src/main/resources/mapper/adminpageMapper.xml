@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.yollowa.model.adminpage.AdminpageDao">
+	<select id="getHostApprovalStandbyList" resultType="com.proj.yollowa.model.entity.UserVo">
+		<![CDATA[
+		SELECT * FROM USER 
+		WHERE USER_LEVEL < 10 AND USER_COMPANYNUMBER IS NOT NULL;
+		]]>
+	</select>
+	<update id="updateUserLevelToHost">
+		<![CDATA[
+		UPDATE USER SET USER_LEVEL = 10 WHERE (USER_NUMBER = #{user_number});
+		]]>
+	</update>
+	
+</mapper>
