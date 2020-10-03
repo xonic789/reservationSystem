@@ -292,9 +292,16 @@ function removeRoom(temp){
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList">
+					<p>호스트 페이지</p>
+					<div class="smallList">
+						<p><a href="${pageContext.request.contextPath }/host/">호스트 페이지</a></p>
+					</div>
+				</div>
+				<div class="bigList">
 					<p>글 보기</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/lodgement">내가 작성한 숙박 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/activity">내가 작성한 액티비티 글</a></p>
 					</div>
 				</div>
 				<div class="bigList">
@@ -304,12 +311,6 @@ function removeRoom(temp){
 					</div>
 					<div class="smallList">
 						<p><a href="${pageContext.request.contextPath }/host/aadd">엑티비티 게시글 등록</a></p>
-					</div>
-				</div>
-				<div class="bigList">
-					<p>글 등록하기</p>
-					<div class="smallList">
-						<p><a href="">숙박 게시글 리뷰</a></p>
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
 
 public interface HostDao {
@@ -15,6 +16,8 @@ public interface HostDao {
 	
 	// 호스트 숙박글 리스트 
 	public ArrayList<LodgementVo> selectHostLodgementList(int user_number);
+	// 호스트 숙박 글 업데이트
+	public void updateHostLodgement(@Param("lodgement_number") int lodgement_number, @Param("lodgement") LodgementUpdatePageDto bean);
 	//host/ end
 	
 	// host/ladd start
@@ -30,6 +33,12 @@ public interface HostDao {
 	// lodgement_img 업데이트 
 	public void updateLodgementImg(@Param("lodgeNumber") int lodgementNumber,@Param("lodgement_img") String lodgement_img);
 	// host/ladd end
+
+
+	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
+	public ArrayList<LodgementVo> hostNumberMatch(int user_number);
+
+
 	
 	
 }

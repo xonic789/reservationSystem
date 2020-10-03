@@ -2,6 +2,7 @@ package com.proj.yollowa.model.service.host;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,15 +10,17 @@ import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 
 public interface HostService {
 	
-	UserVo HostDetail(Model model, int user_number) throws SQLException;
+	UserVo hostDetail(Model model, int user_number) throws SQLException;
 	
 	// host/ -> 사업자 글 리스트
-	void selectHostLodgementList(Model model,int user_number);
-	// path 경로 리턴
-	void selectRealPath(Model model, HttpServletRequest req);
+	void selectHostLodgementList(Model model,UserVo bean) throws SQLException;
+	// host/lodgeUpdate/ -> 사업자 숙박 글 수정
+	void updateHostLodgement(int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException;
 
 	
 	
@@ -35,6 +38,12 @@ public interface HostService {
 
 	// host/ladd -> lodgement information insert
 	void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException;
+
+	
+	
+	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 true return
+	ArrayList<LodgementVo> hostNumberMatch(int user_number);
+
 
 
 

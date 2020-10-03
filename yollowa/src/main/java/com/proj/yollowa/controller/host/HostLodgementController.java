@@ -25,16 +25,29 @@ public class HostLodgementController {
 	@Inject
 	HostService hostService;
 	
+	// 호스트 인덱스 페이지
 	@Auth
 	@RequestMapping("/")
 	public String HostIndex(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
-		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
-		hostService.selectHostLodgementList(model, bean.getUser_number());
-		hostService.selectRealPath(model ,req);
-		model.addAttribute("userVo", bean);
+		
 		return "host/hostIndex";
 	}
 	
+	// 호스트 숙박 글 목록 페이지
+	@Auth
+	@RequestMapping("/lodgement")
+	public String HostLodgement(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
+		UserVo userBean = hostService.hostDetail(model, userVo.getUser_number());
+		hostService.selectHostLodgementList(model, userBean);
+		model.addAttribute("userVo", userBean);
+		return "host/hostLodgement";
+	}
+	
+	// 호스트 액티비티 글 목록 페이지
+	
+	
+	
+	// 숙박 글 등록 페이지
 	@Auth
 	@RequestMapping(value="/ladd", method=RequestMethod.GET)
 	public String laddPage(@AuthUser UserVo userVo, Model model) {
@@ -56,6 +69,7 @@ public class HostLodgementController {
 		return "host/addLodgement";
 	}
 	
+	// 숙박 글 등록버튼 클릭 시 post 
 	@Auth
 	@RequestMapping(value="/ladd", method=RequestMethod.POST)
 	public String addLadgement(@AuthUser UserVo userVo, AddLodgementPageDto bean, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
@@ -80,15 +94,32 @@ public class HostLodgementController {
 		return "host/addRoom";
 	}
 	
+	// 숙박 글 수정완료 버튼 클릭 시 post
+	@Auth
+	@RequestMapping(value="/lodgeUpdate/{lodgement_number}", method=RequestMethod.POST)
+	public String updateHostLodgement(@AuthUser UserVo userVo, @PathVariable("lodgement_number") int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
+		System.out.println("호스트 등록글 수정 컨트롤러");
+		int lodgement_userNumber = userVo.getUser_number();
+		System.out.println("호스트 숙박 글 업데이트 유저 넘버 : "+lodgement_userNumber);
+		System.out.println("숙박 글 수정 : "+bean);
+		
+		
+		hostService.updateHostLodgement(lodgement_number, bean, req);
+		
+		return "redirect:/host/";
+	}
+	
 	@Auth
 	@RequestMapping(value="/addRoom/{lodgement_number}", method=RequestMethod.GET)
 	public String addRoomPage(@PathVariable("lodgement_number") int lodgement_number, @AuthUser UserVo userVo, Model model) throws SQLException {
-		UserVo bean = hostService.HostDetail(model, userVo.getUser_number());
-		if(bean.getUser_companyNumber()==lodgement_number) {
-			
-			
+		
+		// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
+		ArrayList<LodgementVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
+		if(matchUserNumber!=null) {
 			return "host/addRoom";
+		}else {
+			return "home";
 		}
-		return "home";
+		
 	}
 }
