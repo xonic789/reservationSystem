@@ -164,9 +164,6 @@ $(document).ready(function(){
 		
 	}
 	
-	$('.roomRemove').onClick(function(){
-		alert("정말 삭제하시겠습니까?")
-	});
 });
 
 /* 방 사진 추가 */
@@ -198,7 +195,7 @@ var alert = function(msg, type) {
 	});
 }
 
-var confirm = function(msg, title, resvNum) {
+var confirm = function(msg, title, resvNum, articleNumber, roomNumber) {
 	swal({
 		title : title,
 		text : msg,
@@ -212,6 +209,14 @@ var confirm = function(msg, title, resvNum) {
 	}, function(isConfirm) {
 		if (isConfirm) {
 			swal('', '방 삭제가 완료되었습니다.', "success");
+			
+			// async function
+			// 확인 버튼 클릭 후 1초 뒤 삭제 
+			// 빨간줄 이클립스 오류임
+			(async function(){
+				await sleep(1000);
+				location.href="/yollowa/host/removeRoom/"+articleNumber+"/"+roomNumber;
+			})();
 		}else{
 			return false;
 		}
@@ -219,11 +224,15 @@ var confirm = function(msg, title, resvNum) {
 	});
 }
 
+function sleep(ms){
+	return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
 function Alert() {
 	alert('gg', 'success');
 }
-function Confirm() {
-	confirm('해당 방에대한 모든 정보가 삭제됩니다. 그래도 삭제하시겠습니까?', '방을 삭제하시겠습니까?');
+function Confirm(articleNumber, roomNumber) {
+	confirm('해당 방에대한 모든 정보가 삭제됩니다. 그래도 삭제하시겠습니까?', '방을 삭제하시겠습니까?','' ,articleNumber , roomNumber);
 }
 
 
@@ -279,7 +288,7 @@ function Confirm() {
 					
 				  <c:forEach items="${roomList }" var="bean" begin="0" varStatus="num">
 				    <p class="roomSub">${bean.roomInfo_name }</p>
-				    <a class="roomRemove btn btn-outline-danger" >방 삭제</a>
+				    <a class="roomRemove btn btn-outline-danger" onclick="Confirm(${bean.roomInfo_articleNumber },${bean.roomInfo_roomNumber})">방 삭제</a>
 				    <div class="oneRoom jumbotron">
 					    <%-- <div class="form-group">
 						  <label for="roomInfo_name" class="label_title">방 이름</label>
@@ -331,7 +340,7 @@ function Confirm() {
 							  </div>
 						    </div>
 						    <div class="col">
-							  <label for="roomInfo_maxPeople" class="label_title">최대인원</label>
+							  <label for="roomInfo_maxPeople" class="label_title">최대 인원</label>
 							  <div>
 							    <input type="text" class="form-control inputs maxPeople${num.index }" name="roomInfo_maxPeople" value="${bean.roomInfo_maxPeople }" readonly />
 							  </div>

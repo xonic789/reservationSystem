@@ -245,8 +245,13 @@ public class HostServiceImpl implements HostService {
 		return null;
 	}
 
-
-
+	// host/lodgeRoom -> 방 삭제 버튼
+	@Override
+	public void deleteRoom(int articleNumber, int roomNumber) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.deleteRoom(articleNumber,roomNumber);
+			
+	}
 
 
 	

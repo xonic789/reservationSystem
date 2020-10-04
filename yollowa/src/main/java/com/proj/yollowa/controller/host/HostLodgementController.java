@@ -156,4 +156,15 @@ public class HostLodgementController {
 		}
 		
 	}
+	
+	// lodgeRoom -> 방 삭제
+	@Auth
+	@RequestMapping(value="/removeRoom/{roomArticleNumber}/{roomNumber}")
+	public String removeRoom(@PathVariable("roomArticleNumber") int articleNumber, @PathVariable("roomNumber") int roomNumber) {
+		
+		hostService.deleteRoom(articleNumber,roomNumber);
+		
+		// 해당 펜션의 방 리스트로 보냄
+		return "redirect:/host/lodgeRoom/"+articleNumber;
+	}
 }

@@ -48,6 +48,9 @@ public interface HostService {
 	// host/lodgeRoom -> 등록된 방 
 	void selectLodgementRooms(int lodgement_number, Model model);
 
+	// host/lodgeRoom -> 방 삭제 버튼
+	void deleteRoom(int articleNumber, int roomNumber);
+
 
 
 

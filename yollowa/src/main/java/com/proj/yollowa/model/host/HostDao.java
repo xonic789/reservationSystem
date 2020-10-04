@@ -44,6 +44,9 @@ public interface HostDao {
 	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
 	public ArrayList<LodgementVo> hostNumberMatch(int user_number);
 
+	// host/lodgeRoom -> 방 삭제 버튼
+	public void deleteRoom(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber);
+
 
 
 

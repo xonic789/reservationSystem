@@ -42,6 +42,9 @@
 	<select id="selectLodgementRooms" resultType="com.proj.yollowa.model.entity.host.RoomInfoVo">
 		select * from roomInfo where roomInfo_articleNumber = #{lodgement_number}
 	</select>
+	<delete id="deleteRoom">
+		delete from roomInfo where roomInfo_articleNumber = #{articleNumber} and roomInfo_roomNumber = #{roomNumber}
+	</delete>
 	<!-- host/lodgeRoom end -->
 	
 	
