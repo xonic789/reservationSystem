@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.login.LoginVo;
 import com.proj.yollowa.model.entity.login.ManagerLoginVo;
 import com.proj.yollowa.model.user.ManagerDao;
@@ -38,5 +39,5 @@ public class LoginUserManagerDaoTest {
 		ManagerDao managerDao = sqlSession.getMapper(ManagerDao.class);
 		System.out.println(managerDao.login(new ManagerLoginVo("manager1","1234")));
 	}
-
+	
 }

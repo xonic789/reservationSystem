@@ -12,15 +12,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.yollowa.auth.SNSLogin;
 import com.proj.yollowa.auth.SnsValue;
 import com.proj.yollowa.interceptor.Auth;
+import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.interceptor.AuthUser;
+import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.service.login.UserService;
 import com.proj.yollowa.util.socialLogin.AccessToken;
@@ -104,16 +108,26 @@ public class LoginController {
 
 
 
-
+	
 	@RequestMapping(value = "login/result", method = RequestMethod.POST)
 	public void loginResult() {
 	}
-
+	
+	
 	@RequestMapping(value = "mlogin/result",method =RequestMethod.POST )
 	public void managerLoginResult() {
 	}
+	//get접근시 리다이렉팅
+	@RequestMapping(value = "login/result", method = RequestMethod.GET)
+	public String loginGetResult() {
+		return "redirect:../";
+	}
+	
+	
+	
 
 
+	//세션에 객체가 실려있을시 홈화면으로 리다이렉팅
 	@Auth
 	@RequestMapping(value = "logout/",method = RequestMethod.GET)
 	public String logout(HttpSession session,@AuthUser UserVo userVo) throws IOException {
@@ -124,9 +138,24 @@ public class LoginController {
 
 		return null;
 	}
+	
+	//회원가입 페이지
 	@RequestMapping(value = "join/",method = RequestMethod.GET)
-	public String join() {
+	public String join(@AuthManager ManagerVo managerVo, @AuthUser UserVo userVo) {
+		if(userVo!=null||managerVo!=null) {
+			return "redirect:../";
+		}
+		
 		return "login/join";
 	}
+	
+	
+	@RequestMapping(value = "join/",method = RequestMethod.POST)
+	public String join(Model model,@ModelAttribute UserVo userVo,@RequestParam String addressDetail) throws Exception {
+		userService.insertUserJoinInfo(userVo, addressDetail);
+		
+		return "redirect:../";
+	}
+	
 
 }

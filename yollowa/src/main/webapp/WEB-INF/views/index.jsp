@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="${bootstrapCSS }">
 	<script type="text/javascript" src="${jquery }"></script>
 	<script type="text/javascript" src="${bootstrap }"></script>
+	<script type="text/javascript" src=""></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

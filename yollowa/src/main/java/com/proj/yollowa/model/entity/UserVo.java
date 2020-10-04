@@ -1,10 +1,12 @@
 package com.proj.yollowa.model.entity;
 
+import java.sql.Date;
+
 public class UserVo {
 	private int user_number;
 	private String user_nickName;
 	private String user_name;
-	private String user_birthday;
+	private Date user_birthday;
 	private String user_gender;
 	private String user_phoneNumber;
 	private String user_address;
@@ -22,12 +24,10 @@ public class UserVo {
 	public String getUser_googleId() {
 		return user_googleId;
 	}
-	public UserVo(int user_number, String user_nickName, String user_name, String user_birthday, String user_gender,
+	public UserVo(String user_nickName, String user_name, Date user_birthday, String user_gender,
 			String user_phoneNumber, String user_address, String user_id, String user_password, String user_email,
-			String user_likes, String user_wishList, int user_companyNumber, String user_companyName, int user_level,
-			String user_googleId, String user_naverId, String user_kakaoId) {
+			String user_likes) {
 		super();
-		this.user_number = user_number;
 		this.user_nickName = user_nickName;
 		this.user_name = user_name;
 		this.user_birthday = user_birthday;
@@ -38,13 +38,6 @@ public class UserVo {
 		this.user_password = user_password;
 		this.user_email = user_email;
 		this.user_likes = user_likes;
-		this.user_wishList = user_wishList;
-		this.user_companyNumber = user_companyNumber;
-		this.user_companyName = user_companyName;
-		this.user_level = user_level;
-		this.user_googleId = user_googleId;
-		this.user_naverId = user_naverId;
-		this.user_kakaoId = user_kakaoId;
 	}
 	public void setUser_googleId(String user_googleId) {
 		this.user_googleId = user_googleId;
@@ -63,12 +56,7 @@ public class UserVo {
 	}
 	public UserVo() {
 	}
-	public String getUser_birthday() {
-		return user_birthday;
-	}
-	public void setUser_birthday(String user_birthday) {
-		this.user_birthday = user_birthday;
-	}
+	
 	public String getUser_gender() {
 		return user_gender;
 	}

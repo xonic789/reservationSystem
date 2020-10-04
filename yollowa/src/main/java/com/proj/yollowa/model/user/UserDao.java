@@ -29,4 +29,7 @@ public interface UserDao {
 	List<String> getNaverId() throws SQLException;
 	UserVo getKakaoUserInfo(String kakaoId) throws SQLException;
 	UserVo getNaverUserInfo(String naverId) throws SQLException;
+	List<String> getUserId() throws SQLException;
+	void insertUser(@Param("user") UserVo userVo) throws SQLException;
+	List<String> getUserNickName() throws SQLException;
 }

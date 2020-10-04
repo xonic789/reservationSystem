@@ -31,8 +31,9 @@
 <%@ include file="../template/head.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.js"/>
 <style type="text/css">
-
 </style>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 	<%@ include file="../template/header.jspf"%>
@@ -41,7 +42,7 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form" method="post" action="${pageContext.request.contextPath }/join/">
 				<span class="contact100-form-title" style="font-family: 'MapoPeacefull';">
 					YOLLOWA <br/>
 					회원가입
@@ -74,7 +75,7 @@
 				</div>
 				<div class="wrap-input100">
 					<span class="label-input100" style="font-family: 'MapoPeacefull';">닉네임</span>
-					<input class="input100" type="text" name="user_nickname" style="font-family: 'MapoPeacefull';" placeholder="닉네임을 입력해주세요">
+					<input class="input100" type="text" name="user_nickName" style="font-family: 'MapoPeacefull';" placeholder="닉네임을 입력해주세요">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 input100-select" data-validate="필수 입력사항 입니다.">
@@ -89,16 +90,16 @@
 				</div>
 				<div class="wrap-input100 validate-input" data-validate = "이메일 형식을 지켜주세요: ex@abc.xyz">
 					<span class="label-input100" style="font-family: 'MapoPeacefull';">이메일</span>
-					<input class="input100" type="text" name="email" style="font-family: 'MapoPeacefull';" placeholder="이메일을 입력해주세요">
+					<input class="input100" type="text" name="user_email" style="font-family: 'MapoPeacefull';" placeholder="이메일을 입력해주세요">
 					<span class="focus-input100"></span>
 				</div>
 				
-				<div class="wrap-input100 validate-input" data-validate="필수 입력사항 입니다.">
+				<div class="wrap-input100">
 					<span class="label-input100" style="font-family: 'MapoPeacefull';">우편번호</span>
 					<input onclick="daumPostcode()" class="btn btn-primary" type="button" value="주소 검색"/>
-					<input class="input100" type="text" id="roadAddress" style="font-family: 'MapoPeacefull';" placeholder="도로명주소" readonly/>
+					<input class="input100" type="text" id="roadAddress" name="user_address" style="font-family: 'MapoPeacefull';" placeholder="도로명주소" readonly/>
 					<input class="input100" type="text" id="jibunAddress" style="font-family: 'MapoPeacefull';" placeholder="지번주소" readonly/> 
-					<input class="input100" type="text" id="detailAddress" style="font-family: 'MapoPeacefull';" placeholder="상세주소" />
+					<input class="input100" type="text" id="detailAddress" name="addressDetail" style="font-family: 'MapoPeacefull';" placeholder="상세주소" />
 					<span class="focus-input100"></span>
 				</div>
 		

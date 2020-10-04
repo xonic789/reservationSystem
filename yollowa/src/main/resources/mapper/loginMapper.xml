@@ -22,5 +22,14 @@
 		<select id="getNaverUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
 			select * from user where user_naverId=#{user_naverId}
 		</select>
-		
+		<select id="getUserId" resultType="java.lang.String">
+			select user_id from user
+		</select>
+		<select id="getUserNickName" resultType="java.lang.String">
+			select user_nickName from user
+		</select>
+		<insert id="insertUser" parameterType="com.proj.yollowa.model.entity.UserVo">
+			INSERT INTO user (user_nickName, user_name, user_gender, user_birthday, user_phoneNumber, user_address, user_id, user_password, user_email, user_likes)
+			VALUES (#{user.user_nickName}, #{user.user_name}, #{user.user_gender}, #{user.user_birthday}, #{user.user_phoneNumber}, #{user.user_address}, #{user.user_id}, #{user.user_password}, #{user.user_email}, #{user.user_likes})
+		</insert>
   </mapper>
