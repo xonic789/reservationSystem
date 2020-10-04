@@ -34,7 +34,7 @@
 	}
 	h2{
 		font-size: 35px;
-		display: inline-block;
+		margin-bottom: 20px;
 	}
 	h4{
 		padding-bottom:5px;
@@ -71,13 +71,21 @@
 	/***************************************************************************************************/
 
 	/* 방 리스트 start  */
+	.infoTitle{
+		margin-bottom: 50px;
+	}
 	
 	.oneRoom{
-		border: 1px solid lightgray;
-		padding:20px 20px 20px 0px;
+		padding:20px 20px 0px 0px;
 		margin-bottom:40px;
 		border-radius: 5px;
 	}
+	.roomSub{
+		padding-right: 15px;
+		display:inline-block;
+		margin-bottom:10px;
+		font-size: 20px;
+	} 
 	.form-group, .form-inline{
 		margin-bottom:30px;
 	}
@@ -111,9 +119,17 @@
 		width:90%;
 		margin-left:15px;
 	}
+	.roomRemove{
+		line-height: 7px;
+	}
 	
 	/* 방 리스트 end  */
 </style>
+
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -147,6 +163,10 @@ $(document).ready(function(){
 		$('.extraPrice'+i).val(extraPrice);
 		
 	}
+	
+	$('.roomRemove').onClick(function(){
+		alert("정말 삭제하시겠습니까?")
+	});
 });
 
 /* 방 사진 추가 */
@@ -165,6 +185,46 @@ function removeRoomImg(){
 	});
 };
 
+
+
+var alert = function(msg, type) {
+	swal({
+		title : '',
+		text : msg,
+		type : type,
+		timer : 1500,
+		customClass : 'sweet-size',
+		showConfirmButton : false
+	});
+}
+
+var confirm = function(msg, title, resvNum) {
+	swal({
+		title : title,
+		text : msg,
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonClass : "btn-danger",
+		confirmButtonText : "예",
+		cancelButtonText : "아니오",
+		closeOnConfirm : false,
+		closeOnCancel : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal('', '방 삭제가 완료되었습니다.', "success");
+		}else{
+			return false;
+		}
+
+	});
+}
+
+function Alert() {
+	alert('gg', 'success');
+}
+function Confirm() {
+	confirm('해당 방에대한 모든 정보가 삭제됩니다. 그래도 삭제하시겠습니까?', '방을 삭제하시겠습니까?');
+}
 
 
 </script>
@@ -211,29 +271,30 @@ function removeRoomImg(){
 			<div class="col-md-9">
 			<div id="host">
 				<h2>숙박 게시글 등록</h2>
-				<p id="sub">${lodgement_companyName }에 등록 된 방 현황입니다.<p>
+				<%-- <p id="sub">${lodgement_companyName }에 등록 된 방 현황입니다.<p> --%>
 				
 				<h4 class="infoTitle">${lodgement_companyName }에 등록된 방 목록</h4>
-				<a href="/yollowa/host/addRoom/1" class="btn btn-outline-success">방 추가하기</a>
+				<a href="/yollowa/host/addRoom/${lodgement_number }" class="btn btn-outline-success">방 추가하기</a>
 				<div class="roomBox">
 					
 				  <c:forEach items="${roomList }" var="bean" begin="0" varStatus="num">
-				    <div class="oneRoom">
-					    <div class="form-group">
+				    <p class="roomSub">${bean.roomInfo_name }</p>
+				    <a class="roomRemove btn btn-outline-danger" >방 삭제</a>
+				    <div class="oneRoom jumbotron">
+					    <%-- <div class="form-group">
 						  <label for="roomInfo_name" class="label_title">방 이름</label>
 						  <div>
-						    <input type="text" class="form-control roomName" name="roomName1" value="${bean.roomInfo_name }" readonly/>
+						    <input type="text" class="form-control roomName" value="${bean.roomInfo_name }" readonly/>
 						  </div>
-					    </div>
+					    </div> --%>
 	
-						<div class="form-group">
+						<%-- <div class="form-group">
 					      <label class="label_title" for="roomImg">등록 된 방 사진</label>
 						  <!-- <a onclick="addRoomImg()" id="addImgBtn" class="btnAdd btn btn-primary">사진 추가 등록</a> -->
-						  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 방 대표사진으로 등록됩니다</p>
 					      <div class="roomImgFile">
-							<input type="text" class="form-control roomImg" name="roomImg" value="${bean.roomInfo_img }" readonly />
+							<input type="text" class="form-control roomImg" value="${bean.roomInfo_img }" readonly />
 						  </div>
-					    </div>
+					    </div> --%>
 						
 					    <div class="row">
 					      <div class="col">

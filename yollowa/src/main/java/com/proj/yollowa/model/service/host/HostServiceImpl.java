@@ -238,7 +238,8 @@ public class HostServiceImpl implements HostService {
 	public ArrayList<LodgementVo> hostNumberMatch(int user_number) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		ArrayList<LodgementVo> matchUserNumber = hostDao.hostNumberMatch(user_number);
-			if(matchUserNumber.size()!=0) {
+		
+		if(matchUserNumber.size()!=0) {
 			return matchUserNumber;
 		}
 		return null;

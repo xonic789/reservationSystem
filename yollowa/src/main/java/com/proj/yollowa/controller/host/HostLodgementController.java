@@ -17,6 +17,8 @@ import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.service.host.HostService;
 
 @Controller
@@ -121,6 +123,10 @@ public class HostLodgementController {
 		ArrayList<LodgementVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
 		
 		if(matchUserNumber!=null) {
+			// 호스트 이름 
+			model.addAttribute("userName", userVo.getUser_name());
+			// 숙박글 번호 -> 방추가하기로 넘길 때 필요
+			model.addAttribute("lodgement_number", lodgement_number);
 			// 컴퍼니 네임 select
 			hostService.selectLodgementName(lodgement_number, model);
 			// 등록 된 방
@@ -141,6 +147,9 @@ public class HostLodgementController {
 		// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
 		ArrayList<LodgementVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
 		if(matchUserNumber!=null) {
+			// 컴퍼니 네임 select
+			hostService.selectLodgementName(lodgement_number, model);
+			
 			return "host/addRoom";
 		}else {
 			return "home";

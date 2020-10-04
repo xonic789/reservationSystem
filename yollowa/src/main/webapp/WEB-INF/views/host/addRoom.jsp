@@ -61,6 +61,7 @@
 		margin-left: 20px;
 	}
 	#sub{
+		font-size:16px;
 		margin-top:20px;
 		margin-bottom:50px;
 	}
@@ -111,10 +112,12 @@
 		line-height: 8px;
 	}
 	.oneRoom{
-		border: 1px solid lightgray;
 		padding:20px 20px 20px 0px;
 		margin-bottom:40px;
 		border-radius: 5px;
+	}
+	.roomImg{
+		margin-bottom:5px;
 	}
 	.addRoomBtn{
 		background-color: #F0F0F0;
@@ -306,17 +309,17 @@ function removeRoomImg(){
 			<div class="col-md-9">
 			<div id="host">
 				<h2>숙박 게시글 등록</h2>
-				<p id="sub">방 등록 현황입니다.<p>
+				<p id="sub">${lodgement_companyName } 방 등록 페이지 입니다.<br/>아래 내용을 빠짐 없이 입력하고 방추가하기 버튼을 클릭하세요.<p>
 				
 				<form id="form" action="ladd" method="post">
-				  <h4 class="infoTitle">방 정보 등록</h4>
+				  <h4 class="infoTitle">${lodgement_companyName } 방 등록하기</h4>
 				  
 				  <div class="roomBox">
-					  <div class="oneRoom">
+					  <div class="oneRoom jumbotron">
 					    <div class="form-group">
 						  <label for="roomInfo_name" class="label_title">방 이름</label>
 						  <div>
-						    <input type="text" class="form-control roomName" name="roomName1" placeholder="방 이름을 입력하세요">
+						    <input type="text" class="form-control roomName" name="roomInfo_roomName" placeholder="방 이름을 입력하세요">
 						  </div>
 					    </div>
 	
