@@ -33,9 +33,12 @@
 		cursor: pointer;
 	}
 	h2{
-		margin-top: 50px;
-		margin-left: 20px;
+		font-size: 35px;
 		display: inline-block;
+	}
+	h4{
+		padding-bottom:5px;
+		border-bottom: 2px solid lightgray;
 	}
 	.bigList>p{
 		font-size: 18px;
@@ -53,19 +56,37 @@
 		text-decoration: none;
 		display: block;
 	}
+	#host{
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+	#sub{
+		font-size:16px;
+		margin-top:20px;
+		margin-bottom:50px;
+	}
 	/* category end */
 	
 	/***************************************************************************************************/
 
 	/* 방 추가등록 start  */
-	#sub{
-		margin-left:25px;
+	.form-group, .form-inline{
+		margin-bottom:30px;
+	}
+	.form-group > div{
+		margin-left:15px;
+	}
+	.label_title{
+		font-size:18px;
+		padding-left: 10px;
+		border-left: 2px solid #B167CF;
+		margin-top: 10px;
+		margin-bottom:10px;
 	}
 	#form{
 		margin-top: 10px;
-		margin-left: 30px;
 	}
-	.form-group, .form-inline{
+	.form-group, .form-inline, .col{
 		margin-left:15px;
 		margin-bottom:30px;
 	}
@@ -91,34 +112,12 @@
 		line-height: 8px;
 	}
 	.oneRoom{
-		border: 1px solid lightgray;
 		padding:20px 20px 20px 0px;
 		margin-bottom:40px;
 		border-radius: 5px;
 	}
-	.peakStartDate, .peakEndDate{
-		margin-left: 10px;
-		margin-right: 50px;
-	}
-	.offPeakPrice{
-		margin-left:30px;
-	}
-	.peakPrice{
-		margin-left:46px;
-	}
-	
-	.minPeople{
-		margin-right: 13px;
-	}
-	.maxPeople{
-		margin-left: 30px;
-		margin-right: 13px;
-	}
-	.extraPrice{
-		margin-left:28px;
-	}
-	.roomImg, .titleImg{
-		margin-bottom:10px;
+	.roomImg{
+		margin-bottom:5px;
 	}
 	.addRoomBtn{
 		background-color: #F0F0F0;
@@ -127,24 +126,19 @@
 		margin-bottom:100px;
 		line-height: 50px;	
 	}
-	.roomRemoveDiv{
-		position: absolute;
-		margin-left:703px;
-		text-align: center;
+	.col{
+		margin-bottom:30px;
 	}
-	.roomRemoveDiv>a{
-		line-height:10px;
-		display: inline-block;
-	}
-	#submit{
-		text-align: center;
+	.inputs{
+		width:90%;
+		margin-left:15px;
 	}
 	/* 방 추가등록 end  */
 </style>
 <script type="text/javascript">
 
 /* 이미지 등록 시 미리보기 기능 */
-function setThumbnail(event) { 
+/* function setThumbnail(event) { 
 	var reader = new FileReader();
 	reader.onload = function(event) {
 		var img = document.createElement("img");
@@ -152,11 +146,10 @@ function setThumbnail(event) {
 		document.querySelector("div#image_container").appendChild(img);
 		}; 
 		reader.readAsDataURL(event.target.files[0]); 
-	}
-
+	} */ 
 
 /* 방 추가 */
-var temp = 1;
+/* var temp = 1;
 function addRoom(){
 	temp++;
 	var oneRoom;
@@ -243,17 +236,23 @@ function addRoom(){
 	
 	$('.roomBox').append(oneRoom);
 }
-
+ */
+ 
+/* 방 추가된 div class="oneRoom" delete */
+/* function removeRoom(temp){
+	console.log('oneRoom'+temp+'');
+	$('.removeRoomBtn').on('click', function(){
+		$('.oneRoom'+temp+'').remove();
+	});
+} */
 
 
 /* 방 사진 추가 */
-function addRoomImg(temp){
-	console.log(temp);
-	$('.roomImgFile'+temp+'').append('<input type="file" class="roomImg" name="roomImg'+temp+'" id="roomImg'+temp+'" />\
+function addRoomImg(){
+	$('.roomImgFile').append('<input type="file" class="roomImg" name="roomImg" id="roomImg" />\
 							<button onclick="removeRoomImg()" type="button" class="roomImgRemove btn btn-danger">삭제</button><br/>'
 	);
 }
-
 
 /* 방 디테일 사진 동적 추가된 input delete method */
 function removeRoomImg(){
@@ -263,14 +262,6 @@ function removeRoomImg(){
 		$(this).remove();
 	});
 };
-
-/* 방 추가된 div class="oneRoom" delete */
-function removeRoom(temp){
-	console.log('oneRoom'+temp+'');
-	$('.removeRoomBtn').on('click', function(){
-		$('.oneRoom'+temp+'').remove();
-	});
-}
 
 
 
@@ -287,14 +278,22 @@ function removeRoom(temp){
 			<h1>
 				호스트 페이지 <small> Host page</small>
 			</h1>
+			<p>${userName }님 호스트 페이지 입니다.</p>
 			
 		</div>
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList">
+					<p>호스트 페이지</p>
+					<div class="smallList">
+						<p><a href="${pageContext.request.contextPath }/host/">호스트 페이지</a></p>
+					</div>
+				</div>
+				<div class="bigList">
 					<p>글 보기</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/host/">내가 작성한 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/lodgement">내가 작성한 숙박 글</a></p>
+						<p><a href="${pageContext.request.contextPath }/host/activity">내가 작성한 액티비티 글</a></p>
 					</div>
 				</div>
 				<div class="bigList">
@@ -306,106 +305,83 @@ function removeRoom(temp){
 						<p><a href="${pageContext.request.contextPath }/host/aadd">엑티비티 게시글 등록</a></p>
 					</div>
 				</div>
-				<div class="bigList">
-					<p>글 등록하기</p>
-					<div class="smallList">
-						<p><a href="">숙박 게시글 리뷰</a></p>
-					</div>
-				</div>
 			</div>
 			<div class="col-md-9">
+			<div id="host">
 				<h2>숙박 게시글 등록</h2>
-				<p id="sub">아래 입력박스들을 모두 기입해야 글 등록이 가능합니다<p>
+				<p id="sub">${lodgement_companyName } 방 등록 페이지 입니다.<br/>아래 내용을 빠짐 없이 입력하고 방추가하기 버튼을 클릭하세요.<p>
+				
 				<form id="form" action="ladd" method="post">
-				  <h4 class="infoTitle">방 정보 등록</h4>
+				  <h4 class="infoTitle">${lodgement_companyName } 방 등록하기</h4>
 				  
 				  <div class="roomBox">
-					  <div class="oneRoom oneRoom1">
+					  <div class="oneRoom jumbotron">
 					    <div class="form-group">
-						  <label for="roomName1" class="label_title">1번 방 이름</label>
+						  <label for="roomInfo_name" class="label_title">방 이름</label>
 						  <div>
-						    <input type="text" class="form-control roomName" name="roomName1" placeholder="방 이름을 입력하세요">
+						    <input type="text" class="form-control roomName" name="roomInfo_roomName" placeholder="방 이름을 입력하세요">
 						  </div>
 					    </div>
 	
 						<div class="form-group">
 					      <label class="label_title" for="roomImg">방 사진 등록</label>
-						  <a onclick="addRoomImg(1)" id="addImgBtn1" class="btnAdd btn btn-primary">사진 추가 등록</a>
+						  <a onclick="addRoomImg()" id="addImgBtn" class="btnAdd btn btn-primary">사진 추가 등록</a>
 						  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 방 대표사진으로 등록됩니다</p>
-					      <div class="roomImgFile1">
-							<input type="file" class="roomImg" name="roomImg1" /><br/>
+					      <div class="roomImgFile">
+							<input type="file" class="roomImg" name="roomImg" /><br/>
 						  </div>
 					    </div>
 						
-					    <div class="form-inline">
-						  <label for="peakStartDate1" class="label_title">성수기 시작 날짜</label>
-						  <div>
-						    <input type="date" class="form-control peakStartDate" name="peakStartDate1">
-						  </div>
-						  
-						  <label for="peakEndDate1" class="label_title">성수기 종료 날짜</label>
-						  <div>
-						    <input type="date" class="form-control peakEndDate" name="peakEndDate1">
-						  </div>
-					    </div>
-	
-					    <div class="form-inline">
-						  <label for="offPeakPrice1" class="label_title">비성수기 가격</label>
-						  <div>
-						    <input type="number" class="form-control offPeakPrice" name="offPeakPrice1"> 원
-						  </div>
-						  
-						  <label for="peakPrice1" class="label_title peakPrice">성수기 가격</label>
-						  <div>
-						    <input type="number" class="form-control peakPrice" name="peakPrice1"> 원
+					    <div class="row">
+					      <div class="col">
+						 	 <label for="roomInfo_peakStartDate" class="label_title">성수기 시작 날짜</label>
+							  <div>
+							    <input type="date" class="form-control inputs" name="roomInfo_peakStartDate">
+							  </div>
+					      </div>
+					      <div class="col">
+							  <label for="roomInfo_peakEndDate" class="label_title">성수기 종료 날짜</label>
+							  <div>
+							    <input type="date" class="form-control inputs" name="roomInfo_peakEndDate">
+							  </div>
 						  </div>
 					    </div>
 	
-					    <div class="form-inline">
-						  <label for="minPeople1" class="label_title minPeople">기본 인원</label>
-						  <div>
-							<select class="form-control" name="minPeople1">
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-							</select>
-							명
-						  </div>
-						  <label for="maxPeople1" class="label_title maxPeople">최대인원</label>
-						  <div>
-						    <select class="form-control" name="maxPeople1">
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
-								<option>10</option>
-								<option>11</option>
-								<option>12</option>
-								<option>13</option>
-								<option>14</option>
-								<option>15</option>
-								<option>16</option>
-								<option>17</option>
-								<option>18</option>
-								<option>19</option>
-								<option>20</option>
-							</select>
-							명
-						  </div>
+					    <div class="row">
+						    <div class="col">
+							  <label for="roomInfo_offPeakPrice" class="label_title">비성수기 가격</label>
+							  <div>
+							    <input type="number" class="form-control inputs" name="roomInfo_offPeakPrice">
+							  </div>
+						    </div>
+						    <div class="col">
+							  <label for="roomInfo_peakPrice" class="label_title">성수기 가격</label>
+							  <div>
+							    <input type="number" class="form-control inputs" name="roomInfo_peakPrice">
+							  </div>
+						    </div>
+						</div>
 						  
-						  <label for="extraPrice1" class="label_title extraPrice">인원 추가 비용</label>
-						  <div>
-						    <input type="number" class="form-control extraPrice" name="extraPrice1" placeholder="1명 추가 기준 가격"> 원
-						  </div>
+					    <div class="row">
+						    <div class="col">
+							  <label for="roomInfo_minPeople" class="label_title">기본 인원</label>
+							  <div>
+							    <input type="number" class="form-control inputs" name="roomInfo_minPeople">
+							  </div>
+						    </div>
+						    <div class="col">
+							  <label for="roomInfo_maxPeople" class="label_title">최대인원</label>
+							  <div>
+							    <input type="number" class="form-control inputs" name="roomInfo_maxPeople">
+							  </div>
+							</div>
+						    <div class="col">
+							  <label for="roomInfo_extraPrice" class="label_title">인원 추가 비용</label>
+							  <div>
+							    <input type="number" class="form-control inputs" name="roomInfo_extraPrice" placeholder="1명 추가 기준 가격">
+							  </div>
+						    </div>
 					    </div>
-					    
-					    
-					  
 					  </div>
 				  </div>
 				  
@@ -413,10 +389,8 @@ function removeRoom(temp){
 				  	<a onclick="addRoom()" class="addRoomBtn btn btn-primary btn-lg btn-block">방 추가하기</a>	
 				  </div>
 				  
-				  <div id="submit">
-				  	<button type="submit" class="btn btn-primary">글 등록하기</button>
-				  </div>
 				</form>
+			</div>
 			</div>
 		</div>
 	</div>
