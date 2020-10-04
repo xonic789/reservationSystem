@@ -103,6 +103,8 @@ public class LoginController {
 	//매니저 로그인 페이지 get
 	@RequestMapping(value = "mlogin/",method = RequestMethod.GET)
 	public String managerLogin() {
+		
+		
 		return "login/managerlogin";
 	}
 

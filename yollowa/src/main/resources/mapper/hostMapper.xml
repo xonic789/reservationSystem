@@ -13,11 +13,12 @@
 	<select id="selectHostLodgementList" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
 		select * from lodgement where lodgement_userNumber = #{user_number}
 	</select>
-	
+	<insert id="updateHostLodgement" parameterType="com.proj.yollowa.model.entity.host.LodgementUpdatePageDto">
+		update lodgement set lodgement_img = #{lodgement.lodgement_img}, lodgement_hashTag = #{lodgement.lodgement_hashTag} where lodgement_number = #{lodgement_number}
+	</insert>
 	<!-- host/ end -->
 	
 	<!--host/ladd start -->
-	
 	<insert id="insertLodgement" parameterType="com.proj.yollowa.model.entity.host.LodgementVo">
 		insert into lodgement (lodgement_userNumber, lodgement_companyName, lodgement_location, lodgement_LatLng, lodgement_category, lodgement_hashTag) values 
 							  (#{lodgement_userNumber}, #{lodgement.lodgement_companyName}, #{lodgement.lodgement_location}, #{lodgement.lodgement_LatLng}, #{lodgement.lodgement_category}, #{lodgement.lodgement_hashTag})
@@ -32,9 +33,27 @@
 	<insert id="updateLodgementImg">
 		update lodgement set lodgement_img = #{lodgement_img} where lodgement_number = #{lodgeNumber}
 	</insert>
-	
 	<!-- host/ladd end -->
 	
+	<!-- host/lodgeRoom start -->
+	<select id="selectLodgementName" resultType="String">
+		select lodgement_companyName from lodgement where lodgement_number = #{lodgement_number}
+	</select>
+	<select id="selectLodgementRooms" resultType="com.proj.yollowa.model.entity.host.RoomInfoVo">
+		select * from roomInfo where roomInfo_articleNumber = #{lodgement_number}
+	</select>
+	<delete id="deleteRoom">
+		delete from roomInfo where roomInfo_articleNumber = #{articleNumber} and roomInfo_roomNumber = #{roomNumber}
+	</delete>
+	<!-- host/lodgeRoom end -->
+	
+	
+	<!-- host/addRoom start -->
+	<select id="hostNumberMatch" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
+		select lodgement_number from lodgement where lodgement_userNumber=#{user_number}
+	</select> 
+	
+	<!-- host/addRoom end -->
 	
 	
 </mapper>
