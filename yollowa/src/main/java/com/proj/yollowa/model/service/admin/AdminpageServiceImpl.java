@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.proj.yollowa.model.adminpage.AdminpageDao;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.admin.ActivityApprovalVo;
 
 @Service
 public class AdminpageServiceImpl implements AdminpageService{
@@ -30,6 +31,22 @@ public class AdminpageServiceImpl implements AdminpageService{
 		
 		adminpageDao.updateUserLevelToHost(user_number);
 	}
+
+	@Override
+	public List<ActivityApprovalVo> getActivityApprovalStandbyList() throws SQLException {
+		AdminpageDao adminpageDao = sqlsession.getMapper(AdminpageDao.class);
+		
+		return adminpageDao.getActivityApprovalStandbyList();
+	}
+
+	@Override
+	public void updateActivityTempToApproved(int activity_number) throws SQLException {
+		AdminpageDao adminpageDao = sqlsession.getMapper(AdminpageDao.class);
+		
+		adminpageDao.updateActivityTempToApproved(activity_number);;
+	}
+
+
 	
 	
 }

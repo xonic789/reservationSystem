@@ -19,11 +19,10 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
-import com.proj.yollowa.model.entity.host.RoomInfoVo;
 import com.proj.yollowa.model.host.HostDao;
 
 @Service
-public class HostServiceImpl implements HostService {
+public class HostServiceImpl<RoomInfoVo> implements HostService {
 
 	@Inject
 	SqlSession sqlSession;
@@ -229,7 +228,7 @@ public class HostServiceImpl implements HostService {
 	@Override
 	public void selectLodgementRooms(int lodgement_number, Model model) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		ArrayList<RoomInfoVo> roomList =  hostDao.selectLodgementRooms(lodgement_number);
+		ArrayList<com.proj.yollowa.model.entity.host.RoomInfoVo> roomList =  hostDao.selectLodgementRooms(lodgement_number);
 		model.addAttribute("roomList", roomList);
 	}
 	

@@ -106,14 +106,17 @@
 	<div class="row">
 		<div id="category" class="col-md-2">
 				<div class="bigList">
-					<p>파트너 회원 관리</p>
+					<p>파트너 관리</p>
 					<div class="smallList">
 						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList">사업자 승인</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/postApprovalStandbyList">POST  승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/lodgementApprovalStandbyList">숙박 게시글 관리</a></p>
 					</div>
-					<p>자사 사원 관리</p>
+					<div class="smallList">
+						<p><a href="${pageContext.request.contextPath }/admin/activityApprovalStandbyList">액티비티 게시글 관리</a></p>
+					</div>
+					<p>사원 관리</p>
 					<div class="smallList">
 						<p><a href="${pageContext.request.contextPath }/admin/adminList">관리자 관리</a></p>
 					</div>
@@ -137,17 +140,22 @@
 			  <thead class="thead-light">
 			    <tr>
 			      <th>번호</th>
-			      <th>제목</th>
 			      <th>대표이미지</th>
+			      <th>제목</th>
 			      <th>영업소명</th>
 			      <th>상태</th>
 			      <th>승인하기</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach items="${list }" var="user">
+			  <c:forEach items="${list }" var="list">
 			    <tr>
-
+					<td>${list.activity_number }</td>
+					<td><img alt="" src="../${list.activity_img }" width="100px" height="100px"></td>
+					<td>${list.activity_title }</td>
+					<td>${list.user_companyname }</td>
+					<td>${list.activity_temp }</td>
+					<td><a href="./updateActivityTemp/${list.activity_number}">승인하기</a></td>
 			    </tr>
 			    </c:forEach>
 			  </tbody>

@@ -3,8 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.proj.yollowa.model.adminpage.AdminpageDao">
- 	
-	<!-- HOST 권한을 요청한 USER들을 표시한다 -->
+	<!-- HOST 권한을 요청한 USER들을 출력한다 -->
 	<select id="getHostApprovalStandbyList" resultType="com.proj.yollowa.model.entity.UserVo">
 		<![CDATA[
 		SELECT * FROM USER 
@@ -18,10 +17,21 @@
 		]]>
 	</update>
 	
-	<select id="activitySelectAll" resultType="com.proj.yollowa.model.entity.activity.ActivityVo">
+	<!-- 승인이 필요한 ACTIVITY 항목을 출력한다 -->
+	<select id="getActivityApprovalStandbyList" resultType="com.proj.yollowa.model.entity.admin.ActivityApprovalVo">
 		<![CDATA[
-		select * from activity where activity_temp!=1
+		SELECT ACTIVITY_NUMBER, ACTIVITY_TITLE, ACTIVITY_IMG, ACTIVITY_TEMP, USER_COMPANYNAME 
+		FROM ACTIVITY, USER 
+		WHERE ACTIVITY_USERNUMBER = USER_NUMBER AND ACTIVITY_TEMP !=1;
 		]]>
 	</select>
+	<!-- ACTIVITY 테이블의 ACTIVITY_TEMP 값을 1로 UPDATE한다 -->
+	<update id="updateActivityTempToApproved">
+		<![CDATA[
+		UPDATE ACTIVITY SET activity_temp = 1 WHERE (ACTIVITY_NUMBER = #{activity_number});
+		]]>
+	</update>
+	
+	<!-- MANAGER -->
 	
 </mapper>
