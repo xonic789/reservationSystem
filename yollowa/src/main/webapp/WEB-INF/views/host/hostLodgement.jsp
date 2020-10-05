@@ -204,9 +204,8 @@
 		if($('.inputCon').val()==null){
 			$('#hostInfo').append(jumbo);
 		}
-		
 		$('.lodgeModifySuc').hide();
-
+		
 	});
 	
 	/* 수정 버튼 클릭 이벤트 */
@@ -358,7 +357,7 @@
 		<div class="col-md-9">
 		<div id="hostInfo">
 			<h2>나의 글 정보</h2>
-			<p id="sub">사업자께서 등록하신 욜로와 글 등록 정보입니다.</p>
+			<p id="sub">- 사업자께서 등록하신 욜로와 글 등록 정보입니다.<br/>- 본인의 작성 글의 정보를 확인할 수 있으며 방등록이 가능합니다.</p>
 			<h4>숙박 게시글 정보</h4>
 			<c:forEach items="${lodgementList }" begin="0" varStatus="num" var="lodgeList">
 			
