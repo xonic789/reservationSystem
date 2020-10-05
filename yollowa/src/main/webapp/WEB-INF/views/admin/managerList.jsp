@@ -123,7 +123,55 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<h1>관리자</h1>
+			<form id="search" action="" class="form-inline">
+				<div class="form-group">
+				    <select name="searchType" class="custom-select">
+				      	<option value="subject">회원번호</option>
+				      	<option value="subject">아이디</option>
+						<option value="content">이름</option>
+						<option value="all">전화번호</option>
+						<option value="user_name">이메일</option>
+				    </select>
+				  	<input type="text" class="form-control" placeholder="검색어를 입력하세요" id="inputDefault">
+					<input type="button" id="btn-normal" value="검색하기" class="btn btn-primary" />
+				</div>
+			</form>
+			<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th>번호</th>
+			      <th>아이디</th>
+			      <th>권한</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  <c:forEach items="${list }" var="list">
+			    <tr>
+					<td><a href="./detail/${list.manager_number }">${list.manager_number }</a></td>
+					<td><a href="./detail/${list.manager_number }">${list.manager_id }</a></td>
+					<td><a href="./detail/${list.manager_number }">${list.manager_level }</a></td>
+			    </tr>
+			    </c:forEach>
+			  </tbody>
+			</table>
+			<div class="pagingBox">
+				<div class="paging">
+					<ul class="pagination">
+						<c:if test="${paging.prev }">
+						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }">이전</a></li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
+							<li class="page-item"><a class="page-link" href="?page=${status.index }">${status.index }</a></li>
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0 }">
+							<li class="page-item"><a class="page-link" href="?page=${paging.endPage + 1 }">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+			<div class="btnGroup">
+				<input type="button" id="btn-long" value="괸리자 등록" class="btn btn-primary" onClick="location.href='./add'" />
+				</div>
 		</div>
 	</div>
 </div>

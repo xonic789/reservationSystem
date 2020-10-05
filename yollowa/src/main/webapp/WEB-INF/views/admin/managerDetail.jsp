@@ -123,7 +123,32 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<h1>관리자</h1>
+			<table class="table">
+				 <tbody>
+				    <tr>
+				    	<th>번호</th>
+						<td>${bean.manager_number }</td>
+				    </tr>
+				    <tr>
+						<th>아이디</th>
+						<td>${bean.manager_id }</td>
+					</tr>
+				    <tr>
+						<th>비밀번호</th>
+						<td>${bean.manager_password }</td>
+					</tr>
+				    <tr>
+						<th>권한</th>
+						<td>${bean.manager_level }</td>
+				    </tr>
+				  </tbody>
+			</table>
+			<div class="btnGroup">
+				<input type="button" id="btn-long" value="수정" class="btn btn-primary" onClick="location.href='../update/${bean.manager_number }'" />
+			</div>
+			<div class="btnGroup">
+				<input type="button" id="btn-long" value="삭제" class="btn btn-primary" onClick="location.href='../delete/${bean.manager_number }'" />
+			</div>
 		</div>
 	</div>
 </div>

@@ -108,17 +108,17 @@
 				<div class="bigList">
 					<p>파트너 관리</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList">사업자 승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList/">사업자 승인</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/lodgementApprovalStandbyList">숙박 게시글 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/lodgementApprovalStandbyList/">숙박 게시글 관리</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/activityApprovalStandbyList">액티비티 게시글 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/activityApprovalStandbyList/">액티비티 게시글 관리</a></p>
 					</div>
 					<p>사원 관리</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/adminList">관리자 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/managerList/">관리자 관리</a></p>
 					</div>
 				</div>
 		</div>
@@ -151,7 +151,7 @@
 			  <c:forEach items="${list }" var="list">
 			    <tr>
 					<td>${list.activity_number }</td>
-					<td><img alt="" src="../${list.activity_img }" width="100px" height="100px"></td>
+					<td><img alt="" src="../../${list.activity_img }" width="100px" height="100px"></td>
 					<td>${list.activity_title }</td>
 					<td>${list.user_companyname }</td>
 					<td>${list.activity_temp }</td>

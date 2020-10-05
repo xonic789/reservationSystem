@@ -123,7 +123,34 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<h1>관리자</h1>
+			<form action="./${bean.manager_number }" method="post">
+				<table class="table">
+					 <tbody>
+					    <tr>
+					    	<th>번호</th>
+							<td>${bean.manager_number }</td>
+					    </tr>
+					    <tr>
+							<th>아이디</th>
+							<td><input type="text" name="manager_id" class="" id="" value="${bean.manager_id }" /></td>
+						</tr>
+					    <tr>
+							<th>비밀번호</th>
+							<td><input type="text" name="manager_password" class="" id="" value="${bean.manager_password }" /></td>
+						</tr>
+					    <tr>
+							<th>권한</th>
+							<td><input type="text" name="manager_level" class="" id="" value="${bean.manager_level }" /></td>
+					    </tr>
+					  </tbody>
+				</table>
+				<input type="submit" id="btn-long" value="수정" class="btn btn-primary" onClick="location.href='../update/${bean.manager_number }'" />
+			</form>
+			<div class="btnGroup">
+			</div>
+			<div class="btnGroup">
+				<input type="button" id="btn-long" value="뒤로가기" class="btn btn-primary" onClick="location.href='../detail/${bean.manager_number }'" />
+			</div>
 		</div>
 	</div>
 </div>
