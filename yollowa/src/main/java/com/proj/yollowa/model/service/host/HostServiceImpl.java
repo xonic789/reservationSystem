@@ -75,6 +75,8 @@ public class HostServiceImpl implements HostService {
 		
 	}
 	
+	
+	// host/lodgeUpdate/ -> 사업자 숙박 글 수정
 	@Override
 	public void updateHostLodgement(int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -116,6 +118,7 @@ public class HostServiceImpl implements HostService {
 		
 	}
 
+	// host/ladd -> lodgement_number select
 	@Override
 	public void insertLodgement(int user_number, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -139,6 +142,7 @@ public class HostServiceImpl implements HostService {
 		return lodgementNumber;
 	}
 	
+	// host/ladd -> lodgement_img upload
 	@Override
 	public String uploadLodgementImg(AddLodgementPageDto bean, int lodgementNumber, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
 		List<String> titleImgNames = new ArrayList<String>();
@@ -161,7 +165,7 @@ public class HostServiceImpl implements HostService {
 			String realPath = context.getRealPath(path);
 			
 			File dest = new File(realPath+origin);
-			System.out.println("이미지 저장위치"+dest.getAbsolutePath());
+			System.out.println("숙박 타이틀 이미지 저장위치"+dest.getAbsolutePath());
 //			저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
 			
 			titleImg.transferTo(dest);
@@ -169,16 +173,18 @@ public class HostServiceImpl implements HostService {
 		}
 		// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송 
 		String lodgement_img = img.substring(0,img.length()-1);
-		System.out.println("이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
+		System.out.println("숙박 타이틀 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
 		return lodgement_img;
 	}
-
+	
+	// host/ladd -> lodgement_img update
 	@Override
 	public void updateLodgementImg(int lodgementNumber, String lodgement_img) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
 		hostDao.updateLodgementImg(lodgementNumber, lodgement_img);
 	}
 
+	// host/ladd -> lodgement information insert
 	@Override
 	public void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -253,7 +259,84 @@ public class HostServiceImpl implements HostService {
 			
 	}
 
+	// host/addRoom/addAction -> 방 추가등록 (이미지 제외)
+	@Override
+	public void insertLodgementRoom(RoomInfoVo bean) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.insertLodgementRoom(bean);
+		
+	}
+	
+	// 위에서 insert 되면서 생성된 roomNumber select
+	// 숙박 글번호와 방이름으로 매치 
+	@Override
+	public int selectRoomInfo_RoomNumber(int roomInfo_articleNumber, String roomInfo_name) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		int roomNumber = hostDao.selectRoomInfo_RoomNumber(roomInfo_articleNumber, roomInfo_name);
+		return roomNumber;
+	}
 
+	// host/addRoom/addAction -> 이미지 업로드 및 파싱하여 리턴값 전달하여 roomInfo_img에 set하기 위함
+	// 이미지가 업로드 될때 방번호를 가지고 생성되기 때문에 위에서 먼저 방 insert 를한 후에 업로드처리한다.
+	@Override
+	public String uploadRoomInfoImg(RoomInfoVo bean, int roomNumber, HttpServletRequest req) throws IllegalStateException, IOException {
+		
+		// roomInfo 테이블에 roomInfo_img update 하기 위해 & 로 파싱하기 위해 선언
+		String setImgNames = "";
+		for(MultipartFile roomImgFiles : bean.getRoomImg()) {
+			// 숙박글번호_룸번호_파일명
+			String origin = bean.getRoomInfo_articleNumber()+"_"+roomNumber+"_"+roomImgFiles.getOriginalFilename();
+			System.out.println("방 사진 파일들 :: "+origin);
+			
+			// roomInfo_img에 update 하기 위함
+			setImgNames += origin+"&";
+			
+			if(roomImgFiles.isEmpty()) {
+				continue;
+			}
+			
+			String path = "/upload/lodgement/roomImg/";
+			ServletContext context = req.getSession().getServletContext();
+			String realPath = context.getRealPath(path);
+			
+			File dest = new File(realPath+origin);
+			System.out.println("숙박 방 이미지 저장위치 :: "+dest.getAbsolutePath());
+			
+			roomImgFiles.transferTo(dest);
+			
+			
+		}
+		
+		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
+//				String img = "";
+//				
+//				for(MultipartFile titleImg : bean.getTitleImg()) {
+//					String origin = lodgementNumber+"_"+titleImg.getOriginalFilename();
+//					
+//					// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
+//					img+=origin+"&";
+//					
+//					if(titleImg.getOriginalFilename().isEmpty()) {
+//						continue;
+//					}
+//					
+//					String path = "/upload/lodgement/titleImg/";
+//					ServletContext context = req.getSession().getServletContext();
+//					String realPath = context.getRealPath(path);
+//					
+//					File dest = new File(realPath+origin);
+//					System.out.println("숙박 타이틀 이미지 저장위치"+dest.getAbsolutePath());
+////					저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
+//					
+//					titleImg.transferTo(dest);
+//					titleImgNames.add(origin);
+//				}
+//				// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송 
+//				String lodgement_img = img.substring(0,img.length()-1);
+//				System.out.println("숙박 타이틀 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
+		
+		return null;
+	}
 	
 
 

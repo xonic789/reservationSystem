@@ -12,6 +12,7 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
+import com.proj.yollowa.model.entity.host.RoomInfoVo;
 
 public interface HostService {
 	
@@ -36,7 +37,6 @@ public interface HostService {
 	// host/ladd -> lodgement_img update
 	void updateLodgementImg(int lodgementNumber, String lodgement_img) throws SQLException;
 
-	// host/ladd -> lodgement information insert
 	void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException;
 
 	// host/lodgeRoom -> 숙박업소명 select
@@ -50,6 +50,19 @@ public interface HostService {
 
 	// host/lodgeRoom -> 방 삭제 버튼
 	void deleteRoom(int articleNumber, int roomNumber);
+
+	// host/addRoom/addAction -> 방 추가등록(이미지 제외)
+	void insertLodgementRoom(RoomInfoVo bean);
+
+	// 위에서 insert 되면서 생성된 roomNumber select
+	// 숙박 글번호와 방이름으로 매치 
+	int selectRoomInfo_RoomNumber(int roomInfo_articleNumber, String roomInfo_name);
+
+	// host/addRoom/addAction -> 이미지 업로드 및 파싱하여 리턴값 전달하여 roomInfo_img에 set하기 위함
+	// 이미지가 업로드 될때 방번호를 가지고 생성되기 때문에 위에서 먼저 방 insert 를한 후에 업로드처리한다.
+	String uploadRoomInfoImg(RoomInfoVo bean, int roomNumber, HttpServletRequest req) throws IllegalStateException, IOException ;
+
+
 
 
 

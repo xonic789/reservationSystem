@@ -278,7 +278,7 @@ function removeRoomImg(){
 			<h1>
 				호스트 페이지 <small> Host page</small>
 			</h1>
-			<p>${userName }님 호스트 페이지 입니다.</p>
+			<p>${hostName }님 호스트 페이지 입니다.</p>
 			
 		</div>
 		<div class="row">
@@ -311,7 +311,7 @@ function removeRoomImg(){
 				<h2>숙박 게시글 등록</h2>
 				<p id="sub">${lodgement_companyName } 방 등록 페이지 입니다.<br/>아래 내용을 빠짐 없이 입력하고 방추가하기 버튼을 클릭하세요.<p>
 				
-				<form id="form" action="ladd" method="post">
+				<form id="form" action="addRoomAction/${lodgement_number }" method="post" enctype="multipart/form-data">
 				  <h4 class="infoTitle">${lodgement_companyName } 방 등록하기</h4>
 				  
 				  <div class="roomBox">
@@ -319,7 +319,7 @@ function removeRoomImg(){
 					    <div class="form-group">
 						  <label for="roomInfo_name" class="label_title">방 이름</label>
 						  <div>
-						    <input type="text" class="form-control roomName" name="roomInfo_roomName" placeholder="방 이름을 입력하세요">
+						    <input type="text" class="form-control roomName" name="roomInfo_name" placeholder="방 이름을 입력하세요">
 						  </div>
 					    </div>
 	
@@ -386,7 +386,7 @@ function removeRoomImg(){
 				  </div>
 				  
 				  <div>
-				  	<a onclick="addRoom()" class="addRoomBtn btn btn-primary btn-lg btn-block">방 추가하기</a>	
+				  	<button type="submit" class="addRoomBtn btn btn-primary btn-lg btn-block">방 추가하기</button>	
 				  </div>
 				  
 				</form>

@@ -47,7 +47,12 @@ public interface HostDao {
 	// host/lodgeRoom -> 방 삭제 버튼
 	public void deleteRoom(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber);
 
+	// host/addRoom/addAction -> 방 추가등록 (이미지 제외)
+	public void insertLodgementRoom(@Param("bean") RoomInfoVo bean);
 
+	// 위에서 insert 되면서 생성된 roomNumber select
+	// 숙박 글번호와 방이름으로 매치 
+	public int selectRoomInfo_RoomNumber(@Param("articleNumber") int roomInfo_articleNumber, @Param("roomName") String roomInfo_name);
 
 
 	
