@@ -136,29 +136,18 @@
 			<table class="table">
 			  <thead class="thead-light">
 			    <tr>
-			      <th>회원번호</th>
-			      <th>아이디</th>
-			      <th>이름</th>
-			      <th>전화번호</th>
-			      <th>이메일</th>
-			      <th>사업자등록번호</th>
-			      <th>상호</th>
-			      <th>권한</th>
-			      <th>승인</th>
+			      <th>번호</th>
+			      <th>제목</th>
+			      <th>대표이미지</th>
+			      <th>영업소명</th>
+			      <th>상태</th>
+			      <th>승인하기</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach items="${list }" var="user">
 			    <tr>
-			      <td>${user.user_number }</td>
-			      <td>${user.user_id }</td>
-			      <td>${user.user_name }</td>
-			      <td>${user.user_phoneNumber }</td>
-			      <td>${user.user_email }</td>
-			      <td>${user.user_companyNumber }</td>
-			      <td>${user.user_companyName }</td>
-			      <td>${user.user_level }</td>
-			      <td><a href="./hostApproval/${user.user_number }">승인하기</a></td>
+
 			    </tr>
 			    </c:forEach>
 			  </tbody>

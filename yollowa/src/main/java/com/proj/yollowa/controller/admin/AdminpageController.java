@@ -40,9 +40,9 @@ public class AdminpageController {
 		return "redirect:../hostApprovalStandbyList";
 	}
 	
-	@RequestMapping(value = "/postApproval", method = RequestMethod.GET)
+	@RequestMapping(value = "/postApprovalStandbyList", method = RequestMethod.GET)
 	public String postApprovalList(Model model) {
 		
-		return "admin/adminpageIndex";
+		return "admin/postApprovalStandbyList";
 	}
 }

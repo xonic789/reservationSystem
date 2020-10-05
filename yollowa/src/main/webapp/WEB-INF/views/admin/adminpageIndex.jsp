@@ -111,7 +111,7 @@
 						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList">사업자 승인</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/postApproval">POST  승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/postApprovalStandbyList">POST  승인</a></p>
 					</div>
 					<p>자사 사원 관리</p>
 					<div class="smallList">
