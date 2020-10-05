@@ -1,7 +1,6 @@
 package com.proj.yollowa.controller.cs;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.inject.Inject;
 

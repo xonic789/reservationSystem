@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <%@ include file="../template/head.jspf" %>
 
-<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.css" />
 <style rel="stylesheet" type="text/css">
 	/* category start */
 	.page-header{
@@ -79,15 +81,39 @@
 		
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
-		CKEDITOR.replace('editor',
-			    {
-		      height : '500px',  //에디터 높이
-		      startupFocus : false
-	    });
-		
-	});
-	
+    $(document).ready(function() {
+      $('#editor').summernote({
+        height: 300,
+        minHeight: null,
+        maxHeight: null,
+        focus: true,
+        callbacks: {
+          onImageUpload: function(files, editor, welEditable) {
+            for (var i = files.length - 1; i >= 0; i--) {
+              sendFile(files[i], this);
+            }
+          }
+        }
+      });
+    });
+    
+    function sendFile(file, el) {
+      var form_data = new FormData();
+      form_data.append('file', file);
+      $.ajax({
+        data: form_data,
+        type: "POST",
+        url: '/image',
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function(url) {
+          $(el).summernote('editor.insertImage', url);
+          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+        }
+      });
+    }
 </script>
 </head>
 <body>
