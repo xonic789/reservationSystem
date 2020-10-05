@@ -182,6 +182,9 @@ public class HostLodgementController {
 		String setImgName = hostService.uploadRoomInfoImg(bean, roomNumber, req);
 		System.out.println("데이터베이스 update RoomImg :: "+setImgName);
 		
+		// 위에서 리턴받은 파싱된 이미지 String update
+		hostService.updateRoomInfoImg(bean.getRoomInfo_articleNumber(), roomNumber, setImgName);
+		
 		return "redirect:/host/lodgeRoom/"+lodgement_number;
 	}
 	

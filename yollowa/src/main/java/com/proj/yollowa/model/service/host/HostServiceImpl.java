@@ -302,43 +302,20 @@ public class HostServiceImpl implements HostService {
 			File dest = new File(realPath+origin);
 			System.out.println("숙박 방 이미지 저장위치 :: "+dest.getAbsolutePath());
 			
+			// 업로드
 			roomImgFiles.transferTo(dest);
-			
-			
 		}
-		
-		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
-//				String img = "";
-//				
-//				for(MultipartFile titleImg : bean.getTitleImg()) {
-//					String origin = lodgementNumber+"_"+titleImg.getOriginalFilename();
-//					
-//					// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
-//					img+=origin+"&";
-//					
-//					if(titleImg.getOriginalFilename().isEmpty()) {
-//						continue;
-//					}
-//					
-//					String path = "/upload/lodgement/titleImg/";
-//					ServletContext context = req.getSession().getServletContext();
-//					String realPath = context.getRealPath(path);
-//					
-//					File dest = new File(realPath+origin);
-//					System.out.println("숙박 타이틀 이미지 저장위치"+dest.getAbsolutePath());
-////					저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
-//					
-//					titleImg.transferTo(dest);
-//					titleImgNames.add(origin);
-//				}
-//				// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송 
-//				String lodgement_img = img.substring(0,img.length()-1);
-//				System.out.println("숙박 타이틀 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
-		
-		return null;
+		String returnRoomImg = setImgNames.substring(0, setImgNames.length()-1);
+		// 파싱된 String return 
+		return returnRoomImg;
 	}
 	
-
+	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
+	@Override
+	public void updateRoomInfoImg(int roomInfo_articleNumber, int roomNumber, String setImgName) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.updateRoomInfoImg(roomInfo_articleNumber, roomNumber, setImgName);
+	}
 
 
 }

@@ -66,6 +66,9 @@
 	<select id="selectRoomInfo_RoomNumber" resultType="int">
 		select roomInfo_roomNumber from roomInfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_name=#{roomName}
 	</select>
+	<insert id="updateRoomInfoImg">
+		update roomInfo set roomInfo_img = #{roomInfo_img} where roomInfo_articleNumber = #{articleNumber} and roomInfo_roomNumber = #{roomNumber}
+	</insert>
 	<!-- host/addRoom/addAction end -->
 	
 </mapper>

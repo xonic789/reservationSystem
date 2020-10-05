@@ -51,8 +51,11 @@ public interface HostDao {
 	public void insertLodgementRoom(@Param("bean") RoomInfoVo bean);
 
 	// 위에서 insert 되면서 생성된 roomNumber select
-	// 숙박 글번호와 방이름으로 매치 
+	// host/addRoom/addAction ->  숙박 글번호와 방이름으로 매치 
 	public int selectRoomInfo_RoomNumber(@Param("articleNumber") int roomInfo_articleNumber, @Param("roomName") String roomInfo_name);
+
+	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
+	public void updateRoomInfoImg(@Param("articleNumber") int roomInfo_articleNumber,@Param("roomNumber") int roomNumber,@Param("roomInfo_img") String setImgName);
 
 
 	

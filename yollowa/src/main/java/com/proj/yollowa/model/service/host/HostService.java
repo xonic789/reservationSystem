@@ -54,13 +54,16 @@ public interface HostService {
 	// host/addRoom/addAction -> 방 추가등록(이미지 제외)
 	void insertLodgementRoom(RoomInfoVo bean);
 
-	// 위에서 insert 되면서 생성된 roomNumber select
+	// host/addRoom/addAction -> 위에서 insert 되면서 생성된 roomNumber select
 	// 숙박 글번호와 방이름으로 매치 
 	int selectRoomInfo_RoomNumber(int roomInfo_articleNumber, String roomInfo_name);
 
 	// host/addRoom/addAction -> 이미지 업로드 및 파싱하여 리턴값 전달하여 roomInfo_img에 set하기 위함
 	// 이미지가 업로드 될때 방번호를 가지고 생성되기 때문에 위에서 먼저 방 insert 를한 후에 업로드처리한다.
 	String uploadRoomInfoImg(RoomInfoVo bean, int roomNumber, HttpServletRequest req) throws IllegalStateException, IOException ;
+
+	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
+	void updateRoomInfoImg(int roomInfo_articleNumber, int roomNumber, String setImgName);
 
 
 
