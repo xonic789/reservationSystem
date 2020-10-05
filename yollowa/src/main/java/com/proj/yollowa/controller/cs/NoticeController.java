@@ -95,5 +95,4 @@ public class NoticeController {
 		return new ModelAndView("redirect:../detail/"+noticeno);
 	}
 	
-	
 }
