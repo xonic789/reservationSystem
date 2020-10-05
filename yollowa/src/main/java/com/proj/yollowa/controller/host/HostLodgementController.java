@@ -97,7 +97,7 @@ public class HostLodgementController {
 		// information insert  숙박 글번호와 함께 사장님 한마디, 공지사항, 기본정보, 인원 추가정보, 편의시설 및 서비스, 취소 및 환불규정
 		hostService.insertLodgeInfo(lodgementNumber, bean);
 		
-		return "host/addRoom";
+		return "host/lodgement";
 	}
 	
 	// 숙박 글 수정완료 버튼 클릭 시 post

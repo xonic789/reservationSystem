@@ -135,6 +135,10 @@
 	}
 	/* 방 추가등록 end  */
 </style>
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <script type="text/javascript">
 
 /* 이미지 등록 시 미리보기 기능 */
@@ -263,7 +267,25 @@ function removeRoomImg(){
 	});
 };
 
-
+//빈 값 체크
+function submitClick(){
+	var is_empty = false;
+	$('#form').find('input').each(function(){
+		if(!$(this).val()){
+			is_empty = true;
+		}
+	});
+	
+	if(is_empty){
+		swal("빈칸이 존재합니다", "값을 전부 입력하고 다시 버튼을 클릭하세요", "warning")
+	}else{
+		swal("정확히 입력하셨습니다!", "방이 정상적으로 추가되었습니다.", "success");
+		setTimeout(function(){
+			$('.addRoomBtn').prop('type','submit');
+			$('.addRoomBtn').click();
+		},1500);
+	}
+}
 
 </script>
 </head>
@@ -386,7 +408,7 @@ function removeRoomImg(){
 				  </div>
 				  
 				  <div>
-				  	<button type="submit" class="addRoomBtn btn btn-primary btn-lg btn-block">방 추가하기</button>	
+				  	<button type="button" class="addRoomBtn btn btn-primary btn-lg btn-block" onclick="submitClick();">방 추가하기</button>	
 				  </div>
 				  
 				</form>

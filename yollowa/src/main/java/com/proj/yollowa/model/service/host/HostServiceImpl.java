@@ -28,6 +28,7 @@ public class HostServiceImpl implements HostService {
 	@Inject
 	SqlSession sqlSession;
 	
+	
 	@Override
 	public UserVo hostDetail(Model model, int user_number) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -36,7 +37,10 @@ public class HostServiceImpl implements HostService {
 		return bean;
 	}
 
-
+	
+/*  host/ start **********************************************************************************************************/
+	
+	// host/ -> 사업자 글 리스트
 	@Override
 	public void selectHostLodgementList(Model model, UserVo userBean) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -74,8 +78,12 @@ public class HostServiceImpl implements HostService {
 		}
 		
 	}
+
+/*  host/ end**********************************************************************************************************/
 	
 	
+/*  host/lodgeUpdate/ start**********************************************************************************************************/
+
 	// host/lodgeUpdate/ -> 사업자 숙박 글 수정
 	@Override
 	public void updateHostLodgement(int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException {
@@ -118,6 +126,12 @@ public class HostServiceImpl implements HostService {
 		
 	}
 
+/*  host/lodgeUpdate/ end**********************************************************************************************************/
+
+	
+	
+/* host/ladd start**********************************************************************************************************/
+	
 	// host/ladd -> lodgement_number select
 	@Override
 	public void insertLodgement(int user_number, AddLodgementPageDto bean) throws SQLException {
@@ -135,6 +149,7 @@ public class HostServiceImpl implements HostService {
 		hostDao.insertLodgement(user_number, bean);
 	}
 
+	// host/ladd -> lodgement_number select
 	@Override
 	public int selectLodgementNumber(int user_number, AddLodgementPageDto bean) throws SQLException {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -222,6 +237,12 @@ public class HostServiceImpl implements HostService {
 		hostDao.insertLodgeInfo(lodgementNumber, bean);
 	}
 
+/* host/ladd end**********************************************************************************************************/
+
+	
+	
+/* host/lodgeRoom start**********************************************************************************************************/
+	
 	// host/lodgeRoom -> 숙박업소명 select
 	@Override
 	public void selectLodgementName(int lodgement_number, Model model) {
@@ -258,7 +279,12 @@ public class HostServiceImpl implements HostService {
 		hostDao.deleteRoom(articleNumber,roomNumber);
 			
 	}
-
+	
+/* host/lodgeRoom end**********************************************************************************************************/
+	
+	
+/* host/addRoom/addAction start**********************************************************************************************************/	
+	
 	// host/addRoom/addAction -> 방 추가등록 (이미지 제외)
 	@Override
 	public void insertLodgementRoom(RoomInfoVo bean) {
@@ -275,7 +301,7 @@ public class HostServiceImpl implements HostService {
 		int roomNumber = hostDao.selectRoomInfo_RoomNumber(roomInfo_articleNumber, roomInfo_name);
 		return roomNumber;
 	}
-
+	
 	// host/addRoom/addAction -> 이미지 업로드 및 파싱하여 리턴값 전달하여 roomInfo_img에 set하기 위함
 	// 이미지가 업로드 될때 방번호를 가지고 생성되기 때문에 위에서 먼저 방 insert 를한 후에 업로드처리한다.
 	@Override
@@ -317,5 +343,6 @@ public class HostServiceImpl implements HostService {
 		hostDao.updateRoomInfoImg(roomInfo_articleNumber, roomNumber, setImgName);
 	}
 
+/* host/addRoom/addAction end**********************************************************************************************************/
 
 }
