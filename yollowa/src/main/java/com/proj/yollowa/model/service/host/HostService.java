@@ -39,10 +39,18 @@ public interface HostService {
 	// host/ladd -> lodgement information insert
 	void insertLodgeInfo(int lodgementNumber, AddLodgementPageDto bean) throws SQLException;
 
-	
+	// host/lodgeRoom -> 숙박업소명 select
+	void selectLodgementName(int lodgement_number, Model model);
 	
 	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 true return
 	ArrayList<LodgementVo> hostNumberMatch(int user_number);
+
+	// host/lodgeRoom -> 등록된 방 
+	void selectLodgementRooms(int lodgement_number, Model model);
+
+	// host/lodgeRoom -> 방 삭제 버튼
+	void deleteRoom(int articleNumber, int roomNumber);
+
 
 
 

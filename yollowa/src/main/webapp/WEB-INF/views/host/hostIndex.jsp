@@ -17,6 +17,10 @@
 		margin-top: 10px;
 		margin-bottom:2px;
 	}
+	#sub{
+		margin-top:20px;
+		margin-bottom:50px;
+	}
 	#category{
 		border-right: 1px solid lightgray;
 	}
@@ -59,20 +63,22 @@
 	
 	
 	/* content start */
-	#btns{
-		margin-bottom: 10px;
+	.btns{
+		margin-top: 30px;
+		margin-bottom: 20px;
 	}
-	#addLodgementBtn, #lodgementBtn{
-		background-color: #E8B62E;
-		border: 0px;
-		margin-right: 15px;
-		cursor: pointer;
+	.btns>p{
+		margin-bottom:10px;
+		padding-left: 10px;
+		border-left: 2px solid #91079F;
 	}
-	#addActivityBtn, #activityBtn{
-		border: 0px;
-		cursor: pointer;
+	.btns>a{
+		margin-left:20px;
 	}
-	
+	.jumbotron{
+		padding-top: 40px;
+		padding-bottom: 30px;
+	}
 </style>
 <script type="text/javascript">
 	
@@ -85,7 +91,7 @@
 	<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 호스트 페이지 </p>
 		<h1>호스트 페이지 <small> Host page</small></h1>
-		<p>${userVo.user_name }님 호스트 페이지 입니다.</p>
+		<p>${userName }님 호스트 페이지 입니다.</p>
 	</div>
 	
 	<div class="row">
@@ -116,16 +122,18 @@
 		<div class="col-md-9">
 		<div id="hostInfo">
 			<div class="jumbotron">
-			  <h1 class="display-4">욜로와 호스트페이지</h1>
-			  <p class="lead">어서오세요, 욜로와 사업자 페이지입니다. 지금 바로 본인의 업소를 소개하는 글을 작성해보세요!</p>
+			  <h1 class="display-4">${userName }님 호스트페이지</h1>
+			  <p class="lead">어서오세요, 욜로와 호스트 페이지입니다.</p>
 			  <hr class="my-4">
-			  <div id="btns">
-				  <a class="btn btn-primary btn-lg" id="lodgementBtn" href="lodgement" role="button">본인 숙박 글</a>
-				  <a class="btn btn-primary btn-lg" id="activityBtn" href="activity" role="button">본인 액티비티 글</a>
+			  <div class="btns">
+			  	<p>${userName }님, 본인이 등록하신 글을 확인하세요!</p>	
+				<a class="btn btn-outline-warning" id="lodgementBtn" href="lodgement" role="button">본인 숙박 글</a>
+				<a class="btn btn-outline-primary" id="activityBtn" href="activity" role="button">본인 액티비티 글</a>
 			  </div>
-			  <div>
-				  <a class="btn btn-primary btn-lg" id="addLodgementBtn" href="ladd" role="button">숙박 글 작성</a>
-				  <a class="btn btn-primary btn-lg" id="addActivityBtn" href="aadd" role="button">액티비티 글 작성</a>
+			  <div class="btns">
+			  	<p>${userName }님, 지금 바로 본인의 업소를 소개하는 글을 작성해보세요!</p>	
+				<a class="btn btn-outline-warning" id="addLodgementBtn" href="ladd" role="button">숙박 글 작성</a>
+				<a class="btn btn-outline-primary" id="addActivityBtn" href="aadd" role="button">액티비티 글 작성</a>
 			  </div>
 			</div>
 		</div>		
