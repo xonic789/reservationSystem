@@ -39,5 +39,10 @@ public class LoginUserManagerDaoTest {
 		ManagerDao managerDao = sqlSession.getMapper(ManagerDao.class);
 		System.out.println(managerDao.login(new ManagerLoginVo("manager1","1234")));
 	}
+	@Test
+	public void testUserId() throws SQLException{
+		UserDao userDao = sqlSession.getMapper(UserDao.class);
+		System.out.println(userDao.getUserInfo());
+	}
 	
 }

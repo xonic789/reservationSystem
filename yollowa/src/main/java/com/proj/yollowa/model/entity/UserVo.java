@@ -39,6 +39,12 @@ public class UserVo {
 		this.user_email = user_email;
 		this.user_likes = user_likes;
 	}
+	public Date getUser_birthday() {
+		return user_birthday;
+	}
+	public void setUser_birthday(Date user_birthday) {
+		this.user_birthday = user_birthday;
+	}
 	public void setUser_googleId(String user_googleId) {
 		this.user_googleId = user_googleId;
 	}

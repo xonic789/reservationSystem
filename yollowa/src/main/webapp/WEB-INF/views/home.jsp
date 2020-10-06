@@ -40,13 +40,13 @@
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner ">
     <div class="carousel-item active">
-      <video src="resources/video/beach.mp4" class="d-block w-100" autoplay noache muted></video>
+      <video src="${pageContext.request.contextPath }/resources/video/beach.mp4" class="d-block w-100" autoplay noache muted></video>
     </div>
     <div class="carousel-item">
-      <img src="resources/img/surffing.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/img/surffing.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="resources/img/youth.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/img/youth.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">

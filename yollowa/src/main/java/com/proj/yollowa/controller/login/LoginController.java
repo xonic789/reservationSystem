@@ -2,6 +2,7 @@ package com.proj.yollowa.controller.login;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.auth.SNSLogin;
 import com.proj.yollowa.auth.SnsValue;
@@ -42,7 +44,10 @@ public class LoginController {
 	private JsonNode accessToken;
 
 	@RequestMapping(value = "login/{service}/callback",method = { RequestMethod.GET,RequestMethod.POST})
-	public String SnsLoginCallback(@PathVariable String service,Model model,@RequestParam String code,HttpServletRequest request) throws Exception {
+	public ModelAndView SnsLoginCallback(@PathVariable String service,Model model,@RequestParam String code,HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		userService.getUserInfo(model);
+		boolean boo=false;
 		if(StringUtils.equals("kakao", service)) {
 
 			JsonNode jsonToken = AccessToken.getAccessToken(code);
@@ -54,14 +59,21 @@ public class LoginController {
 			UserVo snsUser=null;
 			for(String kakaoId:allKakaoId) {
 				if(kakaoId!=null) {
-					if(kakaoId.equals(userVo.getUser_kakaoId())) {
-						snsUser=userService.getKakaoUserLoginService(model, kakaoId, request);
+					if(kakaoId.equals(userVo.getUser_kakaoId())){
+						boo=true;
 						break;
-					}else {
-						model.addAttribute("joinInfo",userVo);
-						return "redirect:../../join/";
-					}
+					}else 
+						boo = false;
 				}
+			}
+			if(boo) {
+				snsUser=userService.getKakaoUserLoginService(model, userVo.getUser_kakaoId(), request);
+			}else {
+				System.out.println(userVo);
+				mv.addObject("joinInfo", userVo);
+				mv.setViewName("/login/join");
+				//	mv.addAttribute("joinInfo",userVo);
+				return mv;
 			}
 			
 		}else {
@@ -74,18 +86,26 @@ public class LoginController {
 			for(String naverId:allNaverId) {
 				// 3. DB 해당 유저가 존재하는지 체크
 				if(naverId!=null) {
-					if(naverId.equals(userVo.getUser_naverId())) {
-						// 4. 존재시 강제로그인,
-						userService.getNaverUserLoginService(model, naverId, request);
-					}else {
-						// 미존재시 가입페이지로
-						model.addAttribute("joinInfo",userVo);
-						return "redirect:../../join/";
-					}
+					if(naverId.equals(userVo.getUser_naverId())){
+						boo=true;
+						break;
+					}else 
+						boo = false;
 				}
 			}
+			
+			if(boo) {
+				// 4. 존재시 강제로그인,
+				userService.getNaverUserLoginService(model, userVo.getUser_naverId(), request);
+			}else {
+				// 미존재시 가입페이지로
+				mv.addObject("joinInfo", userVo);
+				mv.setViewName("/login/join");
+				return mv;
+			}
+			
 		}
-		return "redirect:../";
+		return new ModelAndView("redirect:../");
 	}
 
 
@@ -143,10 +163,14 @@ public class LoginController {
 	
 	//회원가입 페이지
 	@RequestMapping(value = "join/",method = RequestMethod.GET)
-	public String join(@AuthManager ManagerVo managerVo, @AuthUser UserVo userVo) {
+	public String join(@AuthManager ManagerVo managerVo, @AuthUser UserVo userVo,Model model,UserVo user) throws SQLException {
+		System.out.println(user);
+		//로그인 돼 있으면 홈으로 돌린다.
 		if(userVo!=null||managerVo!=null) {
 			return "redirect:../";
 		}
+		//모든 유저 가져오기
+		userService.getUserInfo(model);
 		
 		return "login/join";
 	}
@@ -156,7 +180,7 @@ public class LoginController {
 	public String join(Model model,@ModelAttribute UserVo userVo,@RequestParam String addressDetail) throws Exception {
 		userService.insertUserJoinInfo(userVo, addressDetail);
 		
-		return "redirect:../";
+		return "redirect:../login/";
 	}
 	
 

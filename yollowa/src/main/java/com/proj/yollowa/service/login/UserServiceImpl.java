@@ -81,28 +81,25 @@ public class UserServiceImpl implements UserService{
 	//네이버로그인
 	public UserVo getNaverUserLoginService(Model model,String naverId,HttpServletRequest request) throws SQLException{
 		UserDao userDao=sqlSession.getMapper(UserDao.class);
+		UserVo user=null;
 		if(naverId!=null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", userDao.getNaverUserInfo(naverId));
+			user = userDao.getNaverUserInfo(naverId);
+			session.setAttribute("user",user);
 		}else
 			return null;
-		return userDao.getNaverUserInfo(naverId);
+		return user;
 	}
 	//네이버로그인
 
 	
 	//아이디 중복검사
 	@Override
-	public boolean getUserIdSearching(Model model,UserVo userVo) throws SQLException {
+	public List<UserVo> getUserInfo(Model model) throws SQLException {
 		UserDao userDao=sqlSession.getMapper(UserDao.class);
-		List<String> userId=userDao.getUserId();
-		for(String id : userId) {
-			if(id.equals(userVo.getUser_id())) {
-				return false;
-			}
-		}
-		
-		return true;
+		List<UserVo> userInfo=userDao.getUserInfo();
+		model.addAttribute("userInfo",userInfo);
+		return userInfo;
 	}
 
 	
@@ -137,7 +134,14 @@ public class UserServiceImpl implements UserService{
 		String address= userVo.getUser_address()+" "+addressDetail;
 		userVo.setUser_address(address);
 		UserDao userDao=sqlSession.getMapper(UserDao.class);
-		userDao.insertUser(userVo);
+		if(userVo.getUser_kakaoId()!=null) {
+			userDao.insertKakaoUser(userVo);
+		}else if(userVo.getUser_naverId()!=null) {
+			userDao.insertNaverUser(userVo);
+		}else
+			userDao.insertUser(userVo);
+		
+		
 	}
 
 	//닉네임 중복검사

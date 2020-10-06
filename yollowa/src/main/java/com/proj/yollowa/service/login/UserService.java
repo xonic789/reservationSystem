@@ -19,7 +19,7 @@ public interface UserService {
 	List<String> getAllKakaoIdService() throws SQLException;
 	public UserVo getKakaoUserLoginService(Model model,String kakaoId,HttpServletRequest request) throws SQLException;
 	public UserVo getNaverUserLoginService(Model model,String naverId,HttpServletRequest request) throws SQLException;
-	public boolean getUserIdSearching(Model model,UserVo userVo) throws SQLException;
+	public List<UserVo> getUserInfo(Model model) throws SQLException;
 	public void insertUserJoinInfo(UserVo userVo,String addressDetail) throws Exception;
 	public boolean getUserNickNameSearching(Model model,UserVo userVo) throws SQLException;
 }
