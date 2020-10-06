@@ -5,7 +5,7 @@
 <div id="footer">
 <div class="jumbotron jumbotron-fluid text-center">
 	  <div class="container">
-	    <h1 class="display-4">YOLLOWA</h1>
+	    <h1 class="display-4"><img alt="" src="${pageContext.request.contextPath}/resources/img/icons/footerLogo.png"></h1>
 	    <p class="lead">프로젝트 조원 : 김진,이승우,오영문,이성범</p>
 	  </div>
 	</div>

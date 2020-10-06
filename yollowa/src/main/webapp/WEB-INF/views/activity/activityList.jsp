@@ -134,10 +134,77 @@ h2 {
 </style>
 <script type="text/javascript">
 	
+	// 카테고리 라디오 박스
+	function allActivityR(){
+		$('.ski').show();
+		$('.jumping').show();
+		$('.rafting').show();
+		$('.leisure').show();
+		
+		$('h2').text($('.allList').length+"건의 검색결과");
+	};
+	
+	function skiR(){
+		$('.ski').show();
+		$('.jumping').hide();
+		$('.rafting').hide();
+		$('.leisure').hide();
+		
+		$('h2').text($('.ski').length+"건의 검색결과");
+	};
+	
+	
+	function jumpR(){
+		$('.ski').hide();
+		$('.jumping').show();
+		$('.rafting').hide();
+		$('.leisure').hide();
+		
+		$('h2').text($('.jumping').length+"건의 검색결과");
+	};
+	
+	
+	function raftingR(){
+		$('.ski').hide();
+		$('.jumping').hide();
+		$('.rafting').show();
+		$('.leisure').hide();
+		
+		$('h2').text($('.rafting').length+"건의 검색결과");
+	};
+	
+	
+	function leisureR(){
+		$('.ski').hide();
+		$('.jumping').hide();
+		$('.rafting').hide();
+		$('.leisure').show();
+		
+		$('h2').text($('.leisure').length+"건의 검색결과");
+	};
+	
+	
+	
+	
+	
 	/* 달력 */
 	var today = new Date();
-	var msg = (today.getYear()+1900) +"-0"+(today.getMonth()+1)+ "-"+today.getDate();
-
+	var month,day;
+	
+	if(today.getDate()<10){
+		day="0"+today.getDate();
+	}else{
+		day=today.getDate();
+	}
+	
+	if(today.getMonth()<9){
+		month="0"+(today.getMonth()+1);
+	}else{
+		month=today.getMonth()+1;
+	}
+	
+	var msg = (today.getYear()+1900) +"-"+month+ "-"+day;
+	
 	$(function() {
 		$('#currentDate').attr('value', msg);
 		$('#currentDate').attr('min', msg);
@@ -166,28 +233,6 @@ h2 {
 		
 	});
 	
-	
-	/* 카테고리 */
-	/* $(function() {
-		
-		$('#category>.bigList').on('click',function(){
-			
-			if(document.querySelector(".bigList").className == 'bigList arrowUp'){
-				$(this).find('.smallList').stop().slideDown(800);
-				$(this).removeClass('arrowUp').addClass('arrowDown');
-			}else{
-				$(this).find('.smallList').stop().slideUp(800);
-				$(this).removeClass('arrowDown').addClass('arrowUp');
-			}
-			
-		}); */
-		/* $('#category>.bigList').on('click',function(){
-			if($(this).find('.smallList'))
-			$(this).find('.smallList').stop().slideUp(800);
-		});
-	});
- */
-		
 	
 	
 </script>
@@ -230,19 +275,35 @@ h2 {
 				<div class="bigList arrowUp">
 					<p>액티비티 종류</p>
 					<div class="smallList">
-						<p><label><input type="checkbox" name="color" value="blue">스키</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">번지점프</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">레프팅</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">수상레저</label></p>
+						<div>
+							<input type="radio" id="allActivity" name="actList" value="allActivity" checked="checked" onclick="allActivityR();">
+							<label for="allActivity">전체</label>
+						</div>
+						<div>
+							<input type="radio" id="ski" name="actList" value="ski" onclick="skiR();">
+							<label for="ski">스키</label>
+						</div>
+						<div>
+							<input type="radio" id="jump" name="actList" value="jump" onclick="jumpR();">
+							<label for="jump">번지점프</label>
+						</div>
+						<div>
+							<input type="radio" id="rafting" name="actList" value="rafting" onclick="raftingR();">
+							<label for="rafting">래프팅</label>
+						</div>
+						<div>
+							<input type="radio" id="leisure" name="actList" value="leisure" onclick="leisureR();">
+							<label for="leisure">수상레저</label>
+						</div>
 					</div>
 				</div>
 				<div class="bigList arrowUp">
 					<p>위치</p>
 					<div class="smallList">
-						<p><label><input type="checkbox" name="color" value="blue">서울</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">경기도</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">대구</label></p>
-						<p><label><input type="checkbox" name="color" value="blue">부산</label></p>
+						<div>
+							<input type="radio" id="allPlace" name="allPlace" value="allPlace" checked="checked"/>
+							<label for="allPlace">전체</label>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -292,8 +353,8 @@ h2 {
 					</div>
 					<div id="actiList">
 					<c:forEach items="${list}" var="bean"> 
-						<div>
-							<a href="detail/${bean.activity_number }">
+						<div class="${bean.activity_category} allList" >
+							<a href="detail/${bean.activity_number}">
 								<img alt="" src="../${bean.activity_img }">
 								<ul>
 									<li>${bean.activity_title}</li>

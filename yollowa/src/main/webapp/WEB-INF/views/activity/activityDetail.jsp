@@ -22,9 +22,13 @@
 }
 /* category end */
 
-h1 {
+h2 {
 	text-align: center;
-	margin-top: 20px;
+	margin: 30px 0px;
+	font-size:50px;
+}
+h3{
+	margin-bottom: 15px;
 }
 
 h3:first-letter {
@@ -35,7 +39,7 @@ h3:first-letter {
 
 #package-div-option-select{
 	background-color:white;
-	margin:10px auto;
+	margin:10px 0px;
 	border:1px solid purple;
 	font-size: 15px;
 	padding: 10px 20px;
@@ -55,16 +59,78 @@ h3:first-letter {
 .quantity-wrapper{
      width: 38px; 
 }
+
+#resultAmount{
+	border: 0px;
+	text-align: center;
+}
+#map-div,#info-div,#review-div{
+	padding-top: 20px;
+	padding-bottom:20px;
+	border-top: 1px solid lightgray;
+
+}
+
+/* 리뷰css */
+.review-div{
+	margin-top: 20px;
+}
+.review-box{
+	padding:10px 20px;
+	margin-bottom:30px;
+	background-color: #F7F3FF ;
+	border-radius: 10px;
+}
+
+.review-writer{
+	font-style:italic;
+	font-size: 15px;
+}
+
+.review-writedDateA{
+	float: right;
+}
+
 </style>
 <script type="text/javascript">
+
 	/* 달력 */
 	var today = new Date();
-	var msg = (today.getYear()+1900) +"-0"+(today.getMonth()+1)+ "-"+today.getDate();
+	var month,day;
+	
+	if(today.getDate()<10){
+		day="0"+today.getDate();
+	}else{
+		day=today.getDate();
+	}
+	
+	if(today.getMonth()<9){
+		month="0"+(today.getMonth()+1);
+	}else{
+		month=today.getMonth()+1;
+	}
+	
+	var msg = (today.getYear()+1900) +"-"+month+ "-"+day;
 	
 	$(function() {
 		$('#currentDate').attr('value', msg);
 		$('#currentDate').attr('min', msg);
 	});
+	
+	function nalja(n){
+		var nal = $(n).prev().val();
+		
+		$.ajax({
+			type:'get',
+			data:{
+				nal:nal
+			},
+			url:'./'
+		});
+		console.log(nal);
+		document.currentDate1.submit();
+	};
+	
 	
 	/* 패키지 옵션 설정 버튼 */
 	$(function() {
@@ -90,7 +156,6 @@ h3:first-letter {
 		
 		//합계
 		$('#resultAmount').val(totalAdd);
-		
 	}
 	
 	// - 버튼
@@ -109,32 +174,35 @@ h3:first-letter {
 			
 		}
 	};
-
 	
-	// 합계 전송
-	/* 
+	// 바로구매
 	function buySubmit(){
-		$.ajax({
-			type:'post',
-			url:'Inicis',
-			data: {
-				resultPay:$('#resultAmount').val()
-			} ,
-			success: function(){
-				window.location.href='../detail/Inicis';
-			},
-			error: function(e){
-				alert("에러메시지 :"+e);
-			}
-		}); 
-	} 
-	*/
 
+		if($('.uuu').text()=="로그인"){
+			alert("로그인이 필요한 기능입니다. 로그인페이지로 이동합니다.");
+			window.location.href="../../login/";
+		}else{
+			document.form1.submit();
+		}
+		
+		
+	}
+	
+	// 장바구니
+	function wish(){
+		window.location.href="../../";
+	};
 	
 	
-
+	// 리뷰 날짜
 	
-	
+	$(function(){
+		for (var i = 0; i <100; i++) {
+			var a = $('.review-writedDate'+i).text().substring(0,10);
+			$('.review-writedDate'+i).text(a);
+			
+		}
+	});
 	
 </script>
 
@@ -184,7 +252,7 @@ h3:first-letter {
 		<div class="row">
 			<div id="category" class="col-md-12">
 			<c:forEach items="${detailList }" var="bean">
-				<h1>${bean.activity_title }</h1>
+				<h2>${bean.activity_title }</h2>
 			</c:forEach>
 				<div id="infoList">
 					<div class="jumbotron">
@@ -195,20 +263,19 @@ h3:first-letter {
 								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false">예약가능 날짜</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<form id="currentDate1">
-										<input id="currentDate" type="date"/>
-										<button type="submit" class="btn btn-primary">확인</button>
+									<form name="currentDate1" id="currentDate1">
+										<input id="currentDate" name="nal" type="date"/>
+										<input type="button" value="확인" onclick="nalja(this);"/>
 									</form>
 								</div>
 							</div>
 							
 							<div>
 								<h5>옵션 선택</h5>
-								<button type="reset">재설정</button>
-								<form action="Inicis" method="post">
+								<form name="form1" action="Inicis" method="post" >
+									<button type="reset" class="btn btn-outline-warning">재설정</button>
 									<c:forEach items="${option }" var="bean">
-									<div id="package-div-option-select" class="col-md-11">
-										<!-- <button>check</button> -->
+									<div id="package-div-option-select" class="col-md-10">
 										<div>
 											<p>[${bean.AOInfo_name}]</p>
 										</div>
@@ -222,11 +289,14 @@ h3:first-letter {
 										</div>
 									</div>
 									</c:forEach>
-									<label for="resultAmount">합계 :</label>
-									<input id="resultAmount" name="resultAmount" value="0" type="text" size="8" readonly="readonly"/>
-									<button id="wish" >장바구니</button>
- 									<button id="buySubmit" type="submit">바로구매</button>
-								 	<!-- <input type="submit" value="바로구매" onclick="buySubmit();"/> -->
+									<div class="input-group mb-3">
+									  <div class="input-group-prepend">
+									    <span class="input-group-text" id="inputGroup-sizing-default">합계</span>
+										<input id="resultAmount" name="resultAmount" value="0" type="text" size="10" readonly="readonly" />
+									  </div>
+									</div>
+									<input type="button" class="btn btn-outline-primary" value="장바구니" onclick="wish();"/>
+									<input type="button" class="btn btn-outline-primary" value="바로구매" onclick="buySubmit();"/>
 								</form>
 							</div>
 						</div>
@@ -242,9 +312,17 @@ h3:first-letter {
 						<div id="map" style="width: 100%; height: 350px;"></div>
 					</div>
 
-					<div id="review-div">
+					<div id="review-div" >
 						<h3>리뷰</h3>
-						<p>내용</p>
+						
+						<c:forEach items="${reviewList}" var="bean" varStatus="status">
+						<div class="review-box">
+							<div class="review-writedDate${status.index} review-writedDateA">${bean.review_writedDate }</div>
+							<div class="review-writer blockquote-footer">${bean.review_writer}</div>
+							<div class="review-star">별점 : ${bean.review_starPoint}</div>
+							<div class="review-content">${bean.review_content}</div>
+						</div>
+						</c:forEach>
 					</div>
 
 				</div>

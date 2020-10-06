@@ -370,19 +370,7 @@ h2 {
 						</div>
 					</div>
 					<div id="lodgeList">
-					<c:forEach items="${listAll}" var="bean"> 
-						<div class="${bean.lodgement_category } allList" >
-							<a href="detail/${bean.lodgement_number}">
-								<img alt="" src="../${bean.lodgement_img }">
-								<ul>
-									<li>${bean.lodgement_companyName}</li>
-									<li>★ ${bean.lodgement_reviewGradeRate} (리뷰 ${bean.lodgement_reviewCount}건)</li>
-								</ul>
-							</a>
-						</div>
-					</c:forEach>
-						
-						
+						ddd
 					</div>
 
 				</div>
