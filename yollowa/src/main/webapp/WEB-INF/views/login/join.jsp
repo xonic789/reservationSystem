@@ -40,6 +40,10 @@
 <%@ include file="../template/head.jspf"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.js" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <style type="text/css">
 </style>
 <script type="text/javascript">
@@ -49,7 +53,7 @@
 		var email = "failed";
 		var nickName = "failed";
 		var charlength = 0;
-
+		var addressDetail= $('#addressDetail').val();
 		var list = new Array();
 		<c:forEach items="${userInfo}" var="user">
 		var json = new Object();
@@ -84,10 +88,10 @@
 			}
 			if (id === "success" && inputId.length > 4 && !(inputId === '')) {
 				$('#user_id').attr('readonly', 'readonly');
-				alert('사용 가능한 아이디 입니다.')
+				swal('사용 가능한 아이디 입니다.','','success');
 			} else {
 				id = "failed";
-				alert('사용 불가능한 아이디 입니다.  (중복이거나 5자 미만 입니다.)');
+				swal('사용 불가능한 아이디 입니다.', '(중복이거나 5자 미만 입니다.)' ,'warning');
 				$('#user_id').focus();
 			}
 		});
@@ -106,10 +110,10 @@
 			}
 			if (nickName === "success" && inputNick.length > 2 && !(inputNick === '')) {
 				$('#user_nickName').attr('readonly', 'readonly');
-				alert('사용 가능한 닉네임 입니다.')
+				swal('사용 가능한 닉네임 입니다.','','success');
 			} else {
 				nickName = "failed";
-				alert('사용 불가능한 닉네임 입니다.  (중복이거나 5자 미만 입니다.)');
+				swal('사용 불가능한 닉네임 입니다.',  '(중복이거나 5자 미만 입니다.)','warning');
 				$('#user_nickName').focus();
 			}
 		});
@@ -120,31 +124,38 @@
 			 var eng = pw.search(/[a-z]/ig);
 			 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 			 if(pw.length < 8 || pw.length > 20){
-				  alert("패스워드는 8자리 ~ 20자리 이내로 입력해주세요.");
+				  swal("패스워드는 8자리 ~ 20자리 이내로 입력해주세요.",'','warning');
 				  $('#user_password').focus();
 				  return false;
 				 }else if(pw.search(/\s/) != -1){
-				  alert("비밀번호는 공백 없이 입력해주세요.");
+				  swal("비밀번호는 공백 없이 입력해주세요.",'','warning');
 				  $('#user_password').focus();
 				  return false;
 				 }else if(num < 0 || eng < 0 || spe < 0 ){
-				  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+				  swal("영문,숫자, 특수문자를 혼합하여 입력해주세요.",'','warning');
 				  $('#user_password').focus();
 				  return false;
 				 }else {
 					 password="success";
 				 }
 			 if(id==="failed"){
-				 alert('아이디를 다시 확인해주세요');
+				 swal('아이디를 다시 확인해주세요','중복 확인 버튼을 눌러주세요','warning');
+				 $('#user_id').focus();
 			 }else if(password==="failed"){
-				 console.log(password);
-				 alert('패스워드를 다시 확인해주세요');
+				 swal('패스워드를 다시 확인해주세요','','warning');
+				 $('#user_password').focus();
 			 }else if(nickName==="failed"){
-				 alert('닉네임을 다시 확인해주세요')
+				 swal('닉네임을 다시 확인해주세요','','warning');
+				 $('#user_nickName').focus();
 			 }
 			 
+			 
 			 if(id==="success"&&password==="success"&&nickName==="success"){
-				 $('.contact100-form-btn').attr('type','submit');
+				 swal('회원 가입이 완료 되었습니다','','success');
+				 setTimeout(function(){
+					$('.contact100-form-btn').prop('type','submit');
+						$('.contact100-form-btn').click();
+					},1000);
 			 }
 		});
 
@@ -164,13 +175,15 @@
 					style="font-family: 'MapoPeacefull';"> YOLLOWA <br /> 회원가입
 				</span>
 				<c:if test="${joinInfo.user_kakaoId ne null}">
-				<input type="hidden" name="user_kakaoId" value="${joinInfo.user_kakaoId }">
+					<input type="hidden" name="user_kakaoId"
+						value="${joinInfo.user_kakaoId }">
 				</c:if>
-				
+
 				<c:if test="${joinInfo.user_naverId ne null}">
-				<input type="hidden" name="user_naverId" value="${joinInfo.user_naverId }">
+					<input type="hidden" name="user_naverId"
+						value="${joinInfo.user_naverId }">
 				</c:if>
-				
+
 				<div class="wrap-input100 validate-input"
 					data-validate="필수 입력사항 입니다.">
 					<span class="label-input100" style="font-family: 'MapoPeacefull';">아이디</span>
@@ -231,14 +244,13 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input"
-					data-validate="필수 입력사항 입니다.">
+				<div class="wrap-input100">
 					<span class="label-input100" style="font-family: 'MapoPeacefull';">우편번호</span>
 					<input onclick="daumPostcode()" class="btn btn-primary"
 						type="button" value="주소 검색" /> <input class="input100"
 						type="text" id="roadAddress" name="user_address"
 						style="font-family: 'MapoPeacefull';" placeholder="도로명주소" readonly />
-					<input class="input100" type="text" id="detailAddress"
+					<input class="input100" type="text" id="addressDetail"
 						name="addressDetail" style="font-family: 'MapoPeacefull';"
 						placeholder="상세주소" /> <span class="focus-input100"></span>
 				</div>
