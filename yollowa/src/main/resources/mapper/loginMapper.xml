@@ -22,5 +22,22 @@
 		<select id="getNaverUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
 			select * from user where user_naverId=#{user_naverId}
 		</select>
-		
+		<select id="getUserInfo" resultType="com.proj.yollowa.model.entity.UserVo">
+			select user_id,user_email,user_nickName from user
+		</select>
+		<select id="getUserNickName" resultType="java.lang.String">
+			select user_nickName from user
+		</select>
+		<insert id="insertUser" parameterType="com.proj.yollowa.model.entity.UserVo">
+			INSERT INTO user (user_nickName, user_name, user_gender, user_address, user_id, user_password, user_likes)
+			VALUES (#{user.user_nickName}, #{user.user_name}, #{user.user_gender}, #{user.user_address}, #{user.user_id}, #{user.user_password}, #{user.user_likes})
+		</insert>
+		<insert id="insertKakaoUser" parameterType="com.proj.yollowa.model.entity.UserVo">
+			INSERT INTO user (user_nickName, user_name, user_gender, user_address, user_id, user_password, user_likes,user_kakaoId)
+			VALUES (#{user.user_nickName}, #{user.user_name}, #{user.user_gender}, #{user.user_address}, #{user.user_id}, #{user.user_password}, #{user.user_likes},#{user.user_kakaoId})
+		</insert>
+		<insert id="insertNaverUser" parameterType="com.proj.yollowa.model.entity.UserVo">
+			INSERT INTO user (user_nickName, user_name, user_gender, user_address, user_id, user_password, user_likes, user_naverId)
+			VALUES (#{user.user_nickName}, #{user.user_name}, #{user.user_gender}, #{user.user_address}, #{user.user_id}, #{user.user_password}, #{user.user_likes},#{user.user_naverId})
+		</insert>
   </mapper>
