@@ -12,8 +12,8 @@ public class RoomInfoVo {
 	private String roomInfo_name;
 	private int roomInfo_peakPrice;
 	private int roomInfo_offPeakPrice;
-	private Timestamp roomInfo_peakStartDate;
-	private Timestamp roomInfo_peakEndDate;
+	private Date roomInfo_peakStartDate;
+	private Date roomInfo_peakEndDate;
 	private int roomInfo_soldCondition;
 	private int roomInfo_minPeople;
 	private int roomInfo_maxPeople;
@@ -26,7 +26,7 @@ public class RoomInfoVo {
 	}
 
 	public RoomInfoVo(int roomInfo_roomNumber, int roomInfo_articleNumber, String roomInfo_name, int roomInfo_peakPrice,
-			int roomInfo_offPeakPrice, Timestamp roomInfo_peakStartDate, Timestamp roomInfo_peakEndDate,
+			int roomInfo_offPeakPrice, Date roomInfo_peakStartDate, Date roomInfo_peakEndDate,
 			int roomInfo_soldCondition, int roomInfo_minPeople, int roomInfo_maxPeople, int roomInfo_extraPrice,
 			String roomInfo_img, MultipartFile[] roomImg) {
 		super();
@@ -166,19 +166,19 @@ public class RoomInfoVo {
 		this.roomInfo_offPeakPrice = roomInfo_offPeakPrice;
 	}
 
-	public Timestamp getRoomInfo_peakStartDate() {
+	public Date getRoomInfo_peakStartDate() {
 		return roomInfo_peakStartDate;
 	}
 
-	public void setRoomInfo_peakStartDate(Timestamp roomInfo_peakStartDate) {
+	public void setRoomInfo_peakStartDate(Date roomInfo_peakStartDate) {
 		this.roomInfo_peakStartDate = roomInfo_peakStartDate;
 	}
 
-	public Timestamp getRoomInfo_peakEndDate() {
+	public Date getRoomInfo_peakEndDate() {
 		return roomInfo_peakEndDate;
 	}
 
-	public void setRoomInfo_peakEndDate(Timestamp roomInfo_peakEndDate) {
+	public void setRoomInfo_peakEndDate(Date roomInfo_peakEndDate) {
 		this.roomInfo_peakEndDate = roomInfo_peakEndDate;
 	}
 
@@ -229,7 +229,7 @@ public class RoomInfoVo {
 	public void setRoomImg(MultipartFile[] roomImg) {
 		this.roomImg = roomImg;
 	}
-	
+
 	
 	
 }

@@ -210,22 +210,14 @@ var confirm = function(msg, title, resvNum, articleNumber, roomNumber) {
 		if (isConfirm) {
 			swal('', '방 삭제가 완료되었습니다.', "success");
 			
-			// async function
-			// 확인 버튼 클릭 후 1초 뒤 삭제 
-			// 빨간줄 이클립스 오류임
-			(async function(){
-				await sleep(1000);
+			setTimeout(function(){
 				location.href="/yollowa/host/removeRoom/"+articleNumber+"/"+roomNumber;
-			})();
+			},1500);
 		}else{
 			return false;
 		}
 
 	});
-}
-
-function sleep(ms){
-	return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
 function Alert() {

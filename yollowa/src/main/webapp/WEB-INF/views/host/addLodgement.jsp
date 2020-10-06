@@ -137,54 +137,60 @@
 	/***************************************************************************************************/
 
 </style>
+<!-- sweet alert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- map -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3d2ea55cf19b317302dd07f8c2c3117&libraries=services"></script>
-<script type="text/javascript">
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-mapOption = {
-    center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-    level: 5 // 지도의 확대 레벨
-};
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
 
-//지도를 미리 생성
-var map = new daum.maps.Map(mapContainer, mapOption);
-//주소-좌표 변환 객체를 생성
-var geocoder = new daum.maps.services.Geocoder();
-//마커를 미리 생성
-var marker = new daum.maps.Marker({
-position: new daum.maps.LatLng(37.537187, 127.005476),
-map: map
-});
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
 
 
-function sample5_execDaumPostcode() {
-new daum.Postcode({
-    oncomplete: function(data) {
-        var addr = data.address; // 최종 주소 변수
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
 
-        // 주소 정보를 해당 필드에 넣는다.
-        document.getElementById("sample5_address").value = addr;
-        // 주소로 상세 정보를 검색
-        geocoder.addressSearch(data.address, function(results, status) {
-            // 정상적으로 검색이 완료됐으면
-            if (status === daum.maps.services.Status.OK) {
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
 
-                var result = results[0]; //첫번째 결과의 값을 활용
+                        var result = results[0]; //첫번째 결과의 값을 활용
 
-                // 해당 주소에 대한 좌표를 받아서
-                var coords = new daum.maps.LatLng(result.y, result.x);
-                // 지도를 보여준다.
-                mapContainer.style.display = "block";
-                map.relayout();
-                // 지도 중심을 변경한다.
-                map.setCenter(coords);
-                // 마커를 결과값으로 받은 위치로 옮긴다.
-                marker.setPosition(coords)
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
             }
-        });
+        }).open();
     }
-}).open();
-}
+</script>
+<script type="text/javascript">
 
 /* 이미지 등록 시 미리보기 기능 */
 function setThumbnail(event) { 
@@ -266,6 +272,25 @@ function removetitleImg(){
 };
 
 
+// 빈 값 체크
+function submitClick(){
+	var is_empty = false;
+	$('#form').find('input').each(function(){
+		if(!$(this).val()){
+			is_empty = true;
+		}
+	});
+	
+	if(is_empty){
+		swal("빈칸이 존재합니다", "값을 전부 입력하고 다시 버튼을 클릭하세요", "warning")
+	}else{
+		swal("모두 정확히 입력하셨습니다", "5초 뒤 승인 요청을 합니다.\n관리자의 승인이 이루어지면 글이 정상적으로 등록됩니다.", "success");
+		setTimeout(function(){
+			$('.submit').prop('type','submit');
+			$('.submit').click();
+		},4000);
+	}
+}
 
 </script>
 </head>
@@ -420,7 +445,7 @@ function removetitleImg(){
 				  </div>
 				  
 				  
-				  <button type="submit" class="submit btn btn-primary btn-lg btn-block">글 등록하기</button>				  
+				  <button type="button" class="submit btn btn-primary btn-lg btn-block" onclick="submitClick();">글 등록하기</button>				  
 				</form>
 			</div>
 		</div>

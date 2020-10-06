@@ -106,16 +106,19 @@
 	<div class="row">
 		<div id="category" class="col-md-2">
 				<div class="bigList">
-					<p>파트너 회원 관리</p>
+					<p>파트너 관리</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList">사업자 승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList/">사업자 승인</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/postApproval">POST  승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/lodgementApprovalStandbyList/">숙박 게시글 관리</a></p>
 					</div>
-					<p>자사 사원 관리</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/adminList">관리자 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/admin/activityApprovalStandbyList/">액티비티 게시글 관리</a></p>
+					</div>
+					<p>사원 관리</p>
+					<div class="smallList">
+						<p><a href="${pageContext.request.contextPath }/admin/managerList/">관리자 관리</a></p>
 					</div>
 				</div>
 		</div>

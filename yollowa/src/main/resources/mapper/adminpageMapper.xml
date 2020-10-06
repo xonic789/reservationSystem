@@ -3,16 +3,73 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.proj.yollowa.model.adminpage.AdminpageDao">
+	<!-- HOST 권한을 요청한 USER들을 출력한다 -->
 	<select id="getHostApprovalStandbyList" resultType="com.proj.yollowa.model.entity.UserVo">
 		<![CDATA[
 		SELECT * FROM USER 
-		WHERE USER_LEVEL < 10 AND USER_COMPANYNUMBER IS NOT NULL;
+		WHERE USER_LEVEL < 10 AND USER_COMPANYNUMBER IS NOT NULL
 		]]>
 	</select>
+	<!-- HOST 권한을 요청한 USER들에게 권한을 부여한다 -->
 	<update id="updateUserLevelToHost">
 		<![CDATA[
-		UPDATE USER SET USER_LEVEL = 10 WHERE (USER_NUMBER = #{user_number});
+		UPDATE USER SET USER_LEVEL = 10 WHERE (USER_NUMBER = #{user_number})
 		]]>
 	</update>
+	
+	<!-- 승인이 필요한 ACTIVITY 항목을 출력한다 -->
+	<select id="getActivityApprovalStandbyList" resultType="com.proj.yollowa.model.entity.admin.ActivityApprovalVo">
+		<![CDATA[
+		SELECT ACTIVITY_NUMBER, ACTIVITY_TITLE, ACTIVITY_IMG, ACTIVITY_TEMP, USER_COMPANYNAME 
+		FROM ACTIVITY, USER 
+		WHERE ACTIVITY_USERNUMBER = USER_NUMBER AND ACTIVITY_TEMP !=1
+		]]>
+	</select>
+	<!-- ACTIVITY 테이블의 ACTIVITY_TEMP 값을 1로 UPDATE한다 -->
+	<update id="updateActivityTempToApproved">
+		<![CDATA[
+		UPDATE ACTIVITY SET activity_temp = 1 WHERE (ACTIVITY_NUMBER = #{activity_number})
+		]]>
+	</update>
+	
+	<!-- 승인이 필요한 LODGEMENT 항목을 출력한다 -->
+	<select id="getLodgementApprovalStandbyList" resultType="com.proj.yollowa.model.entity.admin.LodgementApprovalVo">
+		SELECT 
+			LODGEMENT_NUMBER, LODGEMENT_COMPANYNAME, LODGEMENT_IMG, LODGEMENT_TEMP, USER_COMPANYNAME 
+		FROM LODGEMENT, USER 
+		WHERE LODGEMENT_USERNUMBER = USER_NUMBER AND LODGEMENT_TEMP !=1
+	</select>
+	<!-- LODGEMENT 테이블의 LODGEMENT_TEMP 값을 1로 UPDATE한다 -->
+	<update id="updateLodgementTempToApproved">
+        UPDATE LODGEMENT SET LODGEMENT_TEMP = 1 WHERE (LODGEMENT_NUMBER = #{lodgement_number})
+	</update>
+	
+	<!-- MANAGER -->
+	<select id="getManagerList" resultType="com.proj.yollowa.model.entity.ManagerVo">
+		SELECT MANAGER_NUMBER, MANAGER_ID, MANAGER_LEVEL 
+		FROM MANAGER
+	</select>
+	
+	<select id="getManager" resultType="com.proj.yollowa.model.entity.ManagerVo">
+		SELECT 
+			MANAGER_NUMBER, MANAGER_ID, MANAGER_LEVEL, MANAGER_PASSWORD 
+		FROM MANAGER 
+		WHERE MANAGER_NUMBER = #{manager_number}
+	</select>
+	
+	<insert id="insertManager">
+		INSERT INTO MANAGER (MANAGER_LEVEL, MANAGER_ID, MANAGER_PASSWORD) 
+		VALUES (#{manager_level}, #{manager_id}, #{manager_password})
+	</insert>
+	
+	<update id="updateManager">
+		UPDATE MANAGER 
+		SET MANAGER_LEVEL = #{manager_level}, MANAGER_ID = #{manager_id}, MANAGER_PASSWORD = #{manager_password} 
+		WHERE (MANAGER_NUMBER = #{manager_number})
+	</update>
+	
+	<delete id="deleteManager">
+		DELETE FROM MANAGER WHERE (MANAGER_NUMBER = #{manager_number})
+	</delete>
 	
 </mapper>

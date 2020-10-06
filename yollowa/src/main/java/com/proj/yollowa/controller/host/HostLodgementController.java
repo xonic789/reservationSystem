@@ -19,6 +19,7 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
+import com.proj.yollowa.model.entity.host.RoomInfoVo;
 import com.proj.yollowa.model.service.host.HostService;
 
 @Controller
@@ -96,7 +97,20 @@ public class HostLodgementController {
 		// information insert  숙박 글번호와 함께 사장님 한마디, 공지사항, 기본정보, 인원 추가정보, 편의시설 및 서비스, 취소 및 환불규정
 		hostService.insertLodgeInfo(lodgementNumber, bean);
 		
-		return "host/addRoom";
+		return "redirect:/host/lodgement";
+	}
+
+	// 숙박 글 삭제 (숙박 글에 달려있는 방들도 삭제)
+	@Auth
+	@RequestMapping(value="lodgeDelete/{lodgement_number}")
+	public String deleteHostLodgement(@PathVariable("lodgement_number") int lodgement_number) {
+		// 숙박 글 삭제
+		hostService.deleteHostLodgement(lodgement_number);
+		
+		// 해당 글에 등록된 방 삭제
+		hostService.deleteHostLodgeRoom(lodgement_number);
+		
+		return "redirect:/host/lodgement";
 	}
 	
 	// 숙박 글 수정완료 버튼 클릭 시 post
@@ -139,7 +153,7 @@ public class HostLodgementController {
 		
 	}
 	
-	// 숙박 글의 룸 리스트 페이지에서 방 추가하기 버튼 클릭 시 이동
+	// 숙박 글의 룸 리스트 페이지에서 방 추가 페이지로 이동
 	@Auth
 	@RequestMapping(value="/addRoom/{lodgement_number}", method=RequestMethod.GET)
 	public String addRoomPage(@PathVariable("lodgement_number") int lodgement_number, @AuthUser UserVo userVo, Model model) throws SQLException {
@@ -148,6 +162,8 @@ public class HostLodgementController {
 		ArrayList<LodgementVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
 		if(matchUserNumber!=null) {
 			// 컴퍼니 네임 select
+			model.addAttribute("hostName", userVo.getUser_name());
+			model.addAttribute("lodgement_number", lodgement_number);
 			hostService.selectLodgementName(lodgement_number, model);
 			
 			return "host/addRoom";
@@ -156,6 +172,35 @@ public class HostLodgementController {
 		}
 		
 	}
+	
+	// 방 추가 post
+	@Auth
+	@RequestMapping(value="/addRoom/addRoomAction/{lodgement_number}", method=RequestMethod.POST)
+	public String addRoomAction(@PathVariable("lodgement_number") int lodgement_number, RoomInfoVo bean, HttpServletRequest req) throws IllegalStateException, IOException {
+		System.out.println(bean);
+	
+		// articleNumber set
+		bean.setRoomInfo_articleNumber(lodgement_number);
+		
+		// insert roomInfo (이미지 제외)
+		hostService.insertLodgementRoom(bean);
+		
+		// 위에서 insert 되면서 생성된 roomNumber select
+		// 숙박 글번호와 방이름으로 매치 
+		int roomNumber = hostService.selectRoomInfo_RoomNumber(bean.getRoomInfo_articleNumber(),bean.getRoomInfo_name());
+		System.out.println("등록된 roomNumber :: "+roomNumber);
+		
+		// img upload & parsing
+		// 이미지가 업로드 될때 방번호를 가지고 생성되기 때문에 위에서 먼저 방 insert 를한 후에 업로드처리한다.
+		String setImgName = hostService.uploadRoomInfoImg(bean, roomNumber, req);
+		System.out.println("데이터베이스 update RoomImg :: "+setImgName);
+		
+		// 위에서 리턴받은 파싱된 이미지 String update
+		hostService.updateRoomInfoImg(bean.getRoomInfo_articleNumber(), roomNumber, setImgName);
+		
+		return "redirect:/host/lodgeRoom/"+lodgement_number;
+	}
+	
 	
 	// lodgeRoom -> 방 삭제
 	@Auth
