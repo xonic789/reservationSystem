@@ -284,7 +284,7 @@ function submitClick(){
 	if(is_empty){
 		swal("빈칸이 존재합니다", "값을 전부 입력하고 다시 버튼을 클릭하세요", "warning")
 	}else{
-		swal("정확히 입력하셨습니다!", "5초 뒤 승인 요청을 합니다.\n관리자의 승인이 이루어지면 글이 정상적으로 등록됩니다.", "success");
+		swal("모두 정확히 입력하셨습니다", "5초 뒤 승인 요청을 합니다.\n관리자의 승인이 이루어지면 글이 정상적으로 등록됩니다.", "success");
 		setTimeout(function(){
 			$('.submit').prop('type','submit');
 			$('.submit').click();

@@ -16,6 +16,12 @@
 	<insert id="updateHostLodgement" parameterType="com.proj.yollowa.model.entity.host.LodgementUpdatePageDto">
 		update lodgement set lodgement_img = #{lodgement.lodgement_img}, lodgement_hashTag = #{lodgement.lodgement_hashTag} where lodgement_number = #{lodgement_number}
 	</insert>
+	<delete id="deleteHostLodgement">
+		delete from lodgement where lodgement_number = #{lodgement_number}
+	</delete>
+	<delete id="deleteHostLodgeRoom">
+		delete from roomInfo where roomInfo_articleNumber = #{lodgement_number}
+	</delete>
 	<!-- host/ end -->
 	
 	<!--host/ladd start -->

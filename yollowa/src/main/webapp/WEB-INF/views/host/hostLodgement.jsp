@@ -178,6 +178,9 @@
 	} */
 	
 </style>
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script type="text/javascript">
 	$(document).ready(function(){
 		if($('.temp').val()==0){
@@ -210,7 +213,7 @@
 	
 	/* 수정 버튼 클릭 이벤트 */
 	function modiClick(a){
-		alert('사진과 해시태그를 다시 등록 후 수정완료를 클릭하세요.\n \n타이틀 사진의 첫번째 사진은 대표사진으로 설정됩니다.');
+		swal("사진과 해시태그를 다시 등록 하세요!", "- 타이틀 이미지의 첫번째 사진이 대표사진으로 설정됩니다\n- 해시태그와 사진 이외의 요소는 수정이 불가능합니다", "warning");
 		
 		var number = $(a).next().val();
 		$('.lodgeModifySuc').show();
@@ -316,6 +319,36 @@
 			$(this).remove();
 		});
 	};
+	
+	/* 삭제버튼 클릭 */
+	var confirm = function(msg, title, resvNum, number) {
+	swal({
+		title : title,
+		text : msg,
+		type : "warning",
+		showCancelButton : true,
+		confirmButtonClass : "btn-danger",
+		confirmButtonText : "예",
+		cancelButtonText : "아니오",
+		closeOnConfirm : false,
+		closeOnCancel : true
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal('', '방 삭제가 완료되었습니다.', "success");
+			
+			setTimeout(function(){
+				location.href="/yollowa/host/lodgeDelete/"+number;
+			},1500);
+		}else{
+			return false;
+		}
+
+	});
+}
+
+function Confirm(number) {
+	confirm('해당 방에 대한 방 정보까지 함께 삭제됩니다.', '글을 정말 삭제하시겠습니까?','' ,number);
+}
 	
 </script>
 </head>
@@ -425,7 +458,7 @@
 						<input type="button" class="btn btn-outline-warning lodgeModify${lodgeList.lodgement_number }" onclick="modiClick(this);" value="수정"></input>
 						<input type="hidden" value="${lodgeList.lodgement_number }"></input>
 						<button type="submit" class="btn btn-outline-warning lodgeModifySuc">수정 완료</button>
-						<a href="#" class="btn btn-outline-danger">삭제</a>
+						<a class="removeBtn btn btn-outline-danger" onclick="Confirm(${lodgeList.lodgement_number });">삭제</a>
 					</div>
 					
 				</form>

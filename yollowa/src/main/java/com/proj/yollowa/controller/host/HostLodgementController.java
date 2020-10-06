@@ -97,7 +97,20 @@ public class HostLodgementController {
 		// information insert  숙박 글번호와 함께 사장님 한마디, 공지사항, 기본정보, 인원 추가정보, 편의시설 및 서비스, 취소 및 환불규정
 		hostService.insertLodgeInfo(lodgementNumber, bean);
 		
-		return "host/lodgement";
+		return "redirect:/host/lodgement";
+	}
+
+	// 숙박 글 삭제 (숙박 글에 달려있는 방들도 삭제)
+	@Auth
+	@RequestMapping(value="lodgeDelete/{lodgement_number}")
+	public String deleteHostLodgement(@PathVariable("lodgement_number") int lodgement_number) {
+		// 숙박 글 삭제
+		hostService.deleteHostLodgement(lodgement_number);
+		
+		// 해당 글에 등록된 방 삭제
+		hostService.deleteHostLodgeRoom(lodgement_number);
+		
+		return "redirect:/host/lodgement";
 	}
 	
 	// 숙박 글 수정완료 버튼 클릭 시 post

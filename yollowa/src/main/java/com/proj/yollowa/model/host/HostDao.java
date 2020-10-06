@@ -19,6 +19,10 @@ public interface HostDao {
 	public ArrayList<LodgementVo> selectHostLodgementList(int user_number);
 	// 호스트 숙박 글 업데이트
 	public void updateHostLodgement(@Param("lodgement_number") int lodgement_number, @Param("lodgement") LodgementUpdatePageDto bean);
+	// host/lodgeDelete - 글삭제와 방삭제 동시에 (글 삭제)
+	public void deleteHostLodgement(int lodgement_number);
+	// host/lodgeDelete - 글삭제와 방삭제 동시에 (방 삭제)
+	public void deleteHostLodgeRoom(int lodgement_number);
 	//host/ end
 	
 	// host/ladd start
@@ -56,6 +60,9 @@ public interface HostDao {
 
 	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
 	public void updateRoomInfoImg(@Param("articleNumber") int roomInfo_articleNumber,@Param("roomNumber") int roomNumber,@Param("roomInfo_img") String setImgName);
+
+
+	
 
 
 	

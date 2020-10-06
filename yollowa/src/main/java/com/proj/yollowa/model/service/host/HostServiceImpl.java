@@ -80,7 +80,22 @@ public class HostServiceImpl implements HostService {
 	}
 
 /*  host/ end**********************************************************************************************************/
+
+/*	host/lodgeDelete/ start**********************************************************************************************************/
+	// 숙박 글 삭제
+	@Override
+	public void deleteHostLodgement(int lodgement_number) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.deleteHostLodgement(lodgement_number);
+	}
+	// 숙박 글에 등록된 방 삭제
+	@Override
+	public void deleteHostLodgeRoom(int lodgement_number) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.deleteHostLodgeRoom(lodgement_number);
+	}
 	
+/*	host/lodgeDelete/ end**********************************************************************************************************/
 	
 /*  host/lodgeUpdate/ start**********************************************************************************************************/
 

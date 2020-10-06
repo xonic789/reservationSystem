@@ -22,7 +22,10 @@ public interface HostService {
 	void selectHostLodgementList(Model model,UserVo bean) throws SQLException;
 	// host/lodgeUpdate/ -> 사업자 숙박 글 수정
 	void updateHostLodgement(int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException;
-
+	// host/lodgeDelete - 글삭제와 방삭제 동시에 (글 삭제)
+	void deleteHostLodgement(int lodgement_number);
+	// host/lodgeDelete - 글삭제와 방삭제 동시에 (방 삭제)
+	void deleteHostLodgeRoom(int lodgement_number);
 	
 
 	
@@ -72,6 +75,8 @@ public interface HostService {
 
 	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
 	void updateRoomInfoImg(int roomInfo_articleNumber, int roomNumber, String setImgName);
+
+
 
 
 
