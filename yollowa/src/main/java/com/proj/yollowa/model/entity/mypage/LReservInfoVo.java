@@ -2,7 +2,7 @@ package com.proj.yollowa.model.entity.mypage;
 
 import java.sql.Date;
 
-public class LReservInfo {
+public class LReservInfoVo {
 	private int lReservInfo_number;
 	private int lReservInfo_userNumber;
 	private int lReservInfo_acticleNumber;
@@ -15,7 +15,7 @@ public class LReservInfo {
 	private int lReservInfo_reservStatus;
 	private int lReservInfo_cartStatus;
 	
-	public LReservInfo() {
+	public LReservInfoVo() {
 		
 	}
 	public int getlReservInfo_number() {
@@ -84,7 +84,7 @@ public class LReservInfo {
 	public void setlReservInfo_cartStatus(int lReservInfo_cartStatus) {
 		this.lReservInfo_cartStatus = lReservInfo_cartStatus;
 	}
-	public LReservInfo(int lReservInfo_number, int lReservInfo_userNumber, int lReservInfo_acticleNumber,
+	public LReservInfoVo(int lReservInfo_number, int lReservInfo_userNumber, int lReservInfo_acticleNumber,
 			int lReservInfo_roomNumber, Date lReservInfo_checkIn, Date lReservInfo_checkOut,
 			String lReservInfo_phoneNumber, Date lReservInfo_reservDate, int lReservInfo_payment,
 			int lReservInfo_reservStatus, int lReservInfo_cartStatus) {
@@ -136,7 +136,7 @@ public class LReservInfo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LReservInfo other = (LReservInfo) obj;
+		LReservInfoVo other = (LReservInfoVo) obj;
 		if (lReservInfo_acticleNumber != other.lReservInfo_acticleNumber)
 			return false;
 		if (lReservInfo_cartStatus != other.lReservInfo_cartStatus)

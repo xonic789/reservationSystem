@@ -2,7 +2,7 @@ package com.proj.yollowa.model.entity.mypage;
 
 import java.sql.Date;
 
-public class AReservInfo {
+public class AReservInfoVo {
 	private int aReservInfo_number;
 	private int aReservInfo_userNumber;
 	private int aReservInfo_articleNumber;
@@ -14,10 +14,10 @@ public class AReservInfo {
 	private int aReservInfo_reservStatus;
 	private int aReservInfo_cartStatus;
 	
-	public AReservInfo() {
+	public AReservInfoVo() {
 	}
 	
-	public AReservInfo(int aReservInfo_number, int aReservInfo_userNumber, int aReservInfo_articleNumber,
+	public AReservInfoVo(int aReservInfo_number, int aReservInfo_userNumber, int aReservInfo_articleNumber,
 			Date aReservInfo_checkIn, Date aReservInfo_checkOut, String aReservInfo_phoneNumber,
 			Date aReservInfo_reservDate, int aReservInfo_payment, int aReservInfo_reservStatus,
 			int aReservInfo_cartStatus) {
@@ -59,7 +59,7 @@ public class AReservInfo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AReservInfo other = (AReservInfo) obj;
+		AReservInfoVo other = (AReservInfoVo) obj;
 		if (aReservInfo_articleNumber != other.aReservInfo_articleNumber)
 			return false;
 		if (aReservInfo_cartStatus != other.aReservInfo_cartStatus)
