@@ -76,7 +76,6 @@ public class AdminpageController {
 	//숙박 판매 글 중 등록 승인 대기 글 하나를 승인한다
 	@RequestMapping(value = "/lodgementApprovalStandbyList/updateLodgementTemp/{lodgement_number}", method = RequestMethod.GET)
 	public String updateLodgementTempToApproved(@PathVariable int lodgement_number) throws SQLException {
-		System.out.println("@--------------------------------------------------------------");
 		adminpageService.updateLodgementTempToApprovedService(lodgement_number);
 		return "redirect:../";
 	}

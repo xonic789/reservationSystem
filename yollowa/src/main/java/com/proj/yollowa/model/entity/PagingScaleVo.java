@@ -1,6 +1,6 @@
-package com.proj.yollowa.model.service.cs;
+package com.proj.yollowa.model.entity;
 
-public class PagingScale {
+public class PagingScaleVo {
 	private int page;
 	private int perPageNum;
 	private int pageNavNum=5;
@@ -10,7 +10,7 @@ public class PagingScale {
     private boolean prev;
     private boolean next;
     
-	public PagingScale() {
+	public PagingScaleVo() {
 		this.page = 1;
 		this.perPageNum = 10;
 	}

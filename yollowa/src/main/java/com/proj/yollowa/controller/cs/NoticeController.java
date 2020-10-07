@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.model.entity.NoticeVo;
+import com.proj.yollowa.model.entity.PagingScaleVo;
+import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
-import com.proj.yollowa.model.service.cs.PagingScale;
 
 @Controller
 @RequestMapping("/cs-center/notice")
@@ -25,18 +26,48 @@ public class NoticeController {
 	NoticeService noticeService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String noticeList(Model model, @RequestParam(value="page", required=false, defaultValue="1") int page) throws SQLException {
-		System.out.println("페이징 작업 진행 시작...");
-		PagingScale pagingScale = new PagingScale();
-		pagingScale.setPage(page);
-		pagingScale.setTotalCnt(noticeService.countNoticeService());
+	public String noticeList(Model model, 
+			@RequestParam(value="page", required=false, defaultValue="1") int page,
+			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+			@RequestParam(value="keyword" ,required=false, defaultValue="") String keyword
+			) throws SQLException {
+		SearchVo searchVo = new SearchVo();
+		searchVo.setSearchType(searchType);
+		searchVo.setKeyword(keyword);
+		searchVo.setPage(page);
+		searchVo.setTotalCnt(noticeService.countNoticeService(searchVo));
+		System.out.println("@@"+searchVo.toString());
+		System.out.println("@"+searchVo.serachToString());
 		
-		System.out.println(pagingScale.toString());
-		model.addAttribute("list", noticeService.getNoticeListService(pagingScale));
-		model.addAttribute("paging", pagingScale);
+		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
+		model.addAttribute("paging", searchVo);
 		
 		return "cs-center/noticeList";
 	}
+	
+//	@RequestMapping(value = "/?page={page}&searchType={searchType}&keyword={keyword}", method = RequestMethod.GET)
+//	public String noticeListSearch(Model model, 
+//			@RequestParam(value="page", required=false, defaultValue="1") int page,
+//			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+//			@RequestParam(value="keyword" , required=false, defaultValue="") String keyword
+//			) throws SQLException {
+//		PagingScaleVo pagingScaleVo = new SearchVo();
+//		pagingScaleVo.setPage(page);
+//		pagingScaleVo.setTotalCnt(noticeService.countNoticeService());
+//		
+//		SearchVo searchVo = new SearchVo();
+//		searchVo.setSearchType(searchType);
+//		searchVo.setKeyword(keyword);
+//		searchVo.setPage(page);
+//		searchVo.setTotalCnt(noticeService.countNoticeService());
+//		System.out.println("paging:"+pagingScaleVo.toString());
+//		System.out.println(searchVo.toString());
+//		
+//		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
+//		model.addAttribute("paging", searchVo);
+//		
+//		return "cs-center/noticeList";
+//	}
 	
 	@RequestMapping(value = "/detail/{noticeno}", method = RequestMethod.GET)
 	public String getNotice(Model model, @PathVariable int noticeno) {

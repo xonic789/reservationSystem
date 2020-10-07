@@ -8,7 +8,10 @@
 		SELECT 
 			NOTICENO, TITLE, WRITER, CONTENT, WRITEDDATE, CNT 
 		FROM NOTICE 
-		WHERE NOTICENO>0 
+		WHERE NOTICENO>0
+		]]>
+			<include refid="search" />
+		<![CDATA[
 		ORDER BY NOTICENO DESC, WRITEDDATE DESC 
 		LIMIT #{pageStart}, #{perPageNum};
 		]]>
@@ -18,6 +21,8 @@
 	</select>
 	<select id="countNotice" resultType="int">
 		SELECT COUNT(NOTICENO) FROM NOTICE
+		WHERE NOTICENO>0
+		<include refid="search" />
 	</select>
 	<delete id="deleteNotice">
 		DELETE FROM NOTICE WHERE NOTICENO=#{noticeno}
@@ -28,4 +33,24 @@
 	<update id="updateNotice">
 		UPDATE NOTICE SET TITLE=#{title} , CONTENT=#{content} WHERE NOTICENO=#{noticeno}
 	</update>
+	
+	<sql id="search">
+		<if test="searchType != null and searchType != '' ">
+			<if test="searchType == 'title'">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'content'">
+				AND CONTENT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'writer'">
+				AND writer LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'titleContent'">
+				AND (
+	                TITLE LIKE CONCAT('%', #{keyword}, '%')
+	                OR CONTENT LIKE CONCAT('%', #{keyword}, '%')
+           		)
+			</if>
+		</if>
+	</sql>
 </mapper>

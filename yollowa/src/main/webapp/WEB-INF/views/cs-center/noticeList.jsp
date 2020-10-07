@@ -118,16 +118,17 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<form id="search" action="" class="form-inline">
+			<form id="search" action="${pageContext.request.contextPath }/cs-center/notice/" class="form-inline" method="get">
 				<div class="form-group">
+					<input type="hidden" name="page" value="1"/>
 				    <select name="searchType" class="custom-select">
-				      	<option value="subject">제목</option>
+				      	<option value="title">제목</option>
 						<option value="content">내용</option>
-						<option value="all">제목+내용</option>
-						<option value="user_name">작성자</option>
+						<option value="titleContent">제목+내용</option>
+						<option value="writer">작성자</option>
 				    </select>
-				  	<input type="text" class="form-control" placeholder="검색어를 입력하세요" id="inputDefault">
-					<input type="button" id="btn-normal" value="검색하기" class="btn btn-primary" />
+				  	<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요" id="inputDefault">
+					<input type="submit" id="btn-normal" value="검색하기" class="btn btn-primary" />
 				</div>
 			</form>
 			<table class="table">
@@ -159,13 +160,13 @@
 				<div class="col-md-6">
 					<ul class="pagination">
 						<c:if test="${paging.prev }">
-						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }">이전</a></li>
+						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">이전</a></li>
 						</c:if>
 						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
-							<li class="page-item"><a class="page-link" href="?page=${status.index }">${status.index }</a></li>
+							<li class="page-item"><a class="page-link" href="?page=${status.index }&searchType=${paging.searchType }&keyword=${paging.keyword }">${status.index }</a></li>
 						</c:forEach>
 						<c:if test="${paging.next && paging.endPage > 0 }">
-							<li class="page-item"><a class="page-link" href="?page=${paging.endPage + 1 }">다음</a></li>
+							<li class="page-item"><a class="page-link" href="?page=${paging.endPage + 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">다음</a></li>
 						</c:if>
 					</ul>
 				</div>
