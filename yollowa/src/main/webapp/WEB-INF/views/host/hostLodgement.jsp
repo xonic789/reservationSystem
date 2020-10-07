@@ -424,7 +424,7 @@ function Confirm(number) {
 						</c:forEach>
 							
 					</div>
-
+					
 					<div class="title">위치</div>
 					<input type="text" class="inputCon form-control" name="lodgement_location" value="${lodgeList.lodgement_location }"  readonly="readonly"/>
 					
@@ -444,7 +444,7 @@ function Confirm(number) {
 						<input type="text" class="hashInput${lodgeList.lodgement_number }${number.index } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_hashTag" value="${requestScope[hashTagName] }"  readonly="readonly"/>
 					</c:forEach>
 					</div>
-					
+					<img src="/Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1_kakao.png"/>
 					<div class="title">후기 수</div>
 					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewCount }"  readonly="readonly" />
 					<div class="title">좋아요 수</div>
