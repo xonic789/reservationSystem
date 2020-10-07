@@ -72,7 +72,6 @@ public class LoginController {
 				System.out.println(userVo);
 				mv.addObject("joinInfo", userVo);
 				mv.setViewName("/login/join");
-				//	mv.addAttribute("joinInfo",userVo);
 				return mv;
 			}
 			
@@ -164,7 +163,6 @@ public class LoginController {
 	//회원가입 페이지
 	@RequestMapping(value = "join/",method = RequestMethod.GET)
 	public String join(@AuthManager ManagerVo managerVo, @AuthUser UserVo userVo,Model model,UserVo user) throws SQLException {
-		System.out.println(user);
 		//로그인 돼 있으면 홈으로 돌린다.
 		if(userVo!=null||managerVo!=null) {
 			return "redirect:../";
