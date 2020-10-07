@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 <%@ include file="../template/head.jspf" %>
 
-<script src="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/summernote/lang/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.css" />
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js"></script>
 <style rel="stylesheet" type="text/css">
 	/* category start */
 	.page-header{
@@ -81,39 +79,14 @@
 		
 </style>
 <script type="text/javascript">
-    $(document).ready(function() {
-      $('#editor').summernote({
-        height: 300,
-        minHeight: null,
-        maxHeight: null,
-        focus: true,
-        callbacks: {
-          onImageUpload: function(files, editor, welEditable) {
-            for (var i = files.length - 1; i >= 0; i--) {
-              sendFile(files[i], this);
-            }
-          }
-        }
-      });
+$(document).ready(function() {
+	CKEDITOR.replace('editor2',
+		    {
+	      height : '500px',  //에디터 높이
+	      startupFocus : false
     });
-    
-    function sendFile(file, el) {
-      var form_data = new FormData();
-      form_data.append('file', file);
-      $.ajax({
-        data: form_data,
-        type: "POST",
-        url: '/image',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-          $(el).summernote('editor.insertImage', url);
-          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        }
-      });
-    }
+	
+});
 </script>
 </head>
 <body>
@@ -147,6 +120,7 @@
 				</div>
 				<div class="box2">
 					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>
+					<script>CKEDITOR.replace('editor',{filebrowserUploadUrl:'${pageContext.request.contextPath }/fileupload'});</script>
 				</div>
 				<div class="box3">
 					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">
