@@ -353,6 +353,12 @@ function submitClick(){
 						<label class="radio-inline type_label">
 						<input type="radio" name="lodgement_category" id="Pension" value="pension"> 펜션
 						</label>
+						<label class="radio-inline type_label">
+						<input type="radio" name="lodgement_category" id="resort" value="resort"> 리조트/콘도
+						</label>
+						<label class="radio-inline type_label">
+						<input type="radio" name="lodgement_category" id="guest" value="guest"> 게스트하우스
+						</label>
 					</div>
 				  </div>
 
@@ -390,8 +396,9 @@ function submitClick(){
 					<div class="form-group">
 				      <label class="label_title" for="titleImg">타이틀 사진 등록</label>
 					  <a onclick="addTitleImg()" class="btnAdd btn btn-primary">사진 추가 등록</a>
-					  <p>1장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
+					  <p>꼭 2장 이상 등록 가능하며, 첫번째 사진은 해당 글 대표사진으로 등록됩니다</p>
 				      <div class="titleImgFile">
+						<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/><br/>
 						<input type="file" class="titleImg" name="titleImg" accept=".jpg, .jpeg, .png, .webp" onchange="setThumbnail(event);"/><br/>
 					  </div>
 					  <div id="image_container"></div>

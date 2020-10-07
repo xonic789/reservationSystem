@@ -209,6 +209,7 @@ public class HostLodgementController {
 		
 		hostService.deleteRoom(articleNumber,roomNumber);
 		
+		
 		// 해당 펜션의 방 리스트로 보냄
 		return "redirect:/host/lodgeRoom/"+articleNumber;
 	}
