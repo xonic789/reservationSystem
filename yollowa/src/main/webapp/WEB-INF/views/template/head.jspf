@@ -20,6 +20,9 @@
 		    font-weight: normal;
 		    font-style: normal;
 		}
+		*{
+			font-family: 'MapoPeacefull';
+		}
 		#navbarColor01{
 			font-family: 'MapoPeacefull';
 			font-style: bold;
