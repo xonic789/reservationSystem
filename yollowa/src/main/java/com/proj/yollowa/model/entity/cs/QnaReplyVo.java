@@ -7,79 +7,78 @@ import java.sql.Date;
  *
  */
 public class QnaReplyVo {
-	private int reply_no;
-	private int qna_no;
-	private String reply_text;
-	private String reply_writer;
-	private Date req_date;
-	private Date update_date;
+	private int replyNo;
+	private int qnaNo;
+	private String replyText;
+	private String replyWriter;
+	private Date reqDate;
+	private Date updateDate;
 	
 	public QnaReplyVo() {
 	}
 
-	public QnaReplyVo(int reply_no, int qna_no, String reply_text, String reply_writer, Date req_date,
-			Date update_date) {
+	public QnaReplyVo(int replyNo, int qnaNo, String replyText, String replyWriter, Date reqDate, Date updateDate) {
 		super();
-		this.reply_no = reply_no;
-		this.qna_no = qna_no;
-		this.reply_text = reply_text;
-		this.reply_writer = reply_writer;
-		this.req_date = req_date;
-		this.update_date = update_date;
+		this.replyNo = replyNo;
+		this.qnaNo = qnaNo;
+		this.replyText = replyText;
+		this.replyWriter = replyWriter;
+		this.reqDate = reqDate;
+		this.updateDate = updateDate;
 	}
 
-	public int getReply_no() {
-		return reply_no;
+	public int getReplyNo() {
+		return replyNo;
 	}
 
-	public void setReply_no(int reply_no) {
-		this.reply_no = reply_no;
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
 	}
 
-	public int getQna_no() {
-		return qna_no;
+	public int getQnaNo() {
+		return qnaNo;
 	}
 
-	public void setQna_no(int qna_no) {
-		this.qna_no = qna_no;
+	public void setQnaNo(int qnaNo) {
+		this.qnaNo = qnaNo;
 	}
 
-	public String getReply_text() {
-		return reply_text;
+	public String getReplyText() {
+		return replyText;
 	}
 
-	public void setReply_text(String reply_text) {
-		this.reply_text = reply_text;
+	public void setReplyText(String replyText) {
+		this.replyText = replyText;
 	}
 
-	public String getReply_writer() {
-		return reply_writer;
+	public String getReplyWriter() {
+		return replyWriter;
 	}
 
-	public void setReply_writer(String reply_writer) {
-		this.reply_writer = reply_writer;
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
 	}
 
-	public Date getReq_date() {
-		return req_date;
+	public Date getReqDate() {
+		return reqDate;
 	}
 
-	public void setReq_date(Date req_date) {
-		this.req_date = req_date;
+	public void setReqDate(Date reqDate) {
+		this.reqDate = reqDate;
 	}
 
-	public Date getUpdate_date() {
-		return update_date;
+	public Date getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setUpdate_date(Date update_date) {
-		this.update_date = update_date;
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "QnaReplyVo [reply_no=" + reply_no + ", qna_no=" + qna_no + ", reply_text=" + reply_text
-				+ ", reply_writer=" + reply_writer + ", req_date=" + req_date + ", update_date=" + update_date + "]";
+		return "QnaReplyVo [replyNo=" + replyNo + ", qnaNo=" + qnaNo + ", replyText=" + replyText + ", replyWriter="
+				+ replyWriter + ", reqDate=" + reqDate + ", updateDate=" + updateDate + "]";
 	}
 	
 	

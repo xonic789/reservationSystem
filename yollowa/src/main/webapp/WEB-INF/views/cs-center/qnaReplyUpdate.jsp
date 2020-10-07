@@ -129,31 +129,43 @@
 				</div>
 			</div>
 			<div class="box3">${bean.content }</div>
-			<div class="box3">-----------------------------------------------------------------------------------</div>
 			<c:forEach items="${reply }" var="reply">
+			<div class="box3">-----------------------------------------------------------------------------------</div>
 			<div>
-				<div>
-					<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
-					<span>작성자: ${reply.replyWriter } | </span>
-					<span>작성일: ${reply.updateDate } | </span>
-					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }">수정하기</a> | </span>
-					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
-				</div>
-				<div>
-					내용:${reply.replyText }
-				</div>
+				<c:if test="${reply.replyNo != target}">
+					<div>
+						<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+						<span>작성자: ${reply.replyWriter } | </span>
+						<span>작성일: ${reply.updateDate } | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }">수정하기</a> | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
+					</div>
+					<div>
+						내용:${reply.replyText }
+					</div>
+				</c:if>
+				<c:if test="${reply.replyNo == target}">
+					<form action="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }" method="post">
+						<div>
+						<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+						<span>작성자: ${reply.replyWriter } | </span>
+						<span>작성일: ${reply.updateDate } | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
+					</div>
+						<div>
+							<input type="hidden" name="replyNo" value='<c:out value="${reply.replyNo }"></c:out>' />
+							<input type="hidden" name="qnaNo" value='<c:out value="${reply.qnaNo }"></c:out>' />
+							<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요">${reply.replyText }</textarea>
+						</div>
+						<div>
+							<input type="submit" value="작성하기"/>
+						</div>
+					</form>
+				</c:if>
 			</div>
 			</c:forEach>
 			<div class="box3">-----------------------------------------------------------------------------------</div>
-			<form action="${pageContext.request.contextPath }/cs-center/qna/reply/write" method="post">
-				<div>
-					<input type="hidden" name="qnaNo" value='<c:out value="${qnaNo }"></c:out>' />
-					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요"></textarea>
-				</div>
-				<div>
-					<input type="submit" value="작성하기"/>
-				</div>
-			</form>
+			
 			<div class="box4">
 				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.qnano }'" value="수정하기">
 				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.qnano }'" value="삭제하기">
