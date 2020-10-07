@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
-import com.proj.yollowa.model.entity.lodgement.LodgementVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 
 public interface LodgementService {
 
+	// 숙박 리스트
 	void lodgementListAll(Model model) throws SQLException;
-
-	List<LodgementVo> lodgementDetail(int number, Model model) throws SQLException;
+	// 숙박 리스트 temp=1인 전체 개수
+	int lodgementListCnt() throws SQLException;
+	
+	//숙박 디테일 
+	List<LodgementRoomInfoVo> lodgementDetail(int articleNumber, Model model) throws SQLException;
+	
+	
 
 }

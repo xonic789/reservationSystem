@@ -18,18 +18,16 @@ public class LodgementListController {
 	@Inject
 	LodgementService lodgementService;
 	
+	// 숙박 리스트
 	@RequestMapping("list")
 	public String list(Model model) throws SQLException {
 		lodgementService.lodgementListAll(model);
 		
-		return "lodgement/lodgementList";
-	}
-
-	@RequestMapping("detail/{lodgement_number}")
-	public String lodgementDetail(@PathVariable("lodgement_number") int number,Model model) throws SQLException {
-		lodgementService.lodgementDetail(number,model);
+		// 리스트 temp=1인 개수
+		int cnt = lodgementService.lodgementListCnt();
+		model.addAttribute("cnt", cnt);
 		
-		return "lodgement/lodgementDetail";
+		return "lodgement/lodgementList";
 	}
 }
 

@@ -15,7 +15,6 @@ public class ActivityDetailPageDto {
 	private int AOInfo_price;
 	
 	public ActivityDetailPageDto() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getActivity_number() {

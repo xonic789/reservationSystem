@@ -19,7 +19,7 @@ IMP.request_pay({
     pay_method : 'card', // 결제수단 카드
     merchant_uid : 'merchant_' + new Date().getTime(), // 결제가된적 있는 merchant_uid로는 재결제 불가 
     name : 'a', //16자 이내 권장
-    amount : ${ra},	//결제 금액
+    amount :'1234',	//결제 금액
     buyer_email : 'vnvnwn@gmail.com',
     buyer_name : '이성범',
     buyer_tel : '010-8629-2737'

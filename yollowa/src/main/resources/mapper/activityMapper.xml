@@ -23,7 +23,16 @@
 	<select id="activityOption" resultType="com.proj.yollowa.model.entity.activity.ActivityDetailPageDto">
 		select * from activityoption as AO join aoinfo as AI on AO.activityOption_optionNumber = AI.AOInfo_optionNumber where AO.activityOption_articleNumber=#{val}
 	</select>
-	 
+	
+	<!-- 리뷰 리스트 --> 
+	<select id="reviewList" resultType="com.proj.yollowa.model.entity.activity.ReviewVo">
+		select * from review where (review_articleNumber=#{articleNumber} and review_category=#{category})
+	</select>
+	
+	<!-- 리뷰 카운트 -->
+	<select id="activityReviewCount" resultType="Integer">
+		select count(*) from review where (review_articleNumber=#{articleNumber} and review_category=#{category})
+	</select>
 	
 </mapper>
 
