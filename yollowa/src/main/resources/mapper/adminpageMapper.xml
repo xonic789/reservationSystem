@@ -13,7 +13,7 @@
 	<!-- HOST 권한을 요청한 USER들에게 권한을 부여한다 -->
 	<update id="updateUserLevelToHost">
 		<![CDATA[
-		UPDATE USER SET USER_LEVEL = 10 WHERE (USER_NUMBER = #{user_number})
+		UPDATE USER SET USER_LEVEL = #{user_level} WHERE (USER_NUMBER = #{user_number})
 		]]>
 	</update>
 	

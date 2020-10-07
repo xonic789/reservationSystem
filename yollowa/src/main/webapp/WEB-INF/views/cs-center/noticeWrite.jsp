@@ -80,10 +80,11 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-	CKEDITOR.replace('editor2',
+	CKEDITOR.replace('editor',
 		    {
 	      height : '500px',  //에디터 높이
-	      startupFocus : false
+	      startupFocus : false,
+	      filebrowserUploadUrl:'${pageContext.request.contextPath }/fileupload'
     });
 	
 });
@@ -120,7 +121,6 @@ $(document).ready(function() {
 				</div>
 				<div class="box2">
 					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>
-					<script>CKEDITOR.replace('editor',{filebrowserUploadUrl:'${pageContext.request.contextPath }/fileupload'});</script>
 				</div>
 				<div class="box3">
 					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">

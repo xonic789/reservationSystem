@@ -28,10 +28,12 @@ public class AdminpageServiceImpl implements AdminpageService{
 	}
 
 	@Override
-	public void updateUserLevelToHostService(int user_number) throws SQLException {
+	public void updateUserLevelToHostService(int user_number, int user_level) throws SQLException {
 		AdminpageDao adminpageDao = sqlsession.getMapper(AdminpageDao.class);
-		
-		adminpageDao.updateUserLevelToHost(user_number);
+		UserVo userVo = new UserVo();
+		userVo.setUser_number(user_number);
+		userVo.setUser_level(user_level);
+		adminpageDao.updateUserLevelToHost(userVo);
 	}
 
 	@Override

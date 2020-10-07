@@ -70,7 +70,7 @@
 	#titleInput{
 	}
 	.box3 {
-		text-align: right;
+		text-align: left;
 		margin-top: 10px;
 	}
 	#submitBtn {
@@ -115,12 +115,18 @@
 		</div>
 		<div class="col-md-10">
 			<div class="box1">
-				<div id="title">${bean.title }</div>
+				<div id="title"><h1>${bean.title }</h1></div>
 			</div>
-			<div class="box2">
+			<div class="row">
+				<div class="col-md-4">
 				<span id="writer">작성자 | ${bean.writer }</span>
+				</div>
+				<div class="col-md-6">
 				<span id="date">작성일 | ${bean.writeddate }</span>
-				<span id="cnt">조회수  ${bean.cnt }</span>
+				</div>
+				<div class="col-md-2">
+				<span id="cnt">조회수 | ${bean.cnt }</span>
+				</div>
 			</div>
 			<div class="box3">${bean.content }</div>
 			<div class="box4">

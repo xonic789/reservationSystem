@@ -11,7 +11,7 @@ import com.proj.yollowa.model.entity.admin.LodgementApprovalVo;
 public interface AdminpageDao {
 	
 	List<UserVo> getHostApprovalStandbyList() throws SQLException;
-	void updateUserLevelToHost(int user_number) throws SQLException;
+	void updateUserLevelToHost(UserVo bean) throws SQLException;
 	List<ActivityApprovalVo> getActivityApprovalStandbyList() throws SQLException;
 	void updateActivityTempToApproved(int activity_number) throws SQLException;
 	List<LodgementApprovalVo> getLodgementApprovalStandbyList() throws SQLException;

@@ -75,19 +75,18 @@
 	    padding-top: 1px;
 	    padding-bottom: 1px;
 	}
-	.pagingBox{
-		display: flex;
-		position: relative;
-	}
 	.pagination {
-		margin: 10px 205px auto 350px;
 	}
 	#btn-long {
-	    margin: 5px auto 5px auto;
-	    width: 120%;
+	    margin: 5px auto 23px auto;
+	    width: 77px;
 	    height: 33px;
 	    padding-top: 1px;
 	    padding-bottom: 1px;
+	}
+	
+	#writeBox{
+		text-align: right;
 	}
 	/* content end */
 		
@@ -153,8 +152,11 @@
 			    </c:forEach>
 			  </tbody>
 			</table>
-			<div class="pagingBox">
-				<div class="paging">
+			<div class="row">
+				<div class="col-md-4">
+					<input type="hidden" />
+				</div>
+				<div class="col-md-6">
 					<ul class="pagination">
 						<c:if test="${paging.prev }">
 						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }">이전</a></li>
@@ -167,8 +169,8 @@
 						</c:if>
 					</ul>
 				</div>
-				<div class="btnGroup">
-				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
+				<div class="col-md-2" id="writeBox">
+					<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
 				</div>
 			</div>
 		</div>
