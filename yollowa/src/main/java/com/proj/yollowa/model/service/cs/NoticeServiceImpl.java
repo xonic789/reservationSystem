@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.cs.NoticeDao;
-import com.proj.yollowa.model.entity.NoticeVo;
-import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
+import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{

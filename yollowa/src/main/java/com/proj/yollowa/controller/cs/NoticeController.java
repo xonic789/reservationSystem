@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.proj.yollowa.model.entity.NoticeVo;
-import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
+import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
 
 @Controller

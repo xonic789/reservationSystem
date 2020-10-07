@@ -17,8 +17,8 @@ import com.proj.yollowa.interceptor.Auth.Role;
 import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.model.adminpage.AdminpageDao;
 import com.proj.yollowa.model.entity.ManagerVo;
-import com.proj.yollowa.model.entity.NoticeVo;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.service.admin.AdminpageService;
 
 

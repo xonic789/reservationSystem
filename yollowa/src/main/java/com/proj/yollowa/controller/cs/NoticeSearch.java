@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
+import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
