@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 
 
 public interface NoticeDao{

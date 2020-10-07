@@ -72,8 +72,21 @@
 	.box3 {
 		text-align: left;
 		margin-top: 10px;
+		margin-bottom: 20px;
 	}
-	#submitBtn {
+	.mb-3{
+    	margin-bottom: 0.2rem !important;
+	}
+	div#contentBox {
+		margin-top: 30px;
+    	margin-bottom: 20px !important;
+	}	
+	#replyBox{
+		margin: 2px auto 20px auto;
+		display: flex;
+	}
+	#replyText{
+		resize: none;
 	}
 	/* content end */
 		
@@ -114,44 +127,44 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<div class="box1">
-				<div id="title"><h1>${bean.title }</h1></div>
+			<div class="card border-light mb-3" id="contentBox">
+				<div class="card-header" id="title"><h1>${bean.title }</h1>
+					<div class="row">
+						<div class="col-md-4">
+						<span id="writer">작성자 | ${bean.writer }</span>
+						</div>
+						<div class="col-md-6">
+						<span id="date">작성일 | ${bean.writeddate }</span>
+						</div>
+						<div class="col-md-2">
+						<span id="cnt">조회수 | ${bean.cnt }</span>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<p class="card-text">${bean.content }</p>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-				<span id="writer">작성자 | ${bean.writer }</span>
-				</div>
-				<div class="col-md-6">
-				<span id="date">작성일 | ${bean.writeddate }</span>
-				</div>
-				<div class="col-md-2">
-				<span id="cnt">조회수 | ${bean.cnt }</span>
-				</div>
-			</div>
-			<div class="box3">${bean.content }</div>
-			<div class="box3">-----------------------------------------------------------------------------------</div>
 			<c:forEach items="${reply }" var="reply">
-			<div>
-				<div>
-					<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+			<div  class="card border-secondary mb-3">
+				<div class="card-header">
 					<span>작성자: ${reply.replyWriter } | </span>
 					<span>작성일: ${reply.updateDate } | </span>
 					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }">수정하기</a> | </span>
 					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
 				</div>
-				<div>
-					내용:${reply.replyText }
+				<div class="card-body">
+					<p class="card-text">${reply.replyText }</p>
 				</div>
 			</div>
 			</c:forEach>
-			<div class="box3">-----------------------------------------------------------------------------------</div>
 			<form action="${pageContext.request.contextPath }/cs-center/qna/reply/write" method="post">
-				<div>
-					<input type="hidden" name="qnaNo" value='<c:out value="${qnaNo }"></c:out>' />
-					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요"></textarea>
+				<div id="replyBox">
+					<input type="hidden" name="qnaNo" value="${bean.qnano }" />
+					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="5"></textarea>
+					<input type="submit" class="btn btn-primary" value="작성하기"/>
 				</div>
 				<div>
-					<input type="submit" value="작성하기"/>
 				</div>
 			</form>
 			<div class="box4">

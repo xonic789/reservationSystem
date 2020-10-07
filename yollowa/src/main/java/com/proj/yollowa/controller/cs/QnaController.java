@@ -1,7 +1,5 @@
 package com.proj.yollowa.controller.cs;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -16,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.model.entity.SearchVo;
-import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.entity.cs.QnaReplyVo;
 import com.proj.yollowa.model.entity.cs.QnaVo;
-import com.proj.yollowa.model.service.cs.NoticeService;
 import com.proj.yollowa.model.service.cs.QnaReplyService;
 import com.proj.yollowa.model.service.cs.QnaService;
 
