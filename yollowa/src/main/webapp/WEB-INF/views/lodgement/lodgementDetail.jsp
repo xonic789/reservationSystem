@@ -79,6 +79,12 @@ h3:first-letter {
 	border-top: 1px solid lightgray;
 
 }
+/* 달력 start */
+
+
+/* 달력 end */
+
+
 
 /* 리뷰css */
 .review-div{
@@ -104,25 +110,57 @@ h3:first-letter {
 <script type="text/javascript">
 
 	/* 달력 */
-	/* 
-	function nalja(n){
-		var nal = $(n).prev().val();
-		
-		$.ajax({
-			type:'get',
-			data:{
-				nal:nal
-			},
-			url:'./'
-		});
-		
-		console.log(nal);
-		document.currentDate1.submit();
-	};
-	 */
-	 $(document).ready(function() {
+	/*  $(document).ready(function() {
 		 $("#datepicker").val($.datepicker.formatDate('yy-mm-dd',new Date()));
+		 
+	 }); */
+	 
+	 $(function(){
+		  $( "#sdate" ).datepicker({
+			  minDate: 0
+		  });
+		  $( "#edate" ).datepicker({
+			  minDate: 0
+		  });
 	 });
+	
+	 $(document).ready(function () {
+		    $.datepicker.regional['ko'] = {
+		        closeText: '닫기',
+		        prevText: '이전달',
+		        nextText: '다음달',
+		        currentText: '오늘',
+		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+		        '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+		        monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+		        '7월','8월','9월','10월','11월','12월'],
+		        dayNames: ['일','월','화','수','목','금','토'],
+		        dayNamesShort: ['일','월','화','수','목','금','토'],
+		        dayNamesMin: ['일','월','화','수','목','금','토'],
+		        weekHeader: 'Wk',
+		        dateFormat: 'yy-mm-dd',
+		        firstDay: 0,
+		        isRTL: false,
+		        showMonthAfterYear: true,
+		        yearSuffix: '',
+		        changeMonth: true,
+		        changeYear: true,
+		        showButtonPanel: true,
+		        yearRange: 'c-99:c+99',
+		    };
+		    $.datepicker.setDefaults($.datepicker.regional['ko']);
+		    $('#sdate').datepicker();
+		    $('#sdate').datepicker("option", "maxDate", $("#edate").val());
+		    $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#edate").datepicker( "option", "minDate", selectedDate );
+		    });
+
+		    $('#edate').datepicker();
+		    $('#edate').datepicker("option", "minDate", $("#sdate").val());
+		    $('#edate').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#sdate").datepicker( "option", "maxDate", selectedDate );
+		    });
+		});
 	 
 	 // 날짜 선택
 	 function picker(a){
@@ -138,7 +176,6 @@ h3:first-letter {
 			success:function(s){
 				
 				$.each(s,function(idx,val){
-					var bool=false;
 					
 					var valueCheck = Date.parse($(a).val());
 					var startD = Date.parse(val.roomInfo_peakStartDate);
@@ -151,9 +188,7 @@ h3:first-letter {
 						$('.div-peak'+idx).hide();
 						$('.div-offPeak'+idx).show();
 					}
-				
 				});
-				
 			},
 			error:function(e){
 				console.log(e);
@@ -161,20 +196,18 @@ h3:first-letter {
 		});
 		
 		
-		/* <c:forEach items="${roomList}" var="bean" varStatus="status">
+		/* 
+		<c:forEach items="${roomList}" var="bean" varStatus="status">
 
 			console.log($(('.offPeak${status.index}')).text()); // 비성수기
 			console.log($(('.peak${status.index}')).text()); // 성수기
-		</c:forEach> */
+		</c:forEach> 
+			*/
 
 
 	 };
 	 
-	 $(function(){
-		  $( "#datepicker" ).datepicker({
-			  dateFormat: "yy-mm-dd"
-		  });
-	 });
+	 
 	 
 	 
 	/* 패키지 옵션 설정 버튼 */
@@ -234,6 +267,7 @@ h3:first-letter {
 	
 	
 	
+	/* 달력 두개 */
 	
 </script>
 
@@ -284,15 +318,20 @@ h3:first-letter {
 			<div id="category" class="col-md-12">
 			<c:forEach items="${detailList }" var="bean">
 				<h2>${bean.lodgement_companyName}</h2>
-			</c:forEach>
+				
+				
+				<div class="jumbotron">
+				</c:forEach>
 				<div id="infoList">
-					<div class="jumbotron">
+					<button class="btn">조회</button>
 						<h3>객실 예약</h3>
 							<input id="articleNumber" type="hidden" value="${article}" />
 						<div id="package-div-option">
 							<div id="dateDiv">
-								<input id="datepicker" class="btn btn-primary"  aria-labelledby="dropdownMenuButton" 
-									role="btn" name="nal" type="text" readonly="readonly" placeholder="예약가능 날짜" onchange="picker(this);"/>
+								<input id="sdate" class="btn btn-primary"  aria-labelledby="dropdownMenuButton" 
+									role="btn" name="nal" type="text" readonly="readonly" placeholder="체크인" onchange="picker(this);"/>
+								<input id="edate" class="btn btn-primary"  aria-labelledby="dropdownMenuButton" 
+									role="btn" name="nal" type="text" readonly="readonly" placeholder="체크아웃" onchange="picker(this);"/>
 							</div>
 							
 							<div style="margin-top:40px;box-sizing: border-box; ">
