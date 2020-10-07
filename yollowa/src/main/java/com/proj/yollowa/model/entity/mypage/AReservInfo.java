@@ -9,6 +9,10 @@ public class AReservInfo {
 	private Date aReservInfo_checkIn;
 	private Date aReservInfo_checkOut;
 	private String aReservInfo_phoneNumber;
+	private Date aReservInfo_reservDate;
+	private int aReservInfo_payment;
+	private int aReservInfo_reservStatus;
+	private int aReservInfo_cartStatus;
 	
 	public AReservInfo() {
 	}
@@ -161,8 +165,5 @@ public class AReservInfo {
 	public void setaReservInfo_cartStatus(int aReservInfo_cartStatus) {
 		this.aReservInfo_cartStatus = aReservInfo_cartStatus;
 	}
-	private Date aReservInfo_reservDate;
-	private int aReservInfo_payment;
-	private int aReservInfo_reservStatus;
-	private int aReservInfo_cartStatus;
+	
 }

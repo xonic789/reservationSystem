@@ -6,4 +6,12 @@
 	<select id="userDetail" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{user_number}
 	</select>
+	<select id="lReservationInfo">
+		SELECT * FROM LRESERVINFO 
+		WHERE LRSERVINFO_USERNUMBER=#{LRSERVINFO_USERNUMBER}
+		 AND LRESERVINFO_RESERVSTATUS=#{LRESERVINFO_RESERVSTATUS} 
+		 AND LRESERVINFO_CARTSTATUS=#{LRESERVINFO_CARTSTATUS}
+		 
+	</select>
+	
 </mapper>
