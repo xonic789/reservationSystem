@@ -54,11 +54,13 @@ public class HostServiceImpl implements HostService {
 		if(lodgementList.size()!=0) {
 			for(int i=0; i<lodgementList.size(); i++) {
 				
-				String[] imgs = lodgementList.get(i).getLodgement_img().split("&");
-				model.addAttribute("titleImgSize"+i, imgs.length);
-				
-				for(int j=0; j<imgs.length; j++) {
-					model.addAttribute("imgName"+i+j, imgs[j]);
+				if(lodgementList.get(i).getLodgement_img().contains("&")) {
+					String[] imgs = lodgementList.get(i).getLodgement_img().split("&");
+					model.addAttribute("titleImgSize"+i, imgs.length);
+					
+					for(int j=0; j<imgs.length; j++) {
+						model.addAttribute("imgName"+i+j, imgs[j]);
+					}
 				}
 				
 			}

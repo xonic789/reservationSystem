@@ -27,10 +27,10 @@ CREATE TABLE `LReservInfo` (
   `LReservInfo_userNumber` int NOT NULL,
   `LReservInfo_acticleNumber` int NOT NULL,
   `LReservInfo_roomNumber` int NOT NULL,
-  `LReservInfo_checkIn` timestamp NOT NULL,
-  `LReservInfo_checkOut` timestamp NOT NULL,
+  `LReservInfo_checkIn` date NOT NULL,
+  `LReservInfo_checkOut` date NOT NULL,
   `LReservInfo_phoneNumber` varchar(11) NOT NULL,
-  `LReservInfo_reservDate` timestamp NOT NULL,
+  `LReservInfo_reservDate` date NOT NULL,
   `LReservInfo_payment` int NOT NULL,
   `LReservInfo_reservStatus` int NOT NULL DEFAULT '0',
   `LReservInfo_cartStatus` int NOT NULL,
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 15:42:56
+-- Dump completed on 2020-10-07 14:54:45

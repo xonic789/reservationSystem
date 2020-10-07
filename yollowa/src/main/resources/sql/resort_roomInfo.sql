@@ -16,36 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roomInfo`
+-- Table structure for table `roominfo`
 --
 
-DROP TABLE IF EXISTS `roomInfo`;
+DROP TABLE IF EXISTS `roominfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roomInfo` (
+CREATE TABLE `roominfo` (
   `roomInfo_roomNumber` int NOT NULL AUTO_INCREMENT,
   `roomInfo_articleNumber` int NOT NULL,
   `roomInfo_name` varchar(45) NOT NULL,
   `roomInfo_peakPrice` int NOT NULL,
   `roomInfo_offPeakPrice` int NOT NULL,
-  `roomInfo_peakStartDate` timestamp NOT NULL,
-  `roomInfo_peakEndDate` timestamp NOT NULL,
-  `roomInfo_soldCondition` bit(1) NOT NULL DEFAULT b'0',
+  `roomInfo_peakStartDate` date NOT NULL,
+  `roomInfo_peakEndDate` date NOT NULL,
   `roomInfo_minPeople` int NOT NULL,
   `roomInfo_maxPeople` int NOT NULL,
   `roomInfo_extraPrice` int NOT NULL,
   `roomInfo_img` varchar(1000) NOT NULL,
   PRIMARY KEY (`roomInfo_roomNumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roomInfo`
+-- Dumping data for table `roominfo`
 --
 
-LOCK TABLES `roomInfo` WRITE;
-/*!40000 ALTER TABLE `roomInfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomInfo` ENABLE KEYS */;
+LOCK TABLES `roominfo` WRITE;
+/*!40000 ALTER TABLE `roominfo` DISABLE KEYS */;
+INSERT INTO `roominfo` VALUES (1,1,'귀신 나오는방',1500,1000,'2020-08-15','2020-09-15',2,4,500,'resources/img/dog.jpg'),(2,1,'귀신 안나오는방',15000,10000,'2020-10-10','2020-11-15',4,6,5000,'resources/img/dog.jpg'),(3,1,'혼자 자는방',1000,500,'2020-08-17','2020-09-15',1,2,500,'resources/img/dog.jpg');
+/*!40000 ALTER TABLE `roominfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 15:42:55
+-- Dump completed on 2020-10-07 14:54:43

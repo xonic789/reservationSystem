@@ -45,7 +45,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (1,1,'제목1','위치1','1234','카테고리1','해시',1,1,1,'resources/img/bigmeet1.jpg',1),(2,2,'제목2','위치2','1234','카테고리1','해시',2,2,2,'resources/img/bigmeet2.jpg',1),(8,3,'제목3','위치3','1234','카테고리1','해시',3,3,3,'resources/img/bigmeet3.jpg',1),(9,4,'제목4','위치4','1234','카테고리1','해시',4,4,4,'resources/img/bigmeet4.jpg',0),(10,5,'제목5','위치5','1234','카테고리1','해시',5,5,5,'resources/img/dog.jpg',1),(11,5,'제목5','위치5','1234','카테고리1','해시',5,1,6,'resources/img/girl.jpg',0),(12,5,'제목5','위치5','1234','카테고리1','해시',5,2,7,'resources/img/hiker.jpg',0),(13,5,'제목5','위치5','1234','카테고리1','해시',5,3,8,'resources/img/hotel1.jpg',1),(14,1,'제목1','위치1','1234','카테고리1','해시',1,4,9,'resources/img/bigmeet1.jpg',1),(15,2,'제목2','위치2','1234','카테고리1','해시',2,5,10,'resources/img/bigmeet2.jpg',1),(16,3,'제목3','위치3','1234','카테고리1','해시',3,1,12,'resources/img/bigmeet3.jpg',1),(17,4,'제목4','위치4','1234','카테고리1','해시',4,2,3,'resources/img/bigmeet4.jpg',0),(18,5,'제목5','위치5','1234','카테고리1','해시',5,3,4,'resources/img/dog.jpg',1),(19,5,'제목5','위치5','1234','카테고리1','해시',5,4,6,'resources/img/girl.jpg',0),(20,5,'제목5','위치5','1234','카테고리1','해시',5,5,7,'resources/img/hiker.jpg',0),(21,5,'제목5','위치5','1234','카테고리1','해시',5,1,8,'resources/img/hotel1.jpg',1);
+INSERT INTO `activity` VALUES (1,1,'스키1','위치1','1234','ski','해시',1,1,1,'resources/img/bigmeet1.jpg',1),(2,2,'번지점프1','위치2','1234','jumping','해시',2,2,2,'resources/img/dog.jpg',1),(8,3,'래프팅1','위치3','1234','rafting','해시',3,3,3,'resources/img/hiker.jp',1),(9,4,'수상레저1','위치4','1234','leisure','해시',4,4,4,'resources/img/dog.jpg',0),(10,5,'스키2','위치5','1234','ski','해시',5,5,5,'resources/img/dog.jpg',1),(11,5,'번지점프2','위치5','1234','jumping','해시',5,1,6,'resources/img/girl.jpg',0),(12,5,'래프팅2','위치5','1234','rafting','해시',5,2,7,'resources/img/hiker.jpg',0),(13,5,'수상레저2','위치5','1234','leisure','해시',5,3,8,'resources/img/hotel1.jpg',1),(14,1,'스키3','위치1','1234','ski','해시',1,4,9,'resources/img/girl.jpg',1),(15,2,'번지점프3','위치2','1234','jumping','해시',2,5,10,'resources/img/girl.jpg',1),(16,3,'레프팅3','위치3','1234','rafting','해시',3,1,12,'resources/img/hotel1.jpg',1),(17,4,'수상레저3','위치4','1234','leisure','해시',4,2,3,'resources/img/hiker.jpg',0),(18,5,'스키4','위치5','1234','ski','해시',5,3,4,'resources/img/dog.jpg',1),(19,5,'번지점프4','위치5','1234','jumping','해시',5,4,6,'resources/img/girl.jpg',0),(20,5,'래프팅4','위치5','1234','rafting','해시',5,5,7,'resources/img/hiker.jpg',1),(21,5,'수상레저4','위치5','1234','leisure','해시',5,1,8,'resources/img/hotel1.jpg',1);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 15:42:57
+-- Dump completed on 2020-10-07 14:54:47

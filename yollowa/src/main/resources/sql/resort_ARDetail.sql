@@ -26,7 +26,7 @@ CREATE TABLE `ARDetail` (
   `ARDetail_number` int NOT NULL,
   `ARDetail_optionNumber` int NOT NULL,
   `ARDetail_goods` varchar(45) NOT NULL,
-  `ARDetail_checkIn` timestamp NOT NULL,
+  `ARDetail_checkIn` date NOT NULL,
   `ARDetail_amount` int NOT NULL,
   `ARDetail_unitPrice` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 15:42:56
+-- Dump completed on 2020-10-07 14:54:46

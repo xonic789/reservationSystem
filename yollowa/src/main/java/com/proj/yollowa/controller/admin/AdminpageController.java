@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.Auth.Role;
+import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.model.adminpage.AdminpageDao;
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.NoticeVo;
@@ -28,6 +29,7 @@ public class AdminpageController {
 	AdminpageService adminpageService;
 	
 	//관리자 페이지 메인 화면 출력
+	@Auth(role=Role.MANAGER)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		
@@ -35,6 +37,7 @@ public class AdminpageController {
 	}
 	
 	//호스트 권한을 요청한 유저의 목록을 출력
+	@Auth(role=Role.MANAGER)
 	@RequestMapping(value = "/hostApprovalStandbyList/", method = RequestMethod.GET)
 	public String hostApprovalList(Model model) throws SQLException {
 		model.addAttribute("list", adminpageService.getHostApprovalStandbyListService());
@@ -43,6 +46,7 @@ public class AdminpageController {
 	}
 	
 	//호스트 권한을 부여한다
+	@Auth(role=Role.MANAGER)
 	@RequestMapping(value = "/hostApprovalStandbyList/hostApproval/{user_number}", method = RequestMethod.GET)
 	public String hostApproval(@PathVariable int user_number) throws SQLException {
 		adminpageService.updateUserLevelToHostService(user_number);

@@ -26,10 +26,10 @@ CREATE TABLE `AReservInfo` (
   `AReservInfo_number` int NOT NULL AUTO_INCREMENT,
   `AReservInfo_userNumber` int NOT NULL,
   `AReservInfo_articleNumber` int NOT NULL,
-  `AReservInfo_checkIn` timestamp NOT NULL,
-  `AReservInfo_checkOut` timestamp NULL DEFAULT NULL,
+  `AReservInfo_checkIn` date NOT NULL,
+  `AReservInfo_checkOut` date DEFAULT NULL,
   `AReservInfo_phoneNumber` varchar(11) NOT NULL,
-  `AReservInfo_reservDate` timestamp NOT NULL,
+  `AReservInfo_reservDate` date NOT NULL,
   `AReservInfo_payment` int NOT NULL,
   `AReservInfo_reservStatus` int NOT NULL DEFAULT '0',
   `AReservInfo_cartStatus` int NOT NULL,
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 15:42:57
+-- Dump completed on 2020-10-07 14:54:47
