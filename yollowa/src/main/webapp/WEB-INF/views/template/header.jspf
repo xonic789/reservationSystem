@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   
-<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="${pageContext.request.contextPath }/" ><img style="height:35px;padding-bottom:5px;" alt="" src="${pageContext.request.contextPath}/resources/img/icons/headLogo.png"></a>
-=======
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-family: 'MapoPeacefull';">
-  <a class="navbar-brand" href="${pageContext.request.contextPath }/" style="font-size: 25px;font-family: 'MapoPeacefull';">YOLLOWA</a>
->>>>>>> a9c2d80d584d8117205934f4cc993dbaaf2a7c36

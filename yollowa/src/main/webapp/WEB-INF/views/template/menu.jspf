@@ -68,12 +68,8 @@
     <c:if test="${user eq null and manager eq null }">
     	<ul class="navbar-nav">
     	 <li class="nav-item">
-<<<<<<< HEAD
     	 	<!-- class="uuu" 이거 쓰는중 -->
-    		<a class="nav-link uuu" style="margin-right: 5px;" href="${pageContext.request.contextPath }/login/">로그인</a>
-=======
-    		<a class="nav-link" style="margin-right: 5px;font-family: 'MapoPeacefull';"  href="${pageContext.request.contextPath }/login/">로그인</a>
->>>>>>> a9c2d80d584d8117205934f4cc993dbaaf2a7c36
+    		<a class="nav-link uuu" style="margin-right: 5px;font-family: 'MapoPeacefull';"  href="${pageContext.request.contextPath }/login/">로그인</a>
      	 </li>
        <li class="nav-item" >
         <a class="nav-link"  style="font-family: 'MapoPeacefull';" href="${pageContext.request.contextPath }/join/">회원가입</a>

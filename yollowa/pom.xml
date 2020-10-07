@@ -248,8 +248,6 @@
 		    <artifactId>jackson-core</artifactId>
 		    <version>2.9.9</version>
 		</dependency>
-<<<<<<< HEAD
-		
 		<dependency>
 		    <groupId>net.sf.json-lib</groupId>
 		    <artifactId>json-lib</artifactId>
@@ -257,9 +255,6 @@
 		    <classifier>jdk15</classifier>
 		</dependency>
         
-=======
-				
->>>>>>> a9c2d80d584d8117205934f4cc993dbaaf2a7c36
 	</dependencies>
 	
 	
