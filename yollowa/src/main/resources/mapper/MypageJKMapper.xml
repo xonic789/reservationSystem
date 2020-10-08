@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.yollowa.model.mypage.MypageDaoJK">
+	<!--사업자 권한 신청자를 승인 대기 중인 상태로 만든다  -->	
+	<update id="updateToStandByHost">
+	UPDATE USER 
+	SET 
+		USER_COMPANYNUMBER = #{user_companyNumber}, USER_COMPANYNAME = #{user_companyName}, 
+		USER_LEVEL = 9 
+	WHERE (USER_NUMBER = #{user_number})
+	</update>
+	<select id="getLodgementReview" resultType="com.proj.yollowa.model.entity.mypageLodgementReviewVo">
+		SELECT *  
+		FROM 
+			LODGEMENT, REVIEW 
+		WHERE REVIEW_WRITER = #{writer} 
+			AND REVIEW_CATEGORY = 1 
+			AND REVIEW_ARTICLENUMBER = LODGEMENT_NUMBER
+	</select>
+	<select id="getActivityReview" resultType="com.proj.yollowa.model.entity.mypageActivityReviewVo">
+		SELECT *  
+		FROM 
+			ACTIVITY, REVIEW 
+		WHERE REVIEW_WRITER = #{writer}
+			AND REVIEW_CATEGORY = 2 
+			AND REVIEW_ARTICLENUMBER = ACTIVITY_NUMBER
+	</select>
+</mapper>
