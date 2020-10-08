@@ -24,21 +24,21 @@ public class MypageDaoTest {
 	@Test
 	public void lReservationInfoTest() throws SQLException {
 		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> bean =myPageDao.lReservationInfo(24, 1);
+		List<LReservInfoVo> bean =myPageDao.lReservationInfo(24);
 		
 		System.out.println(bean);
 	}
 	@Test
 	public void lUserUsedInfoTest() throws SQLException {
 		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> bean =myPageDao.lUserCartInfo(24, 1);
+		List<LReservInfoVo> bean =myPageDao.lUserCartInfo(24);
 		
 		System.out.println(bean);
 	}
 	@Test
 	public void lUserCartInfoTest() throws SQLException {
 		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> bean =myPageDao.lUserCompletedInfo(24, 1);
+		List<LReservInfoVo> bean =myPageDao.lUserCompletedInfo(24);
 		
 		System.out.println(bean);
 	}
