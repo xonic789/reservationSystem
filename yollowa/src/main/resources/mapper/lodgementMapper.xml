@@ -23,4 +23,24 @@
 		select roomInfo_roomNumber, roomInfo_name ,roomInfo_offPeakPrice from roomInfo where roomInfo_articleNumber = #{lodgementNumber}
 	</select>
 	
+	
+	<!-- list page filter 관련도 순 -->
+	<!-- 전체 -->
+	<select id="selectOptionAll" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1
+	</select>
+	<!-- 후기순 -->
+	<select id="selectOptionReviewCount" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_reviewCount desc
+	</select>	
+	<!-- 별점순 -->
+	<select id="selectOptionReviewRate" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_reviewGradeRate desc
+	</select>
+
+	<!-- 최신순 -->
+	<select id="selectOptionLodgementNumber" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_number desc
+	</select>
+	
 </mapper>
