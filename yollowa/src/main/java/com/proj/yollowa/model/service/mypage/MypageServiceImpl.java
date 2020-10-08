@@ -1,6 +1,7 @@
 package com.proj.yollowa.model.service.mypage;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.entity.UserVo;
-import com.proj.yollowa.model.entity.mypage.LReservInfoVo;
+import com.proj.yollowa.model.entity.host.LodgementVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
+import com.proj.yollowa.model.entity.mypage.LReservInfoDto;
 import com.proj.yollowa.model.mypage.MypageDao;
-import com.proj.yollowa.model.user.UserDao;
 @Service
 public class MypageServiceImpl implements MypageService{
 
@@ -29,32 +31,30 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public List<LReservInfoVo> lReservationInfoService(Model model, int user_number)
+	public List<LReservInfoDto> lReservationInfoService(Model model, int user_number)
 			throws SQLException {
 		MypageDao mypageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> list=mypageDao.lReservationInfo(user_number);
-		model.addAttribute("rsvinfo",list);
-		
-		return list;
+		List<LReservInfoDto> reservInfo=mypageDao.getLreservationInfo(user_number);
+		model.addAttribute("rsvinfo",reservInfo);
+		return reservInfo;
 	}
 
 	@Override
-	public List<LReservInfoVo> lUserCompletedInfoService(Model model, int user_number)
+	public List<LReservInfoDto> lUserCompletedInfoService(Model model, int user_number)
 			throws SQLException {
 		MypageDao mypageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> list=mypageDao.lUserCompletedInfo(user_number);
+		List<LReservInfoDto> list=mypageDao.getLuserCompletedInfo(user_number);
 		model.addAttribute("usedinfo",list);
 		
 		return list;
 	}
 
 	@Override
-	public List<LReservInfoVo> lUserCartInfoService(Model model, int user_number)
+	public List<LReservInfoDto> lUserCartInfoService(Model model, int user_number)
 			throws SQLException {
 		MypageDao mypageDao = sqlSession.getMapper(MypageDao.class);
-		List<LReservInfoVo> list=mypageDao.lUserCartInfo(user_number);
+		List<LReservInfoDto> list=mypageDao.getLuserCartInfo(user_number);
 		model.addAttribute("cartinfo",list);
-		
 		return list;
 	}
 	
