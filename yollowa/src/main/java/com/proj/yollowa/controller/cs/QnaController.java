@@ -1,5 +1,7 @@
 package com.proj.yollowa.controller.cs;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.model.entity.SearchVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.entity.cs.QnaReplyVo;
 import com.proj.yollowa.model.entity.cs.QnaVo;
+import com.proj.yollowa.model.service.cs.NoticeService;
 import com.proj.yollowa.model.service.cs.QnaReplyService;
 import com.proj.yollowa.model.service.cs.QnaService;
 
@@ -49,7 +53,7 @@ public class QnaController {
 	
 	
 	@RequestMapping(value = "/detail/{qnano}", method = RequestMethod.GET)
-	public String getNotice(Model model, @PathVariable int qnano) throws SQLException {
+	public String getQna(Model model, @PathVariable int qnano) throws SQLException {
 		qnaService.getQnaService(model, qnano);
 		
 		model.addAttribute("reply", qnaReplyService.listQnaReplyService(qnano));
@@ -101,6 +105,7 @@ public class QnaController {
 	//댓글 수정 뷰 페이지(본인이 쓴 댓글만 수정 가능하도록 할 것!!)
 	@RequestMapping(value = "/reply/update/repno={replyno},qnano={qnano}", method = RequestMethod.GET)
 	public String updateQnaReplyView(Model model, @PathVariable int replyno, @PathVariable int qnano) throws SQLException {
+		qnaService.getQnaService(model, qnano);
 		model.addAttribute("reply", qnaReplyService.listQnaReplyService(qnano));
 		model.addAttribute("target", replyno);
 		

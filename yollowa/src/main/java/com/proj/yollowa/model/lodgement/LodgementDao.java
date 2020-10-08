@@ -17,7 +17,21 @@ public interface LodgementDao {
 	// 디테일 페이지
 	public List<LodgementRoomInfoVo> lodgementDetail(int articleNumber) throws SQLException;
 
-	// ajax select Price (lodgement list page)
+//	// ajax select Price (lodgement list page)
 	public List<LodgementRoomInfoVo> priceSelect(int lodgementNumber);
-	
+
+	// lodgement list page search
+	public List<LodgementVo> lodgementSearch(String search);
+//	
+//	// filter 전체
+//	public List<LodgementVo> selectOptionAll();
+//
+//	// filter 후기순
+//	public List<LodgementVo> selectOptionReviewCount();
+//	
+//	// filter 별점순
+//	public List<LodgementVo> selectOptionReviewRate();
+//	
+//	// filter 최신순
+//	public List<LodgementVo> selectOptionLodgementNumber();
 }
