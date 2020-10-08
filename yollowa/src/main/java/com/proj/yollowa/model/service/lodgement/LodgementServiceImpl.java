@@ -45,5 +45,18 @@ public class LodgementServiceImpl implements LodgementService {
 		
 		return list;
 	}
+
 	
+	// ajax select Price (lodgement list page)
+	@Override
+	public int priceSelect(int lodgementNumber) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		List<LodgementRoomInfoVo> list = dao.priceSelect(lodgementNumber);
+		System.out.println("service return list :: "+list);
+		
+		int price = list.get(0).getRoomInfo_offPeakPrice();
+		System.out.println(lodgementNumber+"의 방 가격"+price);
+		
+		return price;
+	}
 }
