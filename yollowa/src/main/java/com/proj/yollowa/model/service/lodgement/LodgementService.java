@@ -21,6 +21,9 @@ public interface LodgementService {
 	// ajax select Price (lodgement list page)
 	int priceSelect(int lodgementNumber);
 	
+	// lodgement list page search
+	void lodgementSearch(String search, Model model);
+
 //	// ajax filter (listpage)
 //	List<LodgementVo> selectOption(String optionName, Model model);
 	

@@ -42,5 +42,14 @@
 	<select id="selectOptionLodgementNumber" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
 		select * from lodgement where lodgement_temp=1 order by lodgement_number desc
 	</select>
+	<!-- list page filter 관련도 순 end -->
+	
+	<!-- lodgementSearch  -->
+	<select id="lodgementSearch" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 
+	<if test="#{search}!=''">
+		and lodgement_companyName like CONCAT('%',#{search},'%')
+	</if>
+	</select>
 	
 </mapper>

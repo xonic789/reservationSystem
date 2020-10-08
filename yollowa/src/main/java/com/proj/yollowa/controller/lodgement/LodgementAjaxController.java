@@ -47,6 +47,17 @@ public class LodgementAjaxController {
 		return price;
 	}
 	
+	
+//	@RequestMapping(value="list/lodgementSearch")
+//	public Object lodgementListSearch(HttpServletRequest req) {
+//		String searchVal = req.getParameter("searchVal");
+//		System.out.println(searchVal);
+//		
+//		List<LodgementVo> list = lodgementService.lodgementListSearch(searchVal);
+//		
+//		return null;
+//	}
+	
 //	@RequestMapping(value="list/selectOption", method=RequestMethod.GET, produces = "application/json;charset=utf-8")
 //	@ResponseBody
 //	public Object selectOption(HttpServletRequest req, Model model) {

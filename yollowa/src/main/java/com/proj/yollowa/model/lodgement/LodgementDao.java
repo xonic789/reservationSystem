@@ -19,7 +19,9 @@ public interface LodgementDao {
 
 //	// ajax select Price (lodgement list page)
 	public List<LodgementRoomInfoVo> priceSelect(int lodgementNumber);
-	
+
+	// lodgement list page search
+	public List<LodgementVo> lodgementSearch(String search);
 //	
 //	// filter 전체
 //	public List<LodgementVo> selectOptionAll();

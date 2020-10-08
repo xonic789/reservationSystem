@@ -105,13 +105,13 @@ h3{
 }
 
 .lodgeImgBox{
-	width:252px;
+	width:250px;
 	height: 144px;
 	position: relative;
 }
 .titleImg{
 	z-index:1;
-	width:252px;
+	width:250px;
 	height: 144px;
 	top:0px;
 	left:0px;
@@ -302,69 +302,63 @@ pointer-events:auto;
 
 	// 카테고리 라디오 박스
 	function allLodgementR(){
-		console.log('checkAll');
 		$('.hotel').show();
 		$('.motel').show();
 		$('.pension').show();
 		$('.resort').show();
 		$('.guest').show();
 		
-		$('h2').text($('.allList').length+"건의 검색결과");
+		$('h3').text($('.allList').length+"건의 검색결과");
 	};
 	
 	function hotelR(){
-		console.log('checkhotel');
 		$('.motel').hide();
 		$('.pension').hide();
 		$('.resort').hide();
 		$('.guest').hide();
 		$('.hotel').show();
 		
-		$('h2').text($('.hotel').length+"건의 검색결과");
+		$('h3').text($('.hotel').length+"건의 검색결과");
 	};
 	
 	
 	function motelR(){
-		console.log('checkMotel');
 		$('.hotel').hide();
 		$('.pension').hide();
 		$('.resort').hide();
 		$('.guest').hide();
 		$('.motel').show();
 		
-		$('h2').text($('.motel').length+"건의 검색결과");
+		$('h3').text($('.motel').length+"건의 검색결과");
 	};
 	
 	
 	function pensionR(){
-		console.log('checkPension');
 		$('.hotel').hide();
 		$('.motel').hide();
 		$('.resort').hide();
 		$('.guest').hide();
 		$('.pension').show();
 		
-		$('h2').text($('.pesion').length+"건의 검색결과");
+		$('h3').text($('.pension').length+"건의 검색결과");
 	};
 	function resortR(){
-		console.log('checkResort');
 		$('.hotel').hide();
 		$('.motel').hide();
 		$('.pension').hide();
 		$('.guest').hide();
 		$('.resort').show();
 		
-		$('h2').text($('.resort').length+"건의 검색결과");
+		$('h3').text($('.resort').length+"건의 검색결과");
 	};
 	function guestR(){
-		console.log('checkguest');
 		$('.hotel').hide();
 		$('.motel').hide();
 		$('.pension').hide();
 		$('.resort').hide();
 		$('.guest').show();
 		
-		$('h2').text($('.guest').length+"건의 검색결과");
+		$('h3').text($('.guest').length+"건의 검색결과");
 	};
 	
 	// 관련도 순 선택
@@ -453,6 +447,25 @@ pointer-events:auto;
 		}
 	};
 		
+	
+	/* function searchFunction(search){
+		if(event.keyCode==13){
+			var searchVal = 'searchVal='+$(search).val();
+			$.ajax({
+				type:'GET',
+				dataType: 'json',
+				url: 'list/lodgementSearch',
+				data: searchVal,
+				success:function(data){
+					console.log('성공'+data);
+				},
+				error:function(e){
+					alert('실패'+e);
+				}
+			});
+		}
+	}; */
+	
 </script>
 
 <meta charset="UTF-8">
@@ -523,9 +536,9 @@ pointer-events:auto;
 					<div id="filter-2">
 					  <div id="search" class="input-append span12">
 						  <!-- 검색 form -->
-						  <form id="custom-search-form" class="form-search">
-							<input type="text" id="searchQuery" name="searchQuery" class="form-control search-query" placeholder="검색어를 입력하세요"/>
-							<button class="btn btn-secondary searchBtn">
+						  <form action="./lodgeSearch" method="GET" class="form-search">
+							<input type="text" id="searchQuery" name="searchQuery" class="form-control search-query" placeholder="검색어를 입력하세요" />
+							<button type="submit" class="btn btn-secondary searchBtn">
 							  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
 								<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>

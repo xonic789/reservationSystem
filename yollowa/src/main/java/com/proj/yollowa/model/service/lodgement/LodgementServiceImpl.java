@@ -31,7 +31,6 @@ public class LodgementServiceImpl implements LodgementService {
 			String imgName = list.get(i).getLodgement_img().substring(0, su);
 			list.get(i).setLodgement_img(imgName);
 			
-			System.out.println(i+"번 숙박 글 대표사진 :: "+imgName);
 		}
 		model.addAttribute("listAll",list);
 	}
@@ -68,6 +67,21 @@ public class LodgementServiceImpl implements LodgementService {
 		return price;
 	}
 	
+	
+	// lodgement list page search
+	@Override
+	public void lodgementSearch(String search, Model model) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		List<LodgementVo> list = dao.lodgementSearch(search);
+		
+		for(int i=0; i<list.size(); i++) {
+			int su = list.get(i).getLodgement_img().indexOf("&");
+			String imgName = list.get(i).getLodgement_img().substring(0, su);
+			list.get(i).setLodgement_img(imgName);
+		}
+		
+		model.addAttribute("listAll", list);
+	}
 	// ajax filter (listpage)
 //	@Override
 //	public List<LodgementVo> selectOption(String optionName, Model model) {
