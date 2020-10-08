@@ -83,7 +83,8 @@
 		CKEDITOR.replace('editor',
 			    {
 		      height : '500px',  //에디터 높이
-		      startupFocus : false
+		      startupFocus : false,
+		      filebrowserUploadUrl:'${pageContext.request.contextPath }/fileupload'
 	    });
 		
 	});
@@ -96,7 +97,7 @@
 <div class="container">
 		<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
-		<h1>Q&amp;A <small>이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">

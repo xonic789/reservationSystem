@@ -76,7 +76,9 @@
 	    padding-bottom: 1px;
 	}
 	.pagination {
-	}
+		text-align: center;
+    	padding-left: revert;
+   	}
 	#btn-long {
 	    margin: 5px auto 23px auto;
 	    width: 77px;
@@ -100,7 +102,7 @@
 <div class="container">
 	<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
-		<h1>Q&amp;A <small>이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
