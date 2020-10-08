@@ -172,7 +172,7 @@
 			<form class="contact100-form validate-form" method="post"
 				action="${pageContext.request.contextPath }/join/">
 				<span class="contact100-form-title"
-					style="font-family: 'MapoPeacefull';"> YOLLOWA <br /> 회원가입
+					style="font-family: 'MapoPeacefull';"> 회원가입
 				</span>
 				<c:if test="${joinInfo.user_kakaoId ne null}">
 					<input type="hidden" name="user_kakaoId"
