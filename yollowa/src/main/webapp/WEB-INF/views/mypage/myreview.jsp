@@ -38,6 +38,13 @@ ul {
 .card-link:hover {
 	color: #433387;
 }
+  table {
+    width: 100%;
+    border: 1px solid #444444;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -125,13 +132,15 @@ ul {
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach items="${list }" var="list" >
 					<tr>
-						<td>11111111111</td>
-						<td>22222</td>
-						<td>333</td>
-						<td>4344</td>
-						<td>555</td>
+						<td>::${list.company }</td>
+						<td>${list.img }</td>
+						<td>${list.starNum }</td>
+						<td>${list.reviewedDate }</td>
+						<td>${list.content }</td>
 					</tr>
+				</c:forEach>
 				</tbody>
 				</table>
 			</div>

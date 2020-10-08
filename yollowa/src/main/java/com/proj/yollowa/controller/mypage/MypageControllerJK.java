@@ -56,14 +56,15 @@ public class MypageControllerJK {
 		if(user==null) {
 			return "redirect:../";
 		}
-		String writer = "김철수";
 		System.out.println("---->"+userVo.getUser_name());
-//		mypageServiceJK.getLodgementReviewService(writer);
-//		mypageServiceJK.getActivityReviewService(writer);
-		System.out.println(mypageServiceJK.getLodgementReviewService(writer));
-		System.out.println("@---------------------------------------------------@");
-		System.out.println(mypageServiceJK.getActivityReviewService(writer));
+		System.out.println("@@@@"+mypageServiceJK.getAllMyReviewService(userVo.getUser_name()).size());
+		model.addAttribute("list", mypageServiceJK.getAllMyReviewService(userVo.getUser_name()));
 		return "mypage/myreview";
 	}
-	
+	//테스트용..
+	@RequestMapping(value = "/1",method = RequestMethod.GET)
+	public String hostRqn(Model model) throws SQLException {
+		mypageServiceJK.getAllMyReviewService("김철수");
+		return "redirect:../";
+	}
 }

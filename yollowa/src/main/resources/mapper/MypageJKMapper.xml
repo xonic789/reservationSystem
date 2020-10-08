@@ -11,7 +11,7 @@
 		USER_LEVEL = 9 
 	WHERE (USER_NUMBER = #{user_number})
 	</update>
-	<select id="getLodgementReview" resultType="com.proj.yollowa.model.entity.mypageLodgementReviewVo">
+	<select id="getLodgementReview" resultType="com.proj.yollowa.model.entity.mypage.LodgementReviewVo">
 		SELECT *  
 		FROM 
 			LODGEMENT, REVIEW 
@@ -19,7 +19,7 @@
 			AND REVIEW_CATEGORY = 1 
 			AND REVIEW_ARTICLENUMBER = LODGEMENT_NUMBER
 	</select>
-	<select id="getActivityReview" resultType="com.proj.yollowa.model.entity.mypageActivityReviewVo">
+	<select id="getActivityReview" resultType="com.proj.yollowa.model.entity.mypage.ActivityReviewVo">
 		SELECT *  
 		FROM 
 			ACTIVITY, REVIEW 
