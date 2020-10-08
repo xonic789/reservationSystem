@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
-
-import net.sf.json.JSON;
 
 
 @RestController
@@ -35,6 +32,14 @@ public class LodgementAjaxController {
 		List<LodgementRoomInfoVo> list=lodgementService.lodgementDetail(an,model);
 		
 		return (Object) list;
+	}
+	
+	@RequestMapping(value="list/priceSelect", method=RequestMethod.POST)
+	public Object priceSelect(HttpServletRequest req) {
+		System.out.println(req.getParameter("lodgementNumber"));
+		int lodgementNumber = Integer.parseInt(req.getParameter("lodgementNumber"));
+		int price = lodgementService.priceSelect(lodgementNumber);
+		return price;
 	}
 	
 }

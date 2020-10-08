@@ -4,135 +4,171 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <%@ include file="../template/head.jspf"%>
 <style type="text/css">
-.behclick-panel .panel-heading {
-	padding: 10px 15px;
-	border-bottom: 1px solid transparent;
-	border-bottom: 1px solid darkslategrey;
-}
-
-/* upDown Fix start*/
-#upDown{
-	border: 1px solid black;
-	position: fixed;
-	top:400px;
-	right: 200px;
-	padding: 3px 6px;
-}
-
-/* upDown Fix end*/
-
 /* category start */
-.page-header {
-	border-bottom: 1px solid lightgray;
-	padding-top: 15px;
-	padding-bottom: 25px;
-}
-
-.page-header>p {
-	margin-top: 10px;
-	margin-bottom: 2px;
-}
-
-#category {
-	border-right: 1px solid lightgray;
-}
-
-#category>div:first-child {
-	margin-top: 30px;
-}
-
-#category>div {
-	margin-bottom: 25px;
-	padding-right: 15px;
-	font-size: 16px;
-}
-
-.smallList>p:hover {
-	background-color: #EEEEED;
-	cursor: pointer;
-}
-
-h2 {
-	margin-top: 50px;
-	margin-left: 20px;
-}
-
-.bigList>p {
-	font-size: 18px;
-	margin-bottom: 5px;
-}
-
-.smallList {
-	margin-left: 15px;
-	margin-bottom: 5px;
-}
-
-.smallList>p {
-	margin-bottom: 8px;
-}
-
-.smallList>p>label>input {
-	font-size: 15px;
-	text-decoration: none;
-}
+.page-header{
+		border-bottom: 1px solid lightgray;
+		padding-top: 15px;
+		padding-bottom: 25px;
+	}
+	.page-header>p{
+		margin-top: 10px;
+		margin-bottom:2px;
+	}
+	#category{
+		border-right: 1px solid lightgray;
+	}
+	
+	#category>div:first-child{
+		margin-top: 30px;
+	}
+	#category>div{
+		margin-bottom: 25px;
+		padding-right:15px;
+		font-size: 16px;
+	}
+	.custom-control-label{
+		display: block;
+		margin-bottom: 10px;
+	}
+	.custom-control-label:hover {
+		background-color: #EEEEED;
+		cursor: pointer;
+	}
+	#hostInfo{
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+	.bigList>p{
+		font-size: 18px;
+		margin-bottom:5px;
+	}
+	.smallList{
+		margin-left: 15px;
+		margin-bottom: 5px;
+	}
+	.smallList>p {
+		margin-bottom:8px;
+	}
+	.smallList>p>a{
+		font-size:15px;
+		text-decoration: none;
+		display: block;
+	}
+	h2{
+		font-size: 35px;
+	}
 /* category end */
 
-/* 금액설정 폼 start */
-
-#payAmount{
-	padding: 0px 10px;
+/* context start */
+#con{
+	padding: 25px 0px 60px 20px;
 }
-/* 금액설정 폼 end */
-
-/* selected link */
-
-#search-right {
-	margin-top: 20px;
-	margin-left: 20px;
+h3{
+	margin-bottom: 30px;
 }
-
-#lodgeList>div {
-	margin: 30px 10px;
-	width: 30%;
-	background-color: white;
+.form-search{
+	display: inline-block;	
+	margin-right:250px;
+}
+.search-query{
+	width:285px;
+	padding : 0px 12px 0px 12px;
+	line-height: 28px;
 	display: inline-block;
-	box-shadow: 1px 1px 1px gray;
+}
+.searchBtn{
+	line-height: 22px;
+	display: inline-block;
 }
 
-#lodgeList>div img {
-	width: 100%;
+.sort{
+	display:inline-block;
+	width:180px;
 }
 
-#lodgeList div a ul {
-	padding-left: 10px;
-	list-style: none;
-	color: black;
-	margin: 5px 0px 10px;
+.oneLodge{
+	width:252px;
+	height: 269px;
+	border: 1px solid lightgray;
+	display: inline-block;
+	margin-right:20px;
+	margin-top: 30px;
+	cursor: pointer;
 }
-#lodgeList div a{
-	text-decoration: none;
-}
-
-#dropdownMenuButton1,#dropdownMenuButton2{
-	margin-right:10px;
-	float:left;
+.oneLodge:nth-child(3n){
+	margin-right:0px;
 }
 
-#searchQuery{
-	margin-left: 50px;
-	float: none;
+.lodgeImgBox{
+	width:252px;
+	height: 144px;
+	background-color: lightgray;
 }
-
-#minPay,#maxPay{
-	width: 100px;
-	text-align: center;
+.type{
+	padding: 5px 0px 0px 5px;
 }
+.sub{
+	padding: 0px 12px 12px 12px;
+	overflow: hidden;
+}
+.companyName{
+	padding-top: 8px;
+	font-size: 16px;
+	overflow: hidden;
+}
+.price{
+	padding-top: 20px;
+	font-size: 18px;
+	font-style: bold;
+}
+.reviewRate{
+	color:#DCA60A;
+}
+/* context end */
 
 </style>
+
 <script type="text/javascript">
+	$(document).ready(function(){
+		<c:forEach items="${listAll}" begin="0" varStatus="num" var="bean">
+			if($('.type${num.index}').text()=='hotel'){
+				$('.type${num.index}').text('호텔')
+			}else if($('.type${num.index}').text()=="motel"){
+				$('.type${num.index}').text('모텔')
+			}else if($('.type${num.index}').text()=="pension"){
+				$('.type${num.index}').text("펜션")
+			}else if($('.type${num.index}').text()=="resort"){
+				$('.type${num.index}').text("리조트/콘도")
+			}else if($('.type${num.index}').text()=="guest"){
+				$('.type${num.index}').text("게스트하우스")
+			}
+		</c:forEach>
+
+		
+		<c:forEach items="${listAll}" begin="0" varStatus="num" var="bean">
+			console.log($('.price${num.index}').text());
+			console.log('lodgementNumber='+${bean.lodgement_number});
+			var ln = "lodgementNumber="+${bean.lodgement_number};
+			
+			$.ajax({
+				url:"list/priceSelect",
+				data:ln,
+				dataType:"json",
+				type:"post",
+				success:function(data){
+					$('.price${num.index}').text(data);
+					var price = $('.price${num.index}').text().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+					$('.price${num.index}').text('￦ '+price); 
+				}
+			});
+			
+			
+		</c:forEach>
+	
+	
+	});
 	
 	// 카테고리 라디오 박스
 	function allLodgementR(){
@@ -196,59 +232,6 @@ h2 {
 		
 		$('h2').text($('.guest').length+"건의 검색결과");
 	};
-	
-	
-	
-	
-	
-	/* 달력 */
-	var today = new Date();
-	var month,day;
-	
-	if(today.getDate()<10){
-		day="0"+today.getDate();
-	}else{
-		day=today.getDate();
-	}
-	
-	if(today.getMonth()<9){
-		month="0"+(today.getMonth()+1);
-	}else{
-		month=today.getMonth()+1;
-	}
-	
-	var msg = (today.getYear()+1900) +"-"+month+ "-"+day;
-	
-	$(function() {
-		$('#currentDate').attr('value', msg);
-		$('#currentDate').attr('min', msg);
-	});
-	
-	/* 리스트 마우스 오버 */
-	$(function() {
-		$('#lodgeList>div').mouseover(function(){
-			$(this).css('cursor','pointer').css('transform','translate(0,-5px)').css('box-shadow','3px 3px 3px gray');
-		});
-		
-		$('#lodgeList>div').mouseleave(function(){
-			$(this).css('cursor','none').css('transform','translate(0,0)').css('box-shadow','1px 1px 1px gray');
-		});
-	});
-	
-	/* updown button */
-	$(function() {
-		$('#upIcon').mouseover(function(){
-			$(this).css('cursor','pointer');
-		});
-		
-		$('#downIcon').mouseover(function(){
-			$(this).css('cursor','pointer');
-		});
-		
-	});
-	
-	
-	
 </script>
 
 <meta charset="UTF-8">
@@ -266,56 +249,43 @@ h2 {
 				숙박 <small>Lodgement</small>
 			</h1>
 		</div>
-		<div id="upDown">
-			<a id="upIcon" href="#headerUp">
-				<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chevron-double-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				  <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
-				  <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-				</svg>
-			</a><br/>
-			<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-			  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-			</svg><br/>
-			<a id="downIcon" href="#footer">
-				<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chevron-double-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				  <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-				  <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-				</svg>
-			</a>
-		</div>
 		
 		<div class="row">
 			<div id="category" class="col-md-3">
 				<div class="bigList arrowUp">
 					<p>숙박 종류</p>
 					<div class="smallList">
-						<div>
-							<input type="radio" id="allLodgement" name="lodList" value="allLodgement" checked="checked" onclick="allLodgementR();">
-							<label for="allLodgement">전체</label>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="allLodgement" class="custom-control-input" name="lodList" value="allLodgement" checked="checked" onclick="allLodgementR();">
+							<label class="custom-control-label" for="allLodgement">전체</label>
 						</div>
-						<div>
-							<input type="radio" id="hotel" name="lodList" value="hotel" onclick="hotelR();">
-							<label for="hotel">호텔</label>
+						<!-- <div class="custom-control custom-radio">
+					      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+					      <label class="custom-control-label" for="customRadio1">호텔</label>
+					    </div> -->
+						<div class="custom-control custom-radio">
+							<input type="radio" id="hotel" class="custom-control-input" name="lodList" value="hotel" onclick="hotelR();">
+							<label class="custom-control-label" for="hotel">호텔</label>
 						</div>
-						<div>
-							<input type="radio" id="motel" name="lodList" value="motel" onclick="motelR();">
-							<label for="motel">모텔</label>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="motel" class="custom-control-input" name="lodList" value="motel" onclick="motelR();">
+							<label class="custom-control-label" for="motel">모텔</label>
 						</div>
-						<div>
-							<input type="radio" id="pension" name="lodList" value="pension" onclick="pensionR();">
-							<label for="pension">펜션</label>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="pension" class="custom-control-input" name="lodList" value="pension" onclick="pensionR();">
+							<label class="custom-control-label" for="pension">펜션</label>
 						</div>
-						<div>
-							<input type="radio" id="resort" name="lodList" value="resort" onclick="resortR();">
-							<label for="resort">리조트/콘도</label>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="resort" class="custom-control-input" name="lodList" value="resort" onclick="resortR();">
+							<label class="custom-control-label" for="resort">리조트/콘도</label>
 						</div>
-						<div>
-							<input type="radio" id="guest" name="lodList" value="guest" onclick="guestR();">
-							<label for="guest">게스트하우스</label>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="guest" class="custom-control-input" name="lodList" value="guest" onclick="guestR();">
+							<label class="custom-control-label" for="guest">게스트하우스</label>
 						</div>
 					</div>
 				</div>
-				<div class="bigList arrowUp">
+				<!-- <div class="bigList arrowUp">
 					<p>위치</p>
 					<div class="smallList">
 						<div>
@@ -323,62 +293,47 @@ h2 {
 							<label for="allPlace">전체</label>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
 			<div class="col-md-9">
-				<div id="search-right">
-					<h2>${cnt}건의 검색결과</h2>
+				<div id="con">
+					<h3>${cnt}건의 검색결과</h3>
 					<div id="filter-2">
-						<div id="search" class="input-append span12">
-						
-								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">예약가능 날짜</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<form id="currentDate1">
-										<input id="currentDate" type="date"/>
-										<button type="submit" class="btn btn-primary">확인</button>
-									</form>
-								</div>
-						
-							<div class="dropdown">
-								<button class="btn btn-secondary dropdown-toggle" type="button"
-									id="dropdownMenuButton2" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">가격대</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<form id="payAmount" action="">
-										<input type="text" id="minPay" name="minPay" class="search-query" placeholder="최소금액"/> -
-										<input type="text" id="maxPay" name="maxPay" class="search-query" placeholder="최대금액"/>
-										<button type="submit" class="btn btn-primary">확인</button>
-									</form>
-								</div>
-							</div>
-							<div>
-								
-							</div>
-							<div>
-								<form id="custom-search-form" class="form-search form-horizontal pull-right">
-									<input type="text" id="searchQuery" name="searchQuery" class="search-query" placeholder="검색어를 입력하세요"/>
-									<button class="btn btn-primary">
-										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-										  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-										  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-										</svg>
-									</button>
-								</form>
-							</div>	
-						</div>
+					  <div id="search" class="input-append span12">
+						  <!-- 검색 form -->
+						  <form id="custom-search-form" class="form-search">
+							<input type="text" id="searchQuery" name="searchQuery" class="form-control search-query" placeholder="검색어를 입력하세요"/>
+							<button class="btn btn-secondary searchBtn">
+							  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+								<path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+							  </svg>
+							</button>
+						  </form>
+						<!-- 관련도 필터 form -->
+						<span>정렬 : </span>
+						<select class="form-control sort">
+							<option>관련도순</option>
+							<option>후기순</option>
+							<option>좋아요순</option>
+							<option>최신순</option>
+						</select>	  	
+					  </div>
 					</div>
+					
 					<div id="lodgeList">
-					<c:forEach items="${listAll}" var="bean"> 
-						<div class="${bean.lodgement_category } allList" >
-							<a href="detail/${bean.lodgement_number}">
-								<img alt="" src="../${bean.lodgement_img }">
-								<ul>
-									<li>${bean.lodgement_companyName}</li>
-									<li>★ ${bean.lodgement_reviewGradeRate} (리뷰 ${bean.lodgement_reviewCount}건)</li>
-								</ul>
-							</a>
+					<c:forEach items="${listAll}" begin="0" varStatus="num" var="bean"> 
+						<div class="${bean.lodgement_category } allList oneLodge" onclick="location.href='detail/${bean.lodgement_number}'">
+							<div class="lodgeImgBox">
+							  <div class="type${num.index }">${bean.lodgement_category}</div>
+							  <img alt="">
+							</div>
+ 							<div class="sub">
+							  <div class="companyName">${bean.lodgement_companyName}</div>
+							  <span class="reviewRate">★ ${bean.lodgement_reviewGradeRate} </span><span> (리뷰 ${bean.lodgement_reviewCount}건)</span>
+							  <div class="price price${num.index }">가격</div>
+							</div>
 						</div>
 					</c:forEach>
 						

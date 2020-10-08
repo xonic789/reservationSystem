@@ -17,6 +17,9 @@ public interface LodgementService {
 	//숙박 디테일 
 	List<LodgementRoomInfoVo> lodgementDetail(int articleNumber, Model model) throws SQLException;
 	
+	// ajax select Price (lodgement list page)
+	int priceSelect(int lodgementNumber);
+	
 	
 
 }
