@@ -88,16 +88,31 @@
 	#replyText{
 		resize: none;
 	}
+	span#cke_1_top {
+	    display: none !important;
+	}
+	span#cke_1_bottom {
+    	display: none;
+	}
+	button.btn.btn-outline-primary {
+        height: 26.22222px;
+	    padding-top: 3px;
+	    padding-bottom: 3px;
+	}	
+	#replyBtnBox{
+		text-align: right;
+	}
 	/* content end */
 		
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		CKEDITOR.replace('editor',
-			    {
-		      height : '500px',  //에디터 높이
-		      startupFocus : false
-	    });
+		CKEDITOR.replace('replyText', {toolbar: [
+            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+           {name: 'editing', items: ['Format', 'Font', 'FontSize', 'TextColor', 'BGColor' , 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] }
+       ],
+       	width:'900px'
+		});
 		
 	});
 	
@@ -109,7 +124,7 @@
 <div class="container">
 	<div class="page-header">
 		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
-		<h1>Q&amp;A <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -148,10 +163,15 @@
 			<c:forEach items="${reply }" var="reply">
 			<div  class="card border-secondary mb-3">
 				<div class="card-header">
-					<span>작성자: ${reply.replyWriter } | </span>
-					<span>작성일: ${reply.updateDate } | </span>
-					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }">수정하기</a> | </span>
-					<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
+					<div class="row">
+					<div class="col-md-2">작성자: ${reply.replyWriter }</div>
+					<div class="col-md-3">작성일: ${reply.updateDate }</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-6" id="replyBtnBox">
+						<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">수정하기</button>
+						<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">삭제하기</button>
+					</div>
+ 				</div>
 				</div>
 				<div class="card-body">
 					<p class="card-text">${reply.replyText }</p>
@@ -161,7 +181,7 @@
 			<form action="${pageContext.request.contextPath }/cs-center/qna/reply/write" method="post">
 				<div id="replyBox">
 					<input type="hidden" name="qnaNo" value="${bean.qnano }" />
-					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="5"></textarea>
+					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="4"></textarea>
 					<input type="submit" class="btn btn-primary" value="작성하기"/>
 				</div>
 				<div>
