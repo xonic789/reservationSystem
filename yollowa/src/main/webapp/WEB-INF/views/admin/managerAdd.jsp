@@ -104,7 +104,7 @@
 		<h1>관리자 <small>임시페이지</small></h1>
 	</div>
 	<div class="row">
-		<div id="category" class="col-md-2">
+		<div id="category" class="col-md-3">
 				<div class="bigList">
 					<p>파트너 관리</p>
 					<div class="smallList">
@@ -122,7 +122,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<form action="./add" method="post">
 				<table class="table">
 					 <tbody>

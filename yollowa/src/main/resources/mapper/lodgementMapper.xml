@@ -19,4 +19,8 @@
 		select * from roominfo where roomInfo_articleNumber=#{articleNumber}
 	</select>
 	
+	<select id="priceSelect" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
+		select roomInfo_roomNumber, roomInfo_name ,roomInfo_offPeakPrice from roomInfo where roomInfo_articleNumber = #{lodgementNumber}
+	</select>
+	
 </mapper>

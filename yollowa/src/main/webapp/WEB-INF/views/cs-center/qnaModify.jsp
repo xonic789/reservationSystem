@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../template/head.jspf" %>
+
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js"></script>
 <style rel="stylesheet" type="text/css">
 	/* category start */
 	.page-header{
@@ -55,75 +57,75 @@
 	/* category end */
 		
 	/* content start */
-	.table{
-		margin-top: 30px;
-	    border-top: 2px solid #D0A9F5;
-	}
-	.table tr{
-		text-align: center;
-	}
-	
-	tbody td:nth-child(2) {
-		text-align: left;
-	}
-	#search {
-		float: right;
-	}
-	.form-group * {
-	    margin: 5px auto 5px auto;
-	    height: 33px;
-	    padding-top: 1px;
-	    padding-bottom: 1px;
-	}
-	.pagingBox{
+	.box1 {
+		margin: 32px auto 10px auto;
 		display: flex;
 		position: relative;
 	}
-	.pagination {
-		margin: 10px 205px auto 350px;
+	#titleLabel{
+		width: 8%;
+ 	 	font-size: 20px;
+ 		text-align: center;
 	}
-	#btn-long {
-	    margin: 5px auto 5px auto;
-	    width: 120%;
-	    height: 33px;
-	    padding-top: 1px;
-	    padding-bottom: 1px;
+	#titleInput{
+	}
+	.box3 {
+		text-align: right;
+		margin-top: 10px;
+	}
+	#submitBtn {
 	}
 	/* content end */
 		
 </style>
 <script type="text/javascript">
+	$(document).ready(function() {
+		CKEDITOR.replace('editor',
+			    {
+		      height : '500px',  //에디터 높이
+		      startupFocus : false
+	    });
+		
+	});
+	
 </script>
 </head>
 <body>
 <%@ include file="../template/header.jspf" %>
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
-	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 관리자 페이지 > 임시 </p>
-		<h1>관리자 <small>임시페이지</small></h1>
+		<div class="page-header">
+		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
+		<h1>Q&amp;A <small>이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
-		<div id="category" class="col-md-3">
+		<div id="category" class="col-md-2">
 				<div class="bigList">
-					<p>파트너 관리</p>
+					<p>고객센터</p>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/hostApprovalStandbyList/">사업자 승인</a></p>
+						<p><a href="${pageContext.request.contextPath }/cs-center/notice/">공지사항</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/lodgementApprovalStandbyList/">숙박 게시글 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/cs-center/faq/">FAQ</a></p>
 					</div>
 					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/activityApprovalStandbyList/">액티비티 게시글 관리</a></p>
-					</div>
-					<p>사원 관리</p>
-					<div class="smallList">
-						<p><a href="${pageContext.request.contextPath }/admin/managerList/">관리자 관리</a></p>
+						<p><a href="${pageContext.request.contextPath }/cs-center/qna/">Q&amp;A</a></p>
 					</div>
 				</div>
 		</div>
-		<div class="col-md-9">
-			<h1>관리자</h1>
+		<div class="col-md-10">
+			<form method="post" action="./${bean.qnano}">
+				<div class="box1">
+					<label for="title" id="titleLabel">제목</label>
+					<input type="text" name="title" class="form-control" id="titleInput" value="${bean.title }" />
+				</div>
+				<div class="box2">
+					<textarea name="content" id="editor">${bean.content }</textarea>
+				</div>
+				<div class="box3">
+					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">
+				</div> 
+			</form>
 		</div>
 	</div>
 </div>

@@ -17,7 +17,8 @@ import com.proj.yollowa.interceptor.Auth.Role;
 import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.model.adminpage.AdminpageDao;
 import com.proj.yollowa.model.entity.ManagerVo;
-import com.proj.yollowa.model.entity.NoticeVo;
+import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.service.admin.AdminpageService;
 
 
@@ -29,7 +30,6 @@ public class AdminpageController {
 	AdminpageService adminpageService;
 	
 	//관리자 페이지 메인 화면 출력
-	@Auth(role=Role.MANAGER)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		
@@ -37,7 +37,6 @@ public class AdminpageController {
 	}
 	
 	//호스트 권한을 요청한 유저의 목록을 출력
-	@Auth(role=Role.MANAGER)
 	@RequestMapping(value = "/hostApprovalStandbyList/", method = RequestMethod.GET)
 	public String hostApprovalList(Model model) throws SQLException {
 		model.addAttribute("list", adminpageService.getHostApprovalStandbyListService());
@@ -46,11 +45,9 @@ public class AdminpageController {
 	}
 	
 	//호스트 권한을 부여한다
-	@Auth(role=Role.MANAGER)
-	@RequestMapping(value = "/hostApprovalStandbyList/hostApproval/{user_number}", method = RequestMethod.GET)
-	public String hostApproval(@PathVariable int user_number) throws SQLException {
-		adminpageService.updateUserLevelToHostService(user_number);
-		
+	@RequestMapping(value = "/hostApprovalStandbyList/hostApproval/userNum={user_number},userLevel={user_level}", method = RequestMethod.GET)
+	public String hostApproval(@PathVariable("user_number") int user_number, @PathVariable("user_level") int user_level) throws SQLException {
+		adminpageService.updateUserLevelToHostService(user_number, user_level);
 		return "redirect:../";
 	}
 	
@@ -79,7 +76,6 @@ public class AdminpageController {
 	//숙박 판매 글 중 등록 승인 대기 글 하나를 승인한다
 	@RequestMapping(value = "/lodgementApprovalStandbyList/updateLodgementTemp/{lodgement_number}", method = RequestMethod.GET)
 	public String updateLodgementTempToApproved(@PathVariable int lodgement_number) throws SQLException {
-		System.out.println("@--------------------------------------------------------------");
 		adminpageService.updateLodgementTempToApprovedService(lodgement_number);
 		return "redirect:../";
 	}

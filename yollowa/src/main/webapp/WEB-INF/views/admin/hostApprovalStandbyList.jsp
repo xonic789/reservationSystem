@@ -93,6 +93,25 @@
 		
 </style>
 <script type="text/javascript">
+$(document).ready(function() {
+	var selectorsLength=$('.selectors').length;
+	var addres='./hostApproval/';
+	for(var i=1; i<=selectorsLength;i++){
+		var params = $('#userType'+i+' option:selected').val();
+		var newaddres= addres + params;
+		console.log(newaddres);
+		$('#a'+i).attr('href',newaddres);
+	}
+	$('.selectors').on('change', function() {
+		for(var i=1; i<=selectorsLength;i++){
+			var params = $('#userType'+i+' option:selected').val();
+			var newaddres= addres + params;
+			console.log(newaddres);
+			$('#a'+i).attr('href',newaddres);
+		}
+	});
+	
+	});
 </script>
 </head>
 <body>
@@ -104,7 +123,7 @@
 		<h1>관리자 <small>임시페이지</small></h1>
 	</div>
 	<div class="row">
-		<div id="category" class="col-md-2">
+		<div id="category" class="col-md-3">
 				<div class="bigList">
 					<p>파트너 관리</p>
 					<div class="smallList">
@@ -122,7 +141,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<form id="search" action="" class="form-inline">
 				<div class="form-group">
 				    <select name="searchType" class="custom-select">
@@ -147,11 +166,12 @@
 			      <th>사업자등록번호</th>
 			      <th>상호</th>
 			      <th>권한</th>
+			      <th>부여할 권한</th>
 			      <th>승인</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach items="${list }" var="user">
+			  <c:forEach items="${list }" var="user" varStatus="status">
 			    <tr>
 			      <td>${user.user_number }</td>
 			      <td>${user.user_id }</td>
@@ -160,8 +180,18 @@
 			      <td>${user.user_email }</td>
 			      <td>${user.user_companyNumber }</td>
 			      <td>${user.user_companyName }</td>
-			      <td>${user.user_level }</td>
-			      <td><a href="./hostApproval/${user.user_number }">승인하기</a></td>
+			      <td>
+			      	일반
+			      </td>
+			      <td>
+	 				<select id="userType${status.count }" class="selectors">
+						<option value="userNum=${user.user_number },userLevel=0">일반</option>
+						<option value="userNum=${user.user_number },userLevel=11">숙박</option>
+						<option value="userNum=${user.user_number },userLevel=12">액티비티</option>
+						<option value="userNum=${user.user_number },userLevel=13">복수 사업자</option>
+					</select>
+				  </td>
+		      	 	<td><a id="a${status.count }" href="">승인</a></td>
 			    </tr>
 			    </c:forEach>
 			  </tbody>

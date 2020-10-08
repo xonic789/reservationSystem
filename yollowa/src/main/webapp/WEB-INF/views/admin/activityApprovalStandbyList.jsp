@@ -100,11 +100,11 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 관리자 페이지 > 임시 </p>
-		<h1>관리자 <small>임시페이지</small></h1>
+		<p> <a href="../">메인 페이지</a> > 관리자 페이지 > 액티비티 게시글 관리 </p>
+		<h1>액티비티 게시글 관리 <small></small></h1>
 	</div>
 	<div class="row">
-		<div id="category" class="col-md-2">
+		<div id="category" class="col-md-3">
 				<div class="bigList">
 					<p>파트너 관리</p>
 					<div class="smallList">
@@ -122,7 +122,7 @@
 					</div>
 				</div>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<form id="search" action="" class="form-inline">
 				<div class="form-group">
 				    <select name="searchType" class="custom-select">
@@ -142,7 +142,6 @@
 			      <th>번호</th>
 			      <th>대표이미지</th>
 			      <th>제목</th>
-			      <th>영업소명</th>
 			      <th>상태</th>
 			      <th>승인하기</th>
 			    </tr>
@@ -153,8 +152,7 @@
 					<td>${list.activity_number }</td>
 					<td><img alt="" src="../../${list.activity_img }" width="100px" height="100px"></td>
 					<td>${list.activity_title }</td>
-					<td>${list.user_companyname }</td>
-					<td>${list.activity_temp }</td>
+					<td>대기</td>
 					<td><a href="./updateActivityTemp/${list.activity_number}">승인하기</a></td>
 			    </tr>
 			    </c:forEach>

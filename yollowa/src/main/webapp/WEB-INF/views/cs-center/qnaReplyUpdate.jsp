@@ -95,8 +95,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
+		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
+		<h1>Q&amp;A <small> 욜로와에서 고객님들에게 알려드립니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -129,9 +129,46 @@
 				</div>
 			</div>
 			<div class="box3">${bean.content }</div>
+			<c:forEach items="${reply }" var="reply">
+			<div class="box3">-----------------------------------------------------------------------------------</div>
+			<div>
+				<c:if test="${reply.replyNo != target}">
+					<div>
+						<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+						<span>작성자: ${reply.replyWriter } | </span>
+						<span>작성일: ${reply.updateDate } | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }">수정하기</a> | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
+					</div>
+					<div>
+						내용:${reply.replyText }
+					</div>
+				</c:if>
+				<c:if test="${reply.replyNo == target}">
+					<form action="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }" method="post">
+						<div>
+						<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+						<span>작성자: ${reply.replyWriter } | </span>
+						<span>작성일: ${reply.updateDate } | </span>
+						<span><a href="${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }">삭제하기</a> | </span>
+					</div>
+						<div>
+							<input type="hidden" name="replyNo" value='<c:out value="${reply.replyNo }"></c:out>' />
+							<input type="hidden" name="qnaNo" value='<c:out value="${reply.qnaNo }"></c:out>' />
+							<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요">${reply.replyText }</textarea>
+						</div>
+						<div>
+							<input type="submit" value="작성하기"/>
+						</div>
+					</form>
+				</c:if>
+			</div>
+			</c:forEach>
+			<div class="box3">-----------------------------------------------------------------------------------</div>
+			
 			<div class="box4">
-				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.noticeno }'" value="수정하기">
-				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.noticeno }'" value="삭제하기">
+				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.qnano }'" value="수정하기">
+				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.qnano }'" value="삭제하기">
 				<input type="button" id="list" class="btn btn-primary" onclick ="history.back();" value="목록">
 			</div> 
 		</div>
