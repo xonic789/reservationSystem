@@ -54,7 +54,14 @@ public class MypageController {
 		myPageService.lUserCartInfoService(model, userVo.getUser_number());
 		return "mypage/cart";
 	}
-	
+	@Auth
+	@RequestMapping(value = "/wishlist",method =RequestMethod.GET )
+	public String wishList(@AuthUser UserVo userVo, Model model) throws SQLException{
+		
+		
+		
+		return "mypage/wishlist";
+	}
 	
 	
 }
