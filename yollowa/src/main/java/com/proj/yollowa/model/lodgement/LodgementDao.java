@@ -1,9 +1,11 @@
 package com.proj.yollowa.model.lodgement;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 
@@ -15,8 +17,8 @@ public interface LodgementDao {
 	public int lodgementListCnt() throws SQLException;
 	
 	// 디테일 페이지
-	public List<LodgementRoomInfoVo> lodgementDetail(int articleNumber) throws SQLException;
-
+	public List<LodgementDetailPageDto> lodgementDetail(@Param("articleNumber") int articleNumber) throws SQLException;
+	
 //	// ajax select Price (lodgement list page)
 	public List<LodgementRoomInfoVo> priceSelect(int lodgementNumber);
 

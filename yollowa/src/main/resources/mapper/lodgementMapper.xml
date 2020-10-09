@@ -14,9 +14,9 @@
 		select count(*) from lodgement where lodgement_temp=1
 	</select>
 	
-	<!-- 숙박 디테일 방정보 옵션 -->
-	<select id="lodgementDetail" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
-		select * from roominfo where roomInfo_articleNumber=#{articleNumber}
+	<!-- 숙박 디테일,방정보 옵션 -->
+	<select id="lodgementDetail" resultType="com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto">
+		select * from lodgement as L join roominfo as R on L.lodgement_number=R.roomInfo_articleNumber where L.lodgement_number = #{articleNumber};
 	</select>
 	
 	<select id="priceSelect" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">

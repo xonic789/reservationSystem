@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.lodgement.LodgementDao;
@@ -45,15 +46,13 @@ public class LodgementServiceImpl implements LodgementService {
 
 	// 숙박 디테일
 	@Override
-	public List<LodgementRoomInfoVo> lodgementDetail(int articleNumber, Model model) throws SQLException {
+	public List<LodgementDetailPageDto> lodgementDetail(int articleNumber, Model model) throws SQLException {
 		LodgementDao dao=sqlSession.getMapper(LodgementDao.class);
-		List<LodgementRoomInfoVo> list=dao.lodgementDetail(articleNumber);
-		model.addAttribute("roomList", list);
-		
+		List<LodgementDetailPageDto> list = dao.lodgementDetail(articleNumber);
+		model.addAttribute("detailList", list);
 		return list;
 	}
 
-	
 	// ajax select Price (lodgement list page)
 	@Override
 	public int priceSelect(int lodgementNumber) {
