@@ -60,16 +60,26 @@ h2{
 /* category end */
 
 /* context start */
-
-#con{
-	padding: 25px 0px 60px 20px;
+.lodgementHref:hover{
+	text-decoration: none;
+	cursor: pointer;
+}
+.lodgementHref{
+	color:black;
+	cursor: pointer;
+}
+.con{
+	padding-top:25px;
 }
 h3{
 	margin-bottom: 30px;
 }
+.filterDiv{
+	margin-bottom:30px;
+}
 .form-search{
 	display: inline-block;	
-	margin-right:242px;
+	/* margin-right:242px; */
 }
 .search-query{
 	width:285px;

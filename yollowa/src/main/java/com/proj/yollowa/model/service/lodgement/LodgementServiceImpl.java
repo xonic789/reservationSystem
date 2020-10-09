@@ -53,10 +53,6 @@ public class LodgementServiceImpl implements LodgementService {
 		return list;
 	}
 
-<<<<<<< HEAD
-
-=======
-	
 	// ajax select Price (lodgement list page)
 	@Override
 	public int priceSelect(int lodgementNumber) {
@@ -70,7 +66,6 @@ public class LodgementServiceImpl implements LodgementService {
 		return price;
 	}
 	
->>>>>>> 5c6a61a74056b9a4a4e38693406fac231e1b95ed
 	
 	// lodgement list page search
 	@Override

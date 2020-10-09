@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
-=======
 import com.google.gson.Gson;
->>>>>>> 5c6a61a74056b9a4a4e38693406fac231e1b95ed
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
