@@ -38,10 +38,6 @@
 	background-color: #EEEEED;
 	cursor: pointer;
 }
-#hostInfo{
-	margin-top: 30px;
-	margin-left: 20px;
-}
 .bigList>p{
 	font-size: 18px;
 	margin-bottom:5px;
@@ -64,16 +60,26 @@ h2{
 /* category end */
 
 /* context start */
-
-#con{
-	padding: 25px 0px 60px 20px;
+.lodgementHref:hover{
+	text-decoration: none;
+	cursor: pointer;
+}
+.lodgementHref{
+	color:black;
+	cursor: pointer;
+}
+.con{
+	padding-top:25px;
 }
 h3{
 	margin-bottom: 30px;
 }
+.filterDiv{
+	margin-bottom:30px;
+}
 .form-search{
 	display: inline-block;	
-	margin-right:242px;
+	/* margin-right:242px; */
 }
 .search-query{
 	width:285px;
@@ -90,30 +96,51 @@ h3{
 	display:inline-block;
 	width:180px;
 }
-
+.allList{
+	padding: 0px 10px 15px 10px;
+}
 .oneLodge{
-	width:252px;
-	height: 269px;
+	width:100%;
 	border: 1px solid lightgray;
 	display: inline-block;
-	margin-right:20px;
-	margin-top: 30px;
 	cursor: pointer;
 }
-.oneLodge:nth-child(3n){
+/* .oneLodge:nth-child(3n){
 	margin-right:0px;
-}
+} */
 
 .lodgeImgBox{
-	width:250px;
-	height: 144px;
+	max-width: 100%;
+	max-width: 100%;
+	overflow:hidden;
 	position: relative;
 }
 .titleImg{
+	max-width: 100%;
+	left:0;
+	top:0;
+	position: relative;
+	display:block;
 	z-index:1;
-	width:250px;
-	height: 144px;
-	top:0px;
+	padding: 0;
+}
+.map{
+	background-color:rgba(100,100,100,0.5);
+	color:white;
+	width:100%;
+	z-index:2;
+	display:inline-block;
+	position: absolute;
+	top:167px;
+	left:0px;
+}
+.mapSpan{
+	color:white;
+	width:100%;
+	z-index:2;
+	display:inline-block;
+	position: absolute;
+	top:167px;
 	left:0px;
 }
 .type{
@@ -121,13 +148,13 @@ h3{
 	background-color: black;
 	color:white;
 	display:inline-block;
-	padding: 5px 8px 5px 8px;
+	padding: 1px 8px 1px 8px;
 	position: absolute;
 	top:0px;
 	left:0px;
 }
 .sub{
-	padding: 0px 12px 12px 12px;
+	padding: 0px 6px 6px 6px;
 	overflow: hidden;
 }
 .companyName{
@@ -150,14 +177,14 @@ h3{
 background:#e7ded5;
 box-shadow:3px 3px 3px rgba(0,0,0,.2);
 cursor:pointer;
-margin:0 auto;
+width:100%;
+float:right;
 max-width:225px;
 padding:1rem;
 position:relative;
-width:75%;
 z-index:3;
 display: inline-block;
-line-height: 12px;
+line-height: 10px;
 }
 
 .wrap-drop::after {
@@ -373,7 +400,7 @@ pointer-events:auto;
 				return bb-aa;
 			})
 			$.each(items, function(idx,ele){
-				$('.existShow').append($(ele).parent().parent());
+				$('.existShow').append($(ele).parent().parent().parent());
 			})
 		}else if(($(me).text()=='별점순')){
 			var items = $('.reviewRate').get();
@@ -387,7 +414,7 @@ pointer-events:auto;
 				return bb-aa;
 			});
 			$.each(items, function(idx,ele){
-				$('.existShow').append($(ele).parent().parent());
+				$('.existShow').append($(ele).parent().parent().parent());
 			});
 			
 		}else if(($(me).text()=='가격높은순')){
@@ -403,7 +430,7 @@ pointer-events:auto;
 			    return keyA-keyB;
 			});
 			$.each(items, function(idx, ele){
-				$('.existShow').prepend($(ele).parent().parent());
+				$('.existShow').prepend($(ele).parent().parent().parent());
 			});
 			
 			
@@ -428,7 +455,7 @@ pointer-events:auto;
 			console.log(items);
 			
 			$.each(items, function(idx, ele){
-				$('.existShow').append($(ele).parent().parent());
+				$('.existShow').append($(ele).parent().parent().parent());
 			});
 			
 			
@@ -442,7 +469,7 @@ pointer-events:auto;
 			});
 			
 			$.each(items,function(idx,ele){
-				$('.existShow').prepend($(ele).parent());
+				$('.existShow').prepend($(ele).parent().parent());
 			});
 		}
 	};
@@ -477,10 +504,10 @@ pointer-events:auto;
 	<div class="container">
 		<div id="headerUp" class="page-header">
 			<p>
-				<a href="../">메인 페이지</a> > 숙박 페이지
+				<a href="../">메인 페이지</a> > <a href="list"> 숙박 페이지</a>
 			</p>
 			<h1>
-				숙박 <small>Lodgement</small>
+				<a class="lodgementHref" href="list">숙박 <small>Lodgement</small></a>
 			</h1>
 		</div>
 		
@@ -531,10 +558,10 @@ pointer-events:auto;
 			</div>
 			
 			<div class="col-md-9">
-				<div id="con">
-					<h3>${cnt}건의 검색결과</h3>
-					<div id="filter-2">
-					  <div id="search" class="input-append span12">
+			<div class="con">
+				<h3>${cnt}건의 검색결과</h3>
+				<div class="row filterDiv">
+					<div class="col-md-8">
 						  <!-- 검색 form -->
 						  <form action="./lodgeSearch" method="GET" class="form-search">
 							<input type="text" id="searchQuery" name="searchQuery" class="form-control search-query" placeholder="검색어를 입력하세요" />
@@ -545,6 +572,8 @@ pointer-events:auto;
 							  </svg>
 							</button>
 						  </form>
+					</div>
+					<div class="col-md-4">
 						<div class="wrap-drop" id="noble-gases">
 						    <span>관련도순</span>
 						    <ul class="drop">
@@ -555,27 +584,35 @@ pointer-events:auto;
 						        <li><a onclick="selectOption(this);">최신순</a></li>
 						    </ul>
 						</div>
-						  	
-					  </div>
-					</div>
-					
-					<div id="lodgeList" class="existShow">
-					<c:forEach items="${listAll}" begin="0" varStatus="num" var="bean"> 
-						<div class="${bean.lodgement_category } allList oneLodge" onclick="location.href='detail/${bean.lodgement_number}'">
-							<div class="lodgeImgBox">
-							  <div class="type type${num.index }">${bean.lodgement_category}</div>
-							  <img class="titleImg" alt="" src="/lodgement/titleImg/${bean.lodgement_img }">
-							</div>
- 							<div class="sub">
-							  <div class="companyName">${bean.lodgement_companyName}</div>
-							  <span class="reviewRate">★${bean.lodgement_reviewGradeRate} </span><span> (리뷰 </span><span class="reviewCount">${bean.lodgement_reviewCount}</span><span>건)</span>
-							  <div class="price price${num.index }">가격</div>
-							</div>
-							<div class="filterLodgeNumber" style="display:none;">${bean.lodgement_number }</div>
-						</div>
-					</c:forEach>
 					</div>
 				</div>
+				
+				<div id="lodgeList" class="existShow row">
+					<c:forEach items="${listAll}" begin="0" varStatus="num" var="bean"> 
+						<div class="${bean.lodgement_category } allList col-md-4" onclick="location.href='detail/${bean.lodgement_number}'">
+							<div class="oneLodge">
+								<div class="lodgeImgBox">
+								  <div class="type type${num.index }">${bean.lodgement_category}</div>
+								  <img class="titleImg col-md" style="height:187px;" alt="" src="/lodgement/titleImg/${bean.lodgement_img }">
+								  <div class="map">
+									  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									    <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+									    <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+									  </svg>
+									  <span>${bean.lodgement_location }</span>
+								  </div>
+								</div>
+								<div class="sub">
+								  <div class="companyName">${bean.lodgement_companyName}</div>
+								  <span class="reviewRate">★${bean.lodgement_reviewGradeRate} </span><span> (리뷰 </span><span class="reviewCount">${bean.lodgement_reviewCount}</span><span>건)</span>
+								  <div class="price price${num.index }">등록된 방 없음</div>
+								</div>
+								<div class="filterLodgeNumber" style="display:none;">${bean.lodgement_number }</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
