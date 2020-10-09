@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -32,7 +33,7 @@ public class LodgementAjaxController {
 		
 		int an=Integer.parseInt(req.getParameter("articleNum"));
 		
-		List<LodgementRoomInfoVo> list=lodgementService.lodgementDetail(an,model);
+		List<LodgementDetailPageDto> list=lodgementService.lodgementDetail(an,model);
 		
 		return (Object) list;
 	}

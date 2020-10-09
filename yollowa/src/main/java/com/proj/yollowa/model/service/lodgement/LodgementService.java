@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 
 public interface LodgementService {
@@ -15,7 +16,7 @@ public interface LodgementService {
 	int lodgementListCnt() throws SQLException;
 	
 	//숙박 디테일 
-	List<LodgementRoomInfoVo> lodgementDetail(int articleNumber, Model model) throws SQLException;
+	List<LodgementDetailPageDto> lodgementDetail(int articleNumber, Model model) throws SQLException;
 	
 	
 
