@@ -25,6 +25,14 @@ public class LodgementServiceImpl implements LodgementService {
 	public void lodgementListAll(Model model) throws SQLException {
 		LodgementDao dao =sqlSession.getMapper(LodgementDao.class);
 		List<LodgementVo> list= dao.lodgementListAll();
+		System.out.println(list);
+		
+		for(int i=0; i<list.size(); i++) {
+			int su = list.get(i).getLodgement_img().indexOf("&");
+			String imgName = list.get(i).getLodgement_img().substring(0, su);
+			list.get(i).setLodgement_img(imgName);
+			
+		}
 		model.addAttribute("listAll",list);
 	}
 
@@ -45,6 +53,55 @@ public class LodgementServiceImpl implements LodgementService {
 		return list;
 	}
 
+<<<<<<< HEAD
 
+=======
 	
+	// ajax select Price (lodgement list page)
+	@Override
+	public int priceSelect(int lodgementNumber) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		List<LodgementRoomInfoVo> list = dao.priceSelect(lodgementNumber);
+//		System.out.println("service return list :: "+list);
+		
+		int price = list.get(0).getRoomInfo_offPeakPrice();
+//		System.out.println(lodgementNumber+"의 방 가격"+price);
+		
+		return price;
+	}
+	
+>>>>>>> 5c6a61a74056b9a4a4e38693406fac231e1b95ed
+	
+	// lodgement list page search
+	@Override
+	public void lodgementSearch(String search, Model model) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		List<LodgementVo> list = dao.lodgementSearch(search);
+		
+		for(int i=0; i<list.size(); i++) {
+			int su = list.get(i).getLodgement_img().indexOf("&");
+			String imgName = list.get(i).getLodgement_img().substring(0, su);
+			list.get(i).setLodgement_img(imgName);
+		}
+		
+		model.addAttribute("listAll", list);
+	}
+	// ajax filter (listpage)
+//	@Override
+//	public List<LodgementVo> selectOption(String optionName, Model model) {
+//		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+//		List<LodgementVo> list = null;
+//		if(optionName.equals("전체")) {
+//			list = dao.selectOptionAll();
+//		}else if(optionName.equals("후기순")) {
+//			list = dao.selectOptionReviewCount();
+//		}else if(optionName.equals("별점순")) {
+//			list = dao.selectOptionReviewRate();
+//		}else if(optionName.equals("최신순")) {
+//			list = dao.selectOptionLodgementNumber();
+//		}
+//		model.addAttribute("ajaxList", list);
+//		
+//		return list;
+//	}
 }

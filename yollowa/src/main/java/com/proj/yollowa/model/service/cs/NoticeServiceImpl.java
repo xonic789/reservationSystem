@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.proj.yollowa.model.cs.NoticeDao;
-import com.proj.yollowa.model.entity.NoticeVo;
+import com.proj.yollowa.model.entity.SearchVo;
+import com.proj.yollowa.model.entity.cs.NoticeVo;
+import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -19,10 +21,10 @@ public class NoticeServiceImpl implements NoticeService{
 	SqlSession sqlSession;
 	
 	@Override
-	public List<NoticeVo> getNoticeListService(PagingScale pagingScale) throws SQLException {
+	public List<NoticeVo> getNoticeListService(SearchVo searchVo) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 		
-		return noticeDao.getNoticeList(pagingScale);
+		return noticeDao.getNoticeList(searchVo);
 		//model.addAttribute("list", noticeDao.getNoticeList(pagingScale));
 	}
 
@@ -33,9 +35,9 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 	
 	@Override
-	public int countNoticeService() throws SQLException {
+	public int countNoticeService(SearchVo searchVo) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		return noticeDao.countNotice();
+		return noticeDao.countNotice(searchVo);
 	}
 	
 	@Override
@@ -47,7 +49,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public void insertNoticeService(NoticeVo bean) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		System.out.println(noticeDao);
 		bean.setWriter("tester");
 		noticeDao.insertNotice(bean);
 	}
@@ -55,7 +56,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public void updateNoticeService(NoticeVo bean) throws SQLException {
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		System.out.println(noticeDao);
 		noticeDao.updateNotice(bean);
 	}
 

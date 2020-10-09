@@ -3,11 +3,13 @@ package com.proj.yollowa.controller.lodgement;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -29,6 +31,15 @@ public class LodgementListController {
 		
 		return "lodgement/lodgementList";
 	}
+	
+	@RequestMapping(value="lodgeSearch", method=RequestMethod.GET)
+	public String lodgementSearch(HttpServletRequest req, Model model) {
+		String search = req.getParameter("searchQuery");
+		lodgementService.lodgementSearch(search, model);
+		
+		return "lodgement/lodgementList";
+	}
+		
 }
 
 

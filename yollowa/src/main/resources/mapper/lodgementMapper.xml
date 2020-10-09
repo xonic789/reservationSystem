@@ -19,4 +19,37 @@
 		select * from lodgement as L join roominfo as R on L.lodgement_number=R.roomInfo_articleNumber where L.lodgement_number = #{articleNumber};
 	</select>
 	
+	<select id="priceSelect" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
+		select roomInfo_roomNumber, roomInfo_name ,roomInfo_offPeakPrice from roomInfo where roomInfo_articleNumber = #{lodgementNumber}
+	</select>
+	
+	
+	<!-- list page filter 관련도 순 -->
+	<!-- 전체 -->
+	<select id="selectOptionAll" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1
+	</select>
+	<!-- 후기순 -->
+	<select id="selectOptionReviewCount" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_reviewCount desc
+	</select>	
+	<!-- 별점순 -->
+	<select id="selectOptionReviewRate" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_reviewGradeRate desc
+	</select>
+
+	<!-- 최신순 -->
+	<select id="selectOptionLodgementNumber" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 order by lodgement_number desc
+	</select>
+	<!-- list page filter 관련도 순 end -->
+	
+	<!-- lodgementSearch  -->
+	<select id="lodgementSearch" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 
+	<if test="#{search}!=''">
+		and lodgement_companyName like CONCAT('%',#{search},'%')
+	</if>
+	</select>
+	
 </mapper>

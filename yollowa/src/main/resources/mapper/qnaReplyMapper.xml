@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.proj.yollowa.model.cs.QnaReplyDao">
+	<select id="listQnaReply" resultType="com.proj.yollowa.model.entity.cs.QnaReplyVo">
+		SELECT *
+			FROM QNAREPLY
+			WHERE QNANO = #{qnano}
+			ORDER BY QNANO
+	</select>
+	
+	<insert id="createQnaReply">
+		INSERT INTO QNAREPLY (
+            QNANO
+            , REPLYTEXT
+            , REPLYWRITER
+        ) VALUES (
+            #{qnaNo}
+            , #{replyText}
+            , #{replyWriter}
+        )
+	</insert>
+	
+	<update id="updateQnaReply">
+		UPDATE QNAREPLY
+	        SET
+	            REPLYTEXT = #{replyText}
+	            , UPDATEDATE = NOW()
+	        WHERE REPLYNO = #{replyNo}
+	</update>
+	
+	<delete id="deleteQnaReply">
+		DELETE FROM QNAREPLY
+	        WHERE REPLYNO = #{replyNo}
+	</delete>
+			
+</mapper>
