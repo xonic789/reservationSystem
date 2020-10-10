@@ -34,7 +34,7 @@
 	</select>
 	<insert id="insertLodgeInfo">
 		insert into information (information_number, information_type, information_notice, information_basicInfo, information_comment, information_addPeopleInfo, information_service, information_refundInfo) values
-								(#{information_number}, 1, #{information.information_notice}, #{information.information_basicInfo}, #{information.information_comment}, #{information.information_addPeopleInfo}, #{information.information_service}, #{information.information_refundInfo})
+								(#{information_number}, 2, #{information.information_notice}, #{information.information_basicInfo}, #{information.information_comment}, #{information.information_addPeopleInfo}, #{information.information_service}, #{information.information_refundInfo})
 	</insert>
 	<insert id="updateLodgementImg">
 		update lodgement set lodgement_img = #{lodgement_img} where lodgement_number = #{lodgeNumber}
