@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.service.activity.ActivityService;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -29,12 +31,28 @@ public class LodgementDetailController {
 	// 숙박 디테일
 	@RequestMapping("detail/{lodgement_number}")
 	public String lodgementDetail(@PathVariable("lodgement_number") int number,Model model) throws SQLException {
+		// 디테일리스트
 		List<LodgementDetailPageDto> list =lodgementService.lodgementDetail(number,model);
-		System.out.println(list.get(0).getRoomInfo_name());
-		System.out.println(list.get(0).getRoomInfo_offPeakPrice());
 		
+		// 이미지들
+		List<LodgementVo> alist=lodgementService.lodgementListAll(model);
+		model.addAttribute("listImg", alist.get(0).getLodgement_img());
+		
+		// 기본정보들
+		lodgementService.lodgementInfo(number, 2, model);
+		
+		//리뷰
 		activityService.reviewList(number, 2, model);
 		
+		// 주소 위치
+		String pin=list.get(0).getLodgement_location();
+
+		// 숙소 이름
+		String name = list.get(0).getLodgement_companyName();
+		
+		
+		model.addAttribute("pin", pin);
+		model.addAttribute("companyName", name);
 		model.addAttribute("startEndDay", list.get(0));
 		model.addAttribute("article", number);
 		
@@ -54,6 +72,17 @@ public class LodgementDetailController {
 	public String lodgementInicis(@PathVariable("lodgement_number") int articleNumber,Model model,HttpServletRequest req) throws SQLException {
 		return "lodgement/lodgementInicis";
 	}
+	
+	/////////////////////////// 예약 페이지
+	
+	//숙박 예약페이지
+	@RequestMapping(value =  "detail/reservation/{lodgement_number}" )
+	public String lodgementReservation() {
+		
+		return "lodgement/lodgementReservation";
+	}
+	
+	
 	
 	
 }

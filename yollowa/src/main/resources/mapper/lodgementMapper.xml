@@ -52,4 +52,10 @@
 	</if>
 	</select>
 	
+	<!-- 숙박 디테일 기본정보 -->
+	<select id="lodgementInfo" resultType="com.proj.yollowa.model.entity.lodgement.InformationVo">
+		select * from information where information_number = #{number} and information_type=#{type}
+	</select>
+	
+	
 </mapper>

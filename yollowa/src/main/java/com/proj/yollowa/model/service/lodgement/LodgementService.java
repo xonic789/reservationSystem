@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
@@ -12,7 +13,7 @@ import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 public interface LodgementService {
 
 	// 숙박 리스트
-	void lodgementListAll(Model model) throws SQLException;
+	List<LodgementVo> lodgementListAll(Model model) throws SQLException;
 	// 숙박 리스트 temp=1인 전체 개수
 	int lodgementListCnt() throws SQLException;
 	
@@ -24,6 +25,9 @@ public interface LodgementService {
 	
 	// lodgement list page search
 	void lodgementSearch(String search, Model model);
+	
+	// 숙박 디테일 기본정보
+	List<InformationVo> lodgementInfo(int number, int type,Model model) throws SQLException;
 
 //	// ajax filter (listpage)
 //	List<LodgementVo> selectOption(String optionName, Model model);

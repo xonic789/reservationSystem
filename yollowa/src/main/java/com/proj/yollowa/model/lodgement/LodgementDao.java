@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
@@ -24,16 +25,8 @@ public interface LodgementDao {
 
 	// lodgement list page search
 	public List<LodgementVo> lodgementSearch(String search);
-//	
-//	// filter 전체
-//	public List<LodgementVo> selectOptionAll();
-//
-//	// filter 후기순
-//	public List<LodgementVo> selectOptionReviewCount();
-//	
-//	// filter 별점순
-//	public List<LodgementVo> selectOptionReviewRate();
-//	
-//	// filter 최신순
-//	public List<LodgementVo> selectOptionLodgementNumber();
+	
+	// 숙박 디테일 기본정보
+	public List<InformationVo> lodgementInfo(@Param("number") int number,@Param("type") int type) throws SQLException;
+	
 }

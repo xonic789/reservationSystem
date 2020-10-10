@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
@@ -22,11 +23,11 @@ public class LodgementServiceImpl implements LodgementService {
 	
 	// 숙박 리스트
 	@Override
-	public void lodgementListAll(Model model) throws SQLException {
+	public List<LodgementVo> lodgementListAll(Model model) throws SQLException {
 		LodgementDao dao =sqlSession.getMapper(LodgementDao.class);
-		List<LodgementVo> list= dao.lodgementListAll();
-		System.out.println(list);
+		List<LodgementVo> alist= dao.lodgementListAll();
 		
+		List<LodgementVo> list= dao.lodgementListAll();
 		for(int i=0; i<list.size(); i++) {
 			int su = list.get(i).getLodgement_img().indexOf("&");
 			String imgName = list.get(i).getLodgement_img().substring(0, su);
@@ -34,6 +35,8 @@ public class LodgementServiceImpl implements LodgementService {
 			
 		}
 		model.addAttribute("listAll",list);
+		
+		return alist;
 	}
 
 	// 숙박 리스트 temp=1인 전체 개수
@@ -49,7 +52,13 @@ public class LodgementServiceImpl implements LodgementService {
 	public List<LodgementDetailPageDto> lodgementDetail(int articleNumber, Model model) throws SQLException {
 		LodgementDao dao=sqlSession.getMapper(LodgementDao.class);
 		List<LodgementDetailPageDto> list = dao.lodgementDetail(articleNumber);
-		model.addAttribute("detailList", list);
+		
+//		for(int i=0; i<list.size(); i++) {
+//			int su = list.get(i).getRoomInfo_img().indexOf("&");
+//			String imgName = list.get(i).getRoomInfo_img().substring(0, su);
+//			list.get(i).setRoomInfo_img(imgName);
+//		}
+		model.addAttribute("detailList",list);
 		return list;
 	}
 
@@ -81,22 +90,15 @@ public class LodgementServiceImpl implements LodgementService {
 		
 		model.addAttribute("listAll", list);
 	}
-	// ajax filter (listpage)
-//	@Override
-//	public List<LodgementVo> selectOption(String optionName, Model model) {
-//		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
-//		List<LodgementVo> list = null;
-//		if(optionName.equals("전체")) {
-//			list = dao.selectOptionAll();
-//		}else if(optionName.equals("후기순")) {
-//			list = dao.selectOptionReviewCount();
-//		}else if(optionName.equals("별점순")) {
-//			list = dao.selectOptionReviewRate();
-//		}else if(optionName.equals("최신순")) {
-//			list = dao.selectOptionLodgementNumber();
-//		}
-//		model.addAttribute("ajaxList", list);
-//		
-//		return list;
-//	}
+
+	
+	// 숙박 디테일 기본정보
+	@Override
+	public List<InformationVo> lodgementInfo(int number, int type,Model model) throws SQLException {
+		LodgementDao dao= sqlSession.getMapper(LodgementDao.class);
+		List<InformationVo> list= dao.lodgementInfo(number,type);
+		
+		model.addAttribute("infoList",list);
+		return list;
+	}
 }
