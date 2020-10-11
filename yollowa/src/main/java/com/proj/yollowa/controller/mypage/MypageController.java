@@ -56,17 +56,6 @@ public class MypageController {
 		return "mypage/cart";
 	}
 	@Auth
-	@RequestMapping(value = "/wishlist",method =RequestMethod.GET )
-	public String wishList(@AuthUser UserVo userVo, Model model) throws SQLException{
-		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
-		if(user==null) {
-			return "redirect:../";
-		}
-		
-		
-		return "mypage/wishlist";
-	}
-	@Auth
 	@RequestMapping(value = "/wishlist/{service}",method =RequestMethod.GET )
 	public String wishList(@AuthUser UserVo userVo, Model model,@PathVariable("service") String service) throws SQLException{
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
@@ -74,7 +63,6 @@ public class MypageController {
 			return "redirect:../";
 		}
 		myPageService.userWishListService(model, userVo, service);
-		
 		
 		return "mypage/wishlist";
 	}
