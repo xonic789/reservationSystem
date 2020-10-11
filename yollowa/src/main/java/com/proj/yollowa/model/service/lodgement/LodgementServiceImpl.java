@@ -62,6 +62,13 @@ public class LodgementServiceImpl implements LodgementService {
 		return list;
 	}
 
+	@Override
+	public void lodgementImgSelect(int number, Model model) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		String titleImg = dao.lodgementImgSelect(number);
+		model.addAttribute("listImg", titleImg);
+	}
+	
 	// ajax select Price (lodgement list page)
 	@Override
 	public int priceSelect(int lodgementNumber) {

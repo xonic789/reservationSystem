@@ -129,6 +129,7 @@ h3{
 	color:white;
 	width:100%;
 	z-index:2;
+	padding: 0px 5px 0px 5px;
 	display:inline-block;
 	position: absolute;
 	top:167px;
@@ -154,7 +155,7 @@ h3{
 	left:0px;
 }
 .sub{
-	padding: 0px 6px 6px 6px;
+	padding: 0px 10px 6px 10px;
 	overflow: hidden;
 }
 .companyName{

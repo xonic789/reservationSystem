@@ -20,6 +20,9 @@ public interface LodgementService {
 	//숙박 디테일 
 	List<LodgementDetailPageDto> lodgementDetail(int articleNumber, Model model) throws SQLException;
 	
+	// 숙박 타이틀 이미지 select
+	void lodgementImgSelect(int number, Model model);
+
 	// ajax select Price (lodgement list page)
 	int priceSelect(int lodgementNumber);
 	

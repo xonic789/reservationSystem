@@ -35,8 +35,7 @@ public class LodgementDetailController {
 		List<LodgementDetailPageDto> list =lodgementService.lodgementDetail(number,model);
 		
 		// 이미지들
-		List<LodgementVo> alist=lodgementService.lodgementListAll(model);
-		model.addAttribute("listImg", alist.get(0).getLodgement_img());
+		lodgementService.lodgementImgSelect(number,model);
 		
 		// 기본정보들
 		lodgementService.lodgementInfo(number, 2, model);
