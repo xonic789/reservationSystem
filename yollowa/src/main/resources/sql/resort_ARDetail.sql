@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: resort
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,29 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ARDetail`
+-- Table structure for table `ardetail`
 --
 
-DROP TABLE IF EXISTS `ARDetail`;
+DROP TABLE IF EXISTS `ardetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ARDetail` (
-  `ARDetail_number` int NOT NULL,
+CREATE TABLE `ardetail` (
+  `ARDetail_number` int NOT NULL AUTO_INCREMENT,
+  `ARDetail_arInfoNumber` int NOT NULL,
   `ARDetail_optionNumber` int NOT NULL,
   `ARDetail_goods` varchar(45) NOT NULL,
   `ARDetail_checkIn` date NOT NULL,
   `ARDetail_amount` int NOT NULL,
-  `ARDetail_unitPrice` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ARDetail_unitPrice` int NOT NULL,
+  `ARDetail_aoname` varchar(45) NOT NULL,
+  PRIMARY KEY (`ARDetail_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ARDetail`
+-- Dumping data for table `ardetail`
 --
 
-LOCK TABLES `ARDetail` WRITE;
-/*!40000 ALTER TABLE `ARDetail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ARDetail` ENABLE KEYS */;
+LOCK TABLES `ardetail` WRITE;
+/*!40000 ALTER TABLE `ardetail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ardetail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-07 14:54:46
+-- Dump completed on 2020-10-11 20:46:16

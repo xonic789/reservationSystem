@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.mypage.LReservInfoDto;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/resources/applicationContext.xml")
@@ -40,9 +41,16 @@ public class MypageDaoTest {
 		System.out.println(bean);
 	}
 	@Test
-	public void getRoomNumberTest() throws SQLException{
+	public void testString() throws SQLException{
 		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
-		System.out.println(myPageDao.getLarticleInfo(1));
+		UserVo userVo=myPageDao.userDetail(24);
+		String awishList=userVo.getUser_aWishList();
+		String[] userwish=awishList.split("&");
+		for(String str:userwish) {
+			System.out.println(str.trim());
+			System.out.println(myPageDao.getAwishList(Integer.parseInt(str.trim())));
+		}
+		
 	}
 }
 

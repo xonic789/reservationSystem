@@ -13,5 +13,5 @@ public interface MypageService {
 	public List<LReservInfoDto> lReservationInfoService(Model model,int user_number) throws SQLException;
 	public List<LReservInfoDto> lUserCompletedInfoService(Model model,int user_number) throws SQLException;
 	public List<LReservInfoDto> lUserCartInfoService(Model model,int user_number) throws SQLException;
-	
+	public void userWishListService(Model model, UserVo userVo, String service) throws SQLException;
 }
