@@ -101,4 +101,15 @@ public class LodgementServiceImpl implements LodgementService {
 		model.addAttribute("infoList",list);
 		return list;
 	}
+
+	// 숙박 예약 지정된 방 정보
+	@Override
+	public List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException{
+		LodgementDao dao= sqlSession.getMapper(LodgementDao.class);
+		List<LodgementRoomInfoVo> list =dao.lodgementReserInfo(articleNumber, roomNumber);
+		model.addAttribute("reserInfo", list);
+		
+		return list;
+	}
+
 }

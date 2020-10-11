@@ -57,5 +57,9 @@
 		select * from information where information_number = #{number} and information_type=#{type}
 	</select>
 	
+	<!-- 숙박 예약 페이지  -->
+	<select id="lodgementReserInfo" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
+		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber=#{roomNumber}
+	</select>
 	
 </mapper>
