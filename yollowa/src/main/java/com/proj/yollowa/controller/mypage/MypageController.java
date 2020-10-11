@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,7 +58,22 @@ public class MypageController {
 	@Auth
 	@RequestMapping(value = "/wishlist",method =RequestMethod.GET )
 	public String wishList(@AuthUser UserVo userVo, Model model) throws SQLException{
+		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
+		if(user==null) {
+			return "redirect:../";
+		}
 		
+		
+		return "mypage/wishlist";
+	}
+	@Auth
+	@RequestMapping(value = "/wishlist/{service}",method =RequestMethod.GET )
+	public String wishList(@AuthUser UserVo userVo, Model model,@PathVariable("service") String service) throws SQLException{
+		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
+		if(user==null) {
+			return "redirect:../";
+		}
+		myPageService.userWishListService(model, userVo, service);
 		
 		
 		return "mypage/wishlist";

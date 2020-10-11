@@ -54,4 +54,17 @@
 		ORDER BY LI.LRESERVINFO_RESERVDATE DESC;	
 		]]>
 	</select>
+	<select id="getUserWishList" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		SELECT *
+		FROM LODGEMENT
+		WHERE LODGEMENT_NUMBER=#{USER_WISHLIST}
+	</select>
+	<select id="getAwishList" resultType="com.proj.yollowa.model.entity.activity.ActivityVo">
+		select * from activity
+		where activity_number=#{activity_number}
+	</select>
+	<select id="getLwishList" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement
+		where lodgement_number=#{lodgement_number}
+	</select>
 </mapper>
