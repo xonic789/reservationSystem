@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: resort
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `LReservInfo`
+-- Table structure for table `lreservinfo`
 --
 
-DROP TABLE IF EXISTS `LReservInfo`;
+DROP TABLE IF EXISTS `lreservinfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `LReservInfo` (
+CREATE TABLE `lreservinfo` (
   `LReservInfo_number` int NOT NULL AUTO_INCREMENT,
   `LReservInfo_userNumber` int NOT NULL,
   `LReservInfo_acticleNumber` int NOT NULL,
@@ -35,16 +35,17 @@ CREATE TABLE `LReservInfo` (
   `LReservInfo_reservStatus` int NOT NULL DEFAULT '0',
   `LReservInfo_cartStatus` int NOT NULL,
   PRIMARY KEY (`LReservInfo_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `LReservInfo`
+-- Dumping data for table `lreservinfo`
 --
 
-LOCK TABLES `LReservInfo` WRITE;
-/*!40000 ALTER TABLE `LReservInfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `LReservInfo` ENABLE KEYS */;
+LOCK TABLES `lreservinfo` WRITE;
+/*!40000 ALTER TABLE `lreservinfo` DISABLE KEYS */;
+INSERT INTO `lreservinfo` VALUES (1,24,1,3,'2020-10-17','2020-10-18','01028542879','2020-10-07',1000,1,0),(2,24,1,3,'2020-10-19','2020-10-20','01028542879','2020-10-07',1000,0,1),(3,24,1,3,'2020-10-06','2020-10-07','01028542879','2020-10-06',1000,1,0),(4,24,1,3,'2020-10-01','2020-10-02','01028542879','2020-10-01',1000,1,0),(5,24,1,3,'2020-10-02','2020-10-03','01028542879','2020-10-02',1000,0,1),(6,24,3,4,'2020-10-01','2020-10-02','01028542879','2020-09-30',1000,1,0),(7,24,3,5,'2020-10-20','2020-10-24','01028542879','2020-10-20',5000,1,0),(8,24,3,6,'2020-10-02','2020-10-04','01028542879','2020-10-01',9000,1,0),(9,24,3,7,'2020-11-20','2020-11-23','01028542879','2020-11-20',200000,0,1),(10,24,3,5,'2019-12-31','2020-01-01','01028542879','2019-12-31',5000,0,1),(11,24,3,6,'2020-03-01','2020-03-02','01028542879','2020-03-01',9000,1,0);
+/*!40000 ALTER TABLE `lreservinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-07 14:54:45
+-- Dump completed on 2020-10-11 20:46:13
