@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: resort
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `aoinfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aoinfo` (
+  `AOInfo_number` int NOT NULL AUTO_INCREMENT,
   `AOInfo_articleNumber` int NOT NULL,
-  `AOInfo_optionNumber` int NOT NULL AUTO_INCREMENT,
+  `AOInfo_optionNumber` int NOT NULL,
   `AOInfo_name` varchar(45) NOT NULL,
   `AOInfo_price` int NOT NULL,
-  PRIMARY KEY (`AOInfo_optionNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`AOInfo_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +38,7 @@ CREATE TABLE `aoinfo` (
 
 LOCK TABLES `aoinfo` WRITE;
 /*!40000 ALTER TABLE `aoinfo` DISABLE KEYS */;
-INSERT INTO `aoinfo` VALUES (1,1,'1인이용권',15000),(1,2,'2인이용권',28000),(2,3,'5인',90000),(2,4,'10인',150000);
+INSERT INTO `aoinfo` VALUES (1,1,1,'1인이용권',1000),(2,1,2,'2인이용권',1000),(3,2,3,'5인',1000),(4,2,4,'10인',1000),(5,1,1,'1인',1000),(6,1,2,'2인',1000),(7,1,3,'3인',1000),(8,2,4,'4인',1000),(9,2,5,'8인',1000),(10,2,5,'4인',1000);
 /*!40000 ALTER TABLE `aoinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-07 14:54:48
+-- Dump completed on 2020-10-11 20:46:14

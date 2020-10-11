@@ -31,9 +31,9 @@ public interface LodgementService {
 	
 	// 숙박 디테일 기본정보
 	List<InformationVo> lodgementInfo(int number, int type,Model model) throws SQLException;
-
-//	// ajax filter (listpage)
-//	List<LodgementVo> selectOption(String optionName, Model model);
+	
+	// 숙박 예약페이지 지정된 방정보
+	List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException;
 	
 	
 

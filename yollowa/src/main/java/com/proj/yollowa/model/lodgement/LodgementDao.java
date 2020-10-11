@@ -32,4 +32,7 @@ public interface LodgementDao {
 	// 숙박 디테일 기본정보
 	public List<InformationVo> lodgementInfo(@Param("number") int number,@Param("type") int type) throws SQLException;
 	
+	// 숙박 예약 페이지 지정된 방정보
+	public List<LodgementRoomInfoVo> lodgementReserInfo(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
+	
 }
