@@ -74,7 +74,7 @@ ul {
 					<p class="lead">
 						<a class="btn btn-warning btn-lg" href="#" role="button" style="display: block;">리뷰 쓰기</a>
 					<hr class="my-4">	
-						<a class="btn btn-lg lodgeDetail" href="#" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
+						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/lodgement/detail/${info.lReservInfo_acticleNumber}" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
 					</p>
 				</div>
 				</c:forEach>
