@@ -496,6 +496,12 @@ pointer-events:auto;
 	
 </script>
 
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+<script> AOS.init(); </script>
+
+
 <meta charset="UTF-8">
 <title>숙박</title>
 </head>
@@ -521,10 +527,6 @@ pointer-events:auto;
 							<input type="radio" id="allLodgement" class="custom-control-input" name="lodList" value="allLodgement" checked="checked" onclick="allLodgementR();">
 							<label class="custom-control-label" for="allLodgement">전체</label>
 						</div>
-						<!-- <div class="custom-control custom-radio">
-					      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
-					      <label class="custom-control-label" for="customRadio1">호텔</label>
-					    </div> -->
 						<div class="custom-control custom-radio">
 							<input type="radio" id="hotel" class="custom-control-input" name="lodList" value="hotel" onclick="hotelR();">
 							<label class="custom-control-label" for="hotel">호텔</label>
@@ -618,36 +620,5 @@ pointer-events:auto;
 		</div>
 	</div>
 	<%@ include file="../template/footer.jspf"%>
-
-<%-- $.ajax({
-			type:"GET",
-			data : optionName,
-			contentType:"application/json;charset=utf-8",
-			dataType: "json",
-			url:"list/selectOption",
-			success:function(data){
-				var arr = data.key;
-				console.log(arr);
-				arr.forEach(function(ele,idx){
-				var div = '<div class="'+ele.lodgement_category+' allList oneLodge" onclick="location.href=\'detail/'+ele.lodgement_number+'\'">';
-			div += '<div class="lodgeImgBox">';
-			div += '<div class="type type'+idx+'">'+ele.lodgement_category+'</div>';
-			div += '<img class="titleImg" alt="" src="/lodgement/titleImg/${bean.lodgement_img }">';
-			div += '</div>';
-			div += '<div class="sub">';
-			div += '<div class="companyName">${bean.lodgement_companyName}</div>';
-			div += '<span class="reviewRate">★ ${bean.lodgement_reviewGradeRate} </span><span> (리뷰 ${bean.lodgement_reviewCount}건)</span>';
-			div += '<div class="price price'+idx+'">가격</div>';
-			div += '</div>';
-			div += '</div>';
-			
-			$('.ajaxList').append(div);
-			
-			})
-		},
-		error:function(e){
-			alert('요청 실패');
-		}
-	});  --%>
 </body>
 </html>

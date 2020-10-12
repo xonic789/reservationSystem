@@ -38,7 +38,7 @@ public interface LodgementService {
 	List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException;
 
 	// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
-	int roomPaymentSelect(int roomNumber, Date startDate);
+	int roomPaymentSelect(int roomNumber, Date startDate, Date endDate);
 
 	// 숙박 장바구니 insert
 	void lodgementCartInsert(int articleNumber, int roomNumber, Date startDate, Date endDate,int payment, UserVo userVo);
