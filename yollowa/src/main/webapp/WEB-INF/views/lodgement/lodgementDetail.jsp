@@ -161,7 +161,12 @@
 	.jjim{
 		float:right;
 	}
-	
+	.cartBtn{
+		width: 10%;
+	}
+	.submitBtn{
+		width: 89%;
+	}
 	
 	/* card start*/ 
 	.career-form {
@@ -283,6 +288,10 @@
 	}
 	
 </style>
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <script type="text/javascript">
 
 	// 달력
@@ -314,7 +323,6 @@
 			$("#sdate").datepicker( "option", "maxDate", selectedDate );
 		});
 	});
-	
 	
 	// 날짜 선택
 	function pickerIn(a){
@@ -350,17 +358,12 @@
 				console.log(e);
 			}
 		});
-		
-		
 	};
 		
 	function pickerOut(o){
 		var outValue = $(o).val();
 		$('.edateVal').val(outValue);
 	};
-
-
-	
 
 	// 패키지 옵션 설정 버튼 
 	$(function() {
@@ -376,25 +379,6 @@
 	});
 	
 	
-	/* 비성수기바로구매
-		<c:forEach items="${roomList}" var="bean" varStatus="status">
-		function offPeakBuySubmit${status.index}(t){
-		
-			console.log($(('.offPeak${status.index}')).text()); // 비성수기
-			
-			document.offPeakform${status.index}.submit();
-			
-			/*
-			if($('.uuu').text()=="로그인"){
-			alert("로그인이 필요한 기능입니다. 로그인페이지로 이동합니다.");
-			window.location.href="../../login/";
-			}else{
-			}
-			
-		}
-		*/
-		</c:forEach>
-	
 	// 성수기바로구매
 	<c:forEach items="${roomList}" var="bean" varStatus="status">
 		function peakBuySubmit${status.index}(t){
@@ -402,15 +386,6 @@
 			
 		}
 	</c:forEach>
-			
-			/*
-			if($('.uuu').text()=="로그인"){
-			alert("로그인이 필요한 기능입니다. 로그인페이지로 이동합니다.");
-			window.location.href="../../login/";
-			}else{
-				document.peakform${status.index}.submit();
-			}
-			*/
 		
 	
 	// 장바구니
@@ -515,9 +490,30 @@
 			var appendDiv = '<p style="color:gray; margin:0px 0px 10px 10px; font-size:16px;">- '+refundInfo[i]+'</p>';
 			$('.info_refundInfo').append(appendDiv);
 		}
-		
 	});
 	
+	function cartInput(articleNumber, roomNumber){
+		
+		var sdate = $('#sdate').val();
+		var edate = $('#edate').val();
+		if(sdate!=''&&edate!=''){		
+			swal('장바구니에 등록합니다','장바구니에서 확인하세요','success');
+			
+			console.log(articleNumber);
+			console.log(roomNumber);
+			console.log(sdate);
+			console.log(edate);
+			
+			$.ajax({
+				url:"./cartInsert",
+				data: {articleNumber:articleNumber, roomNumber:roomNumber, sdate:sdate, edate:edate},
+				method: 'POST'
+			});
+		
+		}else{
+			swal('예약일자를 선택하세요','체크인, 체크아웃 날짜를 선택해야 장바구니 등록이 가능합니다','warning');
+		}
+	};
 	
 	
 
@@ -553,6 +549,9 @@
 		<p class="rote">
 			<a href="../../">메인 페이지</a> > <a href="../list"> 숙박 페이지</a> > <a href="#">${startEndDay.getLodgement_companyName()}</a>
 		</p>
+		<c:forEach items="${detailList }" var="bean" varStatus="status">
+			<p class="hashTag">${bean.lodgement_hashTag }</p>
+		</c:forEach>
 		<p class="titleName">${startEndDay.getLodgement_companyName()}</p>
 		<button class="btn btn-outline-danger jjim">♡ 찜목록 담기</button>
 		
@@ -626,6 +625,7 @@
 																<button type="button" class="btn btn-secondary modalBtn" data-toggle="modal" data-target="#exampleModal${status.index}off">
 																	객실 이용 안내
 																</button>
+																
 																<input class="paymentOffPeak${status.index}" name="roomNumber" type="hidden" value="${bean.roomInfo_roomNumber}" />
 																<input type="hidden" name="sdate" class="sdateVal"/>
 																<input type="hidden" name="edate" class="edateVal"/>
@@ -672,7 +672,13 @@
 															</div>
 															
 															<!-- Modal end -->
-															<button style="width: 100%;" class="btn btn-outline-primary" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<button class="btn btn-outline-primary submitBtn" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<!-- 장바구니 -->
+															<button type="button" onclick="cartInput(${bean.roomInfo_articleNumber},${bean.roomInfo_roomNumber});" class="cartBtn btn btn-outline-success">
+															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+															  <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+															</svg>
+													        </button>
 															</form>
 															
 														</ul>
@@ -730,8 +736,13 @@
 															  </div>
 															</div>
 															<!-- Modal end -->
-															
-															<button style="width: 100%;" class="btn btn-outline-primary" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<button class="btn btn-outline-primary submitBtn" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<!-- 장바구니 -->
+															<button type="button" onclick="cartInput(${bean.roomInfo_articleNumber},${bean.roomInfo_roomNumber});" class="cartBtn btn btn-outline-success">
+															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+															  <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+															</svg>
+													        </button>
 															</form>
 														</ul>
 														<!-- 성수기 end -->
@@ -848,7 +859,7 @@ geocoder.addressSearch('${pin}', function(result, status) {
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.relayout();
 	        map.setCenter(coords);
-        },1000);
+        },1500);
     } 
 });
 	

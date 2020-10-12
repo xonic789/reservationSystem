@@ -1,25 +1,28 @@
 package com.proj.yollowa.controller.lodgement;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.proj.yollowa.interceptor.Auth;
+import com.proj.yollowa.interceptor.AuthUser;
+import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
-import com.proj.yollowa.model.entity.lodgement.InformationVo;
-import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.service.activity.ActivityService;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -100,6 +103,44 @@ public class LodgementDetailController {
 		
 		
 		return "lodgement/lodgementReservation";
+	}
+	
+	
+	
+	// 장바구니 ajax controller
+	@Auth
+	@RequestMapping(value="detail/cartInsert", method=RequestMethod.POST)
+	public void lodgementCartInsert(@AuthUser UserVo userVo,HttpServletRequest req){
+		
+		int articleNumber = Integer.parseInt(req.getParameter("articleNumber"));
+		int roomNumber= Integer.parseInt(req.getParameter("roomNumber"));
+		System.out.println(articleNumber);
+		System.out.println(roomNumber);
+		String sdate = req.getParameter("sdate");
+		String edate = req.getParameter("edate");
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date startDate;
+		Date endDate;
+		try {
+			startDate = transFormat.parse(sdate);
+			endDate = transFormat.parse(edate);
+			System.out.println(startDate);
+			System.out.println(endDate);
+
+			// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
+			int payment = lodgementService.roomPaymentSelect(roomNumber, startDate);
+			
+			// 위에서 성수기인지 비성수기인지 사용자가 선택한 날짜로 확인 후 반환된 payment를 가지고 insert
+			lodgementService.lodgementCartInsert(articleNumber, roomNumber, startDate, endDate, payment, userVo);
+			
+		
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	

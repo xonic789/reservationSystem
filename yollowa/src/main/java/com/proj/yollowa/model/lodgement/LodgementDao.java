@@ -1,10 +1,12 @@
 package com.proj.yollowa.model.lodgement;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
@@ -35,4 +37,15 @@ public interface LodgementDao {
 	// 숙박 예약 페이지 지정된 방정보
 	public List<LodgementRoomInfoVo> lodgementReserInfo(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
 	
+	// 먼저 성수기, 비성수기 가격을 받아온 후 가져온 startDate가 성수기인지 비성수기인지 비교
+	public Date roomPeakStartDateSelect(int roomNumber);
+	public Date roomPeakEndDateSelect(int roomNumber);
+	
+	
+	// 아래에서 성수기면 해당 방의 성수기가격을, 비성수기면 비성수기 가격을 select
+	public int selectPeakPayment(int roomNumber);
+	public int selectOffPeakPayment(int roomNumber);
+	
+	// 숙박 장바구니 ajax
+	public void lodgementCartInsert(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber,@Param("startDate") Date startDate,@Param("endDate") Date endDate,@Param("payment") int payment,@Param("userVo") UserVo userVo);
 }
