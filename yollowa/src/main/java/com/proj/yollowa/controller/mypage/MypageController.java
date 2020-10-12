@@ -26,33 +26,33 @@ public class MypageController {
 	MypageService myPageService;
 	
 	@Auth
-	@RequestMapping(value = "/",method = RequestMethod.GET)
-	public String index(@AuthUser UserVo userVo,Model model) throws SQLException {
+	@RequestMapping(value = "/{service}",method = RequestMethod.GET)
+	public String index(@AuthUser UserVo userVo,Model model,@PathVariable("service") String service) throws SQLException {
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
 		if(user==null) {
 			return "redirect:../";
 		}
-		myPageService.lReservationInfoService(model, userVo.getUser_number());
+		myPageService.lReservationInfoService(model, userVo.getUser_number(),service);
 		return "mypage/mypageIndex";
 	}
 	@Auth
-	@RequestMapping(value = "/completed",method = RequestMethod.GET)
-	public String used(@AuthUser UserVo userVo,Model model) throws SQLException {
+	@RequestMapping(value = "/completed/{service}",method = RequestMethod.GET)
+	public String used(@AuthUser UserVo userVo,Model model,@PathVariable("service") String service) throws SQLException {
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
 		if(user==null) {
 			return "redirect:../";
 		}
-		myPageService.lUserCompletedInfoService(model, userVo.getUser_number());
+		myPageService.lUserCompletedInfoService(model, userVo.getUser_number(),service);
 		return "mypage/completed";
 	}
 	@Auth
-	@RequestMapping(value = "/cart",method = RequestMethod.GET)
-	public String cart(@AuthUser UserVo userVo,Model model) throws SQLException {
+	@RequestMapping(value = "/cart/{service}",method = RequestMethod.GET)
+	public String cart(@AuthUser UserVo userVo,Model model,@PathVariable("service") String service) throws SQLException {
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
 		if(user==null) {
 			return "redirect:../";
 		}
-		myPageService.lUserCartInfoService(model, userVo.getUser_number());
+		myPageService.lUserCartInfoService(model, userVo.getUser_number(),service);
 		return "mypage/cart";
 	}
 	@Auth

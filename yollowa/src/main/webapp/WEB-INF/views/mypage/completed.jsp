@@ -72,7 +72,7 @@ ul {
 					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
 					<p>결제 금액 : ${pay }원</p>
 					<p class="lead">
-						<a class="btn btn-warning btn-lg" href="#" role="button" style="display: block;">리뷰 쓰기</a>
+						<a class="btn btn-warning btn-lg" href="../../review_write/${service }/${info.lReservInfo_number}" role="button" style="display: block;">리뷰 쓰기</a>
 					<hr class="my-4">	
 						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/lodgement/detail/${info.lReservInfo_acticleNumber}" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
 					</p>
