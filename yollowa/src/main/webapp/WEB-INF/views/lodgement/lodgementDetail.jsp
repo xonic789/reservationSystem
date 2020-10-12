@@ -434,7 +434,14 @@
 	// 캐러셀 이미지
 	$(document).ready(function(){
 		
-	
+		// 가격 정규식
+		for(var i=0; i<100; i++){
+			var offPeakPrice = $('.offPeakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.offPeakPrice'+i).text(offPeakPrice);
+			var peakPrice = $('.peakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.peakPrice'+i).text(peakPrice);
+		}
+		
 		// 타이틀 이미지 carousel
 		var title_Hidden_Img = $('#title-carousel').find('input').val();
 		console.log(title_Hidden_Img);
@@ -687,7 +694,7 @@
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (비성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
+																	<span class="offPeakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															
@@ -753,7 +760,7 @@
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
+																	<span class="peakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															<div class="modal fade" id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
