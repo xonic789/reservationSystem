@@ -158,4 +158,35 @@ public class LodgementServiceImpl implements LodgementService {
 		
 	}
 
+	// 숙박 찜목록 ajax insert
+	@Override
+	public void lodgementWishUpdate(int lodgementNumber, int userNumber) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		
+		// 먼저 userNumber로 본인 wish 리스트를 가져와 null이면 그냥 번호만 이미 있는 찜목록이 있으면 & 붙여 update
+		String existWishList = dao.lodgementUserWishSelect(userNumber);
+		
+		if(existWishList==null) {
+			// 기존에 등록된 찜 목록이 없을 때 그냥 update
+			System.out.println("기존에 등록된 wish없음");
+			dao.notExistWishUpdate(lodgementNumber, userNumber);
+		}else {
+			// 중복 검사
+			String arr[] = existWishList.split("&");
+			for(int i=0; i<arr.length; i++) {
+				if(arr[i].contains(""+lodgementNumber)) {
+					// &로 스플릿한 배열 요소중에 가져온 lodgementNumber가 있으면 들어옴
+					return;
+				}
+			}
+			// 중복검사에 걸리지 않았을 때
+			// 기존에 등록된 찜 목록이 있을 때 기존 + & 숙박글번호
+			String afterWish = existWishList+"&"+lodgementNumber;
+			dao.afterWishUpdate(afterWish, userNumber);
+			System.out.println("기존에 등록된 wish 있음");
+			
+		}
+		
+	}
+
 }

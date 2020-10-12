@@ -48,4 +48,17 @@ public interface LodgementDao {
 	
 	// 숙박 장바구니 ajax
 	public void lodgementCartInsert(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber,@Param("startDate") Date startDate,@Param("endDate") Date endDate,@Param("payment") int payment,@Param("userVo") UserVo userVo);
+	
+	
+	// 숙박 찜목록
+
+	// 먼저 userNumber로 본인 wish 리스트를 가져와 null이면 그냥 번호만 이미 있는 찜목록이 있으면 & 붙여 update
+	public String lodgementUserWishSelect(int userNumber);
+	
+	// 기존에 등록된 wish가 없을 때
+	public void notExistWishUpdate(@Param("lodgementNumber") int lodgementNumber,@Param("userNumber") int userNumber);
+	
+	// 기존에 등록된 찜 목록이 있을 때 기존 + & 숙박글번호
+	public void afterWishUpdate(@Param("afterWish") String afterWish,@Param("userNumber") int userNumber);
+	
 }

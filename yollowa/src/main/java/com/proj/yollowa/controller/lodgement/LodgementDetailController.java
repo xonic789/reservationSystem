@@ -37,7 +37,7 @@ public class LodgementDetailController {
 	
 	// 숙박 디테일
 	@RequestMapping("detail/{lodgement_number}")
-	public String lodgementDetail(@PathVariable("lodgement_number") int number,Model model) throws SQLException {
+	public String lodgementDetail(@AuthUser UserVo userVo, @PathVariable("lodgement_number") int number,Model model) throws SQLException {
 		// 디테일리스트
 		List<LodgementDetailPageDto> list =lodgementService.lodgementDetail(number,model);
 		
@@ -56,6 +56,20 @@ public class LodgementDetailController {
 		// 숙소 이름
 		String name = list.get(0).getLodgement_companyName();
 		
+		// 해시태그
+		String hash = list.get(0).getLodgement_hashTag();
+		String hashTag = hash.replaceAll("&", "  ");
+		model.addAttribute("hashTag", hashTag);
+		
+		// 세션 확인 null이 아니면 유저넘버 보내줌 (장바구니, 찜목록 로그인 안돼있을 시 swal 하기 위함) 
+		if(userVo==null) {
+			// 로그인 안되어 있을 시
+			// jsp에서 받을때 null이면 nullpoint때문에 임의적으로 0 을 보내준다.
+			model.addAttribute("userNumber", 0);
+		}else {
+			// 로그인 되어있을 시
+			model.addAttribute("userNumber", userVo.getUser_number());
+		}
 		
 		model.addAttribute("pin", pin);
 		model.addAttribute("companyName", name);
@@ -134,21 +148,22 @@ public class LodgementDetailController {
 			
 			// 위에서 성수기인지 비성수기인지 사용자가 선택한 날짜로 확인 후 반환된 payment를 가지고 insert
 			lodgementService.lodgementCartInsert(articleNumber, roomNumber, startDate, endDate, payment, userVo);
-			
-		
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	
-	
-	
+	// Lodgement 찜목록
+	@Auth
+	@RequestMapping(value="detail/wishInsert", method=RequestMethod.POST)
+	public void lodgementWishInsert(@AuthUser UserVo userVo ,HttpServletRequest req) {
+		
+		int userNumber = userVo.getUser_number();
+		
+		System.out.println("찜목록 lodgementNumber :: "+req.getParameter("number"));
+		int lodgementNumber = Integer.parseInt(req.getParameter("number"));
+		
+		lodgementService.lodgementWishUpdate(lodgementNumber, userNumber);
+	}
 }
-
-
-
-
-

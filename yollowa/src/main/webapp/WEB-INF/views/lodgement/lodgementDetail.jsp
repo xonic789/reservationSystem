@@ -32,13 +32,18 @@
 	}
 	.rote{
 		margin-top: 0px;
-		margin-bottom:0px;
+		margin-bottom:15px;
 	}
 	.rote > a{
 		color: #007EC1;
 	}
 	.rote > a:hover{
 		text-decoration: none;
+	}
+	.hashTag{
+		font-size: 18px;
+		margin-bottom:0px;
+		color: #C3C2C0;
 	}
 	h3 {
 		margin-bottom: 15px;
@@ -492,29 +497,53 @@
 		}
 	});
 	
+	// 장바구니 ajax
 	function cartInput(articleNumber, roomNumber){
 		
 		var sdate = $('#sdate').val();
 		var edate = $('#edate').val();
-		if(sdate!=''&&edate!=''){		
-			swal('장바구니에 등록합니다','장바구니에서 확인하세요','success');
-			
-			console.log(articleNumber);
-			console.log(roomNumber);
-			console.log(sdate);
-			console.log(edate);
-			
-			$.ajax({
-				url:"./cartInsert",
-				data: {articleNumber:articleNumber, roomNumber:roomNumber, sdate:sdate, edate:edate},
-				method: 'POST'
-			});
 		
-		}else{
-			swal('예약일자를 선택하세요','체크인, 체크아웃 날짜를 선택해야 장바구니 등록이 가능합니다','warning');
+		
+		// 로그인 확인 체크 (로그인이 되어있을 시) model에 userNumber에 유저번호를 실어줌
+		if(${userNumber}!=0){
+			// 체크인 체크아웃 선택 체크
+			if(sdate!=''&&edate!=''){		
+				swal('장바구니에 등록합니다','마이페이지 - 장바구니에서 확인하세요','success');
+				
+				$.ajax({
+					url:"./cartInsert",
+					data: {articleNumber:articleNumber, roomNumber:roomNumber, sdate:sdate, edate:edate},
+					method: 'POST'
+				});
+			
+			}else{
+				swal('예약일자를 선택하세요','체크인, 체크아웃 날짜를 선택해야 장바구니 등록이 가능합니다','warning');
+			}
+		// 로그인 확인 체크 (로그인 x) 로그인되어있지 않을때에는 model에 userNumber로 0을 실어준다 (nullPoint 방지)
+		}else if(${userNumber}==0){
+			swal('로그인이 필요한 서비스입니다','로그인을 하시고 장바구니 서비스를 이용하세요.', 'warning');
 		}
 	};
 	
+	// 찜하기 ajax
+	function addWish(number){
+		console.log(${userNumber});
+		// 로그인 확인 체크 (로그인이 되어있을 시) model에 userNumber에 유저번호를 실어줌
+		if(${userNumber}!=0){
+			// 체크인 체크아웃 선택 체크
+			swal('찜목록에 추가되었습니다','마이페이지 - 찜목록에서 확인하세요','success');
+			
+			$.ajax({
+				url:"./wishInsert",
+				data: {number:number},
+				method: 'POST'
+			});
+			
+		// 로그인 확인 체크 (로그인 x) 로그인되어있지 않을때에는 model에 userNumber로 0을 실어준다 (nullPoint 방지)
+		}else if(${userNumber}==0){
+			swal('로그인이 필요한 서비스입니다','로그인을 하시고 찜목록 서비스를 이용하세요.', 'warning');
+		}
+	};
 	
 
 </script>
@@ -523,8 +552,8 @@
 <title>숙박</title>
 </head>
 <body>
-	<%@ include file="../template/header.jspf"%>
-	<%@ include file="../template/menu.jspf"%>
+	<%@ include file="../template/lodgeHeader.jspf"%>
+	<%@ include file="../template/lodgeMenu.jspf"%>
 	<div class="container">
 	
 	
@@ -549,11 +578,9 @@
 		<p class="rote">
 			<a href="../../">메인 페이지</a> > <a href="../list"> 숙박 페이지</a> > <a href="#">${startEndDay.getLodgement_companyName()}</a>
 		</p>
-		<c:forEach items="${detailList }" var="bean" varStatus="status">
-			<p class="hashTag">${bean.lodgement_hashTag }</p>
-		</c:forEach>
+		<p class="hashTag">${hashTag }</p>
 		<p class="titleName">${startEndDay.getLodgement_companyName()}</p>
-		<button class="btn btn-outline-danger jjim">♡ 찜목록 담기</button>
+		<button class="btn btn-outline-danger jjim" onclick="addWish(${article });">♡ 찜목록 담기</button>
 		
 		<c:forEach items="${infoList }" var="bean">
 			<div class="jumbotron commentJumbo">

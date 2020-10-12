@@ -42,6 +42,8 @@ public interface LodgementService {
 
 	// 숙박 장바구니 insert
 	void lodgementCartInsert(int articleNumber, int roomNumber, Date startDate, Date endDate,int payment, UserVo userVo);
-	
+
+	// 숙박 찜목록 insert
+	void lodgementWishUpdate(int lodgementNumber, int userNumber);
 
 }
