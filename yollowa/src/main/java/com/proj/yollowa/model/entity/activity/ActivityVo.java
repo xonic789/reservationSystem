@@ -14,7 +14,16 @@ public class ActivityVo {
 	private int activity_reviewCount;
 	private String activity_img;
 	private int activity_temp;
+	private String[] hashTag;
 	
+	public String[] getHashTag() {
+		return hashTag;
+	}
+
+	public void setHashTag(String[] hashTag) {
+		this.hashTag = hashTag;
+	}
+
 	public ActivityVo() {
 	}
 

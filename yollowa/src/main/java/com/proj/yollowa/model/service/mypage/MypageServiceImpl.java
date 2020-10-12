@@ -68,18 +68,31 @@ public class MypageServiceImpl implements MypageService{
 			
 			if(aWishList==null) {
 				model.addAttribute("emptyList","비었습니다.");
+				//찜목록이 여러개이면
 			}else if(aWishList.contains("&")) {
 				List<ActivityVo> list = new ArrayList<ActivityVo>();
 				String[] wishList= aWishList.split("&");
 				for(String userWish:wishList) {
-					list.add(mypageDao.getAwishList(Integer.parseInt(userWish)));
+					ActivityVo bean = mypageDao.getAwishList(Integer.parseInt(userWish));
+					bean.setHashTag(bean.getActivity_hashTag().split("&"));
+					int su= bean.getActivity_img().indexOf("&");
+					String imgName=bean.getActivity_img().substring(0,su);
+					bean.setActivity_img(imgName);
+					list.add(bean);
 				}
 				model.addAttribute("wishList",list);
-				return;
+				model.addAttribute("service",service);
+				
 			}else {
 				List<ActivityVo> list = new ArrayList<ActivityVo>();
-				list.add(mypageDao.getAwishList(Integer.parseInt(aWishList)));
+				ActivityVo bean = mypageDao.getAwishList(Integer.parseInt(aWishList));
+				bean.setHashTag(bean.getActivity_hashTag().split("&"));
+				int su= bean.getActivity_img().indexOf("&");
+				String imgName=bean.getActivity_img().substring(0,su);
+				bean.setActivity_img(imgName);
+				list.add(bean);
 				model.addAttribute("wishList",list);
+				model.addAttribute("service",service);
 			}
 			
 		}else if(StringUtils.equals("lodgement",service )) {
@@ -90,13 +103,28 @@ public class MypageServiceImpl implements MypageService{
 				List<LodgementVo> list = new ArrayList<LodgementVo>();
 				String[] wishList= lWishList.split("&");
 				for(String userWish:wishList) {
-					list.add(mypageDao.getLwishList(Integer.parseInt(userWish)));
+					LodgementVo bean = mypageDao.getLwishList(Integer.parseInt(userWish));
+					bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+					int su= bean.getLodgement_img().indexOf("&");
+					String imgName=bean.getLodgement_img().substring(0,su);
+					bean.setLodgement_img(imgName);
+					list.add(bean);
 				}
 				model.addAttribute("wishList",list);
+				model.addAttribute("service",service);
 			}else {
-				List<ActivityVo> list = new ArrayList<ActivityVo>();
-				list.add(mypageDao.getAwishList(Integer.parseInt(lWishList)));
+				List<LodgementVo> list = new ArrayList<LodgementVo>();
+				LodgementVo bean = mypageDao.getLwishList(Integer.parseInt(lWishList));
+				bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+				int su= bean.getLodgement_img().indexOf("&");
+				String imgName=bean.getLodgement_img().substring(0,su);
+				bean.setLodgement_img(imgName);
+				list.add(bean);
+				
+				
+				
 				model.addAttribute("wishList",list);
+				model.addAttribute("service",service);
 			}
 		}
 		

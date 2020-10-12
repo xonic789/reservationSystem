@@ -34,7 +34,6 @@ public class LodgementServiceImpl implements LodgementService {
 			int su = list.get(i).getLodgement_img().indexOf("&");
 			String imgName = list.get(i).getLodgement_img().substring(0, su);
 			list.get(i).setLodgement_img(imgName);
-			
 		}
 		model.addAttribute("listAll",list);
 		
