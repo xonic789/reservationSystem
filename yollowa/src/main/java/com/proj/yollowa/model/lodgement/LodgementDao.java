@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
@@ -35,4 +36,9 @@ public interface LodgementDao {
 	// 숙박 예약 페이지 지정된 방정보
 	public List<LodgementRoomInfoVo> lodgementReserInfo(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
 	
+	// 숙박 유저정보
+	public UserVo lodgementReserUser(int userNumber) throws SQLException;
+	
+	// 숙박 선택한 방 성수기날짜
+	public LodgementRoomInfoVo lodgementpeakDays(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
 }

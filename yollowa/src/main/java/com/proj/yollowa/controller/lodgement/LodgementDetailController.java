@@ -1,7 +1,11 @@
 package com.proj.yollowa.controller.lodgement;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
+import com.proj.yollowa.interceptor.Auth;
+import com.proj.yollowa.interceptor.AuthUser;
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.service.activity.ActivityService;
@@ -61,18 +68,13 @@ public class LodgementDetailController {
 		
 		return "lodgement/lodgementDetail";
 	}
-	
-	// 숙박 결제
-	@RequestMapping(value = "detail/Inicis/{lodgement_number}",method = RequestMethod.POST)
-	public String lodgementInicis(@PathVariable("lodgement_number") int articleNumber,Model model,HttpServletRequest req) throws SQLException {
-		return "lodgement/lodgementInicis";
-	}
-	
+
 	/////////////////////////// 예약 페이지
 	
 	//숙박 예약페이지
-	@RequestMapping(value =  "detail/reservation/{lodgement_number}" )
-	public String lodgementReservation(@PathVariable("lodgement_number") int articleNumber, HttpServletRequest req,Model model) throws SQLException{
+	//@Auth ,@AuthUser UserVo user
+	@RequestMapping(value =  "detail/reservation/{lodgement_number}")
+	public String lodgementReservation(@PathVariable("lodgement_number") int articleNumber, HttpServletRequest req,Model model) throws SQLException, ParseException{
 		
 		// 예약할 숙소정보
 		String roomNumber =req.getParameter("roomNumber");
@@ -81,28 +83,195 @@ public class LodgementDetailController {
 		List list =new ArrayList();
 		list.add(articleNumber);
 		list.add(roomNumber);
-		list.add(sdate);
-		list.add(edate);
 		
-		model.addAttribute("reservList",list);
+		model.addAttribute("sdate", sdate);
+		model.addAttribute("edate", edate);
+		model.addAttribute("articleNumber",articleNumber);
+		model.addAttribute("roomNumber",roomNumber);
 		
 		// 해당 기본정보
 		List<InformationVo> infoList=lodgementService.lodgementInfo(articleNumber, 2, model);
 		
 		model.addAttribute("infoList", infoList);
+		// 예약페이지 숙소이름
+		List<LodgementDetailPageDto> lodgementCompanyName= lodgementService.lodgementDetail(articleNumber,model);
+		String companyName = lodgementCompanyName.get(0).getLodgement_companyName();
+		model.addAttribute("companyName", companyName);
 		
-		
-		// 방 정보
+		// 예약페이지 방 정보
 		int rn= Integer.parseInt(roomNumber);
 		List<LodgementRoomInfoVo> detailList = lodgementService.lodgementReserInfo(articleNumber,rn,model);
-		
 		model.addAttribute("roomDetail", detailList);
+		
+		// 로그인한 유저 정보
+		//UserVo userBean = lodgementService.lodgementReserUser(user,model);
+		
+		//model.addAttribute("userName", userBean.getUser_name());
+		
+		// 총 결제금액
+		int peakPrice=detailList.get(0).getRoomInfo_peakPrice();		// 성수기 가격
+		int offPeakPrice =detailList.get(0).getRoomInfo_offPeakPrice();	// 비수기가격
+		
+		LodgementRoomInfoVo days =lodgementService.lodgementpeakDays(articleNumber,rn,model);
+		
+		Date reserveStart=Date.valueOf(sdate);	// 체크인
+		Date reserveEnd=Date.valueOf(edate);	//체크아웃
+		
+		
+		Date peakStart=days.getRoomInfo_peakStartDate();	//성수기 시작날	10-20
+		Date peakEnd = days.getRoomInfo_peakEndDate();		//성수기 종료날	10-23
+		
+		// 하루 long값 86400000
+		long oneDay=86400000;
+		
+		
+		//체크인 날이 성수기 종료날보다 높을때 or 체크아웃날이 성수기 시작날보다 낮을때 (성수기 포함 하루도없음)
+		if((peakEnd.getTime()<reserveStart.getTime()) || (reserveEnd.getTime()<peakStart.getTime()) ) {		
+			long a=reserveEnd.getTime()-reserveStart.getTime()+oneDay;
+			int i= Long.valueOf(a/oneDay).intValue();// 숙박 일수 * 비수기 가격
+//			System.out.println("완전 비성수기"+i);
+			
+			model.addAttribute("resultPrice", offPeakPrice*i);
+			
+		}
+		
+		// 체크인은 비수기 , 체크아웃은 성수기 사이
+		else if((reserveStart.getTime()<peakStart.getTime()) && ((reserveEnd.getTime()>=peakStart.getTime()) && (reserveEnd.getTime()<=peakEnd.getTime()))) {
+			int offPeakCnt =0;
+			int peakCnt=0;
+			long rs=reserveStart.getTime();
+			long ps=peakStart.getTime();
+			int p1=0;
+			int p2=0;
+			
+			// 체크인부터 성수기시작 전까지
+			boolean boo1=true;
+			while(boo1) {
+				offPeakCnt++;
+				rs=rs+oneDay;
+				if(rs == peakStart.getTime()) {
+//					System.out.println("비수기날카운트"+offPeakCnt); 
+					p1=offPeakCnt*offPeakPrice;
+					boo1=false;
+				}
+			}
+			
+			// 성수기시작부터 체크아웃까지
+			boolean boo2=true;
+			while(boo2) {
+				peakCnt++;
+				ps=ps+oneDay;
+				if(ps== reserveEnd.getTime()) {
+					peakCnt++;
+//					System.out.println("성수기날카운트"+peakCnt);
+					p2 =peakCnt*peakPrice;
+					boo2=false;
+				}
+			}
+			model.addAttribute("resultPrice", p1+p2);
+		}
+		
+		// 체크인은 성수기 사이, 체크아웃은 비수기 
+		else if((reserveEnd.getTime()>peakEnd.getTime()) && ((reserveStart.getTime()>=peakStart.getTime()) && (reserveStart.getTime()<=peakEnd.getTime()))) {
+			int offPeakCnt=0;
+			int peakCnt =0;
+			
+			long rs=reserveStart.getTime();
+			long pe=peakEnd.getTime();
+			int p1=0;
+			int p2=0;
+			
+			
+			// 체크인부터 성수기끝까지
+			boolean boo1=true;
+			while(boo1) {
+				peakCnt++;
+				rs=rs+oneDay;
+				if(rs == peakEnd.getTime()) {
+					peakCnt++;
+//					System.out.println("성수기날 카운트~"+peakCnt);
+					p1 =peakCnt*peakPrice;
+					boo1=false;
+				}
+				
+			}
+			
+			// 성수기끝부터 체크아웃까지
+			boolean boo2=true;
+			while(boo2) {
+				offPeakCnt++;
+				pe=pe+oneDay;
+				if(pe == reserveEnd.getTime()) {
+//					System.out.println("비수기날 카운트~"+offPeakCnt);
+					p2 = offPeakCnt*offPeakPrice;
+					boo2=false;
+				}
+				
+			}
+			
+			
+			model.addAttribute("resultPrice", p1+p2);
+		
+		}
+			
+			 
+		// 성수기 사이
+		else if((reserveStart.getTime()>=peakStart.getTime()) && (reserveEnd.getTime()<=peakEnd.getTime())) {
+			long a=reserveEnd.getTime()-reserveStart.getTime()+oneDay;
+			int i= Long.valueOf(a/oneDay).intValue();// 숙박 일수 * 성수기 가격
+//			System.out.println("완전 성수기"+i);
+			
+			model.addAttribute("resultPrice", peakPrice*i);
+			
+		}
+		
+		// 체크인,체크아웃이 비수기지만 사이에 성수기포함
+		else {
+			long peakPrev=(peakStart.getTime()-reserveStart.getTime())/oneDay;	//체크인부터 성수기시작전까지
+			long peakNext=(reserveEnd.getTime()-peakEnd.getTime())/oneDay;		//성수기끝부터 체크아웃까지
+			long peak=(peakEnd.getTime()-peakStart.getTime()+oneDay)/oneDay;		//성수기
+			int p1,p2,p3;
+			p1 = Long.valueOf(peakPrev).intValue();
+			p2 = Long.valueOf(peakNext).intValue();
+			p3 = Long.valueOf(peak).intValue();
+//			System.out.println("성수기 전"+p1);
+//			System.out.println("성수기만"+p3);
+//			System.out.println("성수기 후"+p2);
+			int resultPrice=(p1+p3)*offPeakPrice+p2*peakPrice;
+			
+			model.addAttribute("resultPrice", resultPrice);
+						
+		}
 		
 		
 		return "lodgement/lodgementReservation";
 	}
 	
+	/////////////// 이니시스 페이지
 	
+	// 숙박 결제
+	//@Auth ,@AuthUser UserVo user
+	@RequestMapping(value = "detail/Inicis/",method = RequestMethod.POST)
+	public String lodgementInicis(Model model,HttpServletRequest req) throws SQLException {
+		String articleNumber= req.getParameter("articleNumber");
+		String companyName= req.getParameter("companyName");
+		String roomNumber= req.getParameter("roomNumber");
+		String roomName= req.getParameter("roomName");
+		String checkIn= req.getParameter("checkIn");
+		String checkOut= req.getParameter("checkOut");
+		String resultPrice= req.getParameter("resultPrice");
+		
+		model.addAttribute("articleNumber", articleNumber);
+		model.addAttribute("companyName", companyName);
+		model.addAttribute("roomNumber", roomNumber);
+		model.addAttribute("roomName", roomName);
+		model.addAttribute("checkIn", checkIn);
+		model.addAttribute("checkOut", checkOut);
+		model.addAttribute("resultPrice", resultPrice);
+		
+		
+		return "lodgement/lodgementInicis";
+	}
 	
 	
 }

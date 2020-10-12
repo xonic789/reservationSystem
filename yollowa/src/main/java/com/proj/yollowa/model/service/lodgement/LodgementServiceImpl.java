@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
@@ -117,6 +118,24 @@ public class LodgementServiceImpl implements LodgementService {
 		model.addAttribute("reserInfo", list);
 		
 		return list;
+	}
+
+	//숙박 유저정보
+	@Override
+	public UserVo lodgementReserUser(UserVo user, Model model) throws SQLException {
+		LodgementDao dao= sqlSession.getMapper(LodgementDao.class);
+		UserVo userBean=dao.lodgementReserUser(user.getUser_number());
+		
+		
+		return userBean;
+	}
+
+	//숙박 선택한 방 성수기 날자
+	@Override
+	public LodgementRoomInfoVo lodgementpeakDays(int articleNumber, int roomNumber, Model model) throws SQLException {
+		LodgementDao dao =sqlSession.getMapper(LodgementDao.class);
+		LodgementRoomInfoVo dayBean=dao.lodgementpeakDays(articleNumber,roomNumber);
+		return dayBean;
 	}
 
 }

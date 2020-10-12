@@ -67,4 +67,14 @@
 		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber=#{roomNumber}
 	</select>
 	
+	<!-- 숙박 유저 정보 -->
+	<select id="lodgementReserUser" resultType="com.proj.yollowa.model.entity.UserVo">
+		select * from user where user_number=#{userNumber}
+	</select>
+	
+	<!-- 숙박 성수기 날짜 -->
+	<select id="lodgementpeakDays" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
+		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber = #{roomNumber}
+	</select>
+	
 </mapper>

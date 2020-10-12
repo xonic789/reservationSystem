@@ -392,8 +392,8 @@
 			}
 			
 		}
-		*/
 		</c:forEach>
+		*/
 	
 	// 성수기바로구매
 	<c:forEach items="${roomList}" var="bean" varStatus="status">
@@ -680,7 +680,7 @@
 														
 														<!-- 성수기 start -->
 														<ul class="div-peak${status.index} col-md-7" style="display: none;">
-															<form name="peakform${status.index}" action="reservation/${bean.roomInfo_articleNumber}&${bean.roomInfo_roomNumber }&${bean.roomInfo_peakStartDate}&${bean.roomInfo_peakEndDate}">
+															<form name="peakform${status.index}" action="reservation/${bean.roomInfo_articleNumber}">
 																<li class="roomName">${bean.roomInfo_name }</li>
 																<button style="margin-bottom: 20px;" type="button" class="btn btn-secondary modalBtn" data-toggle="modal" data-target="#exampleModal${status.index}">
 																	  객실 이용 안내
@@ -848,7 +848,7 @@ geocoder.addressSearch('${pin}', function(result, status) {
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.relayout();
 	        map.setCenter(coords);
-        },1000);
+        },1500);
     } 
 });
 	

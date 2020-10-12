@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
@@ -34,6 +35,12 @@ public interface LodgementService {
 	
 	// 숙박 예약페이지 지정된 방정보
 	List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException;
+	
+	// 숙박 유저정보
+	UserVo lodgementReserUser(UserVo user, Model model) throws SQLException;
+	
+	// 숙박 선택한 방 성수기 날짜
+	LodgementRoomInfoVo lodgementpeakDays(int articleNumber, int roomNumber, Model model) throws SQLException;
 	
 	
 
