@@ -67,4 +67,23 @@
 		select * from lodgement
 		where lodgement_number=#{lodgement_number}
 	</select>
+	<select id="getReviewInfo" resultType="com.proj.yollowa.model.entity.mypage.ReviewDto">
+		SELECT * FROM LRESERVINFO AS LI JOIN LODGEMENT AS L JOIN ROOMINFO AS RI ON(LI.LRESERVINFO_ACTICLENUMBER=L.LODGEMENT_NUMBER AND LI.LRESERVINFO_ACTICLENUMBER=RI.ROOMINFO_ARTICLENUMBER)
+		WHERE LI.LRESERVINFO_ROOMNUMBER=RI.ROOMINFO_ROOMNUMBER
+		AND LI.LRESERVINFO_NUMBER=#{LODGEMENT_NUMBER}
+	</select>
+	<insert id="insertReview" parameterType="com.proj.yollowa.model.entity.ReviewVo">
+		INSERT INTO review (review_articleNumber, review_title, review_userNumber, review_reservNumber, review_category, review_starPoint, review_writedDate, review_content, review_writer)
+		 VALUES (#{review.review_articleNumber}, #{review.review_title}, #{user_Number}, #{review.review_reservNumber}, #{review.review_category}, #{review.review_starPoint}, now(), #{review.review_content}, #{review.review_writer});
+	</insert>
+	<select id="getReviewCount" resultType="int">
+		select count(*) from review where review_articleNumber=#{review_articleNumber}
+	</select>
+	<select id="getStarPoint" resultType="int">
+		select review_starPoint from review where review_articleNumber=#{review_articleNumber}
+	</select>
+	<update id="updateReviewInfo" parameterType="com.proj.yollowa.model.entity.ReviewVo">
+		UPDATE lodgement SET lodgement_reviewGradeRate =#{reviewGradeRate}, lodgement_reviewCount =#{reviewCount} WHERE lodgement_number = #{review_articleNumber}
+		
+	</update>
 </mapper>

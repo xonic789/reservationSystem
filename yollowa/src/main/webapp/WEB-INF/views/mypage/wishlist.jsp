@@ -62,11 +62,12 @@ ul {
 	<%@ include file="../template/menu.jspf"%>
 	<%@ include file="../template/mypagemenu1.jspf"%>
 	<div class="col-md-9">
-		<h2>${user.user_name }님의 찜 목록</h2>
-		<c:if test="${service eq 'activity' }">
-			<a
-				href="${pageContext.request.contextPath }/mypage/wishlist/lodgement"
-				class="btn btn-primary">숙박 보기</a>
+		
+		<c:if test="${service eq 1 }">
+		<h2>${user.user_name }님의 액티비티 찜 목록</h2>
+			<a style="margin-bottom:10px;"
+				href="${pageContext.request.contextPath }/mypage/wishlist/2"
+				class="btn btn-warning">숙박 보기</a>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach items="${wishList }" var="userwish">
 					<div class="col mb-4">
@@ -101,10 +102,11 @@ ul {
 				</c:forEach>
 			</div>
 		</c:if>
-		<c:if test="${service eq 'lodgement' }">
-			<a
-				href="${pageContext.request.contextPath }/mypage/wishlist/activity"
-				class="btn btn-warning" style="text-align: center;">액티비티 보기</a>
+		<c:if test="${service eq 2 }">
+		<h2>${user.user_name }님의 숙박 찜 목록</h2>
+			<a	style="margin-bottom:10px;"
+				href="${pageContext.request.contextPath }/mypage/wishlist/1"
+				class="btn btn-primary" style="text-align: center;">액티비티 보기</a>
 			<div class="row row-cols-1 row-cols-md-3">
 				<c:forEach items="${wishList }" var="userwish">
 					<div class="col mb-4">
