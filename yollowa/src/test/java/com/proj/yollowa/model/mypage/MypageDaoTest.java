@@ -50,7 +50,23 @@ public class MypageDaoTest {
 			System.out.println(str.trim());
 			System.out.println(myPageDao.getAwishList(Integer.parseInt(str.trim())));
 		}
-		
+	}
+	
+	@Test
+	public void testReviewInfo() throws SQLException{
+		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
+		System.out.println(myPageDao.getReviewInfo(1));
+	}
+	@Test
+	public void testAverageStar() throws SQLException{
+		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
+		int[] list = myPageDao.getStarPoint(15);
+		double sum=0;
+		for(int i=0;i<list.length;i++) {
+			sum+=list[i];
+		}
+		sum=(int)(sum/list.length*10)/10.0;
+		System.out.println(sum+" "+list.length+" ");
 	}
 }
 

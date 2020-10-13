@@ -43,7 +43,7 @@ public class fileuploadCk {
 						String fileName = file.getName();
 						byte[] bytes = file.getBytes();
 						
-						String uploadPath = req.getServletContext().getRealPath("/resources/img/board/");		
+						String uploadPath = req.getServletContext().getRealPath("/resources/board/");		
 						/*C:\~~\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\*/
 						File uploadFile = new File(uploadPath);
 						if(!uploadFile.exists()){
@@ -56,7 +56,7 @@ public class fileuploadCk {
                         
                         printWriter = resp.getWriter();
                         resp.setContentType("text/html");
-                        String fileUrl = req.getContextPath()+ "/resources/img/board/" + fileName;
+                        String fileUrl = req.getContextPath()+ "/resources/board/" + fileName;
                         
                         // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
                         json.addProperty("uploaded", 1);

@@ -70,52 +70,24 @@
 	#titleInput{
 	}
 	.box3 {
-		text-align: left;
-		margin-top: 10px;
-		margin-bottom: 20px;
-	}
-	.mb-3{
-    	margin-bottom: 0.2rem !important;
-	}
-	div#contentBox {
-		margin-top: 30px;
-    	margin-bottom: 20px !important;
-	}	
-	#replyBox{
-		margin: 2px auto 20px auto;
-		display: flex;
-	}
-	#replyText{
-		resize: none;
-	}
-	span#cke_1_top {
-	    display: none !important;
-	}
-	span#cke_1_bottom {
-    	display: none;
-	}
-	button.btn.btn-outline-primary {
-        height: 26.22222px;
-	    padding-top: 3px;
-	    padding-bottom: 3px;
-	}	
-	#replyBtnBox{
 		text-align: right;
+		margin-top: 10px;
+	}
+	#submitBtn {
 	}
 	/* content end */
 		
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
-		CKEDITOR.replace('replyText', {toolbar: [
-            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-           {name: 'editing', items: ['Format', 'Font', 'FontSize', 'TextColor', 'BGColor' , 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] }
-       ],
-       	width:'900px'
-		});
-		
-	});
+$(document).ready(function() {
+	CKEDITOR.replace('editor',
+		    {
+	      height : '500px',  //에디터 높이
+	      startupFocus : false,
+	      filebrowserUploadUrl:'${pageContext.request.contextPath }/fileupload'
+    });
 	
+});
 </script>
 </head>
 <body>
@@ -123,8 +95,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small>욜로와에서 알려드립니다.</small></h1>
+		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -142,29 +114,18 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<div class="card border-light mb-3" id="contentBox">
-				<div class="card-header" id="title"><h1>${bean.title }</h1>
-					<div class="row">
-						<div class="col-md-4">
-						<span id="writer">작성자 | ${bean.writer }</span>
-						</div>
-						<div class="col-md-6">
-						<span id="date">작성일 | ${bean.writeddate }</span>
-						</div>
-						<div class="col-md-2">
-						<span id="cnt">조회수 | ${bean.cnt }</span>
-						</div>
-					</div>
+			<form method="post" action="write">
+				<div class="box1">
+					<label for="title" id="titleLabel">제목</label>
+					<input type="text" name="title" class="form-control" id="titleInput" placeholder="제목을 입력해 주세요" />
 				</div>
-				<div class="card-body">
-					<p class="card-text">${bean.content }</p>
+				<div class="box2">
+					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>
 				</div>
-			</div>
-			<div class="box4">
-				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.noticeno }'" value="수정하기">
-				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.noticeno }'" value="삭제하기">
-				<input type="button" id="list" class="btn btn-primary" onclick ="location.href='../'" value="목록">
-			</div> 
+				<div class="box3">
+					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">
+				</div> 
+			</form>
 		</div>
 	</div>
 </div>

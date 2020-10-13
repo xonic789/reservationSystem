@@ -2,38 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.proj.yollowa.model.cs.NoticeDao">
-	<select id="getNoticeList" resultType="com.proj.yollowa.model.entity.cs.NoticeVo">
+<mapper namespace="com.proj.yollowa.model.cs.FaqDao">
+	<select id="getFaqList" resultType="com.proj.yollowa.model.entity.cs.FaqVo">
 		<![CDATA[
 		SELECT 
-			NOTICENO, TITLE, WRITER, CONTENT, WRITEDDATE, CNT 
-		FROM NOTICE 
-		WHERE NOTICENO>0
+			FAQNO, TITLE, WRITER, CONTENT, WRITEDDATE, CNT 
+		FROM FAQ 
+		WHERE FAQNO>0
 		]]>
 			<include refid="search" />
 		<![CDATA[
-		ORDER BY NOTICENO DESC, WRITEDDATE DESC 
+		ORDER BY FAQNO DESC, WRITEDDATE DESC 
 		LIMIT #{pageStart}, #{perPageNum}
 		]]>
 	</select>
-	<select id="getNotice" resultType="com.proj.yollowa.model.entity.cs.NoticeVo">
+	<select id="getFaq" resultType="com.proj.yollowa.model.entity.cs.FaqVo">
 		<![CDATA[
-		SELECT * FROM NOTICE WHERE NOTICENO=#{noticeno}
+		SELECT * FROM FAQ WHERE FAQNO=#{faqno}
 		]]>
 	</select>
-	<select id="countNotice" resultType="int">
-		SELECT COUNT(NOTICENO) FROM NOTICE
-		WHERE NOTICENO>0
+	<select id="countFaq" resultType="int">
+		SELECT COUNT(FAQNO) FROM FAQ
+		WHERE FAQNO>0
 		<include refid="search" />
 	</select>
-	<delete id="deleteNotice">
-		DELETE FROM NOTICE WHERE NOTICENO=#{noticeno}
+	<delete id="deleteFaq">
+		DELETE FROM FAQ WHERE FAQNO=#{Faqno}
 	</delete>
-	<insert id="insertNotice">
-		INSERT INTO NOTICE (TITLE, WRITER, CONTENT) VALUES (#{title}, #{writer}, #{content})
+	<insert id="insertFaq">
+		INSERT INTO FAQ (TITLE, WRITER, CONTENT) VALUES (#{title}, #{writer}, #{content})
 	</insert>
-	<update id="updateNotice">
-		UPDATE NOTICE SET TITLE=#{title} , CONTENT=#{content} WHERE NOTICENO=#{noticeno}
+	<update id="updateFaq">
+		UPDATE FAQ SET TITLE=#{title} , CONTENT=#{content} WHERE FAQNO=#{faqno}
 	</update>
 	
 	<sql id="search">

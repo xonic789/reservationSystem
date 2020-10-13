@@ -45,6 +45,16 @@ ul {
   th, td {
     border: 1px solid #444444;
   }
+  
+  .table{
+		margin-top: 30px;
+	    border-top: 2px solid #D0A9F5;
+	}
+	.table tr{
+		text-align: center;
+	}
+	.reviewBox1{
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -121,28 +131,26 @@ ul {
 				</div>
 			</div>
 			<div class="col-md-9">
-				<table>
-				<thead>
-					<tr>
-						<th>제목</th>
-						<th>대표이미지</th>
-						<th>별점</th>
-						<th>작성일</th>
-						<th>내용</th>
-					</tr>
-				</thead>
-				<tbody>
 				<c:forEach items="${list }" var="list" >
-					<tr>
-						<td>::${list.company }</td>
-						<td>${list.img }</td>
-						<td>${list.starNum }</td>
-						<td>${list.reviewedDate }</td>
-						<td>${list.content }</td>
-					</tr>
+						<table >
+						<thead>
+							<tr>
+								<th>${list.company }</th>
+								<th>${list.reviewedDate }</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td rowspan="2" width="110"><img alt="" src="../${list.img }" width="100px" height="100px"></td>
+							<td>|${list.starNum }</td>
+						</tr>
+						<tr>
+							<td>${list.content }</td>
+						</tr>
+						</tbody>
+							</table>
 				</c:forEach>
-				</tbody>
-				</table>
+				
 			</div>
 		</div>
 
