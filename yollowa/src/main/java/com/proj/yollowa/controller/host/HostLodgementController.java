@@ -20,18 +20,18 @@ import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.entity.host.RoomInfoVo;
-import com.proj.yollowa.model.service.host.HostService;
+import com.proj.yollowa.model.service.host.HostLodgementService;
 
 @Controller
 @RequestMapping("/host")
 public class HostLodgementController {
 	@Inject
-	HostService hostService;
+	HostLodgementService hostService;
 	
 	// 호스트 인덱스 페이지
 	@Auth
 	@RequestMapping("/")
-	public String HostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
+	public String hostIndex(@AuthUser UserVo userVo, Model model) throws SQLException {
 		model.addAttribute("userName",userVo.getUser_name());
 		return "host/hostIndex";
 	}
@@ -39,7 +39,7 @@ public class HostLodgementController {
 	// 호스트 숙박 글 목록 페이지
 	@Auth
 	@RequestMapping("/lodgement")
-	public String HostLodgement(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
+	public String hostLodgement(@AuthUser UserVo userVo, Model model, HttpServletRequest req) throws SQLException {
 		UserVo userBean = hostService.hostDetail(model, userVo.getUser_number());
 		hostService.selectHostLodgementList(model, userBean);
 		model.addAttribute("userVo", userBean);
