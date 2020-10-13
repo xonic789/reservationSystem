@@ -174,6 +174,7 @@ public class MypageServiceImpl implements MypageService{
 	
 	public void insertReviewService(ReviewVo reviewVo,int user_Number) throws SQLException {
 		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
+		reviewVo.setReview_content(reviewVo.getReview_content().replace("\r\n", " "));
 		myPageDao.insertReview(reviewVo, user_Number);
 		int reviewCount = myPageDao.getReviewCount(reviewVo.getReview_articleNumber());
 		int[] list = myPageDao.getStarPoint(reviewVo.getReview_articleNumber());
