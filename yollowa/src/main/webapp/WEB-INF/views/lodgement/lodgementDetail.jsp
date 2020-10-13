@@ -43,7 +43,7 @@
 	.hashTag{
 		font-size: 18px;
 		margin-bottom:0px;
-		color: #C3C2C0;
+		color: #A1A1A0;
 	}
 	h3 {
 		margin-bottom: 15px;
@@ -89,28 +89,51 @@
 		padding-bottom: 20px;
 	}
 	
-	/
+	#reviewRateTitle{
+		text-align:center;
+		padding-bottom: 5px;
+		font-size:22px;
+	}
+	#reviewRateStarDiv{
+		text-align:center;
+		font-size: 25px;
+	}
+	#reviewRateStar{
+		color: #F1AD25;
+	}
+	#reviewRate{
+		text-align:center;
+	}
+	#reviewRateCount{
+		color: #A1A1A0;
+		text-align:center;
+		padding-top:10px;
+		padding-bottom:30px;
+		font-size: 16px;
+	}
+	
 	.review-div {
 		margin-top: 20px;
 	}
 	
 	.review-box {
-		padding: 40px 0px 40px 0px;
+		padding: 30px 0px 0px 0px;
 		border-top: 1px solid lightgray;
 	}
 	.review-title{
-		font-size: 22px;	
+		font-size: 20px;	
+		margin-bottom: 5px;
 	}
 	.review-content{
-		font-size: 17px;
-		padding: 10px 0px;
+		font-size: 16px;
+		padding: 15px 0px;
 	}
 	.writerText{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.review-writer {
-		font-size: 18px;
-		color: gray;
+		font-size: 16px;
+		color: #A1A1A0;
 	}
 	.review-star{
 		margin-bottom: 10px;
@@ -119,7 +142,8 @@
 	}
 	.review-writedDateA {
 		margin-top: 5px;
-		color: gray;
+		margin-bottom: 40px;
+		color: #A1A1A0;
 	}
 	
 	.datePicker {
@@ -171,6 +195,11 @@
 	}
 	.submitBtn{
 		width: 89%;
+	}
+	#location{
+		font-size: 17px;
+		margin-bottom:20px;
+		position: relative;
 	}
 	
 	/* card start*/ 
@@ -405,7 +434,14 @@
 	// 캐러셀 이미지
 	$(document).ready(function(){
 		
-	
+		// 가격 정규식
+		for(var i=0; i<100; i++){
+			var offPeakPrice = $('.offPeakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.offPeakPrice'+i).text(offPeakPrice);
+			var peakPrice = $('.peakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.peakPrice'+i).text(peakPrice);
+		}
+		
 		// 타이틀 이미지 carousel
 		var title_Hidden_Img = $('#title-carousel').find('input').val();
 		console.log(title_Hidden_Img);
@@ -580,7 +616,7 @@
 		</p>
 		<p class="hashTag">${hashTag }</p>
 		<p class="titleName">${startEndDay.getLodgement_companyName()}</p>
-		<button class="btn btn-outline-danger jjim" onclick="addWish(${article });">♡ 찜목록 담기</button>
+		<button class="btn btn-outline-danger jjim" onclick="addWish(${article });">♡ 위시리스트</button>
 		
 		<c:forEach items="${infoList }" var="bean">
 			<div class="jumbotron commentJumbo">
@@ -658,7 +694,7 @@
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (비성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
+																	<span class="offPeakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															
@@ -724,7 +760,7 @@
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
+																	<span class="peakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															<div class="modal fade" id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -819,7 +855,8 @@
 			</div>
 			<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
 				<!-- 지도 -->
-				<div>
+				<div id="location"> ${companyName} 주소(도로명) : ${pin }</div>
+				<div class="mapClass">
 					<p style="margin-top:-12px">
 					    <em class="link">
 					        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
@@ -827,18 +864,24 @@
 					        </a>
 					    </em>
 					</p>
-					<div id="map" style="width:100%;height:350px;"></div>
+					<div id="mapkakao" style="width:100%;height:350px;"></div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 				<!-- ..리뷰 -->
 				<div id="review-div row">
-
+					<div id="reviewRate text-center">
+						<div id="reviewRateTitle">추천해요</div>
+						<div id="reviewRateStarDiv">
+						<span id="reviewRateStar">★ ★ ★ ★ ★ </span><span id="reviewRate">10.0</span>
+						</div>
+						<div id="reviewRateCount">전체리뷰 40</div>
+					</div>
 					<c:forEach items="${reviewList}" var="bean" varStatus="status">
 						<div class="review-box col-md-12">
-							<div class="review-title">전체적으로 만족스러웠어요.</div>
-							<div class="review-star">★ ${bean.review_starPoint}.0</div>
-							<span class="writerText">작성자 | </span><span class="review-writer">${bean.review_writer}</span>
+							<div class="review-title">${bean.review_title }</div>
+							<span class="review-star">★ ${bean.review_starPoint}.0 </span>
+							<span class="writerText"></span><span class="review-writer">| ${bean.review_writer}</span>
 							<div class="review-content">${bean.review_content}</div>
 							<div class="review-writedDate${status.index} review-writedDateA">${bean.review_writedDate }</div>
 						</div>
@@ -849,7 +892,7 @@
 	</div>
 	<%@ include file="../template/footer.jspf"%>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	var mapContainer = document.getElementById('mapkakao'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
@@ -886,7 +929,7 @@ geocoder.addressSearch('${pin}', function(result, status) {
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.relayout();
 	        map.setCenter(coords);
-        },1500);
+        },2000);
     } 
 });
 	

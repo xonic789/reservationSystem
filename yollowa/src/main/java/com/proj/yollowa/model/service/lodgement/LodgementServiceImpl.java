@@ -122,7 +122,7 @@ public class LodgementServiceImpl implements LodgementService {
 	
 	// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
 	@Override
-	public int roomPaymentSelect(int roomNumber, Date startDate) {
+	public int roomPaymentSelect(int roomNumber, Date startDate, Date endDate) {
 		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
 		
 		// 먼저 성수기, 비성수기 날자를 받아온 후 가져온 startDate가 성수기인지 비성수기인지 비교
