@@ -59,6 +59,11 @@
 			<beans:bean
 				class="com.proj.yollowa.interceptor.LoginCheck"></beans:bean>
 		</interceptor>
+		<!-- <interceptor>
+			<mapping path="/mypage/**"/>
+			<beans:bean 
+				class="com.proj.yollowa.interceptor.MyPageInterceptor"></beans:bean>
+		</interceptor> -->
 	</interceptors>
 
 
@@ -72,6 +77,11 @@
 				class="com.proj.yollowa.interceptor.AuthInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
+
+
+
+
+
 
 
 	<!-- oauth2 naver -->

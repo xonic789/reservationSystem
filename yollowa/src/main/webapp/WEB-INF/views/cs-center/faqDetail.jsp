@@ -123,8 +123,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 고객센터 > 공지사항 </p>
-		<h1>공지사항 <small>욜로와에서 알려드립니다.</small></h1>
+		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -161,8 +161,8 @@
 				</div>
 			</div>
 			<div class="box4">
-				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.noticeno }'" value="수정하기">
-				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.noticeno }'" value="삭제하기">
+				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.faqno }'" value="수정하기">
+				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.faqno }'" value="삭제하기">
 				<input type="button" id="list" class="btn btn-primary" onclick ="location.href='../'" value="목록">
 			</div> 
 		</div>

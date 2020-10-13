@@ -14,11 +14,11 @@ import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.entity.host.RoomInfoVo;
 
-public interface HostService {
+public interface HostLodgementService {
 	
 	UserVo hostDetail(Model model, int user_number) throws SQLException;
 	
-	// host/ -> 사업자 글 리스트
+	// host/ -> 사업자 숙박글 리스트
 	void selectHostLodgementList(Model model,UserVo bean) throws SQLException;
 	// host/lodgeUpdate/ -> 사업자 숙박 글 수정
 	void updateHostLodgement(int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException;

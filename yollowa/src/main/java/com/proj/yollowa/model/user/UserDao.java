@@ -34,4 +34,5 @@ public interface UserDao {
 	List<String> getUserNickName() throws SQLException;
 	void insertKakaoUser(@Param("user") UserVo userVo) throws SQLException;
 	void insertNaverUser(@Param("user") UserVo userVo) throws SQLException;
+	UserVo getUser(int user_Number) throws SQLException;
 }

@@ -23,7 +23,7 @@ import com.proj.yollowa.model.entity.host.RoomInfoVo;
 import com.proj.yollowa.model.host.HostDao;
 
 @Service
-public class HostServiceImpl implements HostService {
+public class HostLodgementServiceImpl implements HostLodgementService {
 
 	@Inject
 	SqlSession sqlSession;
@@ -38,9 +38,9 @@ public class HostServiceImpl implements HostService {
 	}
 
 	
-/*  host/ start **********************************************************************************************************/
+/*  host/lodgement start **********************************************************************************************************/
 	
-	// host/ -> 사업자 글 리스트
+	// host/lodgement -> 사업자 글 리스트
 	@Override
 	public void selectHostLodgementList(Model model, UserVo userBean) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
@@ -81,7 +81,7 @@ public class HostServiceImpl implements HostService {
 		
 	}
 
-/*  host/ end**********************************************************************************************************/
+/*  host/lodgement end**********************************************************************************************************/
 
 /*	host/lodgeDelete/ start**********************************************************************************************************/
 	// 숙박 글 삭제

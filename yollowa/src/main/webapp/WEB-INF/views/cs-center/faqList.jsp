@@ -75,19 +75,20 @@
 	    padding-top: 1px;
 	    padding-bottom: 1px;
 	}
-	.pagingBox{
-		display: flex;
-		position: relative;
-	}
 	.pagination {
-		margin: 10px 205px auto 350px;
-	}
+		text-align: center;
+    	padding-left: revert;
+   	}
 	#btn-long {
-	    margin: 5px auto 5px auto;
-	    width: 120%;
+	    margin: 5px auto 23px auto;
+	    width: 77px;
 	    height: 33px;
 	    padding-top: 1px;
 	    padding-bottom: 1px;
+	}
+	
+	#writeBox{
+		text-align: right;
 	}
 	/* content end */
 		
@@ -100,8 +101,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 고객센터 > FAQ </p>
-		<h1>FAQ <small>이 곳은 고객님들께서 자주 물으시는 질문과 답변을 모아둔 공간입니다.</small></h1>
+		<p> <a href="../">메인 페이지</a> > 고객센터 > Q&amp;A </p>
+		<h1>Q&amp;A <small> 이 곳은 고객님들의 질문에 답변해드리는 공간입니다.</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-2">
@@ -119,16 +120,17 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<form id="search" action="" class="form-inline">
+			<form id="search" action="${pageContext.request.contextPath }/cs-center/qna/" class="form-inline" method="get">
 				<div class="form-group">
+					<input type="hidden" name="page" value="1"/>
 				    <select name="searchType" class="custom-select">
-				      	<option value="subject">제목</option>
+				      	<option value="title">제목</option>
 						<option value="content">내용</option>
-						<option value="all">제목+내용</option>
-						<option value="user_name">작성자</option>
+						<option value="titleContent">제목+내용</option>
+						<option value="writer">작성자</option>
 				    </select>
-				  	<input type="text" class="form-control" placeholder="검색어를 입력하세요" id="inputDefault">
-					<input type="button" id="btn-normal" value="검색하기" class="btn btn-primary" />
+				  	<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요" id="inputDefault">
+					<input type="submit" id="btn-normal" value="검색하기" class="btn btn-primary" />
 				</div>
 			</form>
 			<table class="table">
@@ -142,31 +144,36 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="i" begin="1" end="10">
+			  <c:forEach items="${list }" var="bean">
 			    <tr>
-			      <td>${i }</td>
-			      <td>${i }번째 테스트 게시글입니다</td>
-			      <td>관리자</td>
-			      <td>2020-09-20</td>
-			      <td>200</td>
+			      <td><a href="./detail/${bean.faqno }">${bean.faqno }</a></td>
+			      <td><a href="./detail/${bean.faqno}">${bean.title }</a></td>
+			      <td><a href="./detail/${bean.faqno }">${bean.writer }</a></td>
+			      <td><a href="./detail/${bean.faqno }">${bean.writeddate }</a></td>
+			      <td><a href="./detail/${bean.faqno }">${bean.cnt }</a></td>
 			    </tr>
 			    </c:forEach>
 			  </tbody>
 			</table>
-			<div class="pagingBox">
-				<div class="paging">
-					<ul class="pagination pagination">
-					  <li class="page-item"><a class="page-link" href="#">이전</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">4</a></li>
-					  <li class="page-item"><a class="page-link" href="#">5</a></li>
-					  <li class="page-item"><a class="page-link" href="#">다음</a></li>
+			<div class="row">
+				<div class="col-md-4">
+					<input type="hidden" />
+				</div>
+				<div class="col-md-6">
+					<ul class="pagination">
+						<c:if test="${paging.prev }">
+						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">이전</a></li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
+							<li class="page-item"><a class="page-link" href="?page=${status.index }&searchType=${paging.searchType }&keyword=${paging.keyword }">${status.index }</a></li>
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0 }">
+							<li class="page-item"><a class="page-link" href="?page=${paging.endPage + 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">다음</a></li>
+						</c:if>
 					</ul>
 				</div>
-				<div class="btnGroup">
-				<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='http://www.daum.net'" />
+				<div class="col-md-2" id="writeBox">
+					<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
 				</div>
 			</div>
 		</div>

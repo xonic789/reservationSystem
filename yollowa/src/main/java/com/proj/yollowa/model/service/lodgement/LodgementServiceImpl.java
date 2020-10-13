@@ -1,6 +1,7 @@
 package com.proj.yollowa.model.service.lodgement;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -175,6 +176,7 @@ public class LodgementServiceImpl implements LodgementService {
 			String arr[] = existWishList.split("&");
 			for(int i=0; i<arr.length; i++) {
 				if(arr[i].contains(""+lodgementNumber)) {
+					System.out.println("번호 중복");
 					// &로 스플릿한 배열 요소중에 가져온 lodgementNumber가 있으면 들어옴
 					return;
 				}
@@ -185,6 +187,84 @@ public class LodgementServiceImpl implements LodgementService {
 			dao.afterWishUpdate(afterWish, userNumber);
 			System.out.println("기존에 등록된 wish 있음");
 			
+		}
+		
+	}
+	
+	
+	// 지역필터
+	@Override
+	public void lodgementLocationFilterSelect(String locationFilter, Model model) {
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		
+		// '/'로 나눠져있을 수 있기 떄문에 /로 split
+		if(locationFilter.contains("/")) {
+			String[] filterSplitArr = locationFilter.split("/");
+			List<LodgementVo> list = new ArrayList<LodgementVo>();
+			
+			int cnt =0;
+			
+			for(int i=0; i<filterSplitArr.length; i++) {
+				// 스플릿돼서 나온 배열 length만큼 돌려 list에 담아놓고 위에 만들어 놓은 list 각각의 요소를 다시 add
+				List<LodgementVo> tempList = dao.selectLocationFilterOne(filterSplitArr[i]);
+				
+				// 누적할 검색 건수 누적
+				cnt += dao.selectLocationFilterOneCnt(locationFilter);
+				
+				// 위에서 나온 list의 안의 요소를 위에 만들어놓은 list에 각각 add
+				for(int j=0; j<tempList.size(); j++) {
+
+					// list에 각각 add
+					list.add(tempList.get(j));
+				}	
+			}
+			model.addAttribute("cnt", cnt);
+			
+			for(int i=0; i<list.size(); i++) {
+				int su = list.get(i).getLodgement_img().indexOf("&");
+				String imgName = list.get(i).getLodgement_img().substring(0, su);
+				list.get(i).setLodgement_img(imgName);
+			}
+			
+			model.addAttribute("listAll",list);
+			
+		}else {
+			// 전체 선택시 걸러주기
+			if(locationFilter.contains("전체")) {
+				String splitAll = locationFilter.replaceAll(" 전체", "");
+				
+				List<LodgementVo> list = dao.selectLocationFilterOne(splitAll);
+				
+				// 검색 건수를 알려주기 위해 count 요청
+				int cnt = dao.selectLocationFilterOneCnt(splitAll);
+				model.addAttribute("cnt", cnt);
+				
+				for(int i=0; i<list.size(); i++) {
+					int su = list.get(i).getLodgement_img().indexOf("&");
+					String imgName = list.get(i).getLodgement_img().substring(0, su);
+					list.get(i).setLodgement_img(imgName);
+				}
+				
+				model.addAttribute("listAll",list);
+				
+				// 리턴시켜버림
+				return;
+			}
+				
+			// '/'로 나눠져있지 않은 것은 바로 보냄
+			List<LodgementVo> list = dao.selectLocationFilterOne(locationFilter);
+			
+			// 검색 건수를 알려주기 위해 count 요청
+			int cnt = dao.selectLocationFilterOneCnt(locationFilter);
+			model.addAttribute("cnt", cnt);
+			
+			for(int i=0; i<list.size(); i++) {
+				int su = list.get(i).getLodgement_img().indexOf("&");
+				String imgName = list.get(i).getLodgement_img().substring(0, su);
+				list.get(i).setLodgement_img(imgName);
+			}
+			
+			model.addAttribute("listAll",list);
 		}
 		
 	}

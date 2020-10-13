@@ -36,8 +36,6 @@ public class NoticeController {
 		searchVo.setKeyword(keyword);
 		searchVo.setPage(page);
 		searchVo.setTotalCnt(noticeService.countNoticeService(searchVo));
-		System.out.println("@@"+searchVo.toString());
-		System.out.println("@"+searchVo.serachToString());
 		
 		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
 		model.addAttribute("paging", searchVo);
@@ -45,48 +43,15 @@ public class NoticeController {
 		return "cs-center/noticeList";
 	}
 	
-//	@RequestMapping(value = "/?page={page}&searchType={searchType}&keyword={keyword}", method = RequestMethod.GET)
-//	public String noticeListSearch(Model model, 
-//			@RequestParam(value="page", required=false, defaultValue="1") int page,
-//			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
-//			@RequestParam(value="keyword" , required=false, defaultValue="") String keyword
-//			) throws SQLException {
-//		PagingScaleVo pagingScaleVo = new SearchVo();
-//		pagingScaleVo.setPage(page);
-//		pagingScaleVo.setTotalCnt(noticeService.countNoticeService());
-//		
-//		SearchVo searchVo = new SearchVo();
-//		searchVo.setSearchType(searchType);
-//		searchVo.setKeyword(keyword);
-//		searchVo.setPage(page);
-//		searchVo.setTotalCnt(noticeService.countNoticeService());
-//		System.out.println("paging:"+pagingScaleVo.toString());
-//		System.out.println(searchVo.toString());
-//		
-//		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
-//		model.addAttribute("paging", searchVo);
-//		
-//		return "cs-center/noticeList";
-//	}
-	
 	@RequestMapping(value = "/detail/{noticeno}", method = RequestMethod.GET)
-	public String getNotice(Model model, @PathVariable int noticeno) {
-		try {
-			noticeService.getNoticeService(model, noticeno);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public String getNotice(Model model, @PathVariable int noticeno) throws SQLException {
+		noticeService.getNoticeService(model, noticeno);
 		return "cs-center/noticeDetail";
 	}
 	
 	@RequestMapping(value = "/delete/{noticeno}", method = RequestMethod.GET)
-	public String deleteNotice(@PathVariable int noticeno) {
-		try {
-			noticeService.deleteNoticeService(noticeno);
-			System.out.println(noticeno+", noticia se ha eliminado");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public String deleteNotice(@PathVariable int noticeno) throws SQLException {
+		noticeService.deleteNoticeService(noticeno);
 		return "redirect:../";
 	}
 	@RequestMapping("/write")
@@ -95,33 +60,20 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String noticeInsert(@ModelAttribute NoticeVo bean) {
-		System.out.println("escribir page, enviado por post");
-		try {
-			noticeService.insertNoticeService(bean);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public String noticeInsert(@ModelAttribute NoticeVo bean) throws SQLException {
+		noticeService.insertNoticeService(bean);
 		return "redirect:./";
 	}
 	
 	@RequestMapping("/modify/{noticeno}")
-	public String modify(Model model, @PathVariable int noticeno) {
-		try {
-			noticeService.getNoticeService(model, noticeno);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public String modify(Model model, @PathVariable int noticeno) throws SQLException {
+		noticeService.getNoticeService(model, noticeno);
 		return "cs-center/noticeModify";
 	}
 	
 	@RequestMapping(value = "/modify/{noticeno}", method = RequestMethod.POST)
-	public ModelAndView noticeUpdate(@PathVariable int noticeno, @ModelAttribute NoticeVo bean) {
-		try {
-			noticeService.updateNoticeService(bean);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public ModelAndView noticeUpdate(@PathVariable int noticeno, @ModelAttribute NoticeVo bean) throws SQLException {
+		noticeService.updateNoticeService(bean);
 		return new ModelAndView("redirect:../detail/"+noticeno);
 	}
 	
