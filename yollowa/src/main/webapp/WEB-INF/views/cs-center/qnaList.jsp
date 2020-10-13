@@ -144,10 +144,10 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach items="${list }" var="bean">
+			  <c:forEach items="${list }" var="bean" varStatus="status">
 			    <tr>
 			      <td><a href="./detail/${bean.qnano }">${bean.qnano }</a></td>
-			      <td><a href="./detail/${bean.qnano }">${bean.title }</a>
+			      <td><a href="./detail/${bean.qnano }">${bean.title }&nbsp;&nbsp;(${conutReply[status.index] })</a>
 			      <c:if test="${bean.hidden eq 1 }"><img style="height:15px;padding-bottom:5px;" alt="" src="${pageContext.request.contextPath}/resources/img/icons/lock.png"></c:if>
 			      </td>
 			      <td><a href="./detail/${bean.qnano }">${bean.writer }</a></td>

@@ -58,8 +58,18 @@ public class FaqServiceImpl implements FaqService{
 		
 		faqDao.updateFaq(bean);
 	}
-
-
+	
+	@Override
+	public boolean isWritedManagerService(int faqno, String managerId) throws SQLException {
+		FaqDao faqDao = sqlSession.getMapper(FaqDao.class);
+		boolean boo=false;
+		if(faqDao.getFaq(faqno).getWriter().equals(managerId)) {
+			boo=true;
+			System.out.println("일치합니다!!!");
+		}
+		
+		return boo;
+	}
 
 
 	

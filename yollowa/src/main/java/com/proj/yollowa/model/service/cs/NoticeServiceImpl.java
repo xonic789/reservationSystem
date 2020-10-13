@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import com.proj.yollowa.model.cs.NoticeDao;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -58,5 +57,16 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeDao.updateNotice(bean);
 	}
 
-	
+	@Override
+	public boolean isWritedManagerService(int noticeno, String managerId) throws SQLException {
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		boolean boo=false;
+		if(noticeDao.getNotice(noticeno).getWriter().equals(managerId)) {
+			boo=true;
+			System.out.println("일치합니다!!!");
+		}
+		
+		return boo;
+	}
+
 }

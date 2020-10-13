@@ -1,6 +1,8 @@
 package com.proj.yollowa.controller.cs;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -49,6 +51,22 @@ public class QnaController {
 		model.addAttribute("list", qnaService.getQnaListService(searchVo));
 		model.addAttribute("paging", searchVo);
 		model.addAttribute("userVo", userVo);
+		
+		List<Integer> coutReplys = new ArrayList<>();
+		for (int i = 0; i < qnaService.getQnaListService(searchVo).size(); i++) {
+//			qnaService.getQnaListService(searchVo).get(i);
+			System.out.println("==================");
+//			qnaReplyService.countReplyService(qnaService.getQnaListService(searchVo).get(i).getQnano());
+			int qnano2 = qnaService.getQnaListService(searchVo).get(i).getQnano();
+			System.out.print("qnano"+qnano2);
+			System.out.print("==");
+			System.out.println(qnaReplyService.countReplyService(qnano2));
+			System.out.println("==================");
+			
+			coutReplys.add(qnaReplyService.countReplyService(qnano2));
+		}
+		model.addAttribute("conutReply", coutReplys);
+//		System.out.println(qnaService.getQnaListService(searchVo).size());
 		
 		return "cs-center/qnaList";
 	}

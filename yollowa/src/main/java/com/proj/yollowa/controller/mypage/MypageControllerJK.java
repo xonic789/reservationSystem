@@ -57,9 +57,9 @@ public class MypageControllerJK {
 			return "redirect:../";
 		}
 		
-		System.out.println("---->"+userVo.getUser_name());
-		System.out.println("@@@@"+mypageServiceJK.getAllMyReviewService(userVo.getUser_name()).size());
-		model.addAttribute("list", mypageServiceJK.getAllMyReviewService("승우리"));
+		System.out.println("---->"+userVo.getUser_nickName());
+		System.out.println("---->"+mypageServiceJK.getAllMyReviewService(userVo.getUser_nickName()).size());
+		model.addAttribute("list", mypageServiceJK.getAllMyReviewService(userVo.getUser_nickName()));
 		return "mypage/myreview";
 	}
 	//테스트용..

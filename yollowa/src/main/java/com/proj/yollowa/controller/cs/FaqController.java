@@ -48,15 +48,24 @@ public class FaqController {
 	}
 	
 	@RequestMapping(value = "/detail/{faqno}", method = RequestMethod.GET)
-	public String getNotice(Model model, @PathVariable int faqno) throws SQLException {
+	public String getNotice(Model model, @PathVariable int faqno, @AuthManager ManagerVo managerVo) throws SQLException {
+		int isWritedManger = 0;
+		if(managerVo != null && faqService.isWritedManagerService(faqno, managerVo.getManager_id())) {
+			isWritedManger = 1;
+		}
+		model.addAttribute("isWritedManager", isWritedManger);
 		faqService.getFaqService(model, faqno);
 		return "cs-center/faqDetail";
 	}
 	
 	@RequestMapping(value = "/delete/{faqno}", method = RequestMethod.GET)
-	public String deleteNotice(@PathVariable int faqno) throws SQLException {
-		faqService.deleteFaqService(faqno);
-		System.out.println(faqno+", se ha eliminado");
+	public String deleteNotice(@PathVariable int faqno, @AuthManager ManagerVo managerVo) throws SQLException {
+		if(managerVo != null && faqService.isWritedManagerService(faqno, managerVo.getManager_id())) {
+			faqService.deleteFaqService(faqno);
+			System.out.println(faqno+", se ha eliminado");
+			return "redirect:../";
+			
+		}
 		return "redirect:../";
 	}
 	
@@ -77,9 +86,12 @@ public class FaqController {
 	}
 	
 	@RequestMapping("/modify/{faqno}")
-	public String modify(Model model, @PathVariable int faqno) throws SQLException {
-		faqService.getFaqService(model, faqno);
-		return "cs-center/faqModify";
+	public String modify(Model model, @PathVariable int faqno, @AuthManager ManagerVo managerVo) throws SQLException {
+		if(managerVo != null && faqService.isWritedManagerService(faqno, managerVo.getManager_id())) {
+			faqService.getFaqService(model, faqno);
+			return "cs-center/faqModify";
+		}
+		return "redirect:../";
 	}
 	
 	@RequestMapping(value = "/modify/{faqno}", method = RequestMethod.POST)

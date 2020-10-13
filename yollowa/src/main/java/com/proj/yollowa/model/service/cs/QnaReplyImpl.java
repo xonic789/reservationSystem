@@ -42,5 +42,13 @@ public class QnaReplyImpl implements QnaReplyService{
 		QnaReplyDao qnaReplyDao = sqlSession.getMapper(QnaReplyDao.class);
 		qnaReplyDao.deleteQnaReply(replyNo);
 	}
+
+	@Override
+	public int countReplyService(int qnano) throws SQLException {
+		QnaReplyDao qnaReplyDao = sqlSession.getMapper(QnaReplyDao.class);
+		int countReply = qnaReplyDao.countReply(qnano);
+		
+		return countReply;
+	}
 	
 }

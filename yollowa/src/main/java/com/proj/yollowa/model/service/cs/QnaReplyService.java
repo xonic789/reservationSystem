@@ -10,4 +10,5 @@ public interface QnaReplyService {
 	void createQnaReplyService(QnaReplyVo qnaReplyVo) throws SQLException;
 	void updateQnaReplyService(QnaReplyVo qnaReplyVo) throws SQLException;
 	void deleteQnaReplyService(int replyNo) throws SQLException;
+	int countReplyService(int qnano) throws SQLException;
 }

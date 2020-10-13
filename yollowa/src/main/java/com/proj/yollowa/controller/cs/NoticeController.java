@@ -49,15 +49,23 @@ public class NoticeController {
 	
 	//공지사항 상세 뷰
 	@RequestMapping(value = "/detail/{noticeno}", method = RequestMethod.GET)
-	public String getNotice(Model model, @PathVariable int noticeno) throws SQLException {
+	public String getNotice(Model model, @PathVariable int noticeno, @AuthManager ManagerVo managerVo) throws SQLException {
+		int isWritedManger = 0;
+		if(managerVo != null && noticeService.isWritedManagerService(noticeno, managerVo.getManager_id())) {
+			isWritedManger = 1;
+		}
+		model.addAttribute("isWritedManager", isWritedManger);
 		noticeService.getNoticeService(model, noticeno);
 		return "cs-center/noticeDetail";
 	}
 	
 	//공지 글 삭세
 	@RequestMapping(value = "/delete/{noticeno}", method = RequestMethod.GET)
-	public String deleteNotice(@PathVariable int noticeno) throws SQLException {
-		noticeService.deleteNoticeService(noticeno);
+	public String deleteNotice(@PathVariable int noticeno, @AuthManager ManagerVo managerVo) throws SQLException {
+		if(managerVo != null && noticeService.isWritedManagerService(noticeno, managerVo.getManager_id())) {
+			noticeService.deleteNoticeService(noticeno);
+			return "redirect:../";
+		}
 		return "redirect:../";
 	}
 	
@@ -86,9 +94,12 @@ public class NoticeController {
 	
 	//공지 글 수정 뷰 
 	@RequestMapping("/modify/{noticeno}")
-	public String modify(Model model, @PathVariable int noticeno) throws SQLException {
-		noticeService.getNoticeService(model, noticeno);
-		return "cs-center/noticeModify";
+	public String modify(Model model, @PathVariable int noticeno, @AuthManager ManagerVo managerVo) throws SQLException {
+		if(managerVo != null && noticeService.isWritedManagerService(noticeno, managerVo.getManager_id())) {
+			noticeService.getNoticeService(model, noticeno);
+			return "cs-center/noticeModify";
+		}
+		return "redirect:../";
 	}
 	
 	//공지 글 수정하기
