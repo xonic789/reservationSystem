@@ -29,5 +29,6 @@ public interface MypageDao {
 			@Param("reviewGradeRate") double reviewGradeRate,
 			@Param("reviewCount") int reviewCount
 			) throws SQLException;
+	public int getExistReview(@Param("lreservInfo_number") int lreservInfo_number) throws SQLException;
 }
 

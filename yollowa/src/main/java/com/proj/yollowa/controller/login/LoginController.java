@@ -176,7 +176,6 @@ public class LoginController {
 	@RequestMapping(value = "join/",method = RequestMethod.POST)
 	public String join(Model model,@ModelAttribute UserVo userVo,@RequestParam String addressDetail) throws Exception {
 		userService.insertUserJoinInfo(userVo, addressDetail);
-		
 		return "redirect:../login/";
 	}
 	
