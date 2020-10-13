@@ -66,6 +66,10 @@
 	
 	
 	/* 기본정보 등록 start */
+	.categoryRadio{
+		width: 150px;
+	}
+	
 	#hostWrite{
 		margin-top: 30px;
 		margin-left: 20px;
@@ -159,7 +163,7 @@ function setThumbnail(event) {
 
 /* 해쉬태그 등록 add input method (name, class ="notice") */
 function addInputHashtag(){
-	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="lodgement_hashTag" />\
+	$('.addInputHashtag').append('<input type="text" class="form-control hashtag" name="activity_hashTag" />\
 							<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 	);
 }
@@ -289,38 +293,47 @@ function submitClick(){
 			</div>
 			<div class="col-md-9">
 			<div id="hostWrite">
-				<h2>숙박 게시글 등록</h2>
+				<h2>액티비티 게시글 등록</h2>
 				<p id="sub">아래 입력박스들을 모두 기입해야 글 등록이 가능합니다<p>
 				
-				<form id="form" action="ladd" method="post" enctype="multipart/form-data">
+				<form id="form" action="aadd" method="post" enctype="multipart/form-data">
 				  <h4 class="infoTitle">기본정보 등록</h4>
 				  
 				  <div class="form-group">
-				  	<label class="label_title" for="lodgement_category">타입</label><br/>
+				  	<label class="label_title" for="activity_category">타입</label><br/>
 				  	<div>
-					  	<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="hotel" value="hotel"> 호텔
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="outdoor" value="outdoor"> 아웃도어
 						</label>
-						<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="motel" value="motel"> 모텔
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="bungee" value="bungee"> 번지점프
 						</label>
-						<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="Pension" value="pension"> 펜션
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="cruise" value="cruise"> 크루즈
 						</label>
-						<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="resort" value="resort"> 리조트/콘도
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="water" value="water"> 수상 액티비티
 						</label>
-						<label class="radio-inline type_label">
-						<input type="radio" name="lodgement_category" id="guest" value="guest"> 게스트하우스
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="spa" value="spa"> 스파&테라피
+						</label>
+					  	<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="nature" value="nature"> 자연&와일드라이프
+						</label>
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="ski" value="ski"> 스키&겨울 스포츠
+						</label>
+						<label class="radio-inline type_label categoryRadio">
+						<input type="radio" name="activity_category" id="kid" value="kid"> 키즈 액티비티
 						</label>
 					</div>
 				  </div>
 
 					<div class="form-group">
-						<label for="lodgement_comapanyName" class="label_title">업체명</label>
+						<label for="activity_title" class="label_title">업체명</label>
 						<p>계정에 사업자로 등록되어 있는 업체명이 표시되며 선택사항이 존재하지 않으면 글 등록에 제한됩니다</p>
 						<div>
-							<select name="lodgement_companyName" class="form-control custom-select">
+							<select name="activity_title" class="form-control custom-select">
 							<option selected>업체명을 선택해 주세요</option>
 							<c:forEach items="${companys}" var="companyName">
 								<option value="${companyName }">${companyName }</option>
@@ -330,20 +343,20 @@ function submitClick(){
 					</div>
 
 					<div class="form-group">
-						<label for="lodgement_location" class="label_title">위치 등록(도로명 주소)</label><br/>
+						<label for="activity_location" class="label_title">위치 등록(도로명 주소)</label><br/>
 						<div>		
-							<input type="text" class="location form-control" name="lodgement_location" id="sample5_address" placeholder="주소">
+							<input type="text" class="location form-control" name="activity_location" id="sample5_address" placeholder="주소">
 							<input type="button" class="btn btn-primary" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 							<div id="map" style="width:100%;height:300px;margin-top:10px;display:none"></div>
 						</div>
 					</div>
 					
 					<div class="form-group">
-				      <label class="label_title" for="lodgement_hashTag">해시태그</label>
+				      <label class="label_title" for="activity_hashTag">해시태그</label>
 					  <a onclick="addInputHashtag()" class="btnAdd btn btn-primary">태그 추가</a>
 				      <p>해시태그는 5개까지 등록 가능하며 앞에 '#' 을 붙여서 작성해주세요</p>
 				      <div class="addInputHashtag">
-				      	<input type="text" class="form-control hashtag" name="lodgement_hashTag" placeholder="#욜로와단독"/><br/>
+				      	<input type="text" class="form-control hashtag" name="activity_hashTag" placeholder="#욜로와단독"/><br/>
   					  </div>
 				  	</div>
 
