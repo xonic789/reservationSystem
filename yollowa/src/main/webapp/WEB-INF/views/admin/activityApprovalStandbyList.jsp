@@ -154,7 +154,7 @@
 					<td><img alt="" src="../../${list.activity_img }" width="100px" height="100px"></td>
 					<td>${list.activity_title }</td>
 					<td>${list.user_name }</td>
-					<td>대기</td>
+					<td>대기중</td>
 					<td><a href="./updateActivityTemp/${list.activity_number}">승인하기</a></td>
 			    </tr>
 			    </c:forEach>
