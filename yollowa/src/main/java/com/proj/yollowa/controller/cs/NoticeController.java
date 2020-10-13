@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proj.yollowa.interceptor.AuthManager;
+import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.entity.cs.PagingScaleVo;
@@ -24,7 +26,7 @@ public class NoticeController {
 	
 	@Inject
 	NoticeService noticeService;
-	
+	//공지사항 list
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String noticeList(Model model, 
 			@RequestParam(value="page", required=false, defaultValue="1") int page,
@@ -43,34 +45,49 @@ public class NoticeController {
 		return "cs-center/noticeList";
 	}
 	
+	//공지사항 상세 뷰
 	@RequestMapping(value = "/detail/{noticeno}", method = RequestMethod.GET)
 	public String getNotice(Model model, @PathVariable int noticeno) throws SQLException {
 		noticeService.getNoticeService(model, noticeno);
 		return "cs-center/noticeDetail";
 	}
 	
+	//공지 글 삭세
 	@RequestMapping(value = "/delete/{noticeno}", method = RequestMethod.GET)
 	public String deleteNotice(@PathVariable int noticeno) throws SQLException {
 		noticeService.deleteNoticeService(noticeno);
 		return "redirect:../";
 	}
-	@RequestMapping("/write")
-	public String write() {
+	
+	//공지 글 작성 뷰
+	@RequestMapping(value = "/write")
+	public String write(@AuthManager ManagerVo managerVo) {
+		if(managerVo == null) {
+			return "redirect:../../mlogin/";
+		}
+		
 		return "cs-center/noticeWrite";
 	}
 	
+	//공지 글 작성 POST
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String noticeInsert(@ModelAttribute NoticeVo bean) throws SQLException {
+	public String noticeInsert(@ModelAttribute NoticeVo bean, @AuthManager ManagerVo managerVo) throws SQLException {
+		if(managerVo == null) {
+			return "redirect:../../mlogin/";
+		}
+		bean.setWriter(managerVo.getManager_id());
 		noticeService.insertNoticeService(bean);
 		return "redirect:./";
 	}
 	
+	//공지 글 수정 뷰 
 	@RequestMapping("/modify/{noticeno}")
 	public String modify(Model model, @PathVariable int noticeno) throws SQLException {
 		noticeService.getNoticeService(model, noticeno);
 		return "cs-center/noticeModify";
 	}
 	
+	//공지 글 수정하기
 	@RequestMapping(value = "/modify/{noticeno}", method = RequestMethod.POST)
 	public ModelAndView noticeUpdate(@PathVariable int noticeno, @ModelAttribute NoticeVo bean) throws SQLException {
 		noticeService.updateNoticeService(bean);

@@ -100,8 +100,8 @@
 <%@ include file="../template/menu.jspf" %>
 <div class="container">
 	<div class="page-header">
-		<p> <a href="../">메인 페이지</a> > 관리자 페이지 > 임시 </p>
-		<h1>관리자 <small>임시페이지</small></h1>
+		<p> <a href="../">메인 페이지</a> > 관리자 페이지 > 숙박 게시글 관리 </p>
+		<h1> 파트너 관리 <small>숙박 게시글 관리</small></h1>
 	</div>
 	<div class="row">
 		<div id="category" class="col-md-3">
@@ -142,6 +142,7 @@
 			      <th>번호</th>
 			      <th>대표이미지</th>
 			      <th>제목</th>
+			      <th>업주명</th>
 			      <th>상태</th>
 			      <th>승인하기</th>
 			    </tr>
@@ -152,6 +153,7 @@
 					<td>${list.lodgement_number }</td>
 					<td><img alt="" src="../../${list.lodgement_img }" width="100px" height="100px"></td>
 					<td>${list.lodgement_companyName }</td>
+					<td>${list.user_name }</td>
 					<td>대기</td>
 					<td><a href="./updateLodgementTemp/${list.lodgement_number}">승인하기</a></td>
 			    </tr>
