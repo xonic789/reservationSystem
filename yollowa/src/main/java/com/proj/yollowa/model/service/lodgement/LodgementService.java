@@ -45,5 +45,8 @@ public interface LodgementService {
 
 	// 숙박 찜목록 insert
 	void lodgementWishUpdate(int lodgementNumber, int userNumber);
+	
+	// 지역 필터
+	void lodgementLocationFilterSelect(String locationFilter, Model model);
 
 }
