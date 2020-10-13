@@ -173,7 +173,10 @@
 					</ul>
 				</div>
 				<div class="col-md-2" id="writeBox">
-					<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
+					<c:set var="temp" >${isManager }</c:set>
+					<c:if test="${!empty temp}">
+						<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
+					</c:if>
 				</div>
 			</div>
 		</div>

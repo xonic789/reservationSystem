@@ -49,7 +49,6 @@ public class FaqServiceImpl implements FaqService{
 	@Override
 	public void insertFaqService(FaqVo bean) throws SQLException {
 		FaqDao faqDao = sqlSession.getMapper(FaqDao.class);
-		bean.setWriter("tester");
 		faqDao.insertFaq(bean);
 	}
 

@@ -31,7 +31,8 @@ public class NoticeController {
 	public String noticeList(Model model, 
 			@RequestParam(value="page", required=false, defaultValue="1") int page,
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
-			@RequestParam(value="keyword" ,required=false, defaultValue="") String keyword
+			@RequestParam(value="keyword" ,required=false, defaultValue="") String keyword,
+			@AuthManager ManagerVo managerVo
 			) throws SQLException {
 		SearchVo searchVo = new SearchVo();
 		searchVo.setSearchType(searchType);
@@ -39,6 +40,7 @@ public class NoticeController {
 		searchVo.setPage(page);
 		searchVo.setTotalCnt(noticeService.countNoticeService(searchVo));
 		
+		model.addAttribute("managerVo", managerVo);
 		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
 		model.addAttribute("paging", searchVo);
 		
@@ -61,8 +63,10 @@ public class NoticeController {
 	
 	//공지 글 작성 뷰
 	@RequestMapping(value = "/write")
-	public String write(@AuthManager ManagerVo managerVo) {
+	public String write(Model model,@AuthManager ManagerVo managerVo) {
+		model.addAttribute("managerVo", managerVo);
 		if(managerVo == null) {
+			
 			return "redirect:../../mlogin/";
 		}
 		

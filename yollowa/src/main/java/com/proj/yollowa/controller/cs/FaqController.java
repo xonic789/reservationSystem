@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proj.yollowa.interceptor.AuthManager;
+import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.FaqVo;
-import com.proj.yollowa.model.entity.cs.NoticeVo;
 import com.proj.yollowa.model.service.cs.FaqService;
-import com.proj.yollowa.model.service.cs.NoticeService;
 
 @Controller
 @RequestMapping("/cs-center/faq")
@@ -30,14 +30,17 @@ public class FaqController {
 	public String noticeList(Model model, 
 			@RequestParam(value="page", required=false, defaultValue="1") int page,
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
-			@RequestParam(value="keyword" ,required=false, defaultValue="") String keyword
+			@RequestParam(value="keyword" ,required=false, defaultValue="") String keyword,
+			@AuthManager ManagerVo managerVo
 			) throws SQLException {
 		SearchVo searchVo = new SearchVo();
 		searchVo.setSearchType(searchType);
 		searchVo.setKeyword(keyword);
 		searchVo.setPage(page);
 		searchVo.setTotalCnt(faqService.countFaqService(searchVo));
-		
+		if(managerVo!=null) {
+			model.addAttribute("isManager", managerVo.getManager_level());
+		}
 		model.addAttribute("list", faqService.getFaqListService(searchVo));
 		model.addAttribute("paging", searchVo);
 		
@@ -58,13 +61,17 @@ public class FaqController {
 	}
 	
 	@RequestMapping("/write")
-	public String write() {
-		return "cs-center/faqWrite";
+	public String write(@AuthManager ManagerVo managerVo) {
+		if(managerVo != null) {
+			return "cs-center/faqWrite";
+		}
+		return "redirect:../../mlogin/";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String noticeInsert(@ModelAttribute FaqVo bean) throws SQLException {
+	public String noticeInsert(@ModelAttribute FaqVo bean,@AuthManager ManagerVo managerVo) throws SQLException {
 		System.out.println("escribir page, enviado por post");
+		bean.setWriter(managerVo.getManager_id());
 		faqService.insertFaqService(bean);
 		return "redirect:./";
 	}

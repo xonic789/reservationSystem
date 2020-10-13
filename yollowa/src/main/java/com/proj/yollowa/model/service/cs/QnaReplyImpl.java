@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.proj.yollowa.model.cs.QnaDao;
 import com.proj.yollowa.model.cs.QnaReplyDao;
 import com.proj.yollowa.model.entity.cs.QnaReplyVo;
 
@@ -41,5 +42,5 @@ public class QnaReplyImpl implements QnaReplyService{
 		QnaReplyDao qnaReplyDao = sqlSession.getMapper(QnaReplyDao.class);
 		qnaReplyDao.deleteQnaReply(replyNo);
 	}
-
+	
 }
