@@ -48,7 +48,6 @@ public class LodgementAjaxController {
 		return price;
 	}
 	
-	
 //	@RequestMapping(value="list/lodgementSearch")
 //	public Object lodgementListSearch(HttpServletRequest req) {
 //		String searchVal = req.getParameter("searchVal");

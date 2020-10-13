@@ -67,6 +67,17 @@
 		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber=#{roomNumber}
 	</select>
 	
+
+	<!-- 숙박 유저 정보 -->
+	<select id="lodgementReserUser" resultType="com.proj.yollowa.model.entity.UserVo">
+		select * from user where user_number=#{userNumber}
+	</select>
+	
+	<!-- 숙박 성수기 날짜 -->
+	<select id="lodgementpeakDays" resultType="com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo">
+		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber = #{roomNumber}
+	</select>
+
 	<!-- 장바구니 -->
 	<select id="roomPeakStartDateSelect" resultType="Date">
 		select roomInfo_peakStartDate from roomInfo where roomInfo_roomNumber = #{roomNumber}
@@ -97,6 +108,7 @@
 	<insert id="afterWishUpdate">
 		update user set user_lWishList = #{afterWish} where user_number = #{userNumber}
 	</insert>
+
 	
 	<!-- 지역 필터 -->
 	<select id="selectLocationFilterOne" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
@@ -106,4 +118,5 @@
 		select count(*) from lodgement where lodgement_temp=1 and lodgement_location like CONCAT('%',#{locationFilter},'%')
 	</select>
 	
+
 </mapper>

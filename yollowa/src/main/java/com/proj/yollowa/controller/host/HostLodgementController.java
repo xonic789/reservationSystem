@@ -46,9 +46,6 @@ public class HostLodgementController {
 		return "host/hostLodgement";
 	}
 	
-	// 호스트 액티비티 글 목록 페이지
-	
-	
 	
 	// 숙박 글 등록 페이지
 	@Auth

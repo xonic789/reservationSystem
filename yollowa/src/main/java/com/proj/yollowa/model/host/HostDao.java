@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.entity.host.LodgementVo;
@@ -14,6 +15,9 @@ import com.proj.yollowa.model.entity.host.RoomInfoVo;
 public interface HostDao {
 	// host/ start
 	public UserVo userDetail(int user_number) throws SQLException;
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+// 호스트 숙박 start ----------------------------------------------------------------------------------------------------------------------------------
 	
 	// 호스트 숙박글 리스트 
 	public ArrayList<LodgementVo> selectHostLodgementList(int user_number);
@@ -60,7 +64,46 @@ public interface HostDao {
 
 	// host/addRoom/addAction -> 위에서 리턴받은 파싱된 이미지 String update
 	public void updateRoomInfoImg(@Param("articleNumber") int roomInfo_articleNumber,@Param("roomNumber") int roomNumber,@Param("roomInfo_img") String setImgName);
+	
 
+// 호스트 숙박 end ----------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+// 호스트 액티비티 start ----------------------------------------------------------------------------------------------------------------------------------
+
+	// Lodgement Insert 액티비티 게시글 정보가 등록 lodgement_img는 제외
+	public void insertActivity(@Param("activity_userNumber") int user_number,@Param("activity") AddActivityPageDto bean);
+
+	// 위에서 insert 된 lodgement_number 값을 select (information 테이블에 같이 넣어줘야 하고 titleImg도 파싱해서 넣어줘야 함) 
+	public int selectActivityNum(@Param("activity_userNumber") int user_number,@Param("activity") AddActivityPageDto bean);
+
+	// host/aadd -> lodgement_img update
+	public void updateActivityImg(@Param("activityNumber") int activityNumber,@Param("activity_img") String activity_img);
+
+	// host/aadd -> information insert
+	public void insertActivityInfo(@Param("activityNumber") int activityNumber,@Param("information") AddActivityPageDto bean);
+	
+	
+
+	
+// 호스트 액티비티 end  ----------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 
