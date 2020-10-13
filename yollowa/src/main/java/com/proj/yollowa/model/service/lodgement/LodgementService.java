@@ -37,6 +37,16 @@ public interface LodgementService {
 	// 숙박 예약페이지 지정된 방정보
 	List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException;
 
+	
+	// 숙박 유저정보
+	UserVo lodgementReserUser(UserVo user, Model model) throws SQLException;
+	
+	// 숙박 선택한 방 성수기 날짜
+	LodgementRoomInfoVo lodgementpeakDays(int articleNumber, int roomNumber, Model model) throws SQLException;
+	
+	
+
+
 	// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
 	int roomPaymentSelect(int roomNumber, Date startDate, Date endDate);
 
@@ -45,6 +55,7 @@ public interface LodgementService {
 
 	// 숙박 찜목록 insert
 	void lodgementWishUpdate(int lodgementNumber, int userNumber);
+
 	
 	// 지역 필터
 	void lodgementLocationFilterSelect(String locationFilter, Model model);

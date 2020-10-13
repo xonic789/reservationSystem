@@ -83,7 +83,13 @@
 		select review_starPoint from review where review_articleNumber=#{review_articleNumber}
 	</select>
 	<update id="updateReviewInfo" parameterType="com.proj.yollowa.model.entity.ReviewVo">
-		UPDATE lodgement SET lodgement_reviewGradeRate =#{reviewGradeRate}, lodgement_reviewCount =#{reviewCount} WHERE lodgement_number = #{review_articleNumber}
-		
+		UPDATE lodgement
+		SET lodgement_reviewGradeRate =#{reviewGradeRate},
+		lodgement_reviewCount =#{reviewCount} 
+		WHERE lodgement_number = #{review_articleNumber}
 	</update>
+	<select id="getExistReview" resultType="int">
+		select count(*) from review
+		where review_reservNumber=#{lreservInfo_number}
+	</select>
 </mapper>

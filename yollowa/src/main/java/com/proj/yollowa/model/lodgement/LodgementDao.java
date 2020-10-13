@@ -37,6 +37,13 @@ public interface LodgementDao {
 	// 숙박 예약 페이지 지정된 방정보
 	public List<LodgementRoomInfoVo> lodgementReserInfo(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
 	
+
+	// 숙박 유저정보
+	public UserVo lodgementReserUser(int userNumber) throws SQLException;
+	
+	// 숙박 선택한 방 성수기날짜
+	public LodgementRoomInfoVo lodgementpeakDays(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
+
 	// 먼저 성수기, 비성수기 가격을 받아온 후 가져온 startDate가 성수기인지 비성수기인지 비교
 	public Date roomPeakStartDateSelect(int roomNumber);
 	public Date roomPeakEndDateSelect(int roomNumber);
@@ -67,5 +74,5 @@ public interface LodgementDao {
 	// 검색 건수를 알려주기 위해 count 요청
 	public int selectLocationFilterOneCnt(String locationFilter);
 	
-	
+
 }

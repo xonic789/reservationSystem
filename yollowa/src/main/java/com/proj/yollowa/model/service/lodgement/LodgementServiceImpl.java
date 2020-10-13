@@ -269,4 +269,22 @@ public class LodgementServiceImpl implements LodgementService {
 		
 	}
 
+	//숙박 유저정보
+	@Override
+	public UserVo lodgementReserUser(UserVo user, Model model) throws SQLException {
+		LodgementDao dao= sqlSession.getMapper(LodgementDao.class);
+		UserVo userBean=dao.lodgementReserUser(user.getUser_number());
+		
+		
+		return userBean;
+	}
+
+	//숙박 선택한 방 성수기 날자
+	@Override
+	public LodgementRoomInfoVo lodgementpeakDays(int articleNumber, int roomNumber, Model model) throws SQLException {
+		LodgementDao dao =sqlSession.getMapper(LodgementDao.class);
+		LodgementRoomInfoVo dayBean=dao.lodgementpeakDays(articleNumber,roomNumber);
+		return dayBean;
+	}
+
 }
