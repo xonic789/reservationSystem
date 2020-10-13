@@ -10,6 +10,8 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- swal -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style type="text/css">
 #jumbo div{
@@ -29,6 +31,34 @@
 </style>
 <script type="text/javascript">
 
+	function buy(){
+		if(($("#customCheck1").is(":checked") == true) && ($("#customCheck2").is(":checked") == true))  {
+			
+			swal({
+				title:"결제창으로 이동",
+				icon:"success",
+				closeOnClickOutside:false,
+				buttons: {
+					cancle:{
+						text:"취소",
+						value : false,
+						className: 'btn btn-secondary'
+					},
+					confirm:{
+						text:"확인",
+						value:true,
+						className: 'btn btn-success'
+					}
+				}
+			}).then((result) => {
+				if(result){
+					document.form1.submit();
+				}
+			});
+		}else{
+			swal('필수 이용약관에 동의해주세요','','info');
+		}
+	};
 </script>
 
 <meta charset="UTF-8">
@@ -44,16 +74,24 @@
 					<div class="col-md-11" >
 						<div>
 							<h4>예약자 이름<h4>
-							<input style="width: 100%; padding: 3px 10px;" type="text" value="Scott" readonly="readonly" /> 
+							<input style="width: 100%; padding: 3px 10px;" type="text" value="${userName}" readonly="readonly" />
 						</div>
 						
 						<!-- 이용약관 동의 -->
 						<div class="form-group">
-						  <div class="custom-control custom-checkbox" >
-						    <input type="checkbox" class="custom-control-input" id="customCheck1" >
-						    <label class="custom-control-label" for="customCheck1"  data-toggle="modal" data-target="#exampleModal" style="text-decoration: underline; cursor: pointer;">숙소이용규칙 및 취소/환불규정 동의</label><span style="color:red;">&nbsp;(필수)</span>
-						</div>
+							<div class="custom-control custom-checkbox">
+							  <input type="checkbox" class="custom-control-input" id="customCheck1" >
+							  <label class="custom-control-label" for="customCheck1">숙소이용규칙 및 취소/환불규정 동의</label>
+							  <span style="color:red;">&nbsp;(필수)</span>
+							  <span>
+							  	<button style="font-size: 10px; padding: 1px 3px;" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">
+								  규정확인
+								</button>
+							  </span>
+							  </div>
 						<!-- Modal start -->
+						
+						
 						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
@@ -90,7 +128,7 @@
 			<div id="jumbo" class="col-md-4 jumbotron " style="margin-top: 50px; display:inline-block;">
 				<div>
 					<p>숙소이름</p>
-					<span>${reservList.get(0)}</span>
+					<span>${companyName}</span>
 				</div>
 				
 				<div>
@@ -104,20 +142,41 @@
 				
 				<div>
 					<p>체크인</p>
-					<span>${reservList.get(2)}</span>
+					<span>${sdate}</span>
 				</div>
 				
 				<div style="border-bottom:1px solid lightgray; padding-bottom: 30px;">
 					<p>체크아웃</p>
-					<span>${reservList.get(3)}</span>
+					<span>${edate}</span>
 				</div>
-				
+				<form action="../Inicis/" name="form1" method="post">
+					<c:forEach items="${reservList }" var="bean">
+					<input type="hidden" name="" value="${bean.get }"/>
+					</c:forEach>
+					
+					<!-- 글번호 -->
+					<input type="hidden" name="articleNumber" value="${articleNumber }"/>
+					
+					<!-- 숙소이름 -->
+					<input type="hidden" name="companyName" value="${companyName}"/>
+					
+					<!-- 객실 번호 -->
+					<input type="hidden" name="roomNumber" value="${roomNumber }"/>
+					<!-- 객실 명 -->
+					<c:forEach items="${roomDetail }" var="bean">
+						<input type="hidden" name="roomName" value="${bean.roomInfo_name }"/>
+					</c:forEach>
+					
+					<input type="hidden" name="checkIn" value="${sdate}"/>
+					<input type="hidden" name="checkOut" value="${edate}"/>
+					<input type="hidden" name="resultPrice" value="${resultPrice}"/>
+				</form>
 				<div>
 					<p style="color: black;">총 결제 금액</p>
-					<p style="color: #593196;">55000원</p>
+					<p style="color: #593196;">${resultPrice}원</p>
 				</div>
 				<div style="margin: 0px; padding: 0px;">
-					<button type="button" class="btn btn-primary btn-lg btn-block">결제하기</button>
+					<button type="button" class="btn btn-primary btn-lg btn-block" onclick="buy();">결제하기</button>
 				</div>
 			</div>
 		</div>

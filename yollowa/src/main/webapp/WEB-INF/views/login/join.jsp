@@ -40,8 +40,7 @@
 <%@ include file="../template/head.jspf"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/resources/vendor/bootstrap/js/bootstrap.js" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <style type="text/css">
@@ -52,17 +51,24 @@
 		var password = "failed";
 		var email = "failed";
 		var nickName = "failed";
+		var phoneNumber="failed";
 		var charlength = 0;
-		var addressDetail= $('#addressDetail').val();
+		var roadAddress;
+		//$('#roadAddress').val();
+		var addressDetail; 
+		//$('#addressDetail').val();
 		var list = new Array();
 		<c:forEach items="${userInfo}" var="user">
 		var json = new Object();
 		json.userId = "${user.user_id}";
 		json.userEmail = "${user.user_email}";
 		json.usernickName = "${user.user_nickName}";
+		json.userPhoneNumber = "${user.user_phoneNumber}";
 		list.push(json);
 		</c:forEach>
+		
 		//영문과 숫자만
+
 		$("#user_id").keyup(function(event) {
 			if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
 				var inputVal = $(this).val();
@@ -86,13 +92,43 @@
 					break;
 				}
 			}
-			if (id === "success" && inputId.length > 4 && !(inputId === '')) {
+			if (id === "success" && inputId.length > 4 && !(inputId === '') && inputId.length<20) {
 				$('#user_id').attr('readonly', 'readonly');
-				swal('사용 가능한 아이디 입니다.','','success');
+				id = "success";
+				swal({
+					title:"성공",
+				    text: "사용 가능한 아이디 입니다",
+				    icon: "success",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_password').focus();
+					}
+				});
 			} else {
 				id = "failed";
-				swal('사용 불가능한 아이디 입니다.', '(중복이거나 5자 미만 입니다.)' ,'warning');
-				$('#user_id').focus();
+				swal({
+					title:"실패",
+				    text: "사용 불가능한 아이디 입니다.\n(중복이거나 5자 미만 또는 너무 깁니다)",
+				    icon: "error",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_id').focus();
+					}
+				});
 			}
 		});
 		///아이디 검사
@@ -108,54 +144,282 @@
 					break;
 				}
 			}
-			if (nickName === "success" && inputNick.length > 2 && !(inputNick === '')) {
+			if (nickName === "success" && inputNick.length > 2 && inputNick.length < 20 && !(inputNick === '')) {
 				$('#user_nickName').attr('readonly', 'readonly');
-				swal('사용 가능한 닉네임 입니다.','','success');
+				swal({
+					title:"성공",
+				    text: "사용 가능한 닉네임 입니다",
+				    icon: "success",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_phoneNumber').focus();
+					}
+				});
 			} else {
 				nickName = "failed";
-				swal('사용 불가능한 닉네임 입니다.',  '(중복이거나 5자 미만 입니다.)','warning');
-				$('#user_nickName').focus();
+				swal({
+					title:"실패",
+				    text: "사용 불가능한 닉네임 입니다.\n\n(중복이거나 2자미만 또는 너무 깁니다)",
+				    icon: "error",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_nickName').focus();
+					}
+				});
+			}
+		});
+		$('.phoneSearch').on('click',function(){
+			var inputPhone=$('#user_phoneNumber').val();
+			for(var i in list){
+				console.log(JSON.stringify(list));
+				if(list[i].userPhoneNumber!==inputPhone){
+					phoneNumber="success";
+				} else if(list[i].userPhoneNumber===inputPhone){
+					phoneNumber="failed";
+					break;
+				}
+			}
+			if (phoneNumber === "success" && inputPhone.length == 11 && !(inputPhone === '')) {
+				
+				swal({
+					title:"성공",
+				    text: "사용 가능한 번호 입니다",
+				    icon: "success",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_phoneNumber').attr('readonly', 'readonly');
+					}
+				});
+			} else {
+				phoneNumber = "failed";
+				swal({
+					title:"실패",
+				    text: "사용 불가능한 번호 입니다.\n\n(중복이거나 11자 미만 또는 너무 깁니다)",
+				    icon: "error",
+			    	buttons :{
+				    	confirm:{
+				    		text:'확인',
+				    		value:true,
+				    		className:'btn btn-primary'
+				    	}
+				    }
+				}).then((result) =>{
+					if(result){
+						$('#user_phoneNumber').focus();
+					}
+				});
 			}
 		});
 
 		$('.contact100-form-btn').on('click', function() {
+			roadAddress=$('#roadAddress').val();
+			addressDetail= $('#addressDetail').val();
 			var pw = $("#user_password").val();
 			 var num = pw.search(/[0-9]/g);
 			 var eng = pw.search(/[a-z]/ig);
 			 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 			 if(pw.length < 8 || pw.length > 20){
-				  swal("패스워드는 8자리 ~ 20자리 이내로 입력해주세요.",'','warning');
-				  $('#user_password').focus();
+				 swal({
+						title:"패스워드를 확인해 주세요",
+					    text: "패스워드는 8자리 ~ 20자리 이내로 입력해주세요.",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							$('#user_password').focus();
+						}
+					});
 				  return false;
 				 }else if(pw.search(/\s/) != -1){
-				  swal("비밀번호는 공백 없이 입력해주세요.",'','warning');
-				  $('#user_password').focus();
+					 swal({
+							title:"패스워드를 확인하세요",
+						    text: "비밀번호는 공백 없이 입력해주세요.",
+						    icon: "error",
+					    	buttons :{
+						    	confirm:{
+						    		text:'확인',
+						    		value:true,
+						    		className:'btn btn-primary'
+						    	}
+						    }
+						}).then((result) =>{
+							if(result){
+								$('#user_password').focus();
+							}
+						});
 				  return false;
 				 }else if(num < 0 || eng < 0 || spe < 0 ){
-				  swal("영문,숫자, 특수문자를 혼합하여 입력해주세요.",'','warning');
-				  $('#user_password').focus();
+					 swal({
+							title:"패스워드를 확인하세요",
+						    text: "영문,숫자, 특수문자를 혼합하여 입력해주세요.",
+						    icon: "error",
+					    	buttons :{
+						    	confirm:{
+						    		text:'확인',
+						    		value:true,
+						    		className:'btn btn-primary'
+						    	}
+						    }
+						}).then((result) =>{
+							if(result){
+								$('#user_password').focus();
+							}
+						});
 				  return false;
 				 }else {
 					 password="success";
 				 }
 			 if(id==="failed"){
-				 swal('아이디를 다시 확인해주세요','중복 확인 버튼을 눌러주세요','warning');
-				 $('#user_id').focus();
+				 swal({
+						title:"아이디를 확인하세요",
+					    text: "중복 확인 버튼을 눌러주세요",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+						 $('#user_id').focus();
+						}
+					});
 			 }else if(password==="failed"){
-				 swal('패스워드를 다시 확인해주세요','','warning');
-				 $('#user_password').focus();
+				 swal({
+						title:"패스워드를 다시 확인해주세요",
+					    text: "패스워드 조건이 맞지 않습니다",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+						 $('#user_password').focus();
+						}
+					});
 			 }else if(nickName==="failed"){
-				 swal('닉네임을 다시 확인해주세요','','warning');
-				 $('#user_nickName').focus();
+				 swal({
+						title:"닉네임을 확인하세요",
+					    text: "닉네임을 다시 확인해주세요",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							$('#user_nickName').focus();
+						}
+					});
+			 }else if(phoneNumber==="failed"){
+				 swal({
+						title:"폰번호를 확인하세요",
+					    text: "폰번호를 다시 확인해주세요",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							$('#user_phoneNumber').focus();
+						}
+					});
+			 }else if(roadAddress===''){
+				 swal({
+						title:"도로명 주소를 입력해주세요",
+					    text: "주소를 다시 확인해주세요",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							
+						}
+					});
+			 }else if(addressDetail===''){
+				 swal({
+						title:"상세 주소를 입력해주세요",
+					    text: "주소를 다시 확인해주세요",
+					    icon: "error",
+				    	buttons :{
+					    	confirm:{
+					    		text:'확인',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							$('#address')
+						}
+					});
 			 }
 			 
 			 
-			 if(id==="success"&&password==="success"&&nickName==="success"){
-				 swal('회원 가입이 완료 되었습니다','','success');
-				 setTimeout(function(){
-					$('.contact100-form-btn').prop('type','submit');
-						$('.contact100-form-btn').click();
-					},1000);
+			 if(id==="success"&&password==="success"&&nickName==="success"&&phoneNumber==="success"&&addressDetail!='' && addressDetail!=''){
+				 
+				 swal({
+						title:"회원 가입이 완료 되었습니다",
+					    icon: "success",
+					    closeOnClickOutside:false,
+				    	buttons :{
+					    	confirm:{
+					    		text:'로그인 하러 가기!',
+					    		value:true,
+					    		className:'btn btn-primary'
+					    	}
+					    }
+					}).then((result) =>{
+						if(result){
+							$('.contact100-form-btn').attr('type','submit');
+							$('.contact100-form-btn').trigger("click");
+						}
+					});
 			 }
 		});
 
@@ -230,7 +494,14 @@
 							class="focus-input100"></span>
 					</div>
 				</c:if>
-
+				<div class="wrap-input100">
+						<span class="label-input100" style="font-family: 'MapoPeacefull';">폰번호</span>
+						<button class="btn btn-primary phoneSearch" type="button"
+							style="margin-left: 5px;">중복 확인</button>
+						<input class="input100" type="text" id="user_phoneNumber"
+							name="user_phoneNumber" style="font-family: 'MapoPeacefull';"
+							placeholder="폰번호를 입력해주세요" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <span class="focus-input100"></span>
+					</div>
 
 				<div class="wrap-input100 input100-select"
 					data-validate="필수 입력사항 입니다.">

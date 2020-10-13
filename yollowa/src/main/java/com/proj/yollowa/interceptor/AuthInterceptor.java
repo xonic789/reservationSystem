@@ -1,21 +1,40 @@
 package com.proj.yollowa.interceptor;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.proj.yollowa.model.entity.ManagerVo;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.user.UserDao;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter implements SessionNames{
+	
+	@Inject
+	SqlSession sqlSession;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		/// return이 true이면 컨트롤러로 진행, false이면 여기서 바로 응답
+		
+		HttpSession session=request.getSession();
+		UserVo userVo =(UserVo) session.getAttribute(LOGIN);
+		if(userVo==null) {
+			
+		}else {
+			UserDao userDao=sqlSession.getMapper(UserDao.class);
+			System.out.println("진입");
+			session.setAttribute(LOGIN,userDao.getUser(userVo.getUser_number()) );
+		}
+		
+		
+		
 		
 		
 		//hadler 종류 확인
@@ -37,7 +56,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 		}
 		
 		// @Auth가 있는 경우, 세션이 있는지 체크
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		if(session==null) {
 			//로그인 화면으로 이동
 			response.sendRedirect(request.getContextPath()+"/login/");
