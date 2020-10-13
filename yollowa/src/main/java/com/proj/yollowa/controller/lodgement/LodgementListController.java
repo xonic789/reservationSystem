@@ -40,6 +40,19 @@ public class LodgementListController {
 		return "lodgement/lodgementList";
 	}
 		
+	// 지역 filter
+	@RequestMapping(value="/filter",method=RequestMethod.GET )
+	public String lodgementLocationFilterPage(HttpServletRequest req, Model model) {
+		String locationFilter = req.getParameter("locationFilter");
+		
+		// 사용자가 선택한 필터 ex) 남양주/양주/파주
+		lodgementService.lodgementLocationFilterSelect(locationFilter, model);
+		
+		
+		
+		return "lodgement/lodgementList";
+		
+	}
 }
 
 

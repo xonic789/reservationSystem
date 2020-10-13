@@ -95,6 +95,15 @@
 		update user set user_lWishList = #{lodgementNumber} where user_number = #{userNumber}
 	</insert>
 	<insert id="afterWishUpdate">
-		update user set user_lWishList = #{afterWish} where user_number - #{userNumber}
+		update user set user_lWishList = #{afterWish} where user_number = #{userNumber}
 	</insert>
+	
+	<!-- 지역 필터 -->
+	<select id="selectLocationFilterOne" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
+		select * from lodgement where lodgement_temp=1 and lodgement_location like CONCAT('%',#{locationFilter},'%')
+	</select>
+	<select id="selectLocationFilterOneCnt" resultType="int">
+		select count(*) from lodgement where lodgement_temp=1 and lodgement_location like CONCAT('%',#{locationFilter},'%')
+	</select>
+	
 </mapper>

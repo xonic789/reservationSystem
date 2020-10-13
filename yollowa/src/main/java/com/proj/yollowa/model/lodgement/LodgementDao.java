@@ -61,4 +61,11 @@ public interface LodgementDao {
 	// 기존에 등록된 찜 목록이 있을 때 기존 + & 숙박글번호
 	public void afterWishUpdate(@Param("afterWish") String afterWish,@Param("userNumber") int userNumber);
 	
+	// 지역 필터
+	// '/'로 나눠져있지 않은 것 selectLocationFilterOne
+	public List<LodgementVo> selectLocationFilterOne(String locationFilter);
+	// 검색 건수를 알려주기 위해 count 요청
+	public int selectLocationFilterOneCnt(String locationFilter);
+	
+	
 }
