@@ -413,28 +413,6 @@
 	});
 	
 	
-<<<<<<< HEAD
-	/* 비성수기바로구매
-		<c:forEach items="${roomList}" var="bean" varStatus="status">
-		function offPeakBuySubmit${status.index}(t){
-		
-			console.log($(('.offPeak${status.index}')).text()); // 비성수기
-			
-			document.offPeakform${status.index}.submit();
-			
-			/*
-			if($('.uuu').text()=="로그인"){
-			alert("로그인이 필요한 기능입니다. 로그인페이지로 이동합니다.");
-			window.location.href="../../login/";
-			}else{
-			}
-			
-		}
-		</c:forEach>
-		*/
-	
-=======
->>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 	// 성수기바로구매
 	<c:forEach items="${roomList}" var="bean" varStatus="status">
 		function peakBuySubmit${status.index}(t){
@@ -951,11 +929,7 @@ geocoder.addressSearch('${pin}', function(result, status) {
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.relayout();
 	        map.setCenter(coords);
-<<<<<<< HEAD
-        },1500);
-=======
         },2000);
->>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
     } 
 });
 	

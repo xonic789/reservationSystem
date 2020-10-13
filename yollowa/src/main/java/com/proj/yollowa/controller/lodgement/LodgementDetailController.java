@@ -5,18 +5,11 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Calendar;
-import java.util.HashMap;
-=======
-import java.util.Date;
->>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,14 +22,6 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
-<<<<<<< HEAD
-import com.proj.yollowa.interceptor.Auth;
-import com.proj.yollowa.interceptor.AuthUser;
-import com.proj.yollowa.model.entity.UserVo;
-import com.proj.yollowa.model.entity.lodgement.InformationVo;
-import com.proj.yollowa.model.entity.lodgement.LodgementVo;
-=======
->>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 import com.proj.yollowa.model.service.activity.ActivityService;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -314,8 +299,8 @@ public class LodgementDetailController {
 		Date startDate;
 		Date endDate;
 		try {
-			startDate = transFormat.parse(sdate);
-			endDate = transFormat.parse(edate);
+			startDate = (java.sql.Date) transFormat.parse(sdate);
+			endDate = (java.sql.Date) transFormat.parse(edate);
 			System.out.println(startDate);
 			System.out.println(endDate);
 
