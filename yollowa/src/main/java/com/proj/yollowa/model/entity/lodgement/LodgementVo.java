@@ -14,7 +14,17 @@ public class LodgementVo {
 	private int lodgement_reviewCount;
 	private String lodgement_img;
 	private int lodgement_temp;
+	private String[] hashTag;
 	
+	
+	public String[] getHashTag() {
+		return hashTag;
+	}
+
+	public void setHashTag(String[] hashTag) {
+		this.hashTag = hashTag;
+	}
+
 	public LodgementVo() {
 	}
 

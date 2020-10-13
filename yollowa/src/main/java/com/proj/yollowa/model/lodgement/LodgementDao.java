@@ -1,6 +1,7 @@
 package com.proj.yollowa.model.lodgement;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -36,9 +37,36 @@ public interface LodgementDao {
 	// 숙박 예약 페이지 지정된 방정보
 	public List<LodgementRoomInfoVo> lodgementReserInfo(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
 	
+<<<<<<< HEAD
 	// 숙박 유저정보
 	public UserVo lodgementReserUser(int userNumber) throws SQLException;
 	
 	// 숙박 선택한 방 성수기날짜
 	public LodgementRoomInfoVo lodgementpeakDays(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber) throws SQLException;
+=======
+	// 먼저 성수기, 비성수기 가격을 받아온 후 가져온 startDate가 성수기인지 비성수기인지 비교
+	public Date roomPeakStartDateSelect(int roomNumber);
+	public Date roomPeakEndDateSelect(int roomNumber);
+	
+	
+	// 아래에서 성수기면 해당 방의 성수기가격을, 비성수기면 비성수기 가격을 select
+	public int selectPeakPayment(int roomNumber);
+	public int selectOffPeakPayment(int roomNumber);
+	
+	// 숙박 장바구니 ajax
+	public void lodgementCartInsert(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber,@Param("startDate") Date startDate,@Param("endDate") Date endDate,@Param("payment") int payment,@Param("userVo") UserVo userVo);
+	
+	
+	// 숙박 찜목록
+
+	// 먼저 userNumber로 본인 wish 리스트를 가져와 null이면 그냥 번호만 이미 있는 찜목록이 있으면 & 붙여 update
+	public String lodgementUserWishSelect(int userNumber);
+	
+	// 기존에 등록된 wish가 없을 때
+	public void notExistWishUpdate(@Param("lodgementNumber") int lodgementNumber,@Param("userNumber") int userNumber);
+	
+	// 기존에 등록된 찜 목록이 있을 때 기존 + & 숙박글번호
+	public void afterWishUpdate(@Param("afterWish") String afterWish,@Param("userNumber") int userNumber);
+	
+>>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 }

@@ -216,6 +216,7 @@
 		swal("사진과 해시태그를 다시 등록 하세요!", "- 타이틀 이미지의 첫번째 사진이 대표사진으로 설정됩니다\n- 해시태그와 사진 이외의 요소는 수정이 불가능합니다", "warning");
 		
 		var number = $(a).next().val();
+		console.log("숙박글 번호"+number);
 		$('.lodgeModifySuc').show();
 		if($(a).val()=='수정'){
 			$('.lodgemodifyEl'+number).attr('readonly', false);
@@ -234,7 +235,7 @@
 			$('.imgInput'+number+0).attr('accept','.jpg, .jpeg, .png, .webp');
 			$('.imgInput'+number+0).css('width','610px');
 			$('.imgInput'+number+0).removeClass('form-control');
-			$('.imgDiv'+divNum).append('<a onclick="addTitleImg('+divNum+')" class="btnAdd btn btn-primary">사진추가 버튼</a>');	
+			$('.imgDiv'+number).append('<a onclick="addTitleImg('+number+')" class="btnAdd btn btn-primary">사진추가 버튼</a>');	
 			$('.inputCon').css('margin-left','15px');
 			
 			
@@ -248,7 +249,7 @@
 			/* 해시태그 동적 변환 (순서 조심)*/
 			$('.hashInput'+number+0).prev().text('해시태그 등록');
 			$('.hashInput'+number+0).val('');
-			$('.hashDiv'+divNum).append('<a onclick="addInputHashtag('+divNum+')" class="btnAdd btn btn-primary">태그추가 버튼</a>');	
+			$('.hashDiv'+number).append('<a onclick="addInputHashtag('+number+')" class="btnAdd btn btn-primary">태그추가 버튼</a>');	
 			
 			for(var i=1; i<100; i++){
 				$('.hashInput'+number+i).prev().remove();
@@ -287,15 +288,15 @@
 	}
 	
 	/* 글 타이틀 사진 추가 */
-	function addTitleImg(divNum){
-		$('.titleImgFile'+divNum).append('<div class="title">타이틀 사진 등록</div><input type="file" id="titleImg" class="inputCon" name="titleImg" value="${requestScope[titleName] }" />\
+	function addTitleImg(lodgeNumber){
+		$('.titleImgFile'+lodgeNumber).append('<div class="title">타이틀 사진 등록</div><input type="file" id="titleImg" class="inputCon" name="titleImg" value="${requestScope[titleName] }" />\
 								<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 		);
 	}
 
 	/* 해쉬태그 등록 add input method (name, class ="notice") */
-	function addInputHashtag(divNum){
-		$('.hashBox'+divNum).append('<div class="title hashDiv${num.index }">해시태그 등록</div><input type="text" class="inputCon inputHash form-control" name="lodgement_hashTag" value="${requestScope[hashTagName] }" />\
+	function addInputHashtag(lodgeNumber){
+		$('.hashBox'+lodgeNumber).append('<div class="title hashDiv${num.index }">해시태그 등록</div><input type="text" class="inputCon inputHash form-control" name="lodgement_hashTag" value="${requestScope[hashTagName] }" />\
 								<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 		);
 	}
@@ -411,8 +412,8 @@ function Confirm(number) {
 					<div class="title">타입</div>
 					<input type="text" class="inputCon type form-control" value="${lodgeList.lodgement_category }" readonly="readonly"/>
 										
-					<div class="titleImgFile${num.index }">
-						<div class="title imgDiv${num.index }">대표 이미지</div>
+					<div class="titleImgFile${lodgeList.lodgement_number  }">
+						<div class="title imgDiv${lodgeList.lodgement_number  }">대표 이미지</div>
 						<c:set var="sizeNumber" value="titleImgSize${num.index }" ></c:set>
 						<c:forEach begin="0" end="${requestScope[sizeNumber]-1 }" varStatus="number">
 						
@@ -433,8 +434,8 @@ function Confirm(number) {
 						<input type="text" class="inputCon form-control loc${number.index } lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
 					</div>
 					 --%>
-					<div class="hashBox${num.index }">
-					<div class="title hashDiv${num.index }">해시태그</div>
+					<div class="hashBox${lodgeList.lodgement_number }">
+					<div class="title hashDiv${lodgeList.lodgement_number }">해시태그</div>
 					<c:set var="hashTagSize" value="hashTagSize${num.index }"></c:set>
 					<c:forEach begin="0" end="${requestScope[hashTagSize]-1 }" varStatus="number">
 						<c:set var="hashTagName" value="hashTag${num.index }${number.index }"></c:set>

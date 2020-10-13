@@ -67,6 +67,7 @@
 		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber=#{roomNumber}
 	</select>
 	
+<<<<<<< HEAD
 	<!-- 숙박 유저 정보 -->
 	<select id="lodgementReserUser" resultType="com.proj.yollowa.model.entity.UserVo">
 		select * from user where user_number=#{userNumber}
@@ -77,4 +78,36 @@
 		select * from roominfo where roomInfo_articleNumber=#{articleNumber} and roomInfo_roomNumber = #{roomNumber}
 	</select>
 	
+=======
+	<!-- 장바구니 -->
+	<select id="roomPeakStartDateSelect" resultType="Date">
+		select roomInfo_peakStartDate from roomInfo where roomInfo_roomNumber = #{roomNumber}
+	</select>
+	<select id="roomPeakEndDateSelect" resultType="Date">
+		select roomInfo_peakEndDate from roomInfo where roomInfo_roomNumber = #{roomNumber}
+	</select>
+	<select id="selectPeakPayment" resultType="int">
+		select roomInfo_peakPrice from roomInfo where roomInfo_roomNumber = #{roomNumber}
+	</select>
+	<select id="selectOffPeakPayment" resultType="int">
+		select roomInfo_offPeakPrice from roomInfo where roomInfo_roomNumber = #{roomNumber}
+	</select>
+	<insert id="lodgementCartInsert">
+		insert into LReservInfo 
+		(LReservInfo_userNumber, LReservInfo_acticleNumber, LReservInfo_roomNumber, LReservInfo_checkIn, LReservInfo_checkOut,
+		LReservInfo_phoneNumber, LReservInfo_reservDate, LReservInfo_payment, LReservInfo_reservStatus, LReservInfo_cartStatus)
+		values (#{userVo.user_number}, #{articleNumber}, #{roomNumber}, #{startDate}, #{endDate}, #{userVo.user_phoneNumber}, now(), #{payment}, 0, 1)
+	</insert>
+	
+	<!-- 찜목록 -->
+	<select id="lodgementUserWishSelect" resultType="String">
+		select user_lWishList from user where user_number = #{uesrNumber}
+	</select>
+	<insert id="notExistWishUpdate">
+		update user set user_lWishList = #{lodgementNumber} where user_number = #{userNumber}
+	</insert>
+	<insert id="afterWishUpdate">
+		update user set user_lWishList = #{afterWish} where user_number - #{userNumber}
+	</insert>
+>>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 </mapper>

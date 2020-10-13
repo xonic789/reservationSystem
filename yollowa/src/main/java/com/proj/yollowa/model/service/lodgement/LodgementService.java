@@ -1,6 +1,7 @@
 package com.proj.yollowa.model.service.lodgement;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.ui.Model;
@@ -35,6 +36,7 @@ public interface LodgementService {
 	
 	// 숙박 예약페이지 지정된 방정보
 	List<LodgementRoomInfoVo> lodgementReserInfo(int articleNumber, int roomNumber, Model model) throws SQLException;
+<<<<<<< HEAD
 	
 	// 숙박 유저정보
 	UserVo lodgementReserUser(UserVo user, Model model) throws SQLException;
@@ -43,5 +45,16 @@ public interface LodgementService {
 	LodgementRoomInfoVo lodgementpeakDays(int articleNumber, int roomNumber, Model model) throws SQLException;
 	
 	
+=======
+
+	// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
+	int roomPaymentSelect(int roomNumber, Date startDate, Date endDate);
+
+	// 숙박 장바구니 insert
+	void lodgementCartInsert(int articleNumber, int roomNumber, Date startDate, Date endDate,int payment, UserVo userVo);
+
+	// 숙박 찜목록 insert
+	void lodgementWishUpdate(int lodgementNumber, int userNumber);
+>>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 
 }

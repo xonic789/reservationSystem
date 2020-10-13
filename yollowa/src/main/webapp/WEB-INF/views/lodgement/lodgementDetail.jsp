@@ -32,13 +32,18 @@
 	}
 	.rote{
 		margin-top: 0px;
-		margin-bottom:0px;
+		margin-bottom:15px;
 	}
 	.rote > a{
 		color: #007EC1;
 	}
 	.rote > a:hover{
 		text-decoration: none;
+	}
+	.hashTag{
+		font-size: 18px;
+		margin-bottom:0px;
+		color: #A1A1A0;
 	}
 	h3 {
 		margin-bottom: 15px;
@@ -84,28 +89,51 @@
 		padding-bottom: 20px;
 	}
 	
-	/
+	#reviewRateTitle{
+		text-align:center;
+		padding-bottom: 5px;
+		font-size:22px;
+	}
+	#reviewRateStarDiv{
+		text-align:center;
+		font-size: 25px;
+	}
+	#reviewRateStar{
+		color: #F1AD25;
+	}
+	#reviewRate{
+		text-align:center;
+	}
+	#reviewRateCount{
+		color: #A1A1A0;
+		text-align:center;
+		padding-top:10px;
+		padding-bottom:30px;
+		font-size: 16px;
+	}
+	
 	.review-div {
 		margin-top: 20px;
 	}
 	
 	.review-box {
-		padding: 40px 0px 40px 0px;
+		padding: 30px 0px 0px 0px;
 		border-top: 1px solid lightgray;
 	}
 	.review-title{
-		font-size: 22px;	
+		font-size: 20px;	
+		margin-bottom: 5px;
 	}
 	.review-content{
-		font-size: 17px;
-		padding: 10px 0px;
+		font-size: 16px;
+		padding: 15px 0px;
 	}
 	.writerText{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.review-writer {
-		font-size: 18px;
-		color: gray;
+		font-size: 16px;
+		color: #A1A1A0;
 	}
 	.review-star{
 		margin-bottom: 10px;
@@ -114,7 +142,8 @@
 	}
 	.review-writedDateA {
 		margin-top: 5px;
-		color: gray;
+		margin-bottom: 40px;
+		color: #A1A1A0;
 	}
 	
 	.datePicker {
@@ -161,7 +190,17 @@
 	.jjim{
 		float:right;
 	}
-	
+	.cartBtn{
+		width: 10%;
+	}
+	.submitBtn{
+		width: 89%;
+	}
+	#location{
+		font-size: 17px;
+		margin-bottom:20px;
+		position: relative;
+	}
 	
 	/* card start*/ 
 	.career-form {
@@ -283,6 +322,10 @@
 	}
 	
 </style>
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <script type="text/javascript">
 
 	// 달력
@@ -314,7 +357,6 @@
 			$("#sdate").datepicker( "option", "maxDate", selectedDate );
 		});
 	});
-	
 	
 	// 날짜 선택
 	function pickerIn(a){
@@ -350,17 +392,12 @@
 				console.log(e);
 			}
 		});
-		
-		
 	};
 		
 	function pickerOut(o){
 		var outValue = $(o).val();
 		$('.edateVal').val(outValue);
 	};
-
-
-	
 
 	// 패키지 옵션 설정 버튼 
 	$(function() {
@@ -376,6 +413,7 @@
 	});
 	
 	
+<<<<<<< HEAD
 	/* 비성수기바로구매
 		<c:forEach items="${roomList}" var="bean" varStatus="status">
 		function offPeakBuySubmit${status.index}(t){
@@ -395,6 +433,8 @@
 		</c:forEach>
 		*/
 	
+=======
+>>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
 	// 성수기바로구매
 	<c:forEach items="${roomList}" var="bean" varStatus="status">
 		function peakBuySubmit${status.index}(t){
@@ -402,15 +442,6 @@
 			
 		}
 	</c:forEach>
-			
-			/*
-			if($('.uuu').text()=="로그인"){
-			alert("로그인이 필요한 기능입니다. 로그인페이지로 이동합니다.");
-			window.location.href="../../login/";
-			}else{
-				document.peakform${status.index}.submit();
-			}
-			*/
 		
 	
 	// 장바구니
@@ -425,7 +456,14 @@
 	// 캐러셀 이미지
 	$(document).ready(function(){
 		
-	
+		// 가격 정규식
+		for(var i=0; i<100; i++){
+			var offPeakPrice = $('.offPeakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.offPeakPrice'+i).text(offPeakPrice);
+			var peakPrice = $('.peakPrice'+i).text().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원';
+			$('.peakPrice'+i).text(peakPrice);
+		}
+		
 		// 타이틀 이미지 carousel
 		var title_Hidden_Img = $('#title-carousel').find('input').val();
 		console.log(title_Hidden_Img);
@@ -515,10 +553,55 @@
 			var appendDiv = '<p style="color:gray; margin:0px 0px 10px 10px; font-size:16px;">- '+refundInfo[i]+'</p>';
 			$('.info_refundInfo').append(appendDiv);
 		}
-		
 	});
 	
+	// 장바구니 ajax
+	function cartInput(articleNumber, roomNumber){
+		
+		var sdate = $('#sdate').val();
+		var edate = $('#edate').val();
+		
+		
+		// 로그인 확인 체크 (로그인이 되어있을 시) model에 userNumber에 유저번호를 실어줌
+		if(${userNumber}!=0){
+			// 체크인 체크아웃 선택 체크
+			if(sdate!=''&&edate!=''){		
+				swal('장바구니에 등록합니다','마이페이지 - 장바구니에서 확인하세요','success');
+				
+				$.ajax({
+					url:"./cartInsert",
+					data: {articleNumber:articleNumber, roomNumber:roomNumber, sdate:sdate, edate:edate},
+					method: 'POST'
+				});
+			
+			}else{
+				swal('예약일자를 선택하세요','체크인, 체크아웃 날짜를 선택해야 장바구니 등록이 가능합니다','warning');
+			}
+		// 로그인 확인 체크 (로그인 x) 로그인되어있지 않을때에는 model에 userNumber로 0을 실어준다 (nullPoint 방지)
+		}else if(${userNumber}==0){
+			swal('로그인이 필요한 서비스입니다','로그인을 하시고 장바구니 서비스를 이용하세요.', 'warning');
+		}
+	};
 	
+	// 찜하기 ajax
+	function addWish(number){
+		console.log(${userNumber});
+		// 로그인 확인 체크 (로그인이 되어있을 시) model에 userNumber에 유저번호를 실어줌
+		if(${userNumber}!=0){
+			// 체크인 체크아웃 선택 체크
+			swal('찜목록에 추가되었습니다','마이페이지 - 찜목록에서 확인하세요','success');
+			
+			$.ajax({
+				url:"./wishInsert",
+				data: {number:number},
+				method: 'POST'
+			});
+			
+		// 로그인 확인 체크 (로그인 x) 로그인되어있지 않을때에는 model에 userNumber로 0을 실어준다 (nullPoint 방지)
+		}else if(${userNumber}==0){
+			swal('로그인이 필요한 서비스입니다','로그인을 하시고 찜목록 서비스를 이용하세요.', 'warning');
+		}
+	};
 	
 
 </script>
@@ -527,8 +610,8 @@
 <title>숙박</title>
 </head>
 <body>
-	<%@ include file="../template/header.jspf"%>
-	<%@ include file="../template/menu.jspf"%>
+	<%@ include file="../template/lodgeHeader.jspf"%>
+	<%@ include file="../template/lodgeMenu.jspf"%>
 	<div class="container">
 	
 	
@@ -553,8 +636,9 @@
 		<p class="rote">
 			<a href="../../">메인 페이지</a> > <a href="../list"> 숙박 페이지</a> > <a href="#">${startEndDay.getLodgement_companyName()}</a>
 		</p>
+		<p class="hashTag">${hashTag }</p>
 		<p class="titleName">${startEndDay.getLodgement_companyName()}</p>
-		<button class="btn btn-outline-danger jjim">♡ 찜목록 담기</button>
+		<button class="btn btn-outline-danger jjim" onclick="addWish(${article });">♡ 위시리스트</button>
 		
 		<c:forEach items="${infoList }" var="bean">
 			<div class="jumbotron commentJumbo">
@@ -626,12 +710,13 @@
 																<button type="button" class="btn btn-secondary modalBtn" data-toggle="modal" data-target="#exampleModal${status.index}off">
 																	객실 이용 안내
 																</button>
+																
 																<input class="paymentOffPeak${status.index}" name="roomNumber" type="hidden" value="${bean.roomInfo_roomNumber}" />
 																<input type="hidden" name="sdate" class="sdateVal"/>
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (비성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
+																	<span class="offPeakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_offPeakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															
@@ -672,7 +757,13 @@
 															</div>
 															
 															<!-- Modal end -->
-															<button style="width: 100%;" class="btn btn-outline-primary" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<button class="btn btn-outline-primary submitBtn" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<!-- 장바구니 -->
+															<button type="button" onclick="cartInput(${bean.roomInfo_articleNumber},${bean.roomInfo_roomNumber});" class="cartBtn btn btn-outline-success">
+															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+															  <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+															</svg>
+													        </button>
 															</form>
 															
 														</ul>
@@ -691,7 +782,7 @@
 																<input type="hidden" name="edate" class="edateVal"/>
 																
 																<div class="roomPrice"> 가격 (성수기)
-																	<span style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
+																	<span class="peakPrice${status.index }" style="display: inline-block; float: right;">${bean.roomInfo_peakPrice }</span>
 																</div>
 															<!-- Modal start -->
 															<div class="modal fade" id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -730,8 +821,13 @@
 															  </div>
 															</div>
 															<!-- Modal end -->
-															
-															<button style="width: 100%;" class="btn btn-outline-primary" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<button class="btn btn-outline-primary submitBtn" type="submit" >${bean.roomInfo_name } 예약 페이지로 이동</button>
+															<!-- 장바구니 -->
+															<button type="button" onclick="cartInput(${bean.roomInfo_articleNumber},${bean.roomInfo_roomNumber});" class="cartBtn btn btn-outline-success">
+															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+															  <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+															</svg>
+													        </button>
 															</form>
 														</ul>
 														<!-- 성수기 end -->
@@ -781,7 +877,8 @@
 			</div>
 			<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
 				<!-- 지도 -->
-				<div>
+				<div id="location"> ${companyName} 주소(도로명) : ${pin }</div>
+				<div class="mapClass">
 					<p style="margin-top:-12px">
 					    <em class="link">
 					        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
@@ -789,18 +886,24 @@
 					        </a>
 					    </em>
 					</p>
-					<div id="map" style="width:100%;height:350px;"></div>
+					<div id="mapkakao" style="width:100%;height:350px;"></div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 				<!-- ..리뷰 -->
 				<div id="review-div row">
-
+					<div id="reviewRate text-center">
+						<div id="reviewRateTitle">추천해요</div>
+						<div id="reviewRateStarDiv">
+						<span id="reviewRateStar">★ ★ ★ ★ ★ </span><span id="reviewRate">10.0</span>
+						</div>
+						<div id="reviewRateCount">전체리뷰 40</div>
+					</div>
 					<c:forEach items="${reviewList}" var="bean" varStatus="status">
 						<div class="review-box col-md-12">
-							<div class="review-title">전체적으로 만족스러웠어요.</div>
-							<div class="review-star">★ ${bean.review_starPoint}.0</div>
-							<span class="writerText">작성자 | </span><span class="review-writer">${bean.review_writer}</span>
+							<div class="review-title">${bean.review_title }</div>
+							<span class="review-star">★ ${bean.review_starPoint}.0 </span>
+							<span class="writerText"></span><span class="review-writer">| ${bean.review_writer}</span>
 							<div class="review-content">${bean.review_content}</div>
 							<div class="review-writedDate${status.index} review-writedDateA">${bean.review_writedDate }</div>
 						</div>
@@ -811,7 +914,7 @@
 	</div>
 	<%@ include file="../template/footer.jspf"%>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	var mapContainer = document.getElementById('mapkakao'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
@@ -848,7 +951,11 @@ geocoder.addressSearch('${pin}', function(result, status) {
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.relayout();
 	        map.setCenter(coords);
+<<<<<<< HEAD
         },1500);
+=======
+        },2000);
+>>>>>>> afa4457b757ca8ed2d2f8c99109eb2a8de7491b0
     } 
 });
 	
