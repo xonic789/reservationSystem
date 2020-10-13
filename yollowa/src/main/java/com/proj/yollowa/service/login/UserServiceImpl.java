@@ -99,6 +99,7 @@ public class UserServiceImpl implements UserService{
 		UserDao userDao=sqlSession.getMapper(UserDao.class);
 		List<UserVo> userInfo=userDao.getUserInfo();
 		model.addAttribute("userInfo",userInfo);
+		
 		return userInfo;
 	}
 
