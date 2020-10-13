@@ -288,6 +288,10 @@ pointer-events:auto;
 	color: #E7B648;
 	cursor: pointer;
 }
+#locFilterName{
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
 
 /* 위치 Filter end */
 
@@ -853,6 +857,7 @@ pointer-events:auto;
 			
 			<div class="col-md-9">
 			<div class="con">
+				<h3 id="locFilterName">${locationFilter }</h3>
 				<h3>${cnt}건의 검색결과</h3>
 				<div class="row filterDiv">
 					<div class="col-md-8">

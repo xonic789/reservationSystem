@@ -1,22 +1,143 @@
 package com.proj.yollowa.model.service.host;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.AddActivityPageDto;
+import com.proj.yollowa.model.host.HostDao;
 
 @Service
 public class HostActivityServiceImpl implements HostActivityService{
 
+	@Inject
+	SqlSession sqlSession;
 
-/*  host/activity start **********************************************************************************************************/
+/*  host/aadd start **********************************************************************************************************/
 	
 	// host/ -> 사업자 액티비티글 리스트
 	@Override
 	public void selectHostLodgementList(Model model, UserVo userVo) {
 		
 	}
-
 	
-/*  host/activity end **********************************************************************************************************/
+	// host/aadd -> Lodgement Insert 액티비티 게시글 정보가 등록 lodgement_img는 제외
+	@Override
+	public void insertActivity(int user_number, AddActivityPageDto bean) throws SQLException {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		// 해쉬태그
+		String activity_hashTag = bean.getActivity_hashTag().replaceAll(",", "&");
+		bean.setActivity_hashTag(activity_hashTag);
+		
+		// 타이틀 이미지
+//		String lodgement_img = bean.getLodgement_img().replaceAll(",", "&");
+//		bean.setLodgement_img(lodgement_img);
+		
+		hostDao.insertActivity(user_number, bean);
+	}
+	
+	
+	// host/aadd -> 위에서 insert 된 lodgement_number 값을 select (information 테이블에 같이 넣어줘야 하고 titleImg도 파싱해서 넣어줘야 함) 
+	@Override
+	public int selectActivityNumber(int user_number, AddActivityPageDto bean) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		int activityNumber = hostDao.selectActivityNum(user_number, bean);
+		return activityNumber;
+	}
+
+	// host/aadd -> 타이틀 이미지들 처리 업로드
+	@Override
+	public String uploadActivityImg(AddActivityPageDto bean, int activityNumber, HttpServletRequest req)throws SQLException, IllegalStateException, IOException {
+		List<String> titleImgNames = new ArrayList<String>();
+		
+		// lodgement 테이블에 update 시켜주기위해 이미지 파일 사이에 &로 파싱하기 위해 선언
+		String img = "";
+		
+		for(MultipartFile titleImg : bean.getTitleImg()) {
+			String origin = activityNumber+"_"+titleImg.getOriginalFilename();
+			
+			// 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)
+			img+=origin+"&";
+			
+			if(titleImg.getOriginalFilename().isEmpty()) {
+				continue;
+			}
+			
+			String path = "/upload/activity/titleImg/";
+			ServletContext context = req.getSession().getServletContext();
+			String realPath = context.getRealPath(path);
+			
+			File dest = new File(realPath+origin);
+			System.out.println("숙박 타이틀 이미지 저장위치"+dest.getAbsolutePath());
+//			저장위치 /Users/moony/Desktop/yollowa/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/yollowa/upload/lodgement/titleImg/1601213584288_bigmeet4.jpg
+			
+			titleImg.transferTo(dest);
+			titleImgNames.add(origin);
+		}
+		// 마지막에 붙은 문자 &를 삭제 하고 데이터 전송 
+		String lodgement_img = img.substring(0,img.length()-1);
+		System.out.println("숙박 타이틀 이미지 파일 사이에 &로 파싱 : (최종 데이터베이스 전달)"+lodgement_img);
+		return lodgement_img;
+	}
+
+	// host/aadd -> activity_img update
+	@Override
+	public void updateActivityImg(int activityNumber, String activity_img) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.updateActivityImg(activityNumber, activity_img);
+	}
+	
+	// host/aadd -> information insert
+	@Override
+	public void insertActivityInfo(int activityNumber, AddActivityPageDto bean) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		
+		// 공지사항
+		if(bean.getInformation_notice().contains(",")) {
+			String information_notice = bean.getInformation_notice().replaceAll(",", "&");
+			bean.setInformation_notice(information_notice);
+		}
+		
+		// 기본정보
+		if(bean.getInformation_basicInfo().contains(",")) {
+			String information_basicInfo = bean.getInformation_basicInfo().replaceAll(",", "&");
+			bean.setInformation_basicInfo(information_basicInfo);
+		}
+		
+		//인원 추가정보
+		if(bean.getInformation_addPeopleInfo().contains(",")) {
+			String information_addPeopleInfo = bean.getInformation_addPeopleInfo().replaceAll(",", "&");
+			bean.setInformation_addPeopleInfo(information_addPeopleInfo);
+		}
+		
+		// 편의시설 및 서비스
+		if(bean.getInformation_service().contains(",")) {
+			String information_service = bean.getInformation_service().replaceAll(",", "&");
+			bean.setInformation_service(information_service);
+		}
+		
+		// 취소 및 환불규정
+		if(bean.getInformation_refundInfo().contains(",")) {
+			String information_refundInfo = bean.getInformation_refundInfo().replaceAll(",", "&");
+			bean.setInformation_refundInfo(information_refundInfo);
+		}
+		
+		hostDao.insertActivityInfo(activityNumber, bean);
+	}
+	
+	
+	
+/*  host/aadd end **********************************************************************************************************/
 }

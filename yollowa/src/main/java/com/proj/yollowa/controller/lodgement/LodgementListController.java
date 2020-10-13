@@ -48,7 +48,7 @@ public class LodgementListController {
 		// 사용자가 선택한 필터 ex) 남양주/양주/파주
 		lodgementService.lodgementLocationFilterSelect(locationFilter, model);
 		
-		
+		model.addAttribute("locationFilter", locationFilter);
 		
 		return "lodgement/lodgementList";
 		
