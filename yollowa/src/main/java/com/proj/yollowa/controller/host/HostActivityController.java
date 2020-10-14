@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.ActivityUpdatePageDto;
 import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
 import com.proj.yollowa.model.service.host.HostActivityService;
 import com.proj.yollowa.model.service.host.HostLodgementService;
 
@@ -31,7 +34,7 @@ public class HostActivityController {
 	@Auth
 	@RequestMapping("/activity")
 	public String hostActivity(@AuthUser UserVo userVo, Model model) {
-//		hostService.selectHostActivityList(model, userVo);
+		hostService.selectHostActivityList(model, userVo);
 		model.addAttribute("userVo", userVo);
 		return "host/hostActivity";
 	}
@@ -86,4 +89,16 @@ public class HostActivityController {
 		
 		return "redirect:/host/activity";
 	}
+	
+	
+	// 액티비티 글 수정
+	@Auth
+	@RequestMapping(value="/activityUpdate/{activity_number}", method=RequestMethod.POST)
+	public String updateHostActivity(@AuthUser UserVo userVo, @PathVariable("activity_number") int activity_number, ActivityUpdatePageDto bean, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
+		
+		hostService.updateHostActivity(activity_number, bean, req);
+		
+		return "redirect:/host/activity";
+	}
+	
 }

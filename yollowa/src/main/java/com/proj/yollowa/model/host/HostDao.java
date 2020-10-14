@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.ActivityUpdatePageDto;
+import com.proj.yollowa.model.entity.host.ActivityVo;
 import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
@@ -86,6 +88,15 @@ public interface HostDao {
 
 	// host/aadd -> information insert
 	public void insertActivityInfo(@Param("activityNumber") int activityNumber,@Param("information") AddActivityPageDto bean);
+
+	
+	
+	// host/activity -> 내가 작성한 액티비티 글 페이지 
+	public ArrayList<ActivityVo> selectHostActivityList(int user_number);
+
+	
+	// host/activityUpdate -> 내가 작성한 액티비티 글 수정
+	public void updateHostActivity(@Param("activityNumber") int activity_number,@Param("bean") ActivityUpdatePageDto bean);
 	
 	
 

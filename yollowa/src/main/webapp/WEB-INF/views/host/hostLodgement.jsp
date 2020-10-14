@@ -238,7 +238,9 @@
 			$('.imgDiv'+number).append('<a onclick="addTitleImg('+number+')" class="btnAdd btn btn-primary">사진추가 버튼</a>');	
 			$('.inputCon').css('margin-left','15px');
 			
-			
+			// 타이틀 사진은 두장 이상 등록해야 하기 때문에 추가 버튼을 한번 눌러줌
+			$('.btnAdd').click();
+			$('.titleImgRemove').remove();
 			
 			// 클래스의 마지막이 1 이상인 것들은 삭제
 			for(var i=1; i<100; i++){

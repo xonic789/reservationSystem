@@ -114,15 +114,10 @@ public class HostLodgementController {
 	@Auth
 	@RequestMapping(value="/lodgeUpdate/{lodgement_number}", method=RequestMethod.POST)
 	public String updateHostLodgement(@AuthUser UserVo userVo, @PathVariable("lodgement_number") int lodgement_number, LodgementUpdatePageDto bean, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
-		System.out.println("호스트 등록글 수정 컨트롤러");
-		int lodgement_userNumber = userVo.getUser_number();
-		System.out.println("호스트 숙박 글 업데이트 유저 넘버 : "+lodgement_userNumber);
-		System.out.println("숙박 글 수정 : "+bean);
-		
 		
 		hostService.updateHostLodgement(lodgement_number, bean, req);
 		
-		return "redirect:/host/";
+		return "redirect:/host/lodgement";
 	}
 	
 	// 해당 숙박 글에 등록된 방 리스트페이지

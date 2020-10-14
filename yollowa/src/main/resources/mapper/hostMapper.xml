@@ -101,6 +101,18 @@
 		(#{activityNumber}, 1, #{information.information_notice}, #{information.information_basicInfo}, #{information.information_comment}, #{information.information_addPeopleInfo}, #{information.information_service}, #{information.information_refundInfo})
 	</insert>
 	
+	<!-- host/activity -->
+	<select id="selectHostActivityList" resultType="com.proj.yollowa.model.entity.host.ActivityVo">
+		select * from activity where activity_userNumber = #{user_number}
+	</select>
+	
+	<!-- host/activityUpdate -->
+	<insert id="updateHostActivity" parameterType="com.proj.yollowa.model.entity.host.ActivityUpdatePageDto">
+		update activity set activity_img = #{bean.activity_img }, activity_hashTag = #{bean.activity_hashTag} where activity_number = #{activityNumber }
+	</insert>
+	
+	
+	
 
 	<!-- 호스트 액티비티 start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
