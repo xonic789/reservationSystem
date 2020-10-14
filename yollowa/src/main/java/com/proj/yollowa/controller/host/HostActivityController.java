@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.ActivityUpdatePageDto;
+import com.proj.yollowa.model.entity.host.ActivityVo;
 import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
+import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.service.host.HostActivityService;
 import com.proj.yollowa.model.service.host.HostLodgementService;
 
@@ -31,11 +36,14 @@ public class HostActivityController {
 	@Auth
 	@RequestMapping("/activity")
 	public String hostActivity(@AuthUser UserVo userVo, Model model) {
-//		hostService.selectHostActivityList(model, userVo);
+		hostService.selectHostActivityList(model, userVo);
 		model.addAttribute("userVo", userVo);
 		return "host/hostActivity";
 	}
 	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	host/activity start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	// 액티비티 글 등록 페이지
 	@Auth
@@ -86,4 +94,77 @@ public class HostActivityController {
 		
 		return "redirect:/host/activity";
 	}
+	
+	// 액티비티 글 수정
+	@Auth
+	@RequestMapping(value="/activityUpdate/{activity_number}", method=RequestMethod.POST)
+	public String updateHostActivity(@AuthUser UserVo userVo, @PathVariable("activity_number") int activity_number, ActivityUpdatePageDto bean, HttpServletRequest req) throws SQLException, IllegalStateException, IOException {
+		
+		hostService.updateHostActivity(activity_number, bean, req);
+		
+		return "redirect:/host/activity";
+	}
+	
+	// 액티비티 글 삭제
+	@Auth
+	@RequestMapping(value="activityDelete/{activity_number}")
+	public String deleteHostActivity(@PathVariable("activity_number") int activity_number) {
+		// 액티비티 글 삭제
+		hostService.deleteHostActivity(activity_number);
+		
+		// 해당 글에 등록된 액티비티옵션 삭제
+		hostService.deleteHostActivityOption(activity_number);
+		
+		return "redirect:/host/activity";
+	}
+//	host/activity end ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	host/activityOption/ start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// 해당 액티비티 글에 등록된 액티비티 옵션 리스트페이지
+	@Auth
+	@RequestMapping(value="/activityOptions/{activity_number}", method=RequestMethod.GET)
+	public String activityOptionsPage(@PathVariable("activity_number") int activity_number, @AuthUser UserVo userVo, Model model) throws SQLException {
+		
+		// host/activityOption -> 유저넘버를 보내 activityOption table에 해당 유저번호로 등록 된 글이 있으면 activity_number return
+		ArrayList<ActivityVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
+		
+		if(matchUserNumber!=null) {
+			// 호스트 이름 
+			model.addAttribute("userName", userVo.getUser_name());
+			// 숙박글 번호 -> 옵션추가로 넘길 때 필요
+			model.addAttribute("activity_number", activity_number);
+			// 컴퍼니 네임 select
+			hostService.selectActivityName(activity_number, model);
+			// 등록 된 방 select
+			hostService.selectActivityOptions(activity_number, model);
+			
+			return "host/activityOptions";
+		}else {
+			return "home";
+		}
+	}
+	
+	// 액티비티 옵션 삭제
+	@Auth
+	@RequestMapping(value="/removeOption/{articleNumber}/{optionNumber}")
+	public String removeOption(@PathVariable("articleNumber") int articleNumber, @PathVariable("optionNumber") int optionNumber) {
+		hostService.deleteOption(articleNumber,optionNumber);
+		return "redirect:/host/activityoptions/"+articleNumber;
+	}
+	
+	
+	
+//	host/activityOption/ end ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
 }

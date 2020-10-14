@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.host.ActivityOptionVo;
+import com.proj.yollowa.model.entity.host.ActivityUpdatePageDto;
+import com.proj.yollowa.model.entity.host.ActivityVo;
 import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
@@ -50,7 +53,7 @@ public interface HostDao {
 	public ArrayList<RoomInfoVo> selectLodgementRooms(int lodgement_number);
 
 	// host/addRoom -> 유저넘버를 보내 lodgement table에 해당 유저번호로 등록 된 글이 있으면 lodgement_number return
-	public ArrayList<LodgementVo> hostNumberMatch(int user_number);
+	public ArrayList<LodgementVo> hostLodgementNumberMatch(int user_number);
 
 	// host/lodgeRoom -> 방 삭제 버튼
 	public void deleteRoom(@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber);
@@ -86,6 +89,35 @@ public interface HostDao {
 
 	// host/aadd -> information insert
 	public void insertActivityInfo(@Param("activityNumber") int activityNumber,@Param("information") AddActivityPageDto bean);
+
+	
+	
+	// host/activity -> 내가 작성한 액티비티 글 페이지 
+	public ArrayList<ActivityVo> selectHostActivityList(int user_number);
+
+	// host/activityUpdate -> 내가 작성한 액티비티 글 수정
+	public void updateHostActivity(@Param("activityNumber") int activity_number,@Param("bean") ActivityUpdatePageDto bean);
+
+	// host/activityDelete/number -> 액티비티 글 삭제
+	public void deleteHostActivity(int activity_number);
+
+	// host/activityDelete/number -> 글 삭제시 해당 글에 등록되어있는 activityOption 까지 삭제 함
+	public void deleteHostActivityOption(int activity_number);
+
+	
+	
+	// host/activityOption -> 유저넘버를 보내 activityOption table에 해당 유저번호로 등록 된 글이 있으면 activity_number return
+	public ArrayList<ActivityVo> hostActivityNumberMatch(int user_number);
+
+	
+	// host/activityOption -> title select
+	public String selectActivityName(int activity_number);
+
+	// host/activityOptions -> 등록된 option select
+	public ArrayList<ActivityOptionVo> selectActivityOptions(int activity_number);
+
+	// removeOption/{activity_articleNumber}/{activity_optionNumber} -> 액티비티 옵션 삭제
+	public void deleteOption(@Param("articleNumber") int articleNumber,@Param("optionNumber") int optionNumber);
 	
 	
 

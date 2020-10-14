@@ -207,19 +207,19 @@
 		if($('.inputCon').val()==null){
 			$('#hostInfo').append(jumbo);
 		}
-		$('.lodgeModifySuc').hide();
+		$('.activityModifySuc').hide();
 		
 	});
 	
 	/* 수정 버튼 클릭 이벤트 */
 	function modiClick(a){
-		swal("사진과 해시태그를 다시 등록 하세요!", "- 타이틀 이미지의 첫번째 사진이 대표사진으로 설정됩니다\n- 해시태그와 사진 이외의 요소는 수정이 불가능합니다", "warning");
+		swal("주의사항", "- 사진은 꼭 2장 이상 등록해야 합니다\n\n- 타이틀 이미지의 첫번째 사진이 대표사진으로 설정됩니다\n\n- 해시태그와 사진 이외의 요소는 수정이 불가능합니다", "warning");
 		
 		var number = $(a).next().val();
 		console.log("숙박글 번호"+number);
-		$('.lodgeModifySuc').show();
+		$('.activityModifySuc').show();
 		if($(a).val()=='수정'){
-			$('.lodgemodifyEl'+number).attr('readonly', false);
+			$('.activityModifyEl'+number).attr('readonly', false);
 			$(a).val('수정 완료');
 			$(a).remove();
 			
@@ -238,6 +238,9 @@
 			$('.imgDiv'+number).append('<a onclick="addTitleImg('+number+')" class="btnAdd btn btn-primary">사진추가 버튼</a>');	
 			$('.inputCon').css('margin-left','15px');
 			
+			// 타이틀 사진은 두장 이상 등록해야 하기 때문에 추가 버튼을 한번 눌러줌
+			$('.btnAdd').click();
+			$('.titleImgRemove').remove();
 			
 			
 			// 클래스의 마지막이 1 이상인 것들은 삭제
@@ -275,9 +278,16 @@
 	
 	// 수정완료 버튼 클릭 이벤트
 	function modiSucClick(){
-			/* $(a).attr('href','lodgeUpdate/'+number+''); */
-			console.log("수정완료 버튼 활성화")
-			
+		var is_empty = false;
+		$('.inputCon').each(function(){
+			if(!$(this).val()){
+				is_empty = true;
+			}
+		});
+		
+		if(is_empty){
+			swal("빈칸이 존재합니다", "값을 전부 입력하고 다시 버튼을 클릭하세요", "warning")
+		}else{
 			$(this).click(function(){
 				if(confirm("정말로 수정하시겠습니까?")==true){
 					alert("수정되었습니다");
@@ -285,18 +295,19 @@
 					return;
 				}
 			});
+		}
 	}
 	
 	/* 글 타이틀 사진 추가 */
-	function addTitleImg(lodgeNumber){
-		$('.titleImgFile'+lodgeNumber).append('<div class="title">타이틀 사진 등록</div><input type="file" id="titleImg" class="inputCon" name="titleImg" value="${requestScope[titleName] }" />\
+	function addTitleImg(activityNumber){
+		$('.titleImgFile'+activityNumber).append('<div class="title">타이틀 사진 등록</div><input type="file" id="titleImg" class="inputCon" name="titleImg" value="${requestScope[titleName] }" />\
 								<button onclick="removetitleImg()" type="button" class="titleImgRemove btn btn-danger">삭제</button><br/>'
 		);
 	}
 
 	/* 해쉬태그 등록 add input method (name, class ="notice") */
-	function addInputHashtag(lodgeNumber){
-		$('.hashBox'+lodgeNumber).append('<div class="title hashDiv${num.index }">해시태그 등록</div><input type="text" class="inputCon inputHash form-control" name="lodgement_hashTag" value="${requestScope[hashTagName] }" />\
+	function addInputHashtag(activityNumber){
+		$('.hashBox'+activityNumber).append('<div class="title hashDiv${num.index }">해시태그 등록</div><input type="text" class="inputCon inputHash form-control" name="activity_hashTag" value="${requestScope[hashTagName] }" />\
 								<button onclick="removeInput()" type="button" class="btnRemove btn btn-danger">삭제</button><br/>'
 		);
 	}
@@ -338,7 +349,7 @@
 			swal('', '방 삭제가 완료되었습니다.', "success");
 			
 			setTimeout(function(){
-				location.href="/yollowa/host/lodgeDelete/"+number;
+				location.href="/yollowa/host/activityDelete/"+number;
 			},1500);
 		}else{
 			return false;
@@ -348,7 +359,7 @@
 }
 
 function Confirm(number) {
-	confirm('해당 방에 대한 방 정보까지 함께 삭제됩니다.', '글을 정말 삭제하시겠습니까?','' ,number);
+	confirm('해당 액티비티에 대한 옵션 정보까지 함께 삭제됩니다.', '글을 정말 삭제하시겠습니까?','' ,number);
 }
 	
 </script>
@@ -392,28 +403,27 @@ function Confirm(number) {
 		<div id="hostInfo">
 			<h2>나의 글 정보</h2>
 			<p id="sub">- 사업자께서 등록하신 욜로와 글 등록 정보입니다.<br/>- 본인의 작성 글의 정보를 확인할 수 있으며 옵션등록이 가능합니다.</p>
-			<h4>숙박 게시글 정보</h4>
-			<c:forEach items="${lodgementList }" begin="0" varStatus="num" var="lodgeList">
+			<h4>액티비티 게시글 정보</h4>
+			<c:forEach items="${activityList }" begin="0" varStatus="num" var="bean">
 			
-			<!-- String path = "/upload/lodgement/titleImg/";
-			ServletContext context = req.getSession().getServletContext();
-			String realPath = context.getRealPath(path); -->
 			<input type="hidden" id="imgPath" value="${path }"></input>
 			
-			<div class="lodgementBox">
-				<h5>${lodgeList.lodgement_companyName }</h5><a href="#" class="btn btn-outline-primary">상세 페이지로 이동</a><a href="lodgeRoom/${lodgeList.lodgement_number }" class="btn btn-outline-success">방 등록 현황</a><br/>
-				<div class="list${lodgeList.lodgement_number }">
+			<div class="activityBox">
+				<h5>${bean.activity_title }</h5>
+				<a href="/yollowa/activity/detail/${bean.activity_number }" class="btn btn-outline-primary">상세 페이지로 이동</a>
+				<a href="activityOptions/${bean.activity_number }" class="btn btn-outline-success">옵션 등록 현황</a><br/>
+				<div class="list${bean.activity_number }">
 						
-					<form id="form" action="lodgeUpdate/${lodgeList.lodgement_number  }" method="post" enctype="multipart/form-data">
+					<form id="form" action="activityUpdate/${bean.activity_number  }" method="post" enctype="multipart/form-data">
 							
 					<div class="title">업체명</div>
-					<input type="text" class="inputCon form-control" name="lodgement_companyName" value="${lodgeList.lodgement_companyName }" readonly="readonly"/>
+					<input type="text" class="inputCon form-control" name="activity_companyName" value="${bean.activity_title }" readonly="readonly"/>
 
 					<div class="title">타입</div>
-					<input type="text" class="inputCon type form-control" value="${lodgeList.lodgement_category }" readonly="readonly"/>
+					<input type="text" class="inputCon type form-control" value="${bean.activity_category }" readonly="readonly"/>
 										
-					<div class="titleImgFile${lodgeList.lodgement_number  }">
-						<div class="title imgDiv${lodgeList.lodgement_number  }">대표 이미지</div>
+					<div class="titleImgFile${bean.activity_number  }">
+						<div class="title imgDiv${bean.activity_number  }">대표 이미지</div>
 						<c:set var="sizeNumber" value="titleImgSize${num.index }" ></c:set>
 						<c:forEach begin="0" end="${requestScope[sizeNumber]-1 }" varStatus="number">
 						
@@ -421,44 +431,39 @@ function Confirm(number) {
 							<c:if test="${0 ne number.index }">
 								<div class="title">디테일 이미지 ${number.index }</div>
 							</c:if>
-							<input type="text" id="titleImg" class="imgInput${lodgeList.lodgement_number }${number.index } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="titleImg" value="${requestScope[titleName] }"  readonly="readonly" />
+							<input type="text" id="titleImg" class="imgInput${bean.activity_number }${number.index } inputCon form-control activityModifyEl${bean.activity_number }" name="titleImg" value="${requestScope[titleName] }"  readonly="readonly" />
 						</c:forEach>
 							
 					</div>
 					
 					<div class="title">위치</div>
-					<input type="text" class="inputCon form-control" name="lodgement_location" value="${lodgeList.lodgement_location }"  readonly="readonly"/>
-					
-					<%-- <div class="title">위치</div>
-					<div class="location">
-						<input type="text" class="inputCon form-control loc${number.index } lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_location" value="${lodgeList.lodgement_location }" disabled="disabled"/>
-					</div>
-					 --%>
-					<div class="hashBox${lodgeList.lodgement_number }">
-					<div class="title hashDiv${lodgeList.lodgement_number }">해시태그</div>
+					<input type="text" class="inputCon form-control" name="activity_location" value="${bean.activity_location }"  readonly="readonly"/>
+					<div class="hashBox${bean.activity_number }">
+
+					<div class="title hashDiv${bean.activity_number }">해시태그</div>
 					<c:set var="hashTagSize" value="hashTagSize${num.index }"></c:set>
 					<c:forEach begin="0" end="${requestScope[hashTagSize]-1 }" varStatus="number">
 						<c:set var="hashTagName" value="hashTag${num.index }${number.index }"></c:set>
 						<c:if test="${0 ne number.index }">
 							<div class="title">해시태그${number.index+1 }</div>
 						</c:if>
-						<input type="text" class="hashInput${lodgeList.lodgement_number }${number.index } inputCon form-control lodgemodifyEl${lodgeList.lodgement_number }" name="lodgement_hashTag" value="${requestScope[hashTagName] }"  readonly="readonly"/>
+						<input type="text" class="hashInput${bean.activity_number }${number.index } inputCon form-control activityModifyEl${bean.activity_number }" name="activity_hashTag" value="${requestScope[hashTagName] }"  readonly="readonly"/>
 					</c:forEach>
 					</div>
 					<div class="title">후기 수</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewCount }"  readonly="readonly" />
+					<input type="text" class="inputCon form-control" value="${bean.activity_reviewCount }"  readonly="readonly" />
 					<div class="title">좋아요 수</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_goodCount }"  readonly="readonly" />
+					<input type="text" class="inputCon form-control" value="${bean.activity_goodCount }"  readonly="readonly" />
 					<div class="title">평점</div>
-					<input type="text" class="inputCon form-control" value="${lodgeList.lodgement_reviewGradeRate }"  readonly="readonly" />
+					<input type="text" class="inputCon form-control" value="${bean.activity_reviewGradeRate }"  readonly="readonly" />
 					<div class="title">글 등록 현황</div>
-					<input type="text" class="inputCon temp form-control" value="${lodgeList.lodgement_temp }"  readonly="readonly" />
+					<input type="text" class="inputCon temp form-control" value="${bean.activity_temp }"  readonly="readonly" />
 					
 					<div class="btns">
-						<input type="button" class="btn btn-outline-warning lodgeModify${lodgeList.lodgement_number }" onclick="modiClick(this);" value="수정"></input>
-						<input type="hidden" value="${lodgeList.lodgement_number }"></input>
-						<button type="submit" class="btn btn-outline-warning lodgeModifySuc">수정 완료</button>
-						<a class="removeBtn btn btn-outline-danger" onclick="Confirm(${lodgeList.lodgement_number });">삭제</a>
+						<input type="button" class="btn btn-outline-warning activityModify${bean.activity_number }" onclick="modiClick(this);" value="수정"></input>
+						<input type="hidden" value="${bean.activity_number }"></input>
+						<button type="submit" class="btn btn-outline-warning activityModifySuc">수정 완료</button>
+						<a class="removeBtn btn btn-outline-danger" onclick="Confirm(${bean.activity_number });">삭제</a>
 					</div>
 					
 				</form>
@@ -468,51 +473,6 @@ function Confirm(number) {
 			</c:forEach>
 			
 		</div>		
-		
-			<%-- <div id="lodgement"> 
-			<h2 id="lodgementHeader">${userVo.user_name }님의 숙박 글목록</h2>
-				<c:forEach items="${lodgementList }" var="lodgeList">
-				<div class="list">
-					<img class="rounded" src="${pageContext.request.contextPath }/resources/img/hotel1.jpg">
-					<div class="listContent">
-						<p class="hashtag">${lodgeList.lodgement_hashTag }</p>
-						<h4>${lodgeList.lodgement_companyName }</h4>
-						<p>${lodgeList.lodgement_location }</p>
-						<p>평점 ★★★☆☆</p> 
-						<p>후기 322개</p>
-						<p class="modify"><a href="#">글 수정하기</a></p>
-						<p class="delete"><a href="#">글 삭제하기</a></p>
-					</div>
-				</div>
-				</c:forEach>
-			</div>
-			<div id="activity">
-			<h2 id="activityHeader">나의 액티비티 글 리스트</h2>
-				<div class="list">
-					<img class="rounded" src="${pageContext.request.contextPath }/resources/img/activity1.webp">
-					<div class="listContent">
-						<p class="hashtag">#욜로와단독 #고급호텔 #조식제공</p>
-						<h4>경복궁 한복대여&헤어스타일링 (한복남)</h4>
-						<p>경기도 안산시 단원구 선부광장남로17</p>
-						<p>평점 ★★★★☆</p> 
-						<p>후기 839개</p>
-						<p class="modify"><a href="#">글 수정하기</a></p>
-						<p class="delete"><a href="#">글 삭제하기</a></p>
-					</div>
-				</div>
-				<div class="list">
-					<img class="rounded" src="${pageContext.request.contextPath }/resources/img/activity2.webp">
-					<div class="listContent">
-						<p class="hashtag">#부산요트 #반려견동반가능 #어드벤처 #아웃도어</p>
-						<h4>부산 럭셔리 요트 체험</h4>
-						<p>경기도 안산시 단원구 선부광장남로17</p>
-						<p>평점 ★★★★☆</p> 
-						<p>후기 134개</p>
-						<p class="modify"><a href="#">글 수정하기</a></p>
-						<p class="delete"><a href="#">글 삭제하기</a></p>
-					</div>
-				</div>
-			</div> --%>
 		</div>
 	</div>
 </div>

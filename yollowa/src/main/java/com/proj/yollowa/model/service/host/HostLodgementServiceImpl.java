@@ -50,7 +50,6 @@ public class HostLodgementServiceImpl implements HostLodgementService {
 		
 //		model.addAttribute("titleImgSize", lodgementList.size());
 		// 호스트 인덱스 페이지에서 수정하기 클릭시 이미지
-		System.out.println("호스트 숙박 글 사이즈 : "+lodgementList.size());
 		if(lodgementList.size()!=0) {
 			for(int i=0; i<lodgementList.size(); i++) {
 				
@@ -68,12 +67,10 @@ public class HostLodgementServiceImpl implements HostLodgementService {
 			// 호스트 인덱스 페이지에서 수정하기 클릭 시 해시태그
 			for(int i=0; i<lodgementList.size(); i++) {
 				String[] hashTags = lodgementList.get(i).getLodgement_hashTag().split("&");
-				System.out.println("해시태그 길이 :: "+hashTags.length);
 				model.addAttribute("hashTagSize"+i, hashTags.length);
 				
 				for(int j=0; j<hashTags.length; j++) {
 					model.addAttribute("hashTag"+i+j, hashTags[j]);
-					System.out.println("해시태그 :: "+hashTags[j]);
 				}
 						
 			}
@@ -281,7 +278,7 @@ public class HostLodgementServiceImpl implements HostLodgementService {
 	@Override
 	public ArrayList<LodgementVo> hostNumberMatch(int user_number) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		ArrayList<LodgementVo> matchUserNumber = hostDao.hostNumberMatch(user_number);
+		ArrayList<LodgementVo> matchUserNumber = hostDao.hostLodgementNumberMatch(user_number);
 		
 		if(matchUserNumber.size()!=0) {
 			return matchUserNumber;
