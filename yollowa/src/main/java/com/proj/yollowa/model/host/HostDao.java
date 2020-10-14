@@ -97,6 +97,12 @@ public interface HostDao {
 	
 	// host/activityUpdate -> 내가 작성한 액티비티 글 수정
 	public void updateHostActivity(@Param("activityNumber") int activity_number,@Param("bean") ActivityUpdatePageDto bean);
+
+	// host/activityDelete/number -> 액티비티 글 삭제
+	public void deleteHostActivity(int activity_number);
+
+	// host/activityDelete/number -> 글 삭제시 해당 글에 등록되어있는 activityOption 까지 삭제 함
+	public void deleteHostActivityOption(int activity_number);
 	
 	
 

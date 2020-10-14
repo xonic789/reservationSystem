@@ -37,8 +37,15 @@ public interface HostActivityService {
 	void selectHostActivityList(Model model, UserVo userVo);
 
 	// 액티비티 글 수정
-	// host/activityUpdate/
+	// host/activityUpdate/number 
 	void updateHostActivity(int activity_number, ActivityUpdatePageDto bean, HttpServletRequest req) throws IllegalStateException, IOException;
+
+
+	// 액티비티 글 삭제
+	// host/activityDelete/number
+	void deleteHostActivity(int activity_number);
+	// 위와 함꼐 해당 글에 등록된 액티비티옵션 삭제
+	void deleteHostActivityOption(int activity_number);
 	
 	
 }

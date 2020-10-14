@@ -227,6 +227,18 @@ public class HostActivityServiceImpl implements HostActivityService{
 
 	}
 	
+	// 액티비티 글 삭제
+	// host/activityDelete/number
+	@Override
+	public void deleteHostActivity(int activity_number) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.deleteHostActivity(activity_number);
+	}
+	@Override
+	public void deleteHostActivityOption(int activity_number) {
+		HostDao hostDao = sqlSession.getMapper(HostDao.class);
+		hostDao.deleteHostActivityOption(activity_number);
+	}
 	
 /*  host/aadd end **********************************************************************************************************/
 }

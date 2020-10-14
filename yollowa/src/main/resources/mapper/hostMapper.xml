@@ -111,9 +111,14 @@
 		update activity set activity_img = #{bean.activity_img }, activity_hashTag = #{bean.activity_hashTag} where activity_number = #{activityNumber }
 	</insert>
 	
-	
-	
-
+	<!-- host/activityDelete/number -> 액티비티 글 삭제 -->
+	<delete id="deleteHostActivity">
+		delete from activity where activity_number = #{activity_number}
+	</delete>
+	<!-- host/activityDelete/number -> 글 삭제시 해당 글에 등록되어있는 activityOption 까지 삭제 함 -->
+	<delete id="deleteHostActivityOption">
+		delete from activityOption where activityOption_articleNumber = #{activity_number}
+	</delete>
 	<!-- 호스트 액티비티 start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	

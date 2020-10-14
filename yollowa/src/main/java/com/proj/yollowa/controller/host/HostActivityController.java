@@ -101,4 +101,16 @@ public class HostActivityController {
 		return "redirect:/host/activity";
 	}
 	
+	// 액티비티 글 삭제
+	@Auth
+	@RequestMapping(value="activityDelete/{activity_number}")
+	public String deleteHostActivity(@PathVariable("activity_number") int activity_number) {
+		// 액티비티 글 삭제
+		hostService.deleteHostActivity(activity_number);
+		
+		// 해당 글에 등록된 액티비티옵션 삭제
+		hostService.deleteHostActivityOption(activity_number);
+		
+		return "redirect:/host/activity";
+	}
 }
