@@ -69,18 +69,15 @@ public class MypageControllerJK {
 		}
 		SearchVo searchVo = new SearchVo();
 		searchVo.setSearchType("");
-		//review_writer='철수'
 		searchVo.setKeyword(user.getUser_nickName());
 		searchVo.setPage(page);
 		searchVo.setPerPageNum(5);
 		searchVo.setTotalCnt(mypageServiceJK.getReviewCountService(searchVo));
 		
 		
-		model.addAttribute("list", mypageServiceJK.getAllMyReviewService(searchVo));
+		model.addAttribute("list", mypageServiceJK.getAllMyReviewListService(searchVo));
 		model.addAttribute("paging", searchVo);
-		//System.out.println("---->"+userVo.getUser_nickName());
-		//System.out.println("---->"+mypageServiceJK.getAllMyReviewService(userVo.getUser_nickName()).size());
-		System.out.println("page"+searchVo);
+		System.out.println("paging"+searchVo);
 
 		return "mypage/myreview";
 	}
