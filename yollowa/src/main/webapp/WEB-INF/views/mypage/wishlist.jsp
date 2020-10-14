@@ -41,6 +41,9 @@ ul {
 .card-link:hover {
 	color: #433387;
 }
+.hashtag{
+	height: 37.33px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -88,10 +91,14 @@ ul {
 									${userwish.activity_reviewCount }개</p>
 
 								<p class="card-text" style="font-size: 0.8rem; color: #757575;">
+								<c:if test="${userwish.hashTag ne null }">
 									<c:forEach items="${userwish.hashTag }" var="hash">
 							 ${hash }
 							 </c:forEach>
+								</c:if>
+								
 								</p>
+								
 								<a
 									href="${pageContext.request.contextPath }/activity/detail/${userwish.activity_number}"
 									class="btn btn-primary">게시물 보기</a>
@@ -126,10 +133,15 @@ ul {
 								<p class="card-text" style="font-size: 0.8rem;">리뷰
 									${userwish.lodgement_reviewCount }개</p>
 
-								<p class="card-text" style="font-size: 0.8rem; color: #757575;">
+								<p class="card-text hashtag" style="font-size: 0.8rem; color: #757575;">
+								<c:if test="${userwish.hashTag ne null }">
 									<c:forEach items="${userwish.hashTag }" var="hash">
 							 ${hash }
 							 </c:forEach>
+							 </c:if>
+							 <c:if test="${userwish.hashTag eq null }">
+									${userwish.lodgement_hashTag }
+								</c:if>
 								</p>
 								<a
 									href="${pageContext.request.contextPath }/lodgement/detail/${userwish.lodgement_number}"

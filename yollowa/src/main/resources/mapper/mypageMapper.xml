@@ -26,6 +26,7 @@
 		ORDER BY LI.LRESERVINFO_RESERVDATE DESC;
 		]]>
 	</select>
+	
 	<select id="getLuserCompletedInfo" resultType="com.proj.yollowa.model.entity.mypage.LReservInfoDto">
 		<![CDATA[
 		SELECT *
@@ -40,6 +41,7 @@
 		ORDER BY LI.LRESERVINFO_RESERVDATE DESC;
 		]]>
 	</select>
+	
 	<select id="getLuserCartInfo" resultType="com.proj.yollowa.model.entity.mypage.LReservInfoDto">
 		<![CDATA[
 		SELECT *
@@ -54,6 +56,7 @@
 		ORDER BY LI.LRESERVINFO_RESERVDATE DESC;	
 		]]>
 	</select>
+	
 	<select id="getUserWishList" resultType="com.proj.yollowa.model.entity.lodgement.LodgementVo">
 		SELECT *
 		FROM LODGEMENT
@@ -92,4 +95,6 @@
 		select count(*) from review
 		where review_reservNumber=#{lreservInfo_number}
 	</select>
+	
+	
 </mapper>

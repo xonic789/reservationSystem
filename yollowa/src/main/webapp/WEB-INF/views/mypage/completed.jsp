@@ -87,7 +87,8 @@ ul {
 	<%@ include file="../template/menu.jspf"%>
 	<%@ include file="../template/mypagemenu1.jspf" %>
 			<div class="col-md-9">
-			<h2>${user.user_name }님의 이용 내역 입니다!</h2>
+			<c:if test="${service eq 2 }">
+			<h2>${user.user_name }님의 숙박 구매 내역 입니다!</h2>
 			<c:forEach items="${usedinfo }" var="info" varStatus="status">
 				<div class="jumbotron">
 				<!-- 룸정보는 rsvinfo에 들어있는 게시물넘버와 숙박 게시물번호와 같을때 출력 -->
@@ -95,6 +96,7 @@ ul {
 					<hr class="my-4">
 					<p>객실 정보 : ${info.roomInfo_name }</p>
 					<p>이용 일자 : ${info.lReservInfo_checkIn } ~ ${info.lReservInfo_checkOut }</p>
+					<p>업소 주소 : ${info.lodgement_location}</p>
 					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
 					<p>결제 금액 : ${pay }원</p>
 					<p class="lead">
@@ -104,6 +106,27 @@ ul {
 					</p>
 				</div>
 				</c:forEach>
+			</c:if>
+			<c:if test="${service ne 1 }">
+			<h2>${user.user_name }님의 액티비티 구매 내역 입니다!</h2>
+			<c:forEach items="${usedinfo }" var="info" varStatus="status">
+				<div class="jumbotron">
+				<!-- 룸정보는 rsvinfo에 들어있는 게시물넘버와 숙박 게시물번호와 같을때 출력 -->
+					<h3>${info.lodgement_companyName }</h3>
+					<hr class="my-4">
+					<p>객실 정보 : ${info.roomInfo_name }</p>
+					<p>이용 일자 : ${info.lReservInfo_checkIn } ~ ${info.lReservInfo_checkOut }</p>
+					<p>업소 주소 : ${info.lodgement_location}</p>
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
+					<p>결제 금액 : ${pay }원</p>
+					<p class="lead">
+						<a class="btn btn-warning btn-lg reviewBtn${status.index }" href="../../review_write/${service }/${info.lReservInfo_number}" role="button" style="display: block;" >리뷰 쓰기</a>
+					<hr class="my-4">	
+						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/lodgement/detail/${info.lReservInfo_acticleNumber}" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
+					</p>
+				</div>
+				</c:forEach>
+			</c:if>
 			</div>
 	<%@ include file="../template/mypagemenu2.jspf" %>
 	<%@ include file="../template/footer.jspf"%>
