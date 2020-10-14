@@ -62,7 +62,6 @@ public class MypageServiceImpl implements MypageService{
 			for(LReservInfoDto dto : list) {
 				count.add(mypageDao.getExistReview(dto.getlReservInfo_number()));
 			}
-			System.out.println(count);
 			model.addAttribute("existReview",count);
 			model.addAttribute("usedinfo",list);
 			return list;
@@ -132,7 +131,9 @@ public class MypageServiceImpl implements MypageService{
 				String[] wishList= lWishList.split("&");
 				for(String userWish:wishList) {
 					LodgementVo bean = mypageDao.getLwishList(Integer.parseInt(userWish));
-					bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+					if(bean.getLodgement_hashTag().contains("&")) {
+						bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+					}
 					int su= bean.getLodgement_img().indexOf("&");
 					String imgName=bean.getLodgement_img().substring(0,su);
 					bean.setLodgement_img(imgName);
@@ -143,7 +144,9 @@ public class MypageServiceImpl implements MypageService{
 			}else {
 				List<LodgementVo> list = new ArrayList<LodgementVo>();
 				LodgementVo bean = mypageDao.getLwishList(Integer.parseInt(lWishList));
-				bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+				if(bean.getLodgement_hashTag().contains("&")) {
+					bean.setHashTag(bean.getLodgement_hashTag().split("&"));
+				}
 				int su= bean.getLodgement_img().indexOf("&");
 				String imgName=bean.getLodgement_img().substring(0,su);
 				bean.setLodgement_img(imgName);
