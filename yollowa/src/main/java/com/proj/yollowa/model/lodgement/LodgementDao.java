@@ -74,5 +74,9 @@ public interface LodgementDao {
 	// 검색 건수를 알려주기 위해 count 요청
 	public int selectLocationFilterOneCnt(String locationFilter);
 	
+	// 결제 성공시 예약정보에 insert
+	public void LReservInfoInsert(@Param("userNumber") int userNumber,@Param("articleNumber") int articleNumber,@Param("roomNumber") int roomNumber,@Param("checkIn") java.sql.Date checkIn,
+			@Param("checkOut") java.sql.Date checkOut,@Param("userPhoneNumber") String userPhoneNumber,@Param("resultPrice") int resultPrice);
+	
 
 }

@@ -59,5 +59,9 @@ public interface LodgementService {
 	
 	// 지역 필터
 	void lodgementLocationFilterSelect(String locationFilter, Model model);
+	
+	// 결제 성공시 예약정보에 insert
+	void LReservInfoInsert(int userNumber, int articleNumber, int roomNumber, java.sql.Date checkIn, java.sql.Date checkOut,
+			String userPhoneNumber, int resultPrice);
 
 }

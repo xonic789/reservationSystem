@@ -19,20 +19,37 @@ IMP.request_pay({
     pay_method : 'card', // 결제수단 카드
     merchant_uid : 'merchant_' + new Date().getTime(), // 결제가된적 있는 merchant_uid로는 재결제 불가 
     name : '${roomName}', //16자 이내 권장
-    amount :${resultPrice},	//결제 금액
+    amount :'${resultPrice}',	//결제 금액
     buyer_email : 'vnvnwn@gmail.com',
-    buyer_name : '이성범',
-    buyer_tel : '010-8629-2737'
+    buyer_name : '${userName}',
+    buyer_tel : '${userPhoneNumber}'
 }, function(rsp) {
     if ( rsp.success ) {
         var msg = '결제가 완료되었습니다.  ';
         msg += '결제 금액 : ' + rsp.paid_amount+"원";
+	   
+	    alert(msg);
+	    $.ajax({
+	    	type:"post",
+	    	data:({
+		    		articleNumber:"${articleNumber}",
+		    		companyName:"${companyName}",
+		    		roomNumber:"${roomNumber}",
+		    		roomName:"${roomName}",
+		    		checkIn:"${checkIn}",
+		    		checkOut:"${checkOut}",
+		    		resultPrice:"${resultPrice}"
+	    		}),
+	    	dataType:"json",
+	    	url:"${pageContext.request.contextPath}/lodgement/detail/InicisAjax",
+	    });
+	    window.location.href='http://localhost:8080/yollowa/lodgement/detail/ReservationResult/';
     } else {
         var msg = '결제에 실패하였습니다.  ';
         msg += '에러내용 : ' + rsp.error_msg;
-    }
 	    alert(msg);
 	    window.location.href='http://localhost:8080/yollowa/lodgement/list';
+    }
 });
 </script>
   </body>

@@ -118,5 +118,9 @@
 		select count(*) from lodgement where lodgement_temp=1 and lodgement_location like CONCAT('%',#{locationFilter},'%')
 	</select>
 	
-
+	<!-- 결제 완료시 예약정보에 insert -->
+	<insert id="LReservInfoInsert">
+		insert into LReservInfo (LReservInfo_userNumber,LReservInfo_acticleNumber,LReservInfo_roomNumber,LReservInfo_checkIn,LReservInfo_checkOut,LReservInfo_phoneNumber,LReservInfo_reservDate,LReservInfo_payment,LReservInfo_reservStatus,LReservInfo_cartStatus) 
+		values (#{userNumber},#{articleNumber},#{roomNumber},#{checkIn},#{checkOut},#{userPhoneNumber},now(),#{resultPrice},1,0)
+	</insert>
 </mapper>
