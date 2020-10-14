@@ -154,7 +154,7 @@ public class HostActivityController {
 	@RequestMapping(value="/removeOption/{articleNumber}/{optionNumber}")
 	public String removeOption(@PathVariable("articleNumber") int articleNumber, @PathVariable("optionNumber") int optionNumber) {
 		hostService.deleteOption(articleNumber,optionNumber);
-		return "redirect:/host/activityoptions/"+articleNumber;
+		return "redirect:/host/activityOptions/"+articleNumber;
 	}
 	
 	
