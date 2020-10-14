@@ -130,9 +130,9 @@
 	<select id="selectActivityOptions" resultType="com.proj.yollowa.model.entity.host.ActivityOptionVo">
 		select * from activityOption where activityOption_articleNumber = #{activity_number}
 	</select>
-	<!-- <delete id="deleteHostActivityOption">
+	<delete id="deleteOption">
 		delete from activityOption where activityOption_articleNumber = #{articleNumber} and activityOption_optionNumber = #{optionNumber}
-	</delete> -->
+	</delete> 
 	
 	
 	<!-- 호스트 액티비티 start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->

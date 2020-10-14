@@ -277,7 +277,7 @@ public class HostActivityServiceImpl implements HostActivityService{
 	@Override
 	public void deleteOption(int articleNumber, int optionNumber) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		hostDao.deleteHostActivityOption(articleNumber, optionNumber);
+		hostDao.deleteOption(articleNumber, optionNumber);
 			
 	}
 /*  host/activityOptions page end **********************************************************************************************************/

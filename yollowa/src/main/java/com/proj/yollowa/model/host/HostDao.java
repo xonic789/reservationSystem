@@ -117,7 +117,7 @@ public interface HostDao {
 	public ArrayList<ActivityOptionVo> selectActivityOptions(int activity_number);
 
 	// removeOption/{activity_articleNumber}/{activity_optionNumber} -> 액티비티 옵션 삭제
-	public void deleteHostActivityOption(@Param("articleNumber") int articleNumber,@Param("optionNumber") int optionNumber);
+	public void deleteOption(@Param("articleNumber") int articleNumber,@Param("optionNumber") int optionNumber);
 	
 	
 
