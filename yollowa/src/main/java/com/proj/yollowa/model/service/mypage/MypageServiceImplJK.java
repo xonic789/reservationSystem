@@ -34,24 +34,25 @@ public class MypageServiceImplJK implements MypageServiceJK{
 	}
 	//특정 사용자가 작성한 숙박 리뷰를 불러온다
 	@Override
-	public List<LodgementReviewVo> getLodgementReviewService(String writer) throws SQLException {
+	public List<LodgementReviewVo> getLodgementReviewService(SearchVo searchVo) throws SQLException {
 		MypageDaoJK mypageDaoJK = sqlSession.getMapper(MypageDaoJK.class);
 		
-		return mypageDaoJK.getLodgementReview(writer);
+		return mypageDaoJK.getLodgementReview(searchVo);
 	}
 	//특정 사용자가 작성한 액티비티 리뷰를 불러온다
 	@Override
-	public List<ActivityReviewVo> getActivityReviewService(String writer) throws SQLException {
+	public List<ActivityReviewVo> getActivityReviewService(SearchVo searchVo) throws SQLException {
 		MypageDaoJK mypageDaoJK = sqlSession.getMapper(MypageDaoJK.class);
 
-		return mypageDaoJK.getActivityReview(writer);
+		return mypageDaoJK.getActivityReview(searchVo);
 	}
 	//특정 사용자가 작성한 리뷰를 모두 불러온다(숙박+액티비티)
 	@Override
-	public List<AllReviewViewVo> getAllMyReviewService(String reviewWriter) throws SQLException {
+	public List<AllReviewViewVo> getAllMyReviewService(SearchVo searchVo) throws SQLException {
 		List<AllReviewViewVo> allReviewList = new ArrayList<AllReviewViewVo>();
-		List<LodgementReviewVo> lReviewList = getLodgementReviewService(reviewWriter);
-		List<ActivityReviewVo> aReviewList = getActivityReviewService(reviewWriter);
+		List<AllReviewViewVo> pageReviewList = new ArrayList<AllReviewViewVo>();
+		List<LodgementReviewVo> lReviewList = getLodgementReviewService(searchVo);
+		List<ActivityReviewVo> aReviewList = getActivityReviewService(searchVo);
 		String company;
 		String img;
 		int userNum;
@@ -100,11 +101,22 @@ public class MypageServiceImplJK implements MypageServiceJK{
 					reviewCategoryNum, starNum, reviewedDate, title, content, writer)
 					);
 		}
-		for (int j = 0; j < allReviewList.size(); j++) {
-			System.out.println(allReviewList.get(j).toString());
+		//한페이지에 보여줄 개수
+		int perPageNum =searchVo.getPerPageNum();
+		int startNum= (searchVo.getPage()-1)*perPageNum;
+		System.out.println("#"+startNum);
+		int endNum = startNum+perPageNum;
+		if(endNum>allReviewList.size()) {
+			endNum=allReviewList.size();
+		}
+			
+		System.out.println("PagingNew:"+startNum+"|"+endNum);
+		for (int j = startNum; j < endNum; j++) {
+			System.out.println("get"+j);
+			pageReviewList.add(allReviewList.get(j));
 		}
 		
-		return allReviewList;
+		return pageReviewList;
 	}
 	
 	public String getFirstImg(String imgs) {

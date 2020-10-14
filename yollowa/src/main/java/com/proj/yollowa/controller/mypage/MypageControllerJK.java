@@ -68,16 +68,20 @@ public class MypageControllerJK {
 			return "redirect:../";
 		}
 		SearchVo searchVo = new SearchVo();
-		searchVo.setSearchType("review_userNumber");
-		searchVo.setKeyword(Integer.toString(user.getUser_number()));
+		searchVo.setSearchType("");
+		//review_writer='철수'
+		searchVo.setKeyword(user.getUser_nickName());
 		searchVo.setPage(page);
+		searchVo.setPerPageNum(5);
 		searchVo.setTotalCnt(mypageServiceJK.getReviewCountService(searchVo));
 		
 		
-		
+		model.addAttribute("list", mypageServiceJK.getAllMyReviewService(searchVo));
+		model.addAttribute("paging", searchVo);
 		//System.out.println("---->"+userVo.getUser_nickName());
 		//System.out.println("---->"+mypageServiceJK.getAllMyReviewService(userVo.getUser_nickName()).size());
-		model.addAttribute("list", mypageServiceJK.getAllMyReviewService(userVo.getUser_nickName()));
+		System.out.println("page"+searchVo);
+
 		return "mypage/myreview";
 	}
 	

@@ -39,11 +39,10 @@ public class NoticeController {
 		searchVo.setKeyword(keyword);
 		searchVo.setPage(page);
 		searchVo.setTotalCnt(noticeService.countNoticeService(searchVo));
-		
 		model.addAttribute("managerVo", managerVo);
 		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
 		model.addAttribute("paging", searchVo);
-		
+		System.out.println("##"+searchVo);
 		return "cs-center/noticeList";
 	}
 	

@@ -15,7 +15,7 @@
 		SELECT *  
 		FROM 
 			LODGEMENT, REVIEW 
-		WHERE REVIEW_WRITER = #{writer} 
+		WHERE REVIEW_WRITER=#{keyword}
 			AND REVIEW_CATEGORY = 1 
 			AND REVIEW_ARTICLENUMBER = LODGEMENT_NUMBER
 	</select>
@@ -23,11 +23,11 @@
 		SELECT *  
 		FROM 
 			ACTIVITY, REVIEW 
-		WHERE REVIEW_WRITER = #{writer}
+		WHERE REVIEW_WRITER=#{keyword}
 			AND REVIEW_CATEGORY = 2 
 			AND REVIEW_ARTICLENUMBER = ACTIVITY_NUMBER
 	</select>
 	<select id="getReviewCount" resultType="int">
-		SELECT count(review_userNumber) FROM resort.review where #{searchType}=#{keyword}
+		SELECT COUNT(REVIEW_USERNUMBER) FROM REVIEW WHERE REVIEW_WRITER = #{keyword}
 	</select>
 </mapper>
