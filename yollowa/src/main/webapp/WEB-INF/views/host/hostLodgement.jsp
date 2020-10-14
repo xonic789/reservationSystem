@@ -403,7 +403,7 @@ function Confirm(number) {
 			<input type="hidden" id="imgPath" value="${path }"></input>
 			
 			<div class="lodgementBox">
-				<h5>${lodgeList.lodgement_companyName }</h5><a href="#" class="btn btn-outline-primary">상세 페이지로 이동</a><a href="lodgeRoom/${lodgeList.lodgement_number }" class="btn btn-outline-success">방 등록 현황</a><br/>
+				<h5>${lodgeList.lodgement_companyName }</h5><a href="/yollowa/lodgement/detail/${lodgeList.lodgement_number }" class="btn btn-outline-primary">상세 페이지로 이동</a><a href="lodgeRoom/${lodgeList.lodgement_number }" class="btn btn-outline-success">방 등록 현황</a><br/>
 				<div class="list${lodgeList.lodgement_number }">
 						
 					<form id="form" action="lodgeUpdate/${lodgeList.lodgement_number  }" method="post" enctype="multipart/form-data">

@@ -409,7 +409,9 @@ function Confirm(number) {
 			<input type="hidden" id="imgPath" value="${path }"></input>
 			
 			<div class="activityBox">
-				<h5>${bean.activity_title }</h5><a href="#" class="btn btn-outline-primary">상세 페이지로 이동</a><a href="activityOption/${bean.activity_number }" class="btn btn-outline-success">옵션 등록 현황</a><br/>
+				<h5>${bean.activity_title }</h5>
+				<a href="/yollowa/activity/detail/${bean.activity_number }" class="btn btn-outline-primary">상세 페이지로 이동</a>
+				<a href="activityOptions/${bean.activity_number }" class="btn btn-outline-success">옵션 등록 현황</a><br/>
 				<div class="list${bean.activity_number }">
 						
 					<form id="form" action="activityUpdate/${bean.activity_number  }" method="post" enctype="multipart/form-data">
