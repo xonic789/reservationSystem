@@ -29,7 +29,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter implements Sessio
 			
 		}else {
 			UserDao userDao=sqlSession.getMapper(UserDao.class);
-			System.out.println("진입");
 			session.setAttribute(LOGIN,userDao.getUser(userVo.getUser_number()) );
 		}
 		

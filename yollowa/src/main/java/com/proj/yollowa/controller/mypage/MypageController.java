@@ -66,6 +66,16 @@ public class MypageController {
 		
 		return "mypage/wishlist";
 	}
+	@Auth
+	@RequestMapping(value = "/userinfo",method =RequestMethod.GET )
+	public String userinfo(@AuthUser UserVo userVo, Model model) throws SQLException{
+		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
+		if(user==null) {
+			return "redirect:../";
+		}
+		
+		return "mypage/userinfo";
+	}
 	
 	
 }

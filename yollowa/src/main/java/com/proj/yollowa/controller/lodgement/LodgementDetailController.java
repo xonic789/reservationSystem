@@ -298,21 +298,26 @@ public class LodgementDetailController {
 		
 		Date startDate;
 		Date endDate;
-		try {
-			startDate = (java.sql.Date) transFormat.parse(sdate);
-			endDate = (java.sql.Date) transFormat.parse(edate);
-			System.out.println(startDate);
-			System.out.println(endDate);
-
-			// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
-			int payment = lodgementService.roomPaymentSelect(roomNumber, startDate, endDate);
-			
-			// 위에서 성수기인지 비성수기인지 사용자가 선택한 날짜로 확인 후 반환된 payment를 가지고 insert
-			lodgementService.lodgementCartInsert(articleNumber, roomNumber, startDate, endDate, payment, userVo);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		startDate = Date.valueOf(sdate);
+		endDate = Date.valueOf(edate);
+		
+		// insert 하기 전에 받아온 정보들로 roomInfo에서 날짜 상대적으로 가격을 받아낸다 (시작날짜 기준)
+		int payment = lodgementService.roomPaymentSelect(roomNumber, startDate, endDate);
+		
+		// 위에서 성수기인지 비성수기인지 사용자가 선택한 날짜로 확인 후 반환된 payment를 가지고 insert
+		lodgementService.lodgementCartInsert(articleNumber, roomNumber, startDate, endDate, payment, userVo);
+		
+//		try {
+//			startDate = (java.sql.Date) transFormat.parse(sdate);
+//			endDate = (java.sql.Date) transFormat.parse(edate);
+//			System.out.println(startDate);
+//			System.out.println(endDate);
+//
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+		
 	}
 	
 	// Lodgement 찜목록

@@ -1,7 +1,6 @@
-package com.proj.yollowa.model.entity.activity;
+package com.proj.yollowa.model.entity.host;
 
 public class ActivityVo {
-
 	private int activity_number;
 	private int activity_userNumber;
 	private String activity_title;
@@ -9,24 +8,118 @@ public class ActivityVo {
 	private String activity_LatLng;
 	private String activity_category;
 	private String activity_hashTag;
-
 	private int activity_goodCount;
 	private double activity_reviewGradeRate;
 	private int activity_reviewCount;
 	private String activity_img;
 	private int activity_temp;
-	private String[] hashTag;
 	
-
-	public String[] getHashTag() {
-		return hashTag;
-	}
-
-	public void setHashTag(String[] hashTag) {
-		this.hashTag = hashTag;
-	}
-
 	public ActivityVo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ActivityVo(int activity_number, int activity_userNumber, String activity_title, String activity_location,
+			String activity_LatLng, String activity_category, String activity_hashTag, int activity_goodCount,
+			double activity_reviewGradeRate, int activity_reviewCount, String activity_img, int activity_temp) {
+		super();
+		this.activity_number = activity_number;
+		this.activity_userNumber = activity_userNumber;
+		this.activity_title = activity_title;
+		this.activity_location = activity_location;
+		this.activity_LatLng = activity_LatLng;
+		this.activity_category = activity_category;
+		this.activity_hashTag = activity_hashTag;
+		this.activity_goodCount = activity_goodCount;
+		this.activity_reviewGradeRate = activity_reviewGradeRate;
+		this.activity_reviewCount = activity_reviewCount;
+		this.activity_img = activity_img;
+		this.activity_temp = activity_temp;
+	}
+
+	@Override
+	public String toString() {
+		return "ActivityVo [activity_number=" + activity_number + ", activity_userNumber=" + activity_userNumber
+				+ ", activity_title=" + activity_title + ", activity_location=" + activity_location
+				+ ", activity_LatLng=" + activity_LatLng + ", activity_category=" + activity_category
+				+ ", activity_hashTag=" + activity_hashTag + ", activity_goodCount=" + activity_goodCount
+				+ ", activity_reviewGradeRate=" + activity_reviewGradeRate + ", activity_reviewCount="
+				+ activity_reviewCount + ", activity_img=" + activity_img + ", activity_temp=" + activity_temp + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((activity_LatLng == null) ? 0 : activity_LatLng.hashCode());
+		result = prime * result + ((activity_category == null) ? 0 : activity_category.hashCode());
+		result = prime * result + activity_goodCount;
+		result = prime * result + ((activity_hashTag == null) ? 0 : activity_hashTag.hashCode());
+		result = prime * result + ((activity_img == null) ? 0 : activity_img.hashCode());
+		result = prime * result + ((activity_location == null) ? 0 : activity_location.hashCode());
+		result = prime * result + activity_number;
+		result = prime * result + activity_reviewCount;
+		long temp;
+		temp = Double.doubleToLongBits(activity_reviewGradeRate);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + activity_temp;
+		result = prime * result + ((activity_title == null) ? 0 : activity_title.hashCode());
+		result = prime * result + activity_userNumber;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActivityVo other = (ActivityVo) obj;
+		if (activity_LatLng == null) {
+			if (other.activity_LatLng != null)
+				return false;
+		} else if (!activity_LatLng.equals(other.activity_LatLng))
+			return false;
+		if (activity_category == null) {
+			if (other.activity_category != null)
+				return false;
+		} else if (!activity_category.equals(other.activity_category))
+			return false;
+		if (activity_goodCount != other.activity_goodCount)
+			return false;
+		if (activity_hashTag == null) {
+			if (other.activity_hashTag != null)
+				return false;
+		} else if (!activity_hashTag.equals(other.activity_hashTag))
+			return false;
+		if (activity_img == null) {
+			if (other.activity_img != null)
+				return false;
+		} else if (!activity_img.equals(other.activity_img))
+			return false;
+		if (activity_location == null) {
+			if (other.activity_location != null)
+				return false;
+		} else if (!activity_location.equals(other.activity_location))
+			return false;
+		if (activity_number != other.activity_number)
+			return false;
+		if (activity_reviewCount != other.activity_reviewCount)
+			return false;
+		if (Double.doubleToLongBits(activity_reviewGradeRate) != Double
+				.doubleToLongBits(other.activity_reviewGradeRate))
+			return false;
+		if (activity_temp != other.activity_temp)
+			return false;
+		if (activity_title == null) {
+			if (other.activity_title != null)
+				return false;
+		} else if (!activity_title.equals(other.activity_title))
+			return false;
+		if (activity_userNumber != other.activity_userNumber)
+			return false;
+		return true;
 	}
 
 	public int getActivity_number() {
@@ -125,109 +218,6 @@ public class ActivityVo {
 		this.activity_temp = activity_temp;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((activity_LatLng == null) ? 0 : activity_LatLng.hashCode());
-		result = prime * result + ((activity_category == null) ? 0 : activity_category.hashCode());
-		result = prime * result + activity_goodCount;
-		result = prime * result + ((activity_hashTag == null) ? 0 : activity_hashTag.hashCode());
-		result = prime * result + ((activity_img == null) ? 0 : activity_img.hashCode());
-		result = prime * result + ((activity_location == null) ? 0 : activity_location.hashCode());
-		result = prime * result + activity_number;
-		result = prime * result + activity_reviewCount;
-		long temp;
-		temp = Double.doubleToLongBits(activity_reviewGradeRate);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + activity_temp;
-		result = prime * result + ((activity_title == null) ? 0 : activity_title.hashCode());
-		result = prime * result + activity_userNumber;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ActivityVo other = (ActivityVo) obj;
-		if (activity_LatLng == null) {
-			if (other.activity_LatLng != null)
-				return false;
-		} else if (!activity_LatLng.equals(other.activity_LatLng))
-			return false;
-		if (activity_category == null) {
-			if (other.activity_category != null)
-				return false;
-		} else if (!activity_category.equals(other.activity_category))
-			return false;
-		if (activity_goodCount != other.activity_goodCount)
-			return false;
-		if (activity_hashTag == null) {
-			if (other.activity_hashTag != null)
-				return false;
-		} else if (!activity_hashTag.equals(other.activity_hashTag))
-			return false;
-		if (activity_img == null) {
-			if (other.activity_img != null)
-				return false;
-		} else if (!activity_img.equals(other.activity_img))
-			return false;
-		if (activity_location == null) {
-			if (other.activity_location != null)
-				return false;
-		} else if (!activity_location.equals(other.activity_location))
-			return false;
-		if (activity_number != other.activity_number)
-			return false;
-		if (activity_reviewCount != other.activity_reviewCount)
-			return false;
-		if (Double.doubleToLongBits(activity_reviewGradeRate) != Double
-				.doubleToLongBits(other.activity_reviewGradeRate))
-			return false;
-		if (activity_temp != other.activity_temp)
-			return false;
-		if (activity_title == null) {
-			if (other.activity_title != null)
-				return false;
-		} else if (!activity_title.equals(other.activity_title))
-			return false;
-		if (activity_userNumber != other.activity_userNumber)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ActivityVo [activity_number=" + activity_number + ", activity_userNumber=" + activity_userNumber
-				+ ", activity_title=" + activity_title + ", activity_location=" + activity_location
-				+ ", activity_LatLng=" + activity_LatLng + ", activity_category=" + activity_category
-				+ ", activity_hashTag=" + activity_hashTag + ", activity_goodCount=" + activity_goodCount
-				+ ", activity_reviewGradeRate=" + activity_reviewGradeRate + ", activity_reviewCount="
-				+ activity_reviewCount + ", activity_img=" + activity_img + ", activity_temp=" + activity_temp + "]";
-	}
-
-	public ActivityVo(int activity_number, int activity_userNumber, String activity_title, String activity_location,
-			String activity_LatLng, String activity_category, String activity_hashTag, int activity_goodCount,
-			double activity_reviewGradeRate, int activity_reviewCount, String activity_img, int activity_temp) {
-		super();
-		this.activity_number = activity_number;
-		this.activity_userNumber = activity_userNumber;
-		this.activity_title = activity_title;
-		this.activity_location = activity_location;
-		this.activity_LatLng = activity_LatLng;
-		this.activity_category = activity_category;
-		this.activity_hashTag = activity_hashTag;
-		this.activity_goodCount = activity_goodCount;
-		this.activity_reviewGradeRate = activity_reviewGradeRate;
-		this.activity_reviewCount = activity_reviewCount;
-		this.activity_img = activity_img;
-		this.activity_temp = activity_temp;
-	}
 	
 	
 }
