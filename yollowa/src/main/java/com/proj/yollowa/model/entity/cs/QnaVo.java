@@ -2,6 +2,10 @@ package com.proj.yollowa.model.entity.cs;
 
 import java.sql.Date;
 
+/**
+ * @author Cielo
+ *
+ */
 public class QnaVo {
 	private int qnano;
 	private String title;
@@ -10,10 +14,12 @@ public class QnaVo {
 	private Date writeddate;
 	private int cnt;
 	
+	private int hidden;
+	
 	public QnaVo() {
 	}
 
-	public QnaVo(int qnano, String title, String writer, String content, Date writeddate, int cnt) {
+	public QnaVo(int qnano, String title, String writer, String content, Date writeddate, int cnt, int hidden) {
 		super();
 		this.qnano = qnano;
 		this.title = title;
@@ -21,6 +27,7 @@ public class QnaVo {
 		this.content = content;
 		this.writeddate = writeddate;
 		this.cnt = cnt;
+		this.hidden = hidden;
 	}
 
 	public int getQnano() {
@@ -71,11 +78,18 @@ public class QnaVo {
 		this.cnt = cnt;
 	}
 
+	public int getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(int hidden) {
+		this.hidden = hidden;
+	}
+
 	@Override
 	public String toString() {
 		return "QnaVo [qnano=" + qnano + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", writeddate=" + writeddate + ", cnt=" + cnt + "]";
+				+ ", writeddate=" + writeddate + ", cnt=" + cnt + ", hidden=" + hidden + "]";
 	}
-	
 	
 }

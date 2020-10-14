@@ -123,6 +123,10 @@ $(document).ready(function() {
 					<textarea name="content" id="editor" placeholder="내용을 입력해 주세요" ></textarea>
 				</div>
 				<div class="box3">
+				   <div class="custom-control custom-checkbox">
+				      <input name="hidden" value="1" type="checkbox" class="custom-control-input" id="customCheck1" />
+				      <label  class="custom-control-label" for="customCheck1">비공개로 작성하기</label>
+				    </div>
 					<input type="submit" id="submitBtn" class="btn btn-primary" value="작성하기">
 				</div> 
 			</form>

@@ -120,7 +120,7 @@
 				</div>
 		</div>
 		<div class="col-md-10">
-			<form id="search" action="${pageContext.request.contextPath }/cs-center/qna/" class="form-inline" method="get">
+			<form id="search" action="${pageContext.request.contextPath }/cs-center/faq/" class="form-inline" method="get">
 				<div class="form-group">
 					<input type="hidden" name="page" value="1"/>
 				    <select name="searchType" class="custom-select">
@@ -173,7 +173,10 @@
 					</ul>
 				</div>
 				<div class="col-md-2" id="writeBox">
-					<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
+					<c:set var="temp" >${isManager }</c:set>
+					<c:if test="${!empty temp}">
+						<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
+					</c:if>
 				</div>
 			</div>
 		</div>

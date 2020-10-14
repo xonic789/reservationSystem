@@ -9,7 +9,10 @@
 			WHERE QNANO = #{qnano}
 			ORDER BY QNANO
 	</select>
-	
+	<!-- 댓글 개수를 반환한다 -->
+	<select id="countReply" resultType="int">
+	SELECT COUNT(R.QNANO) FROM QNA Q, QNAREPLY R WHERE R.QNANO=#{qnano} AND Q.QNANO = R.QNANO
+	</select>
 	<insert id="createQnaReply">
 		INSERT INTO QNAREPLY (
             QNANO

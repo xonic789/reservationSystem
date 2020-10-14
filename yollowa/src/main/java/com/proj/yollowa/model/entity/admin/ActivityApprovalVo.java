@@ -9,12 +9,16 @@ public class ActivityApprovalVo {
 	
 	private int user_number;
 	private String user_companyname;
+	private String user_name;
+	
+	private int activityoption_articlenumber;
 	
 	public ActivityApprovalVo() {
 	}
-	
+
 	public ActivityApprovalVo(int activity_number, int activity_userNumber, String activity_title, String activity_img,
-			int activity_temp, int user_number, String user_companyname) {
+			int activity_temp, int user_number, String user_companyname, String user_name,
+			int activityoption_articlenumber) {
 		super();
 		this.activity_number = activity_number;
 		this.activity_userNumber = activity_userNumber;
@@ -23,6 +27,8 @@ public class ActivityApprovalVo {
 		this.activity_temp = activity_temp;
 		this.user_number = user_number;
 		this.user_companyname = user_companyname;
+		this.user_name = user_name;
+		this.activityoption_articlenumber = activityoption_articlenumber;
 	}
 
 	public int getActivity_number() {
@@ -81,7 +87,28 @@ public class ActivityApprovalVo {
 		this.user_companyname = user_companyname;
 	}
 
-	
-	
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public int getActivityoption_articlenumber() {
+		return activityoption_articlenumber;
+	}
+
+	public void setActivityoption_articlenumber(int activityoption_articlenumber) {
+		this.activityoption_articlenumber = activityoption_articlenumber;
+	}
+
+	@Override
+	public String toString() {
+		return "ActivityApprovalVo [activity_number=" + activity_number + ", activity_userNumber=" + activity_userNumber
+				+ ", activity_title=" + activity_title + ", activity_img=" + activity_img + ", activity_temp="
+				+ activity_temp + ", user_number=" + user_number + ", user_companyname=" + user_companyname
+				+ ", user_name=" + user_name + ", activityoption_articlenumber=" + activityoption_articlenumber + "]";
+	}
 	
 }

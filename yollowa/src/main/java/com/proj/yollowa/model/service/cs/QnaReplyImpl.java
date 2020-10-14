@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.proj.yollowa.model.cs.QnaDao;
 import com.proj.yollowa.model.cs.QnaReplyDao;
 import com.proj.yollowa.model.entity.cs.QnaReplyVo;
 
@@ -42,4 +43,12 @@ public class QnaReplyImpl implements QnaReplyService{
 		qnaReplyDao.deleteQnaReply(replyNo);
 	}
 
+	@Override
+	public int countReplyService(int qnano) throws SQLException {
+		QnaReplyDao qnaReplyDao = sqlSession.getMapper(QnaReplyDao.class);
+		int countReply = qnaReplyDao.countReply(qnano);
+		
+		return countReply;
+	}
+	
 }

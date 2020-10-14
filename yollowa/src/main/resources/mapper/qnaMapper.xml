@@ -6,7 +6,7 @@
 	<select id="getQnaList" resultType="com.proj.yollowa.model.entity.cs.QnaVo">
 		<![CDATA[
 		SELECT 
-			QNANO, TITLE, WRITER, CONTENT, WRITEDDATE, CNT 
+			QNANO, TITLE, WRITER, CONTENT, WRITEDDATE, CNT, HIDDEN 
 		FROM QNA 
 		WHERE QNANO>0
 		]]>
@@ -28,7 +28,7 @@
 		DELETE FROM QNA WHERE QnaNO=#{qnano}
 	</delete>
 	<insert id="insertQna">
-		INSERT INTO QNA (TITLE, WRITER, CONTENT) VALUES (#{title}, #{writer}, #{content})
+		INSERT INTO QNA (TITLE, WRITER, CONTENT, HIDDEN) VALUES (#{title}, #{writer}, #{content}, #{hidden })
 	</insert>
 	<update id="updateQna">
 		UPDATE QNA SET TITLE=#{title} , CONTENT=#{content} WHERE QnaNO=#{qnano}

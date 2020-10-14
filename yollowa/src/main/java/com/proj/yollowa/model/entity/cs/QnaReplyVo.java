@@ -13,11 +13,13 @@ public class QnaReplyVo {
 	private String replyWriter;
 	private Date reqDate;
 	private Date updateDate;
+	private int hidden;
 	
 	public QnaReplyVo() {
 	}
 
-	public QnaReplyVo(int replyNo, int qnaNo, String replyText, String replyWriter, Date reqDate, Date updateDate) {
+	public QnaReplyVo(int replyNo, int qnaNo, String replyText, String replyWriter, Date reqDate, Date updateDate,
+			int hidden) {
 		super();
 		this.replyNo = replyNo;
 		this.qnaNo = qnaNo;
@@ -25,6 +27,7 @@ public class QnaReplyVo {
 		this.replyWriter = replyWriter;
 		this.reqDate = reqDate;
 		this.updateDate = updateDate;
+		this.hidden = hidden;
 	}
 
 	public int getReplyNo() {
@@ -75,12 +78,18 @@ public class QnaReplyVo {
 		this.updateDate = updateDate;
 	}
 
+	public int getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(int hidden) {
+		this.hidden = hidden;
+	}
+
 	@Override
 	public String toString() {
 		return "QnaReplyVo [replyNo=" + replyNo + ", qnaNo=" + qnaNo + ", replyText=" + replyText + ", replyWriter="
-				+ replyWriter + ", reqDate=" + reqDate + ", updateDate=" + updateDate + "]";
+				+ replyWriter + ", reqDate=" + reqDate + ", updateDate=" + updateDate + ", hidden=" + hidden + "]";
 	}
-	
-	
 	
 }

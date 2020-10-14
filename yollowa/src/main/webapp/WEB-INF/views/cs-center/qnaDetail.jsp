@@ -88,6 +88,10 @@
 	#replyText{
 		resize: none;
 	}
+	#replyText2{
+		height: 150px;	
+		resize: none;
+	}
 	span#cke_1_top {
 	    display: none !important;
 	}
@@ -164,32 +168,46 @@
 			<div  class="card border-secondary mb-3">
 				<div class="card-header">
 					<div class="row">
-					<div class="col-md-2">작성자: ${reply.replyWriter }</div>
-					<div class="col-md-3">작성일: ${reply.updateDate }</div>
-					<div class="col-md-1"></div>
-					<div class="col-md-6" id="replyBtnBox">
-						<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">수정하기</button>
-						<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">삭제하기</button>
-					</div>
- 				</div>
+						<div class="col-md-2">작성자: ${reply.replyWriter }</div>
+						<div class="col-md-3">작성일: ${reply.updateDate }</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-6" id="replyBtnBox">
+							<c:if test="${reply.replyWriter eq usingName}">
+								<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">수정하기</button>
+								<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">삭제하기</button>
+							</c:if>
+						</div>
+ 					</div>
 				</div>
 				<div class="card-body">
 					<p class="card-text">${reply.replyText }</p>
 				</div>
 			</div>
 			</c:forEach>
+			<c:if test="${isLogin }">
 			<form action="${pageContext.request.contextPath }/cs-center/qna/reply/write" method="post">
 				<div id="replyBox">
 					<input type="hidden" name="qnaNo" value="${bean.qnano }" />
 					<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="4"></textarea>
 					<input type="submit" class="btn btn-primary" value="작성하기"/>
 				</div>
-				<div>
+			</form>
+			</c:if>
+			<c:if test="${isLogin ne true }">
+			<form action="">
+				<div id="replyBox">
+					<input type="hidden" name="qnaNo" value="${bean.qnano }" />
+					<textarea name="replyText2" id="replyText2" placeholder="댓글을 작성하실려면 로그인 하셔야 합니다" class="form-control" rows="4" readonly></textarea>
+					<input type="submit" class="btn btn-primary disabled" value="작성하기"/>
 				</div>
 			</form>
+			</c:if>
 			<div class="box4">
-				<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.qnano }'" value="수정하기">
-				<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.qnano }'" value="삭제하기">
+				<c:set var="temp" >${isMine }</c:set>
+				<c:if test="${temp eq 1}">
+					<input type="button" id="modify" class="btn btn-primary" onclick ="location.href='../modify/${bean.qnano }'" value="수정하기">
+					<input type="button" id="delete" class="btn btn-primary" onclick ="location.href='../delete/${bean.qnano }'" value="삭제하기">
+				</c:if>
 				<input type="button" id="list" class="btn btn-primary" onclick ="location.href='../'" value="목록">
 			</div> 
 		</div>

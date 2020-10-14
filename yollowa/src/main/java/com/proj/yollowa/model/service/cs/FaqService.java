@@ -15,4 +15,5 @@ public interface FaqService {
 	void deleteFaqService(int faqno) throws SQLException;
 	void insertFaqService(FaqVo bean) throws SQLException;
 	void updateFaqService(FaqVo bean) throws SQLException;
+	boolean isWritedManagerService(int faqno, String managerId) throws SQLException;
 }

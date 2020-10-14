@@ -48,6 +48,13 @@ public class MypageServiceImplJK implements MypageServiceJK{
 		List<AllReviewViewVo> allReviewList = new ArrayList<AllReviewViewVo>();
 		List<LodgementReviewVo> lReviewList = getLodgementReviewService(reviewWriter);
 		List<ActivityReviewVo> aReviewList = getActivityReviewService(reviewWriter);
+		System.out.println("-------------");
+		System.out.println(reviewWriter);
+		System.out.println(getLodgementReviewService(reviewWriter));
+		System.out.println("-------------");
+		System.out.println(getActivityReviewService(reviewWriter));
+		System.out.println("-------------");
+		System.out.println("-------------");
 		String company;
 		String img;
 		int userNum;
@@ -58,6 +65,7 @@ public class MypageServiceImplJK implements MypageServiceJK{
 		Date reviewedDate;
 		String content;
 		String writer;
+		System.out.println("리뷰합치기 실행");
 		for (int i = 0; i < lReviewList.size(); i++) {
 			company = lReviewList.get(i).getLodgement_companyName();
 			img = lReviewList.get(i).getLodgement_img();

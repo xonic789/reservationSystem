@@ -161,38 +161,40 @@
 				</div>
 			</div>
 			<c:forEach items="${reply }" var="reply">
-			<div>
-				<c:if test="${reply.replyNo != target}">
-					<div  class="card border-secondary mb-3">
-						<div class="card-header">
-							<div class="row">
-								<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
-								<div class="col-md-2">작성자: ${reply.replyWriter } | </div>
-								<div class="col-md-3">작성일: ${reply.updateDate } | </div>
-								<div class="col-md-1"></div>
-								<div class="col-md-6" id="replyBtnBox">
-									<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">수정하기</button>
-									<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">삭제하기</button>
+				<div>
+					<c:if test="${reply.replyNo != target}">
+						<div  class="card border-secondary mb-3">
+							<div class="card-header">
+								<div class="row">
+									<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+									<div class="col-md-2">작성자: ${reply.replyWriter }</div>
+									<div class="col-md-3">작성일: ${reply.updateDate }</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-6" id="replyBtnBox">
+										<c:if test="${reply.replyWriter eq loginName}">
+											<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">수정하기</button>
+											<button type="button" class="btn btn-outline-primary" onclick = "location.href = '${pageContext.request.contextPath }/cs-center/qna/reply/delete/repno=${reply.replyNo },qnano=${reply.qnaNo }' ">삭제하기</button>
+										</c:if>
+									</div>
 								</div>
 							</div>
 							<div class="card-body">
 								<p class="card-text">${reply.replyText }</p>
 							</div>
 						</div>
-					</div>
-				</c:if>
-				<c:if test="${reply.replyNo == target}">
-					<form action="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }" method="post">
-						<div id="replyBox">
-							<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
-							<input type="hidden" name="replyNo" value='<c:out value="${reply.replyNo }"></c:out>' />
-							<input type="hidden" name="qnaNo" value='<c:out value="${reply.qnaNo }"></c:out>' />
-							<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="4">${reply.replyText }</textarea>
-							<input type="submit" class="btn btn-primary" value="수정하기"/>
-						</div>
-					</form>
-				</c:if>
-			</div>
+					</c:if>
+					<c:if test="${reply.replyNo == target}">
+						<form action="${pageContext.request.contextPath }/cs-center/qna/reply/update/repno=${reply.replyNo },qnano=${reply.qnaNo }" method="post">
+							<div id="replyBox">
+								<c:set var="qnaNo" value="${reply.qnaNo }"></c:set>
+								<input type="hidden" name="replyNo" value='<c:out value="${reply.replyNo }"></c:out>' />
+								<input type="hidden" name="qnaNo" value='<c:out value="${reply.qnaNo }"></c:out>' />
+								<textarea name="replyText" id="replyText" placeholder="댓글을 입력해 주세요" class="form-control" rows="4">${reply.replyText }</textarea>
+								<input type="submit" class="btn btn-primary" value="수정하기"/>
+							</div>
+						</form>
+					</c:if>
+				</div>
 			</c:forEach>
 			
 			<div class="box4">

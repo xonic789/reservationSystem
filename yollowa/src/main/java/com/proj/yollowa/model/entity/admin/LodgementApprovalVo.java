@@ -1,5 +1,9 @@
 package com.proj.yollowa.model.entity.admin;
 
+/**
+ * @author Cielo
+ *
+ */
 public class LodgementApprovalVo {
 	private int lodgement_number;
 	private int lodgement_userNumber;
@@ -9,12 +13,16 @@ public class LodgementApprovalVo {
 	
 	private int user_number;
 	private String user_companyname;
+	private String user_name;
+	
+	private int roomInfo_articleNumber;
 	
 	public LodgementApprovalVo() {
 	}
 
 	public LodgementApprovalVo(int lodgement_number, int lodgement_userNumber, String lodgement_companyName,
-			String lodgement_img, int lodgement_temp, int user_number, String user_companyname) {
+			String lodgement_img, int lodgement_temp, int user_number, String user_companyname, String user_name,
+			int roomInfo_articleNumber) {
 		super();
 		this.lodgement_number = lodgement_number;
 		this.lodgement_userNumber = lodgement_userNumber;
@@ -23,14 +31,8 @@ public class LodgementApprovalVo {
 		this.lodgement_temp = lodgement_temp;
 		this.user_number = user_number;
 		this.user_companyname = user_companyname;
-	}
-
-	@Override
-	public String toString() {
-		return "LodgementApprovalVo [lodgement_number=" + lodgement_number + ", lodgement_userNumber="
-				+ lodgement_userNumber + ", lodgement_companyName=" + lodgement_companyName + ", lodgement_img="
-				+ lodgement_img + ", lodgement_temp=" + lodgement_temp + ", user_number=" + user_number
-				+ ", user_companyname=" + user_companyname + "]";
+		this.user_name = user_name;
+		this.roomInfo_articleNumber = roomInfo_articleNumber;
 	}
 
 	public int getLodgement_number() {
@@ -88,6 +90,30 @@ public class LodgementApprovalVo {
 	public void setUser_companyname(String user_companyname) {
 		this.user_companyname = user_companyname;
 	}
-	
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public int getRoomInfo_articleNumber() {
+		return roomInfo_articleNumber;
+	}
+
+	public void setRoomInfo_articleNumber(int roomInfo_articleNumber) {
+		this.roomInfo_articleNumber = roomInfo_articleNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "LodgementApprovalVo [lodgement_number=" + lodgement_number + ", lodgement_userNumber="
+				+ lodgement_userNumber + ", lodgement_companyName=" + lodgement_companyName + ", lodgement_img="
+				+ lodgement_img + ", lodgement_temp=" + lodgement_temp + ", user_number=" + user_number
+				+ ", user_companyname=" + user_companyname + ", user_name=" + user_name + ", roomInfo_articleNumber="
+				+ roomInfo_articleNumber + "]";
+	}
 	
 }

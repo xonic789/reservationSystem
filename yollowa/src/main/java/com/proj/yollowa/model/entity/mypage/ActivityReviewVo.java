@@ -6,6 +6,9 @@ public class ActivityReviewVo {
 	
 	private int review_reviewNumber;
 	private int review_articleNumber;
+	private String review_title;
+	private int review_userNumber;
+	private int review_resevNumber;
 	private int review_category;
 	private int review_starPoint;
 	private Date review_writedDate;
@@ -27,14 +30,18 @@ public class ActivityReviewVo {
 	public ActivityReviewVo() {
 	}
 
-	public ActivityReviewVo(int review_reviewNumber, int review_articleNumber, int review_category,
-			int review_starPoint, Date review_writedDate, String review_content, String review_writer,
-			int activity_number, int activity_userNumber, String activity_title, String activity_location,
-			String activity_LatLng, String activity_category, String activity_hashTag, int activity_goodCount,
-			double activity_reviewGradeRate, int activity_reviewCount, String activity_img, int activity_temp) {
+	public ActivityReviewVo(int review_reviewNumber, int review_articleNumber, String review_title,
+			int review_userNumber, int review_resevNumber, int review_category, int review_starPoint,
+			Date review_writedDate, String review_content, String review_writer, int activity_number,
+			int activity_userNumber, String activity_title, String activity_location, String activity_LatLng,
+			String activity_category, String activity_hashTag, int activity_goodCount, double activity_reviewGradeRate,
+			int activity_reviewCount, String activity_img, int activity_temp) {
 		super();
 		this.review_reviewNumber = review_reviewNumber;
 		this.review_articleNumber = review_articleNumber;
+		this.review_title = review_title;
+		this.review_userNumber = review_userNumber;
+		this.review_resevNumber = review_resevNumber;
 		this.review_category = review_category;
 		this.review_starPoint = review_starPoint;
 		this.review_writedDate = review_writedDate;
@@ -68,6 +75,30 @@ public class ActivityReviewVo {
 
 	public void setReview_articleNumber(int review_articleNumber) {
 		this.review_articleNumber = review_articleNumber;
+	}
+
+	public String getReview_title() {
+		return review_title;
+	}
+
+	public void setReview_title(String review_title) {
+		this.review_title = review_title;
+	}
+
+	public int getReview_userNumber() {
+		return review_userNumber;
+	}
+
+	public void setReview_userNumber(int review_userNumber) {
+		this.review_userNumber = review_userNumber;
+	}
+
+	public int getReview_resevNumber() {
+		return review_resevNumber;
+	}
+
+	public void setReview_resevNumber(int review_resevNumber) {
+		this.review_resevNumber = review_resevNumber;
 	}
 
 	public int getReview_category() {
@@ -209,16 +240,18 @@ public class ActivityReviewVo {
 	@Override
 	public String toString() {
 		return "ActivityReviewVo [review_reviewNumber=" + review_reviewNumber + ", review_articleNumber="
-				+ review_articleNumber + ", review_category=" + review_category + ", review_starPoint="
-				+ review_starPoint + ", review_writedDate=" + review_writedDate + ", review_content=" + review_content
-				+ ", review_writer=" + review_writer + ", activity_number=" + activity_number + ", activity_userNumber="
-				+ activity_userNumber + ", activity_title=" + activity_title + ", activity_location="
-				+ activity_location + ", activity_LatLng=" + activity_LatLng + ", activity_category="
-				+ activity_category + ", activity_hashTag=" + activity_hashTag + ", activity_goodCount="
-				+ activity_goodCount + ", activity_reviewGradeRate=" + activity_reviewGradeRate
-				+ ", activity_reviewCount=" + activity_reviewCount + ", activity_img=" + activity_img
-				+ ", activity_temp=" + activity_temp + "]";
+				+ review_articleNumber + ", review_title=" + review_title + ", review_userNumber=" + review_userNumber
+				+ ", review_resevNumber=" + review_resevNumber + ", review_category=" + review_category
+				+ ", review_starPoint=" + review_starPoint + ", review_writedDate=" + review_writedDate
+				+ ", review_content=" + review_content + ", review_writer=" + review_writer + ", activity_number="
+				+ activity_number + ", activity_userNumber=" + activity_userNumber + ", activity_title="
+				+ activity_title + ", activity_location=" + activity_location + ", activity_LatLng=" + activity_LatLng
+				+ ", activity_category=" + activity_category + ", activity_hashTag=" + activity_hashTag
+				+ ", activity_goodCount=" + activity_goodCount + ", activity_reviewGradeRate="
+				+ activity_reviewGradeRate + ", activity_reviewCount=" + activity_reviewCount + ", activity_img="
+				+ activity_img + ", activity_temp=" + activity_temp + "]";
 	}
+
 	
 	
 }

@@ -144,10 +144,12 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach items="${list }" var="bean">
+			  <c:forEach items="${list }" var="bean" varStatus="status">
 			    <tr>
 			      <td><a href="./detail/${bean.qnano }">${bean.qnano }</a></td>
-			      <td><a href="./detail/${bean.qnano }">${bean.title }</a></td>
+			      <td><a href="./detail/${bean.qnano }">${bean.title }&nbsp;&nbsp;(${conutReply[status.index] })</a>
+			      <c:if test="${bean.hidden eq 1 }"><img style="height:15px;padding-bottom:5px;" alt="" src="${pageContext.request.contextPath}/resources/img/icons/lock.png"></c:if>
+			      </td>
 			      <td><a href="./detail/${bean.qnano }">${bean.writer }</a></td>
 			      <td><a href="./detail/${bean.qnano }">${bean.writeddate }</a></td>
 			      <td><a href="./detail/${bean.qnano }">${bean.cnt }</a></td>
@@ -173,6 +175,7 @@
 					</ul>
 				</div>
 				<div class="col-md-2" id="writeBox">
+					<c:set var="temp" >${userVo }</c:set>
 					<input type="button" id="btn-long" value="글쓰기" class="btn btn-primary" onClick="location.href='./write'" />
 				</div>
 			</div>
