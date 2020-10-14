@@ -9,6 +9,7 @@ public class ActivityVo {
 	private String activity_LatLng;
 	private String activity_category;
 	private String activity_hashTag;
+
 	private int activity_goodCount;
 	private double activity_reviewGradeRate;
 	private int activity_reviewCount;
@@ -16,6 +17,7 @@ public class ActivityVo {
 	private int activity_temp;
 	private String[] hashTag;
 	
+
 	public String[] getHashTag() {
 		return hashTag;
 	}

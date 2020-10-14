@@ -68,6 +68,7 @@ ul {
 					<hr class="my-4">
 					<p>객실 정보 : ${info.roomInfo_name }</p>
 					<p>선택 일자 : ${info.lReservInfo_checkIn } ~ ${info.lReservInfo_checkOut }</p>
+					<p>업소 주소 : ${info.lodgement_location}</p>
 					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
 					<p>결제 금액 : ${pay }원</p>
 					<p class="lead">

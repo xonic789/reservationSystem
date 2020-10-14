@@ -69,6 +69,7 @@ ul {
 					<p>객실 정보 : ${info.roomInfo_name }</p>
 					<p>예약 일자 : ${info.lReservInfo_checkIn } ~ ${info.lReservInfo_checkOut }</p>
 					<p>제한 인원 : ${info.roomInfo_minPeople }명 ~ ${info.roomInfo_maxPeople }명</p>
+					<p>업소 주소 : ${info.lodgement_location}</p>
 					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment}" var="pay" />
 					<p>결제 금액 : ${pay }원</p>
 					<p class="lead">
