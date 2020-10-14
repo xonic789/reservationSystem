@@ -3,6 +3,7 @@ package com.proj.yollowa.model.entity.mypage;
 import java.sql.Date;
 
 public class AReservInfoDto {
+	
 	private int aReservInfo_number;
 	private int aReservInfo_userNumber;
 	private int aReservInfo_articleNumber;
