@@ -57,7 +57,7 @@
 	
 	
 	<!-- host/addRoom start -->
-	<select id="hostNumberMatch" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
+	<select id="hostLodgementNumberMatch" resultType="com.proj.yollowa.model.entity.host.LodgementVo">
 		select lodgement_number from lodgement where lodgement_userNumber=#{user_number}
 	</select> 
 	
@@ -119,6 +119,22 @@
 	<delete id="deleteHostActivityOption">
 		delete from activityOption where activityOption_articleNumber = #{activity_number}
 	</delete>
+	
+	
+	<select id="hostActivityNumberMatch" resultType="com.proj.yollowa.model.entity.host.ActivityVo">
+		select activity_number from activity where activity_userNumber = #{user_number}
+	</select>
+	<select id="selectActivityName" resultType="String">
+		select activity_title from activity where activity_number = #{activity_number}
+	</select>
+	<select id="selectActivityOptions" resultType="com.proj.yollowa.model.entity.host.ActivityOptionVo">
+		select * from activityOption where activityOption_articleNumber = #{activity_number}
+	</select>
+	<!-- <delete id="deleteHostActivityOption">
+		delete from activityOption where activityOption_articleNumber = #{articleNumber} and activityOption_optionNumber = #{optionNumber}
+	</delete> -->
+	
+	
 	<!-- 호스트 액티비티 start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	

@@ -17,9 +17,11 @@ import com.proj.yollowa.interceptor.Auth;
 import com.proj.yollowa.interceptor.AuthUser;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.host.ActivityUpdatePageDto;
+import com.proj.yollowa.model.entity.host.ActivityVo;
 import com.proj.yollowa.model.entity.host.AddActivityPageDto;
 import com.proj.yollowa.model.entity.host.AddLodgementPageDto;
 import com.proj.yollowa.model.entity.host.LodgementUpdatePageDto;
+import com.proj.yollowa.model.entity.host.LodgementVo;
 import com.proj.yollowa.model.service.host.HostActivityService;
 import com.proj.yollowa.model.service.host.HostLodgementService;
 
@@ -39,6 +41,9 @@ public class HostActivityController {
 		return "host/hostActivity";
 	}
 	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	host/activity start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	// 액티비티 글 등록 페이지
 	@Auth
@@ -90,7 +95,6 @@ public class HostActivityController {
 		return "redirect:/host/activity";
 	}
 	
-	
 	// 액티비티 글 수정
 	@Auth
 	@RequestMapping(value="/activityUpdate/{activity_number}", method=RequestMethod.POST)
@@ -113,4 +117,56 @@ public class HostActivityController {
 		
 		return "redirect:/host/activity";
 	}
+//	host/activity end ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	host/activityOption/ start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// 해당 액티비티 글에 등록된 액티비티 옵션 리스트페이지
+	@Auth
+	@RequestMapping(value="/activityOptions/{activity_number}", method=RequestMethod.GET)
+	public String activityOptionsPage(@PathVariable("activity_number") int activity_number, @AuthUser UserVo userVo, Model model) throws SQLException {
+		
+		// host/activityOption -> 유저넘버를 보내 activityOption table에 해당 유저번호로 등록 된 글이 있으면 activity_number return
+		ArrayList<ActivityVo> matchUserNumber = hostService.hostNumberMatch(userVo.getUser_number());
+		
+		if(matchUserNumber!=null) {
+			// 호스트 이름 
+			model.addAttribute("userName", userVo.getUser_name());
+			// 숙박글 번호 -> 옵션추가로 넘길 때 필요
+			model.addAttribute("activity_number", activity_number);
+			// 컴퍼니 네임 select
+			hostService.selectActivityName(activity_number, model);
+			// 등록 된 방 select
+			hostService.selectActivityOptions(activity_number, model);
+			
+			return "host/activityOptions";
+		}else {
+			return "home";
+		}
+	}
+	
+	// 액티비티 옵션 삭제
+	@Auth
+	@RequestMapping(value="/removeOption/{articleNumber}/{optionNumber}")
+	public String removeOption(@PathVariable("articleNumber") int articleNumber, @PathVariable("optionNumber") int optionNumber) {
+		
+		hostService.deleteOption(articleNumber,optionNumber);
+		
+		return "redirect:host/activityoptions/"+articleNumber;
+	}
+	
+	
+	
+//	host/activityOption/ end ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
 }

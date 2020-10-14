@@ -278,7 +278,7 @@ public class HostLodgementServiceImpl implements HostLodgementService {
 	@Override
 	public ArrayList<LodgementVo> hostNumberMatch(int user_number) {
 		HostDao hostDao = sqlSession.getMapper(HostDao.class);
-		ArrayList<LodgementVo> matchUserNumber = hostDao.hostNumberMatch(user_number);
+		ArrayList<LodgementVo> matchUserNumber = hostDao.hostLodgementNumberMatch(user_number);
 		
 		if(matchUserNumber.size()!=0) {
 			return matchUserNumber;
