@@ -9,11 +9,15 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.UserVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementVo;
 import com.proj.yollowa.model.entity.mypage.ActivityReviewVo;
 import com.proj.yollowa.model.entity.mypage.AllReviewViewVo;
 import com.proj.yollowa.model.entity.mypage.LodgementReviewVo;
+import com.proj.yollowa.model.lodgement.LodgementDao;
 import com.proj.yollowa.model.mypage.MypageDaoJK;
 
 @Service
@@ -48,13 +52,6 @@ public class MypageServiceImplJK implements MypageServiceJK{
 		List<AllReviewViewVo> allReviewList = new ArrayList<AllReviewViewVo>();
 		List<LodgementReviewVo> lReviewList = getLodgementReviewService(reviewWriter);
 		List<ActivityReviewVo> aReviewList = getActivityReviewService(reviewWriter);
-		System.out.println("-------------");
-		System.out.println(reviewWriter);
-		System.out.println(getLodgementReviewService(reviewWriter));
-		System.out.println("-------------");
-		System.out.println(getActivityReviewService(reviewWriter));
-		System.out.println("-------------");
-		System.out.println("-------------");
 		String company;
 		String img;
 		int userNum;
@@ -63,38 +60,45 @@ public class MypageServiceImplJK implements MypageServiceJK{
 		int reviewCategoryNum;
 		int starNum;
 		Date reviewedDate;
+		String title;
 		String content;
 		String writer;
 		System.out.println("리뷰합치기 실행");
 		for (int i = 0; i < lReviewList.size(); i++) {
 			company = lReviewList.get(i).getLodgement_companyName();
 			img = lReviewList.get(i).getLodgement_img();
+			img = getFirstImg(img);
 			userNum = lReviewList.get(i).getLodgement_userNumber();
 			goodsNum = lReviewList.get(i).getLodgement_number();
 			reviewNum = lReviewList.get(i).getReview_reviewNumber();
 			reviewCategoryNum = lReviewList.get(i).getReview_articleNumber();
 			starNum = lReviewList.get(i).getReview_starPoint();
 			reviewedDate = lReviewList.get(i).getReview_writedDate();
+			title=lReviewList.get(i).getReview_title();
 			content = lReviewList.get(i).getReview_content();
 			writer = lReviewList.get(i).getReview_writer();
 			allReviewList.add(new AllReviewViewVo(
 					company, img, userNum, goodsNum, reviewNum, 
-					reviewCategoryNum, starNum, reviewedDate, content, writer));
+					reviewCategoryNum, starNum, reviewedDate, title, content, writer)
+					);
 		}
 		for (int i = 0; i < aReviewList.size(); i++) {
 			company = aReviewList.get(i).getActivity_title();
 			img = aReviewList.get(i).getActivity_img();
+			img = getFirstImg(img);
 			userNum = aReviewList.get(i).getActivity_userNumber();
 			goodsNum = aReviewList.get(i).getActivity_number();
 			reviewNum = aReviewList.get(i).getReview_reviewNumber();
 			reviewCategoryNum = aReviewList.get(i).getReview_articleNumber();
 			starNum = aReviewList.get(i).getReview_starPoint();
 			reviewedDate = aReviewList.get(i).getReview_writedDate();
+			title=aReviewList.get(i).getReview_title();
 			content = aReviewList.get(i).getReview_content();
 			writer = aReviewList.get(i).getReview_writer();
 			allReviewList.add(new AllReviewViewVo(
 					company, img, userNum, goodsNum, reviewNum, 
-					reviewCategoryNum, starNum, reviewedDate, content, writer));
+					reviewCategoryNum, starNum, reviewedDate, title, content, writer)
+					);
 		}
 		for (int j = 0; j < allReviewList.size(); j++) {
 			System.out.println(allReviewList.get(j).toString());
@@ -103,6 +107,17 @@ public class MypageServiceImplJK implements MypageServiceJK{
 		return allReviewList;
 	}
 	
+	public String getFirstImg(String imgs) {
+			String firstImg = "";
+			int su = imgs.indexOf("&");
+			firstImg = imgs.substring(0, su);
+		return firstImg;
+	}
+	@Override
+	public int getReviewCountService(SearchVo searchVo) throws SQLException {
+		MypageDaoJK mypageDaoJK = sqlSession.getMapper(MypageDaoJK.class);
+		return mypageDaoJK.getReviewCount(searchVo);
+	}
 
 	
 	

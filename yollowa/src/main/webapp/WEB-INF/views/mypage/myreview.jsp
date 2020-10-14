@@ -38,15 +38,14 @@ ul {
 .card-link:hover {
 	color: #433387;
 }
-  table {
-    width: 100%;
-    border: 1px solid #444444;
-  }
-  th, td {
-    border: 1px solid #444444;
-  }
-  
-  .table{
+	table {
+	   width: 100%;
+	   margin-bottom: 20px;
+	/*    border: 1px solid #444444;
+	   border-bottom: 1px solid #444444 !important; */
+	 }
+	 
+ 	.table{
 		margin-top: 30px;
 	    border-top: 2px solid #D0A9F5;
 	}
@@ -55,6 +54,35 @@ ul {
 	}
 	.reviewBox1{
 	}
+	
+	th.tCompany {
+    width: 23%;
+	}
+	
+	td.tTitle {
+	    width: 61%;
+	}
+
+	td.tReviewedDate {
+    	width: 18%;
+	}
+
+	.tStarNum{
+		color: #DCA60A
+	} 
+	
+	td.tStar {
+    width: 5%;
+	}
+	
+	.tImg {
+		text-align: center;
+	}
+	th, td {
+		padding: 5px 5px 5px 5px; 
+	}
+	
+	
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -73,25 +101,44 @@ ul {
 	<%@ include file="../template/mypagemenu1.jspf" %>
 	<div class="col-md-9">
 				<c:forEach items="${list }" var="list" >
-						<table >
+						<table>
 						<thead>
-							<tr>
-								<th>${list.company }</th>
-								<th>${list.reviewedDate }</th>
+							<tr class="table-primary">
+								<th class="tCompany">${list.company }</th>
+								<th class="tTitle"><span class="sTitle">${list.title}</span></th>
+								<td class="tStar"><span class="tStarNum">★${list.starNum }</span></td>
+								<td class="tReviewedDate">${list.reviewedDate }</td>
 							</tr>
 						</thead>
 						<tbody>
-						<tr>
-							<td rowspan="2" width="110"><img alt="" src="../${list.img }" width="100px" height="100px"></td>
-							<td>|${list.starNum }</td>
+						<tr class="table-default">
+							<td class="tImg" rowspan="1" colspan="1"><img alt="" src="../${list.img }" width="146px" height="146px"></td>
+							<td class="tContent" rowspan="1" colspan="3">${list.content }</td>
 						</tr>
 						<tr>
-							<td>${list.content }</td>
 						</tr>
 						</tbody>
 							</table>
 				</c:forEach>
+				<div class="row">
+				<div class="col-md-4">
+					<input type="hidden" />
+				</div>
+				<div class="col-md-6">
+					<ul class="pagination">
+						<c:if test="${paging.prev }">
+						 <li class="page-item"><a class="page-link" href="?page=${paging.startPage - 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">이전</a></li>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" varStatus="status">
+							<li class="page-item"><a class="page-link" href="?page=${status.index }&searchType=${paging.searchType }&keyword=${paging.keyword }">${status.index }</a></li>
+						</c:forEach>
+						<c:if test="${paging.next && paging.endPage > 0 }">
+							<li class="page-item"><a class="page-link" href="?page=${paging.endPage + 1 }&searchType=${paging.searchType }&keyword=${paging.keyword }">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
 			</div>
+	</div>
 	<%@ include file="../template/mypagemenu2.jspf" %>
 	<%@ include file="../template/footer.jspf"%>
 </body>

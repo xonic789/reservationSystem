@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.model.entity.ManagerVo;
+import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
 
 @Controller

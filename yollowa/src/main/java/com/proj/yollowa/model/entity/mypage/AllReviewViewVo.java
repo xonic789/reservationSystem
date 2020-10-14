@@ -11,6 +11,7 @@ public class AllReviewViewVo {
 	private int reviewCategoryNum;
 	private int starNum;
 	private Date reviewedDate;
+	private String title;
 	private String content;
 	private String writer;
 	
@@ -18,7 +19,7 @@ public class AllReviewViewVo {
 	}
 
 	public AllReviewViewVo(String company, String img, int userNum, int goodsNum, int reviewNum, int reviewCategoryNum,
-			int starNum, Date reviewedDate, String content, String writer) {
+			int starNum, Date reviewedDate, String title, String content, String writer) {
 		super();
 		this.company = company;
 		this.img = img;
@@ -28,6 +29,7 @@ public class AllReviewViewVo {
 		this.reviewCategoryNum = reviewCategoryNum;
 		this.starNum = starNum;
 		this.reviewedDate = reviewedDate;
+		this.title = title;
 		this.content = content;
 		this.writer = writer;
 	}
@@ -96,6 +98,14 @@ public class AllReviewViewVo {
 		this.reviewedDate = reviewedDate;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -116,8 +126,8 @@ public class AllReviewViewVo {
 	public String toString() {
 		return "AllReviewViewVo [company=" + company + ", img=" + img + ", userNum=" + userNum + ", goodsNum="
 				+ goodsNum + ", reviewNum=" + reviewNum + ", reviewCategoryNum=" + reviewCategoryNum + ", starNum="
-				+ starNum + ", reviewedDate=" + reviewedDate + ", content=" + content + ", writer=" + writer + "]";
+				+ starNum + ", reviewedDate=" + reviewedDate + ", title=" + title + ", content=" + content + ", writer="
+				+ writer + "]";
 	}
-	
 	
 }

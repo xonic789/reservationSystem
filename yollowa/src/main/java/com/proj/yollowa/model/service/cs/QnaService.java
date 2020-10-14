@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 import com.proj.yollowa.model.entity.cs.QnaVo;
 
 

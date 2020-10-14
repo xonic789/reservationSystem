@@ -1,4 +1,4 @@
-package com.proj.yollowa.model.entity.cs;
+package com.proj.yollowa.model.entity;
 
 public class PagingScaleVo {
 	private int page;

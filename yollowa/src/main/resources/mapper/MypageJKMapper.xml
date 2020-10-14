@@ -27,4 +27,7 @@
 			AND REVIEW_CATEGORY = 2 
 			AND REVIEW_ARTICLENUMBER = ACTIVITY_NUMBER
 	</select>
+	<select id="getReviewCount" resultType="int">
+		SELECT count(review_userNumber) FROM resort.review where #{searchType}=#{keyword}
+	</select>
 </mapper>
