@@ -46,6 +46,17 @@ public class MypageController {
 		return "mypage/completed";
 	}
 	@Auth
+	@RequestMapping(value = "/completed/overHistory",method = RequestMethod.GET)
+	public String overHistory(@AuthUser UserVo userVo,Model model) throws SQLException {
+		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
+		String service=null;
+		if(user==null) {
+			return "redirect:../";
+		}
+		myPageService.getActivityOverHistory(model, userVo.getUser_number(),service);
+		return "mypage/overHistory";
+	}
+	@Auth
 	@RequestMapping(value = "/cart/{service}",method = RequestMethod.GET)
 	public String cart(@AuthUser UserVo userVo,Model model,@PathVariable("service") String service) throws SQLException {
 		UserVo user=myPageService.userDetailService(model,userVo.getUser_number());
