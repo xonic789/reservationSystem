@@ -16,8 +16,8 @@ import com.proj.yollowa.model.entity.activity.ActivityDetailPageDto;
 import com.proj.yollowa.model.entity.activity.ActivityOptionVo;
 import com.proj.yollowa.model.entity.activity.ActivityVo;
 import com.proj.yollowa.model.entity.activity.ReviewVo;
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
-import com.proj.yollowa.model.lodgement.LodgementDao;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -25,7 +25,6 @@ public class ActivityServiceImpl implements ActivityService {
 	@Inject
 	SqlSession sqlSession;
 	
-<<<<<<< HEAD
 	// 액티비티 리스트
 		@Override
 		public List<ActivityVo> activityListAll(Model model) throws SQLException {
@@ -63,15 +62,14 @@ public class ActivityServiceImpl implements ActivityService {
 			
 			return price;
 		}
-=======
 	// 액티비티 디테일 리뷰 // 숙박에서 사용중 삭제 x
 	@Override
 	public ArrayList<ReviewVo> reviewList(int articleNumber, int category, Model model) throws SQLException {
 		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
 		ArrayList<ReviewVo> list =dao.reviewList(articleNumber, category);
 		model.addAttribute("reviewList", list);
->>>>>>> c0003f9424a310aa18244348685ed1346448f41a
-		
+		return list;
+	}
 		// 액티비티 리스트 검색
 		@Override
 		public void activitySearch(String search, Model model) {
@@ -168,19 +166,9 @@ public class ActivityServiceImpl implements ActivityService {
 		// 액티비티 리스트 ↑
 	
 	// 액티비티 디테일 리스트
-	@Override
-<<<<<<< HEAD
-	public void activityDetail(Model model,int number) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		List<ActivityVo> detailList =dao.activityDetail(number);
-		model.addAttribute("detailList",detailList);
-	}
-	
-=======
 	public List<ActivityDetailPageDto> activityDetail(int activity_number, Model model) {
 		ActivityDao dao =sqlSession.getMapper(ActivityDao.class);
 		List<ActivityDetailPageDto> list = dao.activityDetail(activity_number);
->>>>>>> c0003f9424a310aa18244348685ed1346448f41a
 
 		model.addAttribute("detailList",list);
 		return list;
@@ -203,7 +191,6 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		model.addAttribute("infoList",list);
 	}
-	
 	
 	
 

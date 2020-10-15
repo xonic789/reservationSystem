@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.proj.yollowa.model.entity.activity.ActivityDetailPageDto;
 import com.proj.yollowa.model.entity.activity.ActivityVo;
 import com.proj.yollowa.model.entity.activity.ReviewVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementVo;
@@ -22,14 +23,6 @@ public interface ActivityService {
 	// 지역 필터
 	void activityLocationFilterSelect(String locationFilter, Model model);
 	
-	//액티비티 디테일
-	void activityDetail(Model model, int number) throws SQLException;
-	//액티비티 디테일 옵션 칸
-	void activityOption(int articleNumber,Model model) throws SQLException;
-	// 리뷰 리스트
-	ArrayList<ReviewVo> reviewList(int articleNumber,int category,Model model) throws SQLException;
-	// 리뷰 카운트
-	int activityReviewCount(int articleNumber,int category) throws SQLException;
 	
 	// 액티비티 디테일 리뷰 // 숙박에서 사용중 삭제 x
 	ArrayList<ReviewVo> reviewList(int articleNumber,int category,Model model) throws SQLException;
