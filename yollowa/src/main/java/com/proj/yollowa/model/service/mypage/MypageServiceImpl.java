@@ -243,6 +243,17 @@ public class MypageServiceImpl implements MypageService{
 		}
 		
 	}
+	@Override
+	public int cartDeleteService(String service, int reservnumber, int user_number) throws SQLException {
+		MypageDao myPageDao = sqlSession.getMapper(MypageDao.class);
+		if(service.equals("1")) {
+			return myPageDao.deleteAcartInfo(reservnumber, user_number);
+		}else if(service.equals("2")) {
+			return myPageDao.deleteLcartInfo(reservnumber, user_number);
+		}
+		
+		return -1;
+	}
 	
 	
 }

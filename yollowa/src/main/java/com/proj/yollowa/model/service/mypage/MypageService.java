@@ -27,4 +27,5 @@ public interface MypageService {
 	//리뷰 인설트, 숙박테이블의 리뷰갯수와 별점 업데이트 해줌.
 	public void insertReviewService(ReviewVo reviewVo,int user_Number,String service) throws SQLException;
 	public List<AReservInfoDto> getActivityOverHistory(Model model,int user_number,String service) throws SQLException;
+	public int cartDeleteService(String service,int reservnumber,int user_number) throws SQLException;
 }
