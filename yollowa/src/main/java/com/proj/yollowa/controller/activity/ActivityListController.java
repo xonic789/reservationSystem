@@ -22,38 +22,22 @@ public class ActivityListController {
 	@Inject
 	ActivityService activityService;
 	
-	//액티비티 리스트
-	@RequestMapping(value = "list",method = RequestMethod.GET)
-	public String ActivityList(Model model,HttpServletRequest req) throws SQLException {
-		
-		activityService.activitySelectAll(model);
-
-		// 최초 리뷰개수
-		int count = activityService.activityCount();
-		req.setAttribute("count", count); 
-		
-		
-		return "activity/activityList";
-	}
-	
-	
-	// 액티비티 디테일페이지
-	@RequestMapping("detail/{activity_number}")
-	public String ActivityDetail(@PathVariable("activity_number") int number,Model model) throws SQLException {
-		
-		activityService.activityDetail(model, number);
-		activityService.activityOption(number, model);
-		activityService.reviewList(number, 1, model);
-		int a=activityService.activityReviewCount(number, 1);
-		System.out.println(a);
-		return "activity/activityDetail";
-	}
+//	// 액티비티 디테일페이지
+//	@RequestMapping("detail/{activity_number}")
+//	public String ActivityDetail(@PathVariable("activity_number") int number,Model model) throws SQLException {
+//		
+//		activityService.activityDetail(model, number);
+//		activityService.activityOption(number, model);
+//		activityService.reviewList(number, 1, model);
+//		int a=activityService.activityReviewCount(number, 1);
+//		System.out.println(a);
+//		return "activity/activityDetail";
+//	}
 
 	// 액티비티 디테일 날짜필터
 	@RequestMapping(value = "./",method = RequestMethod.GET)
 	public void ActivityDate(Model model,HttpServletRequest req) throws SQLException {
 		System.out.println(req.getAttribute("nal"));
-		
 	}
 	
 	// 액티비티 결제창

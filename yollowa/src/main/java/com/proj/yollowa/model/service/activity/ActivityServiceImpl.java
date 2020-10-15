@@ -16,6 +16,10 @@ import com.proj.yollowa.model.entity.activity.ActivityDetailPageDto;
 import com.proj.yollowa.model.entity.activity.ActivityOptionVo;
 import com.proj.yollowa.model.entity.activity.ActivityVo;
 import com.proj.yollowa.model.entity.activity.ReviewVo;
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
+import com.proj.yollowa.model.entity.lodgement.LodgementVo;
+import com.proj.yollowa.model.lodgement.LodgementDao;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -23,41 +27,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Inject
 	SqlSession sqlSession;
 	
-	@Override
-	public List<ActivityVo> activitySelectAll(Model model) throws SQLException{
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		List<ActivityVo> list=dao.activitySelectAll();
-		model.addAttribute("list", list);
-		
-		return list;
-	}
-
-	
-	@Override
-	public void activityDetail(Model model,int number) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		List<ActivityVo> detailList =dao.activityDetail(number);
-		model.addAttribute("detailList",detailList);
-	}
-	
-	// 리스트 temp=1 인 개수
-	@Override
-	public int activityCount() throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		int count=dao.activityCount();
-		return count;
-	}
-
-	// 액티비티 디테일 페이지 Dto 옵션들
-	@Override
-	public void activityOption(int articleNumber, Model model) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		List<ActivityDetailPageDto> list=dao.activityOption(articleNumber);
-		model.addAttribute("option", list);
-		
-	}
-
-	// 액티비티 디테일 리뷰
+	// 액티비티 디테일 리뷰 // 숙박에서 사용중 삭제 x
 	@Override
 	public ArrayList<ReviewVo> reviewList(int articleNumber, int category, Model model) throws SQLException {
 		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
@@ -67,17 +37,34 @@ public class ActivityServiceImpl implements ActivityService {
 		return list;
 	}
 
-
-	// 리뷰카운트
+	
+	// 액티비티 디테일 리스트
 	@Override
-	public int activityReviewCount(int articleNumber, int category) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		int cnt=dao.activityReviewCount(articleNumber, category);
-		
-		return cnt;
+	public List<ActivityDetailPageDto> activityDetail(int activity_number, Model model) {
+		ActivityDao dao =sqlSession.getMapper(ActivityDao.class);
+		List<ActivityDetailPageDto> list = dao.activityDetail(activity_number);
+
+		model.addAttribute("detailList",list);
+		return list;
 	}
 
+	// 디테일 이미지
+	@Override
+	public void activityImgSelect(int activity_number, Model model) {
+		ActivityDao dao = sqlSession.getMapper(ActivityDao.class);
+		
+		String titleImg = dao.activityImgSelect(activity_number);
+		model.addAttribute("listImg", titleImg);
+	}
 
+	// 디테일 기본정보
+	@Override
+	public void activityInfo(int activity_number, int type, Model model) {
+		ActivityDao dao = sqlSession.getMapper(ActivityDao.class);
+		List<InformationVo> list= dao.activityInfo(activity_number,type);
+		
+		model.addAttribute("infoList",list);
+	}
 	
 	
 	

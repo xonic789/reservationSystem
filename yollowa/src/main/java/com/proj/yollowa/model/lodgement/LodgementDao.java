@@ -81,4 +81,5 @@ public interface LodgementDao {
 	// 결제 성공시 예약정보 update (장바구니 결제)
 	public void LReservInfoUpdate(int c);
 	
+	
 }
