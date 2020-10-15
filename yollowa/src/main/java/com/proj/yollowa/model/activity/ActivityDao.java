@@ -47,5 +47,20 @@ public interface ActivityDao {
 	
 	
 	// 리뷰 개수 업데이트
+import com.proj.yollowa.model.entity.lodgement.InformationVo;
+import com.proj.yollowa.model.entity.lodgement.LodgementVo;
+
+public interface ActivityDao {
+	//리뷰
+	public ArrayList<ReviewVo> reviewList(@Param("articleNumber") int articleNumber,@Param("category") int category) throws SQLException;
+	
+	// 액티비티 디테일 페이지
+	public List<ActivityDetailPageDto> activityDetail(int activity_number);
+
+	// 액티비티 디테일 이미지
+	public String activityImgSelect(int activity_number);
+
+	// 액티비티 디테일 기본정보
+	public List<InformationVo> activityInfo(@Param("number") int activity_number,@Param("type") int type);
 	
 }

@@ -25,6 +25,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Inject
 	SqlSession sqlSession;
 	
+<<<<<<< HEAD
 	// 액티비티 리스트
 		@Override
 		public List<ActivityVo> activityListAll(Model model) throws SQLException {
@@ -62,6 +63,14 @@ public class ActivityServiceImpl implements ActivityService {
 			
 			return price;
 		}
+=======
+	// 액티비티 디테일 리뷰 // 숙박에서 사용중 삭제 x
+	@Override
+	public ArrayList<ReviewVo> reviewList(int articleNumber, int category, Model model) throws SQLException {
+		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
+		ArrayList<ReviewVo> list =dao.reviewList(articleNumber, category);
+		model.addAttribute("reviewList", list);
+>>>>>>> c0003f9424a310aa18244348685ed1346448f41a
 		
 		// 액티비티 리스트 검색
 		@Override
@@ -158,44 +167,42 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		// 액티비티 리스트 ↑
 	
+	// 액티비티 디테일 리스트
 	@Override
+<<<<<<< HEAD
 	public void activityDetail(Model model,int number) throws SQLException {
 		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
 		List<ActivityVo> detailList =dao.activityDetail(number);
 		model.addAttribute("detailList",detailList);
 	}
 	
+=======
+	public List<ActivityDetailPageDto> activityDetail(int activity_number, Model model) {
+		ActivityDao dao =sqlSession.getMapper(ActivityDao.class);
+		List<ActivityDetailPageDto> list = dao.activityDetail(activity_number);
+>>>>>>> c0003f9424a310aa18244348685ed1346448f41a
 
-	// 액티비티 디테일 페이지 Dto 옵션들
-	@Override
-	public void activityOption(int articleNumber, Model model) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		List<ActivityDetailPageDto> list=dao.activityOption(articleNumber);
-		model.addAttribute("option", list);
-		
-	}
-
-	// 액티비티 디테일 리뷰
-	@Override
-	public ArrayList<ReviewVo> reviewList(int articleNumber, int category, Model model) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		ArrayList<ReviewVo> list =dao.reviewList(articleNumber, category);
-		model.addAttribute("reviewList", list);
-		
+		model.addAttribute("detailList",list);
 		return list;
 	}
 
-
-	// 리뷰카운트
+	// 디테일 이미지
 	@Override
-	public int activityReviewCount(int articleNumber, int category) throws SQLException {
-		ActivityDao dao=sqlSession.getMapper(ActivityDao.class);
-		int cnt=dao.activityReviewCount(articleNumber, category);
+	public void activityImgSelect(int activity_number, Model model) {
+		ActivityDao dao = sqlSession.getMapper(ActivityDao.class);
 		
-		return cnt;
+		String titleImg = dao.activityImgSelect(activity_number);
+		model.addAttribute("listImg", titleImg);
 	}
 
-
+	// 디테일 기본정보
+	@Override
+	public void activityInfo(int activity_number, int type, Model model) {
+		ActivityDao dao = sqlSession.getMapper(ActivityDao.class);
+		List<InformationVo> list= dao.activityInfo(activity_number,type);
+		
+		model.addAttribute("infoList",list);
+	}
 	
 	
 	

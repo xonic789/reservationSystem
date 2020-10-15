@@ -218,7 +218,7 @@ public class LodgementServiceImpl implements LodgementService {
 					list.add(tempList.get(j));
 				}	
 			}
-			model.addAttribute("cnt", cnt);
+			model.addAttribute("filterCnt", cnt);
 			
 			for(int i=0; i<list.size(); i++) {
 				int su = list.get(i).getLodgement_img().indexOf("&");
@@ -237,7 +237,7 @@ public class LodgementServiceImpl implements LodgementService {
 				
 				// 검색 건수를 알려주기 위해 count 요청
 				int cnt = dao.selectLocationFilterOneCnt(splitAll);
-				model.addAttribute("cnt", cnt);
+				model.addAttribute("filterCnt", cnt);
 				
 				for(int i=0; i<list.size(); i++) {
 					int su = list.get(i).getLodgement_img().indexOf("&");

@@ -21,7 +21,7 @@ public class ActivityListController {
 	
 	@Inject
 	ActivityService activityService;
-	
+
 	// 숙박 리스트
 		@RequestMapping("list")
 		public String list(Model model) throws SQLException {
@@ -56,7 +56,6 @@ public class ActivityListController {
 			return "activity/activityList";
 			
 		}
-	
 	
 	
 	

@@ -93,21 +93,21 @@ ul {
 			<h2>${user.user_name }님의 액티비티 장바구니 내역 </h2>
 			<a style="margin-bottom:10px;"
 				href="${pageContext.request.contextPath }/mypage/cart/2"
-				class="btn btn-primary">숙박 보기</a>
+				class="btn btn-warning">숙박 보기</a>
 			<c:forEach items="${cartinfo }" var="info">
 				<div class="jumbotron">
 				<!-- 룸정보는 rsvinfo에 들어있는 게시물넘버와 숙박 게시물번호와 같을때 출력 -->
-					<h3>${info.lodgement_companyName }</h3>
+					<h3>${info.activity_title }</h3>
 					<hr class="my-4">
-					<p>객실 정보 : ${info.roomInfo_name }</p>
-					<p>선택 일자 : ${info.lReservInfo_checkIn } ~ ${info.lReservInfo_checkOut }</p>
-					<p>업소 주소 : ${info.lodgement_location}</p>
-					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
-					<p>결제 금액 : ${pay }원</p>
+					<p>옵션 이름 : ${info.activityOption_name}</p>
+					<p>세부 내용 : ${info.activityOption_subName}</p>
+					<p>업소 주소 : ${info.activity_location}</p>
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.aReservInfo_payment }" var="pay" />
+					<p>결제 하실 금액 : ${pay }원</p>
 					<p class="lead">
-						<a class="btn btn-warning btn-lg" href="#" role="button" style="display: block;">결제 하기</a>
+						<a class="btn btn-primary btn-lg" href="#" role="button" style="display: block;">결제 하기</a>
 					<hr class="my-4">	
-						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/lodgement/detail/${info.lReservInfo_acticleNumber}" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
+						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/activity/detail/${info.aReservInfo_articleNumber}" role="button" style="display: block;" >업체 자세히 보기</a>
 					</p>
 				</div>
 				</c:forEach>

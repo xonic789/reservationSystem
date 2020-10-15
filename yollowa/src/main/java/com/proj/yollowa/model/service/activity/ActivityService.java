@@ -31,4 +31,15 @@ public interface ActivityService {
 	// 리뷰 카운트
 	int activityReviewCount(int articleNumber,int category) throws SQLException;
 	
+	// 액티비티 디테일 리뷰 // 숙박에서 사용중 삭제 x
+	ArrayList<ReviewVo> reviewList(int articleNumber,int category,Model model) throws SQLException;
+
+	// 액티비티 디테일 리스트
+	List<ActivityDetailPageDto> activityDetail(int activity_number, Model model);
+
+	// 디테일 이미지
+	void activityImgSelect(int activity_number, Model model);
+	
+	// 디테일 기본정보
+	void activityInfo(int activity_number, int type, Model model);
 }
