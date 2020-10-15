@@ -287,4 +287,24 @@ public class LodgementServiceImpl implements LodgementService {
 		return dayBean;
 	}
 
+	// 결제 성공시 예약정보에 insert (바로구매)
+	@Override
+	public void LReservInfoInsert(int userNumber, int articleNumber, int roomNumber, java.sql.Date checkIn,
+			java.sql.Date checkOut, String userPhoneNumber, int resultPrice) {
+		
+		LodgementDao dao = sqlSession.getMapper(LodgementDao.class);
+		
+		
+		dao.LReservInfoInsert(userNumber,articleNumber,roomNumber,checkIn,checkOut,userPhoneNumber,resultPrice);
+		
+	}
+
+	//결제 성공시 예약정보 update (장바구니 결제)
+	@Override
+	public void LReservInfoUpdate(int c) {
+		LodgementDao dao=sqlSession.getMapper(LodgementDao.class);
+		dao.LReservInfoUpdate(c);
+		
+	}
+
 }

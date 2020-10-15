@@ -76,7 +76,13 @@ ul {
 					<fmt:formatNumber type="number" maxFractionDigits="3" value="${info.lReservInfo_payment }" var="pay" />
 					<p>결제 금액 : ${pay }원</p>
 					<p class="lead">
-						<a class="btn btn-warning btn-lg" href="#" role="button" style="display: block;">결제 하기</a>
+					<form action="${pageContext.request.contextPath }/lodgement/detail/reservation/${info.roomInfo_articleNumber}" method="get">
+						<input name="roomNumber" type="hidden" value="${info.roomInfo_roomNumber}" />
+						<input type="hidden" name="sdate" class="sdateVal" value="${info.lReservInfo_checkIn }"/>
+						<input type="hidden" name="edate" class="edateVal" value="${info.lReservInfo_checkOut }"/>
+						<input type="hidden" name="cart" value="${info.lReservInfo_number }"/>
+						<button class="btn btn-warning btn-lg" style="width: 100%;">결제 하기</button>
+					</form>
 					<hr class="my-4">	
 						<a class="btn btn-lg lodgeDetail" href="${pageContext.request.contextPath }/lodgement/detail/${info.lReservInfo_acticleNumber}" role="button" style="display: block;" >숙박 업체 자세히 보기</a>
 					</p>
