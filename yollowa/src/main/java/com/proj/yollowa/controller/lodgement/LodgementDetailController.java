@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.proj.yollowa.model.entity.UserVo;
 import com.proj.yollowa.model.entity.lodgement.InformationVo;
 import com.proj.yollowa.model.entity.lodgement.LodgementDetailPageDto;
 import com.proj.yollowa.model.entity.lodgement.LodgementRoomInfoVo;
+import com.proj.yollowa.model.entity.mypage.LReservInfoDto;
 import com.proj.yollowa.model.service.activity.ActivityService;
 import com.proj.yollowa.model.service.lodgement.LodgementService;
 
@@ -83,8 +85,11 @@ public class LodgementDetailController {
 	//숙박 예약페이지
 	@Auth 
 	@RequestMapping(value =  "detail/reservation/{lodgement_number}")
-	public String lodgementReservation(@PathVariable("lodgement_number") int articleNumber, HttpServletRequest req,Model model,@AuthUser UserVo user) throws SQLException, ParseException{
-		
+	public String lodgementReservation(@PathVariable("lodgement_number") int articleNumber, HttpServletRequest req,Model model,@AuthUser UserVo user,@ModelAttribute("LReservInfoDto") LReservInfoDto LRDto) throws SQLException, ParseException{
+
+		String cart = req.getParameter("cart");
+		model.addAttribute("cart", cart);
+		System.out.println("cart::::::"+cart);
 		// 예약할 숙소정보
 		String roomNumber =req.getParameter("roomNumber");
 		String sdate =req.getParameter("sdate");
@@ -273,6 +278,7 @@ public class LodgementDetailController {
 		String userName =user.getUser_name();
 		String userPhoneNumber = user.getUser_phoneNumber();
 		
+		
 		model.addAttribute("articleNumber", articleNumber);
 		model.addAttribute("companyName", companyName);
 		model.addAttribute("roomNumber", roomNumber);
@@ -282,6 +288,10 @@ public class LodgementDetailController {
 		model.addAttribute("resultPrice", resultPrice);
 		model.addAttribute("userName", userName);
 		model.addAttribute("userPhoneNumber", userPhoneNumber);
+		
+		String cart = req.getParameter("cart");
+		model.addAttribute("cart", cart);
+		System.out.println("이니시스 페이지 카트::"+cart);
 		
 		return "lodgement/lodgementInicis";
 	}
@@ -300,12 +310,22 @@ public class LodgementDetailController {
 		int userNumber =user.getUser_number();
 		String userPhoneNumber =user.getUser_phoneNumber();
 		
+		String cart=req.getParameter("cart");
+		System.out.println("결제완료 ajax:::"+cart);
+		
 		
 		java.sql.Date checkIn=java.sql.Date.valueOf(checkI);
 		java.sql.Date checkOut=java.sql.Date.valueOf(checkO);
 		
-		//유저넘버 , 글번호 , 방번호 , 체크인 , 체크아웃 , 폰번 , 예약한 날짜 , 결제금액 , 예약 상태 , 장바구니 상태
-		lodgementService.LReservInfoInsert(userNumber,Integer.parseInt(articleNumber),Integer.parseInt(roomNumber),checkIn,checkOut,userPhoneNumber,Integer.parseInt(resultPrice));
+		if(cart.isEmpty()) {
+			System.out.println("바로 결제");
+			//유저넘버 , 글번호 , 방번호 , 체크인 , 체크아웃 , 폰번 , 예약한 날짜 , 결제금액 , 예약 상태 , 장바구니 상태
+			lodgementService.LReservInfoInsert(userNumber,Integer.parseInt(articleNumber),Integer.parseInt(roomNumber),checkIn,checkOut,userPhoneNumber,Integer.parseInt(resultPrice));
+		}else {
+			System.out.println("바구니결제");
+			int c = Integer.parseInt(cart);
+			lodgementService.LReservInfoUpdate(c);
+		}
 		
 		
 	}

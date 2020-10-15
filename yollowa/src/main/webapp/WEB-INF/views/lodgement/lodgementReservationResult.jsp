@@ -16,7 +16,21 @@
 <style type="text/css">
 </style>
 <script type="text/javascript">
+	var count = 2;
+	var counter = setInterval(timer,1000);
 	
+	function timer(){
+		$("#timer").text(count);
+		if(count<=0){
+			clearInterval(counter);
+			
+			$("#timer").text("0");
+			location.href="${pageContext.request.contextPath}";
+			
+		}
+		
+		count--;
+	}
 </script>
 
 <meta charset="UTF-8">
@@ -29,17 +43,10 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div>
-					<h2 style="text-align: center;">예약이 완료되었습니다</h2>
-					<div>
-						<ul style="list-style: none;">
-							<li>예약자 : 홍길동</li>
-							<li>예약자 : 홍길동</li>
-							<li>예약자 : 홍길동</li>
-						</ul>
-					</div>
-					
-					<a class="btn btn-outline-primary" href="#" >예약 확인하기</a>
+				<div style="margin: 260px auto; text-align: center;">
+					<p style="font-size: 40px;">예약이 완료되었습니다</p>
+					<span id="timer" style="margin:0px auto; font-size: 25px; padding-top: 20px;">3</span>
+					<span style=" font-size: 25px; padding-top: 20px;">초 후에 메인으로 이동합니다</span>
 				</div>
 			</div>
 			<div class="col-md-2"></div>

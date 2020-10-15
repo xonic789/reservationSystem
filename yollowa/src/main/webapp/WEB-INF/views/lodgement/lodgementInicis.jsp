@@ -54,7 +54,8 @@ IMP.request_pay({
         		    		roomName:"${roomName}",
         		    		checkIn:"${checkIn}",
         		    		checkOut:"${checkOut}",
-        		    		resultPrice:"${resultPrice}"
+        		    		resultPrice:"${resultPrice}",
+        		    		cart:"${cart}"
         	    		}),
         	    	dataType:"json",
         	    	url:"${pageContext.request.contextPath}/lodgement/detail/InicisAjax",
