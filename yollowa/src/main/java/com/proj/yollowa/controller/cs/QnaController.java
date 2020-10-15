@@ -55,13 +55,8 @@ public class QnaController {
 		List<Integer> coutReplys = new ArrayList<>();
 		for (int i = 0; i < qnaService.getQnaListService(searchVo).size(); i++) {
 //			qnaService.getQnaListService(searchVo).get(i);
-			System.out.println("==================");
 //			qnaReplyService.countReplyService(qnaService.getQnaListService(searchVo).get(i).getQnano());
 			int qnano2 = qnaService.getQnaListService(searchVo).get(i).getQnano();
-			System.out.print("qnano"+qnano2);
-			System.out.print("==");
-			System.out.println(qnaReplyService.countReplyService(qnano2));
-			System.out.println("==================");
 			
 			coutReplys.add(qnaReplyService.countReplyService(qnano2));
 		}

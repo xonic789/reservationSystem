@@ -59,7 +59,7 @@
 						</p>
 						<p class="card-text">
 							<a class="card-link"
-								href="${pageContext.request.contextPath }/mypage/qna">내가 쓴
+								href="${pageContext.request.contextPath }/mypage/myqna">내가 쓴
 								Q&A</a>
 						</p>
 						<p class="card-text">

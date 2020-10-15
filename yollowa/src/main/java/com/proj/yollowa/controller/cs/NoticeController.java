@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.proj.yollowa.interceptor.AuthManager;
 import com.proj.yollowa.model.entity.ManagerVo;
+import com.proj.yollowa.model.entity.PagingScaleVo;
 import com.proj.yollowa.model.entity.SearchVo;
 import com.proj.yollowa.model.entity.cs.NoticeVo;
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
 import com.proj.yollowa.model.service.cs.NoticeService;
 
 @Controller
@@ -39,11 +39,10 @@ public class NoticeController {
 		searchVo.setKeyword(keyword);
 		searchVo.setPage(page);
 		searchVo.setTotalCnt(noticeService.countNoticeService(searchVo));
-		
 		model.addAttribute("managerVo", managerVo);
 		model.addAttribute("list", noticeService.getNoticeListService(searchVo));
 		model.addAttribute("paging", searchVo);
-		
+		System.out.println("##"+searchVo);
 		return "cs-center/noticeList";
 	}
 	

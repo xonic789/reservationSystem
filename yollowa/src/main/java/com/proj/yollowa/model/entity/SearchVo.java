@@ -1,7 +1,5 @@
 package com.proj.yollowa.model.entity;
 
-import com.proj.yollowa.model.entity.cs.PagingScaleVo;
-
 public class SearchVo extends PagingScaleVo {
 	
 	private String searchType;
