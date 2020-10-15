@@ -43,6 +43,7 @@ public interface MypageDao {
 	public List<AReservInfoDto> getOverHistory(int user_number) throws SQLException;
 	public List<AReservInfoDto> getAuserCartInfo(int user_number) throws SQLException;
 	public int getAExistReview(int areservInfo_number) throws SQLException;
-	
+	public int deleteLcartInfo(@Param("LReservInfo_number") int LReservInfo_number,@Param("user_number") int user_number) throws SQLException;
+	public int deleteAcartInfo(@Param("AReservInfo_number") int AReservInfo_number,@Param("user_number") int user_number) throws SQLException;
 }
 
