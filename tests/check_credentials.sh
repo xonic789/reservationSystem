@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SPRING_CONFIG="$ROOT/yollowa/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 
+command -v rg >/dev/null || { printf 'ripgrep is required\n' >&2; exit 1; }
+
 fail() {
   printf 'FAIL: %s\n' "$1" >&2
   exit 1
