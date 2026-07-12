@@ -9,6 +9,19 @@ html,css,javascript,bootstrap,jquery,java8,Spring,oAuth2.0,naverAPI,kakaoAPI 등
 메인화면, 마이페이지, 로그인 , 장바구니 , 찜목록 , 리뷰쓰기 , 예약현황 등 
 
 전체적인 UI/UX 및 로직 구현 하였습니다.
+
+## 로컬 OAuth 설정
+
+OAuth 자격증명은 저장소에 커밋하지 않고 실행 환경에서 제공합니다.
+
+- `NAVER_CLIENT_ID`
+- `NAVER_CLIENT_SECRET`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `GOOGLE_API_KEY`
+
+커밋 전 `bash tests/check_credentials.sh`로 설정과 알려진 provider key 패턴을 검사합니다.
+
 ![Untitled](https://user-images.githubusercontent.com/64122884/102733621-165d7d80-4381-11eb-8beb-74892682e83c.png)
 ![Untitled 1](https://user-images.githubusercontent.com/64122884/102733614-13628d00-4381-11eb-86a0-a97a5f8de808.png)
 ![Untitled 2](https://user-images.githubusercontent.com/64122884/102733615-1493ba00-4381-11eb-8cab-ae64a482c13b.png)

@@ -10,6 +10,7 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
+	<context:property-placeholder />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -87,10 +88,10 @@
 	<!-- oauth2 naver -->
 	<beans:bean id="naverClientID" class="java.lang.String">
 		<beans:constructor-arg
-			value="FAFgcQcPU4tJiser6QxC" />
+			value="${NAVER_CLIENT_ID}" />
 	</beans:bean>
 	<beans:bean id="naverClientSecret" class="java.lang.String">
-		<beans:constructor-arg value="v9uycC_MDV" />
+		<beans:constructor-arg value="${NAVER_CLIENT_SECRET}" />
 	</beans:bean>
 	<beans:bean id="naverRedirectUrl" class="java.lang.String">
 		<beans:constructor-arg
@@ -105,10 +106,10 @@
 		<beans:constructor-arg ref="naverRedirectUrl" />
 	</beans:bean>
 	<beans:bean id="googleClientID" class="java.lang.String">
-		<beans:constructor-arg value="183141477636-5vabtlolvogrdtv3r2rg8graq5c96fk2.apps.googleusercontent.com" />
+		<beans:constructor-arg value="${GOOGLE_CLIENT_ID}" />
 	</beans:bean>
 	<beans:bean id="googleClientSecret" class="java.lang.String">
-		<beans:constructor-arg value="DU-4qjG8kSueeusYa7z7zsx2" />
+		<beans:constructor-arg value="${GOOGLE_CLIENT_SECRET}" />
 	</beans:bean>
 	<beans:bean id="googleRedirectUrl" class="java.lang.String">
 		<beans:constructor-arg value="http://localhost:8080/yollowa/login/google/callback" />
@@ -120,6 +121,8 @@
 		<beans:constructor-arg ref="googleClientID" />
 		<beans:constructor-arg ref="googleClientSecret" />
 		<beans:constructor-arg ref="googleRedirectUrl" />
+		<beans:property name="profileUrl"
+			value="https://people.googleapis.com/v1/contactGroups?key=${GOOGLE_API_KEY}" />
 	</beans:bean>
 
 	<beans:bean id="googleConnectionFactory"
