@@ -17,8 +17,18 @@ jobs:
       - name: Install scanner
         run: sudo apt-get update && sudo apt-get install --yes ripgrep
 
+      - name: Set up Java
+        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5
+        with:
+          distribution: temurin
+          java-version: "11"
+          cache: maven
+
       - name: Check committed configuration
         run: bash tests/check_credentials.sh
 
       - name: Check shell script
         run: shellcheck tests/check_credentials.sh
+
+      - name: Compile main and test sources
+        run: mvn --batch-mode --file yollowa/pom.xml test -DskipTests

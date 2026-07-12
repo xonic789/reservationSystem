@@ -22,6 +22,8 @@ OAuth 자격증명은 저장소에 커밋하지 않고 실행 환경에서 제�
 
 커밋 전 `bash tests/check_credentials.sh`로 설정과 알려진 provider key 패턴을 검사합니다.
 
+GitHub Actions는 Java 11에서 main/test source compilation도 수행합니다. 기존 DAO 통합 테스트는 외부 데이터베이스가 필요하므로 자동 실행하지 않습니다.
+
 ![Untitled](https://user-images.githubusercontent.com/64122884/102733621-165d7d80-4381-11eb-8beb-74892682e83c.png)
 ![Untitled 1](https://user-images.githubusercontent.com/64122884/102733614-13628d00-4381-11eb-86a0-a97a5f8de808.png)
 ![Untitled 2](https://user-images.githubusercontent.com/64122884/102733615-1493ba00-4381-11eb-8cab-ae64a482c13b.png)
